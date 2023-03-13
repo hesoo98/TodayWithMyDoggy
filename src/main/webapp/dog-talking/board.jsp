@@ -57,27 +57,38 @@
 	<div style=" margin: 20px 300px;">
 	
 	  <b>총 <%=totalCount %>개의 방명록이 있습니다</b>
+	  <%
+	  
+	  //로그인 한 유저만 글쓰기 버튼	  
+	  String loginok=(String)session.getAttribute("loginok");
+	  
+	  if (loginok!=null){%>
+		  <button type="button" onclick="location.href='index.jsp?main=dog-talking/write.jsp'">글쓰기</button>
+	  <%}
+	  %>
 	  <br><br>
 	
 	<table class="table table-bordered" style="width: 600px;">
 	  <tr>
-	    <td><input type="checkbox"></td>
-	    <td>번호</td>
+	    <td width="10">번호</td>
 	    <td>제목</td>
 	    <td>작성자</td>
 	    <td>작성일</td>
+	    <td>조회수</td>
 	  </tr>
 	  
 	  <%
+	  
+	  //본문
 	  int no=1;
 	  for(DogTalkingBoardDto dto:list){%>
 		  
 		  <tr>
-		    <td width="10"><input type="checkbox"></td>
 		    <td><%=no++ %></td>
-		    <td><%=dto.getSubject() %></td>
+		    <td><a href="dog-talking/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>"><%=dto.getSubject() %></a></td>
 		    <td><%=dto.getNickname() %></td>
 		    <td><%=sdf.format(dto.getWriteday()) %></td>
+		    <td><%=dto.getReadCount()%></td>
 		  </tr>
 		  
 	  <%}
