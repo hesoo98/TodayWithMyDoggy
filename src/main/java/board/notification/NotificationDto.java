@@ -2,7 +2,7 @@ package board.notification;
 
 import java.sql.Timestamp;
 
-public class NotificationBoard {
+public class NotificationDto {
 	private String num;
 	private String title;
 	private String content;

@@ -20,7 +20,6 @@ public class DbConnect {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public Connection getConnection() {
@@ -65,10 +64,8 @@ public class DbConnect {
 				conn.close();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void dbClose(Statement stmt, Connection conn) {
