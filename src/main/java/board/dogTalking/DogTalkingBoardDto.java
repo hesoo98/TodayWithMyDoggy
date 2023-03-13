@@ -60,4 +60,5 @@ public class DogTalkingBoard {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
+	
 }
