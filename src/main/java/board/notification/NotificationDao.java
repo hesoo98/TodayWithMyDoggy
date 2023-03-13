@@ -89,4 +89,24 @@ public class NotificationDao {
 			}
 			return dto;
 		}
+
+		// 공지사항 수정
+		public void updateNotification(NotificationDto dto) {
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+
+			String sql = "update notification_board set title=?, content=? where num=?";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, dto.getTitle());
+				pstmt.setString(2, dto.getContent());
+				pstmt.setString(3, dto.getNum());
+				pstmt.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(pstmt, conn);
+			}
+		}
 }

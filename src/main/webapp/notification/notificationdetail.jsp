@@ -45,19 +45,20 @@
 			
 			<tr>
 				<td align="right">
-					<button type="button" class="btn btn-default" onclick="location.href='index.jsp?main=board/updateform.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'"><span class="glyphicon glyphicon-edit"></span>수정</button>
+				<!-- 이 부분은 관리자 계정일때만 보여야 함 -->
+					<button type="button" class="btn btn-default" onclick="location.href='index.jsp?main=notification/updateform.jsp?num=<%=dto.getNum()%>'"><span class="glyphicon glyphicon-edit"></span>수정</button>
 					<button type="button" class="btn btn-default" onclick="funcdel(<%=num%>)"><span class="glyphicon glyphicon-remove"></span>삭제</button>
-					<button type="button" class="btn btn-default" onclick="location.href='index.jsp?main=board/boardlist.jsp?currentPage=<%=currentPage%>'"><span class="glyphicon glyphicon-list"></span>목록</button>
+					<button type="button" class="btn btn-default" onclick="location.href='index.jsp?main=notification/notificationlist.jsp'"><span class="glyphicon glyphicon-list"></span>목록</button>
 				</td>
 			</tr>
 		</table>
 	</div>
 	<script type="text/javascript">
-		function funcdel(num, currentPage){
+		function funcdel(num){
 			//alert(num+"," + currentPage);
 			var a = confirm("삭제하려면 확인 누르시오");
 			if(a) {
-				location.href = "notification/delete.jsp?num="+num";
+				//location.href = "notification/delete.jsp?num="+num";
 			}
 		}
 	</script>

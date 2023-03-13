@@ -29,19 +29,32 @@ body {
 <body>
    <article>
       <div class="container" role="main">
-         <h2>공지사항 글쓰기 폼</h2>
+         <h2>산책 친구 게시판</h2>
          <br>
-         <form method="post" action="notification/notificationaddaction.jsp">
-            <div class="subject">
+         <form method="post" action="dog-talking/writeaction.jsp" enctype="multipart/form-data">
+            <div class="subjext">
                <div>제목</div>
-               <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
-            </div>        
+               <input type="text" class="form-control" name="subject" id="subject" placeholder="제목을 입력해 주세요">
+            </div>
             <br>
+            
+            <div class="photo">
+               <div>사진</div>
+               <input type="file" multiple="multiple" name="photo" id="photo">
+            </div>
+            
+            <br>         
             <div class="content">
                <div>내용</div>
-               <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+               <textarea class="form-control" rows="10" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
             </div>
+            
+         <div>
+            <br><br>
             <button type="submit" class="btn btn-sm btn-primary" id="btnSave">저장</button>
+            <button type="button" onclick="location.href='index.jsp?main=dog-talking/board.jsp'" class="btn btn-sm btn-primary" id="btnList">목록</button>
+         </div>
+            
          </form>
       </div>
    </article>

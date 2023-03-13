@@ -32,16 +32,29 @@ body {
 
 
 </head>
-
-
-
 <body>
+<%
+	//아이디 
+	//String myid = (String)session.getAttribute("myid");
+	//로그인상태인지?
+	String loginok = (String)session.getAttribute("loginok");
+	
+	String isAdmin = (String)session.getAttribute("isAdmin");
+%>
+
    <article>
       <div class="container" role="main">
          <h2>공지사항 리스트</h2>
          
          <div>
-            <button type="button" class="btn btn-sm btn-primary" onclick="location.href='index.jsp?main=notification/notificationform.jsp'" >글쓰기</button>
+         <%
+         	if(loginok != null && isAdmin.equals("1")) {
+         		%>
+         		<button type="button" class="btn btn-sm btn-primary" onclick="location.href='index.jsp?main=notification/notificationform.jsp'">글쓰기</button>	
+         		<%
+         	}
+         %>
+            
          </div>
       </div>
    </article>
