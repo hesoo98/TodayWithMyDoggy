@@ -4,7 +4,14 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link
+	href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap"
+	rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script type="text/javascript" src="js/layout.js"></script>
+<link rel="stylesheet" href="css/layout.css">
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -12,62 +19,44 @@
 	<%
 	//프로젝트 경로구하기
 	String root = request.getContextPath();
-	String userID = null;
-	if (session.getAttribute("userID") != null) {
-		userID = (String) session.getAttribute("userID");
-	}
 	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<!-- 홈페이지의 로고 -->
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-				aria-expand="false">
-				<span class="icon-bar"></span>
-				<!-- 줄였을때 옆에 짝대기 -->
-				<span class="icon-bar"></span> <span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="main.jsp">웹 페이지 제목</a>
-		</div>
+	<!--
+					<li><a href="<%=root%>/index.jsp">메인</a></li>
+					<li><a href="<%=root%>/index.jsp?main=loginmain.jsp">마이페이지</a></li>
+					<li><a href="<%=root%>/index.jsp?main=member/addform.jsp">같이걸어요</a></li>
+					<li><a href="<%=root%>/index.jsp?main=guest/guestlist.jsp">우리강아지</a></li>
+					<li><a href="<%=root%>/index.jsp?main=board/boardlist.jsp">같이가요</a></li>
+					<li><a href="<%=root%>/index.jsp?main=board/boardlist.jsp">Q&A</a></li>
+  -->
+<nav class="navbar navbar-expand-custom navbar-mainbg">
+        <a class="navbar-brand navbar-logo" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Address Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>Components</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="<%=root%>/index.jsp">메인</a></li>
-				<li><a href="<%=root%>/index.jsp?main=loginmain.jsp">마이페이지</a></li>
-				<li><a href="<%=root%>/index.jsp?main=member/addform.jsp">같이걸어요</a></li>
-				<li><a href="<%=root%>/index.jsp?main=guest/guestlist.jsp">우리강아지</a></li>
-				<li><a href="<%=root%>/index.jsp?main=board/boardlist.jsp">같이가요</a></li>
-				<li><a href="<%=root%>/index.jsp?main=board/boardlist.jsp">Q&A</a></li>
-			</ul>
-			<%
-			// 회원이 아닌 경우
-			if (userID == null) {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">접속하기<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="login.jsp">로그인</a></li>
-						<li><a href="join.jsp">회원가입</a></li>
-					</ul></li>
-			</ul>
-			<%
-			} else {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">회원관리<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="logoutAction.jsp">로그아웃</a></li>
-					</ul></li>
-			</ul>
-			<%
-			}
-			%>
-		</div>
-	</nav>
 </body>
 </html>
