@@ -12,7 +12,7 @@
 <<<<<<< HEAD
 	<a href="#">메인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">마이페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="index.jsp?main=dog-talking/write.jsp">같이걸어요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="index.jsp?main=dog-friend/board.jsp">같이걸어요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">우리강아지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">같이가요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">Q&A</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
