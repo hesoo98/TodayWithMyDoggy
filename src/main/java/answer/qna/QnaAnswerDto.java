@@ -2,7 +2,7 @@ package answer.qna;
 
 import java.sql.Timestamp;
 
-public class QnaAnswer {
+public class QnaAnswerDto {
 	private String idx;
 	private String boardNum;
 	private String content;
