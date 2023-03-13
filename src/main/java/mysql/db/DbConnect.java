@@ -10,7 +10,7 @@ import java.sql.Statement;
 public class DbConnect {
 
 	static final String MYSQLDRIVER = "com.mysql.cj.jdbc.Driver";
-	static final String MYSQL_URL = "jdbc:mysql://doglife.cfmrkylebkdt.ap-northeast-2.rds.amazonaws.com:3306/doglife?serverTimezone=Asia/Seoul"; // 바꿀부분
+	static final String MYSQL_URL = "jdbc:mysql://doglife.cfmrkylebkdt.ap-northeast-2.rds.amazonaws.com:3306/doglife?serverTimezone=Asia/Seoul";
 
 	public DbConnect() {
 
@@ -28,7 +28,7 @@ public class DbConnect {
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection(MYSQL_URL, "eunoia", "a1b2c3d4!"); // 바꿀부분
+			conn = DriverManager.getConnection(MYSQL_URL, "eunoia", "a1b2c3d4!");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
