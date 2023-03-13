@@ -2,7 +2,7 @@ package board.dogTalking;
 
 import java.sql.Timestamp;
 
-public class DogTalkingBoard {
+public class DogTalkingBoardDto {
 	private String num;
 	private String nickname;
 	private String subject;
