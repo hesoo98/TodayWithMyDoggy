@@ -62,16 +62,42 @@ DogTalkingBoardDto dto=dao.getData(num);
 	  </div>
 	  
 	  <div class="wrapper-comment">
-	    <span style="cursor: pointer;" onclick="updateLikes()">likes <%=dto.getLikes() %></span><span> 댓글 0</span>
+	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>likes</span>
+	    <span> <%=dto.getLikes() %></span>
+	    <span> 댓글 0</span>
 	  </div>
 	  
 	  <script type="text/javascript">
+	  
 	  //좋아요
 	  function updateLikes(){
+		  
+		  var num=$(this).attr("num");
+		  var tag=$(this);
+		  <%
+		  //로그인 한 사람만 좋아요 가능
+		  String loginok=(String)session.getAttribute("loginok");
+		  if(loginok==null){%>
+			  alert("로그인 해야 좋아요 됩니다.");
+			  //return;
+			  
+		  <%}else{%>
+			  
 		  $.ajax({
+			  
 			  type:"get",
-			  url:""
+			  url:"dog-talking/likes.jsp",
+			  dataType:"json",
+			  data:{"num":num},
+			  success: function(res){
+				  tag.next().text(res.likes);
+			  }
+			  
 		  })
+		  
+		  <%}
+		  %>
+		
 	  }
 	  
 	  </script>
@@ -87,7 +113,7 @@ DogTalkingBoardDto dto=dao.getData(num);
 	    String currentPage=request.getParameter("currentPage");
 	  
 	    if(nickname.equals(dto.getNickname())){%>
-	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/delete.jsp?num=<%=dto.getNum()%>'">수정</button>
+	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/#####.jsp?num=<%=dto.getNum()%>'">수정</button>
 	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/delete.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'">삭제</button>	    	
 	    <%}
 	  %>
