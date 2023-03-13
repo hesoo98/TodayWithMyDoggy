@@ -1,3 +1,4 @@
+<%@page import="member.MemberDao"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="board.dogTalking.DogTalkingBoardDto"%>
@@ -16,6 +17,11 @@ MultipartRequest multi=null;
 try{
 	multi=new MultipartRequest(request,realPath,uploadSize,"utf-8",new DefaultFileRenamePolicy());
 	
+	//session id 불러와서 nickname 저장
+	String id=(String)session.getAttribute("myid");
+	MemberDao mdao=new MemberDao();
+	String nickname=mdao.getNickname(id);
+	
 	//multi 변수로 모든 폼데이터 읽어오기
 	String subject=multi.getParameter("subject");
 	String photoname=multi.getFilesystemName("photo"); //실제업로드된 파일명
@@ -23,6 +29,7 @@ try{
 	
 	//dto에 저장
 	DogTalkingBoardDto dto=new DogTalkingBoardDto();
+	dto.setNickname(nickname);
 	dto.setSubject(subject);
 	dto.setPhoto(photoname);
 	dto.setContent(content);

@@ -1,3 +1,6 @@
+<%@page import="member.MemberDao"%>
+<%@page import="board.dogTalking.DogTalkingBoardDao"%>
+<%@page import="board.dogTalking.DogTalkingBoardDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -6,8 +9,89 @@
 <meta charset="utf-8">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
-</head>
-<body>
+
+<style type="text/css">
+
+	.wrapper{
+  	  width: 500px;
+  	  margin-left: 300px;
+  	  margin-top: 20px;	
+	}
 	
+	.wrapper-subject{
+	  margin-bottom: 50px;	
+	}
+	
+	.gray-font{
+ 	  color: gray;	
+	}
+	
+	.wrapper-content{
+	  height: 300px;
+	}
+	
+	.wrapper-comment{
+	  margin-bottom: 20px;
+	}
+
+</style>
+
+</head>
+
+<%
+
+//num에 해당하는 data 받기
+String num=request.getParameter("num");
+DogTalkingBoardDao dao=new DogTalkingBoardDao();
+DogTalkingBoardDto dto=dao.getData(num);
+
+%>
+
+<body>
+	<div class="wrapper">
+	
+	  <div class="wrapper-subject">
+	  <h2><%=dto.getSubject() %></h2>
+	  <h4><%=dto.getNickname() %></h4>
+	  <span class="gray-font"><%=dto.getWriteday() %></span>
+	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
+	  </div>
+	  
+	  <div class="wrapper-content">
+	    <%=dto.getContent() %>
+	  </div>
+	  
+	  <div class="wrapper-comment">
+	    <span style="cursor: pointer;" onclick="updateLikes()">likes <%=dto.getLikes() %></span><span> 댓글 0</span>
+	  </div>
+	  
+	  <script type="text/javascript">
+	  //좋아요
+	  function updateLikes(){
+		  $.ajax({
+			  type:"get",
+			  url:""
+		  })
+	  }
+	  
+	  </script>
+	  
+	  <%
+
+		//myid session
+		String id=(String)session.getAttribute("myid");
+	    MemberDao mdao=new MemberDao();
+	    String nickname=mdao.getNickname(id);
+	    
+	    //currentpage
+	    String currentPage=request.getParameter("currentPage");
+	  
+	    if(nickname.equals(dto.getNickname())){%>
+	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/delete.jsp?num=<%=dto.getNum()%>'">수정</button>
+	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/delete.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'">삭제</button>	    	
+	    <%}
+	  %>
+	  <button type="button" onclick="history.back()">뒤로가기</button>
+	</div>
 </body>
 </html>

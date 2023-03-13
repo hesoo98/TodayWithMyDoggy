@@ -9,14 +9,13 @@
 </head>
 <body>
 
-<<<<<<< HEAD
 	<a href="#">메인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">마이페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="index.jsp?main=dog-friend/board.jsp">같이걸어요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">우리강아지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">같이가요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="#">Q&A</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-=======
+	<a href="index.jsp?main=qna/qnalist.jsp">Q&A</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="index.jsp?main=notification/notificationlist.jsp">공지사항</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<%
 	//프로젝트 경로구하기
 	String root = request.getContextPath();
@@ -37,7 +36,6 @@
 			</button>
 			<a class="navbar-brand" href="main.jsp">웹 페이지 제목</a>
 		</div>
->>>>>>> dac98e86466e1ed215271523393cc279c094dbd6
 
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">

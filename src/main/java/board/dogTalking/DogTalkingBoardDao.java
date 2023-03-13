@@ -125,9 +125,9 @@ public class DogTalkingBoardDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			
 			pstmt.setString(1, num);
+			
+			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
 				
@@ -151,6 +151,49 @@ public class DogTalkingBoardDao {
 		}
 		
 		return dto;
+	}
+	
+	//delete
+	public void deleteBoard(String num) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="delete from dog_talking_board where num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+		
+	}
+	
+	//좋아요
+	public void updateLikes(String num) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update dog_talking_board set likes=likes+1 where num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, num);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+		
 	}
 		
 }
