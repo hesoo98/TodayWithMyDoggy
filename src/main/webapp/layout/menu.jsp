@@ -14,7 +14,8 @@
 	<a href="#">같이걸어요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">우리강아지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#">같이가요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="#">Q&A</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="index.jsp?main=qna/qnalist.jsp">Q&A</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="index.jsp?main=notification/notificationlist.jsp">공지사항</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 </body>
 </html>
