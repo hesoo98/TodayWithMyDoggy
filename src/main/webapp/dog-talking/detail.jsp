@@ -1,3 +1,7 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="answer.dogTalking.DogTalkingAnswerDao"%>
+<%@page import="answer.dogTalking.DogTalkingAnswerDto"%>
 <%@page import="member.MemberDao"%>
 <%@page import="board.dogTalking.DogTalkingBoardDao"%>
 <%@page import="board.dogTalking.DogTalkingBoardDto"%>
@@ -34,11 +38,44 @@
 	  margin-bottom: 20px;
 	}
 	
-	#comment-box{
-	  margin: 10px; 20px;
+	/* 댓글 */
+	.comment{
+	  opacity: 0.8;
+	}
+	
+	.writer{
+	  font-weight: 600;
+	  font-size: 14px;
+	}
+	
+	.writeday {
+	  float: right;
+	}
+	
+	.content{
+	  margin-left: 5px;
+	}
+	
+	#btn-box{
+	  float: right;
+	}
+	
+	#btn-comment-del{
+	  padding-right: 10px;
+	}
+	
+	#btn-comment-mod, #btn-comment-del{
+	  cursor: pointer;
+	}
+	
+	#my-comment{
+	  color: gray;
+	  font-size: 10px;
+	  border-radius: 5px;
 	  border: 1px solid gray;
 	}
-
+	
+	
 </style>
 
 </head>
@@ -50,6 +87,9 @@ String num=request.getParameter("num");
 DogTalkingBoardDao dao=new DogTalkingBoardDao();
 DogTalkingBoardDto dto=dao.getData(num);
 
+//format
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 %>
 
 <body>
@@ -58,7 +98,7 @@ DogTalkingBoardDto dto=dao.getData(num);
 	  <div class="wrapper-subject">
 	  <h2><%=dto.getSubject() %></h2>
 	  <h4><%=dto.getNickname() %></h4>
-	  <span class="gray-font"><%=dto.getWriteday() %></span>
+	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
 	  </div>
 	  
@@ -69,8 +109,15 @@ DogTalkingBoardDto dto=dao.getData(num);
 	  <div class="wrapper-comment">
 	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>likes</span>
 	    <span> <%=dto.getLikes() %></span>
-	    <span id="comment" style="cursor: pointer;"> 댓글 0</span>
-	    <div id="comment-box">
+	    
+	    <!-- 댓글 -->
+	    <%
+	    DogTalkingAnswerDao adao=new DogTalkingAnswerDao();
+	    String board_num=dto.getNum();
+	    List<DogTalkingAnswerDto> list=adao.showAnswers(board_num);
+	    %>
+	    <span id="comment" style="cursor: pointer;"> 댓글 <%=list.size() %></span>
+	    <div id="comment-box" name="num" value="<%=dto.getNum() %>">
 	    <%
 	    String loginok=(String)session.getAttribute("loginok");
 	    
@@ -79,6 +126,42 @@ DogTalkingBoardDto dto=dao.getData(num);
 			<jsp:include page="answer.jsp"/>
 	    <%}
 	    %>
+	    
+	      <!-- 댓글 보이는 부분 -->
+	      <div id="comment-list">
+	        <%
+	        for(DogTalkingAnswerDto adto:list){%>
+	        
+	          <span class="comment writer"><%=adto.getNickname() %></span>
+	          <span class="comment writeday"><%=sdf.format(adto.getWriteday()) %></span>
+	          
+				<%
+				  // 내댓글 표시 + 댓글 수정,삭제버튼
+			 	  String id=(String)session.getAttribute("myid");
+				  MemberDao mdao=new MemberDao();
+				  String nickname=mdao.getNickname(id);
+				  
+				  if(loginok!=null && adto.getNickname().equals(nickname)){%>
+					  <span id="my-comment" style="float: left;">내댓글</span>
+					  
+	          <div id="btn-box">
+			      <a id="btn-comment-mod" idx="<%=adto.getIdx() %>">수정</a>
+			      <a id="btn-comment-del" idx="<%=adto.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
+	          </div>
+				  <%}
+				%>
+	          <br>
+	          <span class="comment content"><%=adto.getContent() %></span>
+	          
+	          <!-- 수정창 hidden -->
+	          <br>
+	          <input class="mod-form" type="text" value="<%=adto.getContent()%>">
+	          
+	          <hr>
+	          
+	       <% }
+	        %>
+	      </div>
 	    </div>
 	  </div>
 	  
@@ -105,24 +188,54 @@ DogTalkingBoardDto dto=dao.getData(num);
 				  dataType:"json",
 				  data:{"num":num},
 				  success: function(res){
-					  alert("왜안되니?")
+					  alert("왜안되니?");;;;;;;;;;
 				  }
 				  
 			  })
-		
 	  }
 	  
 	  //댓글
 	  $(function(){
-	  
+		  
 		  //댓글창 안보이게
-		  $("#comment-box").hide();
+		  //$("#comment-box").hide();
+
+		  //댓글 수정창 안보이게
+		  $(".mod-form").hide();
 			  
 		  //댓글 누르면 보이게
 		  $("#comment").click(function(){
 			  $("#comment-box").toggle();
 			  
 		  })
+		  
+	  })
+	  
+	  //댓글 삭제
+	  $(document).on("click","#btn-comment-del",function(){
+		  var idx=$(this).attr("idx");
+		  
+		  var a=confirm("댓글을 삭제하시려면 확인을 눌러주세요");
+		  
+		  if(a){
+		  
+			  $.ajax({
+				  type:"get",
+				  url:"dog-talking/deleteanswer.jsp",
+				  dataType:"html",
+				  data:{"idx":idx},
+				  success:function(res){
+					  location.reload();
+				  }
+			   })
+			}
+	    })
+	    
+	  //댓글 수정
+	  $(document).on("click","#btn-comment-mod",function(){
+		  var idx=$(this).attr("idx");
+		  
+		  
 		  
 	  })
 	  

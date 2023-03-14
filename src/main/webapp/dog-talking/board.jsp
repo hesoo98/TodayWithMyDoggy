@@ -1,3 +1,5 @@
+<%@page import="answer.dogTalking.DogTalkingAnswerDto"%>
+<%@page import="answer.dogTalking.DogTalkingAnswerDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.dogTalking.DogTalkingBoardDto"%>
 <%@page import="java.util.List"%>
@@ -56,7 +58,7 @@
 	
 	<div style=" margin: 20px 300px;">
 	
-	  <b>총 <%=totalCount %>개의 방명록이 있습니다</b>
+	  <b>총 <%=totalCount %>개의 게시글이 있습니다</b>
 	  <%
 	  
 	  //로그인 한 유저만 글쓰기 버튼	  
@@ -81,11 +83,23 @@
 	  
 	  //본문
 	  int no=1;
-	  for(DogTalkingBoardDto dto:list){%>
+	  for(DogTalkingBoardDto dto:list){
+	  
+		  //게시글 옆 댓글 수 표시
+		  DogTalkingAnswerDao adao=new DogTalkingAnswerDao();
+		  String board_num=dto.getNum();
+		  List<DogTalkingAnswerDto> alist=adao.showAnswers(board_num);
+	  
+	  %>
 		  
 		  <tr>
 		    <td><%=no++ %></td>
-		    <td><a href="dog-talking/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>"><%=dto.getSubject() %></a></td>
+		    <td>
+		      <a href="dog-talking/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
+		      <%=dto.getSubject() %>
+		      </a>
+		      [<%=alist.size() %>]
+		    </td>
 		    <td><%=dto.getNickname() %></td>
 		    <td><%=sdf.format(dto.getWriteday()) %></td>
 		    <td><%=dto.getReadCount()%></td>
@@ -104,27 +118,27 @@
 			//이전
 			if (startPage > 1) {
 			%>
-			<li><a href="index.jsp?main=guest/guestlist.jsp?currentPage=<%=startPage - 1%>">이전</a>
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=startPage - 1%>">이전</a>
 			</li>
 			<%
 			}
 			for (int pp = startPage; pp <= endPage; pp++) {
 			if (pp == currentPage) {
 			%>
-			<li class="active"><a href="index.jsp?main=guest/guestlist.jsp?currentPage=<%=pp%>"><%=pp%></a>
+			<li class="active"><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a>
 			</li>
 			<%
 			} else {
 			%>
 
-			<li><a href="index.jsp?main=guest/guestlist.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
 			<%
 			}
 			}
 			//다음
 			if (endPage < totalPage) {
 			%>
-			<li><a href="index.jsp?main=guest/guestlist.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
 			<%
 			}
 			%>
