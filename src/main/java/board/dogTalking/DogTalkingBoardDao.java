@@ -192,7 +192,7 @@ public class DogTalkingBoardDao {
 			e.printStackTrace();
 		} finally {
 			db.dbClose(pstmt, conn);
-		}
+		}	
 		
 	}
 		

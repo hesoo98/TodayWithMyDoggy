@@ -12,6 +12,7 @@ import board.dogTalking.DogTalkingBoardDto;
 import mysql.db.DbConnect;
 
 public class DogFriendBoardDao {
+	
 	DbConnect db=new DbConnect();
 	
 	//insert
@@ -19,13 +20,12 @@ public class DogFriendBoardDao {
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		
-		String sql="insert into dog_friend_board values(null,?,?,?,now(),0,0)";
+		String sql="insert into dog_friend_board(nickname,subject,content,writeday) values(?,?,?,now())";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getNickname());
 			pstmt.setString(2, dto.getSubject());
 			pstmt.setString(3, dto.getContent());
-			pstmt.setTimestamp(4, dto.getWriteday());
 			
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -118,7 +118,7 @@ public class DogFriendBoardDao {
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
-				dto.setReadCount(rs.getInt("readcount"));
+				dto.setReadCount(rs.getInt("read_count"));
 				dto.setLikes(rs.getInt("likes"));
 				
 				list.add(dto);
@@ -148,18 +148,18 @@ public class DogFriendBoardDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			rs=pstmt.executeQuery();
 			
 			pstmt.setString(1, num);
 			
-			while(rs.next()) {
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
 				
 				dto.setNum(rs.getString("num"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
-				dto.setReadCount(rs.getInt("readcount"));
+				dto.setReadCount(rs.getInt("read_count"));
 				dto.setLikes(rs.getInt("likes"));
 				
 			}
@@ -189,6 +189,47 @@ public class DogFriendBoardDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+	}
+	//delete
+	public void deleteBoard(String num) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="delete from dog_friend_board where num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+		
+	}
+	//좋아요
+	public void updateLikes(String num) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update dog_friend_board set likes=likes+1 where num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, num);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 			db.dbClose(pstmt, conn);
 		}
 		

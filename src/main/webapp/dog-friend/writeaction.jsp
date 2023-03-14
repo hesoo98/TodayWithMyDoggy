@@ -8,17 +8,20 @@
 	request.setCharacterEncoding("utf-8");
 	
 	DogFriendBoardDto dto=new DogFriendBoardDto();
-	String nickname=request.getParameter("nickname");
+	String myid=(String)session.getAttribute("myid");
 	String subject=request.getParameter("subject");
 	String content=request.getParameter("content");
 	
+	DogFriendBoardDao dao=new DogFriendBoardDao();
+
+	dao.getData(myid);
 	//dto에 저장
-	dto.setNickname(nickname);
+	dto.setNickname(myid);
 	dto.setSubject(subject);
 	dto.setContent(content);
 	
 	//dao선언
-	DogFriendBoardDao dao=new DogFriendBoardDao();
+	
 	dao.insertDogFriend(dto);
 	
 	//방금 추가된 num값 얻기
