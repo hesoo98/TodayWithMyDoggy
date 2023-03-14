@@ -23,7 +23,6 @@ String loginok = (String)session.getAttribute("loginok");
 String isAdmin = (String)session.getAttribute("isAdmin");
 %>
 
-
 </head>
 
 <body>
@@ -69,7 +68,8 @@ String isAdmin = (String)session.getAttribute("isAdmin");
 		</ul>
 	</div>
 </nav>
-
+</head>
+<body>
 </body>
-
+</body>
 </html>
