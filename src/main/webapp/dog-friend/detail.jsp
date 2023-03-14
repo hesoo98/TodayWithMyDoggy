@@ -94,6 +94,7 @@
 			<tr>
 				<td>
 					<b>작성자 : <%=dto.getNickname() %></b><br>
+					<span><%=dto.getWriteday() %></span>
 	  	<span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
 				</td>
 			</tr>

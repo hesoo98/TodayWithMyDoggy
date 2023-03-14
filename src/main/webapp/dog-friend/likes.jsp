@@ -12,7 +12,7 @@
 	//num에 해당하는 likes 1층가
 	dao.updateLikes(num);
 	
-	//num에 해당하는 chu값 json형식으로 반환
+	//num에 해당하는 likes값 json형식으로 반환
 	int likes=dao.getData(num).getLikes();
 	
 	JSONObject ob=new JSONObject();
