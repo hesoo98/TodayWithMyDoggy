@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="board.dogTalking.DogTalkingAnswerDao"%>
+<%@page import="board.dogTalking.DogTalkingAnswerDto"%>
 <%@page import="member.MemberDao"%>
 <%@page import="board.dogTalking.DogTalkingBoardDao"%>
 <%@page import="board.dogTalking.DogTalkingBoardDto"%>
@@ -34,11 +37,6 @@
 	  margin-bottom: 20px;
 	}
 	
-	#comment-box{
-	  margin: 10px; 20px;
-	  border: 1px solid gray;
-	}
-
 </style>
 
 </head>
@@ -69,8 +67,15 @@ DogTalkingBoardDto dto=dao.getData(num);
 	  <div class="wrapper-comment">
 	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>likes</span>
 	    <span> <%=dto.getLikes() %></span>
-	    <span id="comment" style="cursor: pointer;"> 댓글 0</span>
-	    <div id="comment-box">
+	    
+	    <!-- 댓글 -->
+	    <%
+	    DogTalkingAnswerDao adao=new DogTalkingAnswerDao();
+	    String board_num=dto.getNum();
+	    List<DogTalkingAnswerDto> list=adao.showAnswers(board_num);
+	    %>
+	    <span id="comment" style="cursor: pointer;"> 댓글 개수는 <%=list.size() %></span>
+	    <div id="comment-box" name="num" value="<%=dto.getNum() %>">
 	    <%
 	    String loginok=(String)session.getAttribute("loginok");
 	    
@@ -79,6 +84,11 @@ DogTalkingBoardDto dto=dao.getData(num);
 			<jsp:include page="answer.jsp"/>
 	    <%}
 	    %>
+	    
+	      <!-- 댓글 보이는 부분 -->
+	      <div id="comment-list">
+	        
+	      </div>
 	    </div>
 	  </div>
 	  
@@ -105,7 +115,7 @@ DogTalkingBoardDto dto=dao.getData(num);
 				  dataType:"json",
 				  data:{"num":num},
 				  success: function(res){
-					  alert("왜안되니?")
+					  alert("왜안되니?");;;;;;;;;;
 				  }
 				  
 			  })

@@ -56,7 +56,7 @@
 	
 	<div style=" margin: 20px 300px;">
 	
-	  <b>총 <%=totalCount %>개의 방명록이 있습니다</b>
+	  <b>총 <%=totalCount %>개의 게시글이 있습니다</b>
 	  <%
 	  
 	  //로그인 한 유저만 글쓰기 버튼	  
