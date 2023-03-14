@@ -11,11 +11,11 @@ public class DogProfileDao {
 	DbConnect db = new DbConnect();
 
 	// insert
-	public void addMember(DogProfileDto dto) {
+	public void insertDogProfile(DogProfileDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into dog_profile values(null,?,?,?,?,?,?)";
+		String sql = "insert into dog_profile (member_num,name,gender,dog_size,birthday,photo,main_dog)values(?,?,?,?,?,?,0)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getMemberNum());

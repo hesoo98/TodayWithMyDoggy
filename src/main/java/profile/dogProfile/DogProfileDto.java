@@ -8,7 +8,14 @@ public class DogProfileDto {
 	private String dogSize;
 	private String birthday;
 	private String photo;
+	private int mainDog;
 	
+	public int getMainDog() {
+		return mainDog;
+	}
+	public void setMainDog(int mainDog) {
+		this.mainDog = mainDog;
+	}
 	public String getIdx() {
 		return idx;
 	}
