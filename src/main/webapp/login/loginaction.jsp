@@ -17,6 +17,7 @@
 	
 	MemberDao dao=new MemberDao();
 	boolean b=dao.isIdPasswordCheck(id, password);
+	String isAdmin = dao.getAuth(id);
 	
 	//아이디와 비번이 맞으면 3개의 세션 저장, 로그인메인 이동
 	if(b){
@@ -25,6 +26,7 @@
 		session.setAttribute("loginok", "yes");
 		session.setAttribute("myid", id);
 		session.setAttribute("saveok", cbsave==null?null:"yes");
+		session.setAttribute("isAdmin", isAdmin);
 		
 		//로그인 메인 이동
 		response.sendRedirect("../index.jsp?main=login/loginmain.jsp");
