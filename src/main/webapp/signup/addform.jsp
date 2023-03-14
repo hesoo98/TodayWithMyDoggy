@@ -18,7 +18,7 @@
     		//alert(id);
     		$.ajax({
     			type:"get",
-    			url:"idsearch.jsp",
+    			url:"signup/idsearch.jsp",
     			dataType:"json",
     			data:{"id":id},
     			success:function(res){
@@ -45,7 +45,7 @@
     		//alert(nickname);
     		$.ajax({
     			type:"get",
-    			url:"nicknamesearch.jsp",
+    			url:"signup/nicknamesearch.jsp",
     			dataType:"json",
     			data:{"nickname":nickname},
     			success:function(res){
@@ -94,7 +94,6 @@
 <body>
 	<form action="addaction.jsp" method="post" onsubmit="return passCheck(this)">
 		<table style="width:500px;">
-			<caption><b>회원가입</b></caption>
 			<tr>
 				<th width="100">아이디</th>
 				<td>
