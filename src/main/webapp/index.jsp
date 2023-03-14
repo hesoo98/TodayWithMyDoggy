@@ -1,15 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>Index</title>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
@@ -21,19 +16,24 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-</head>
-<%
-String mainPage = "layout/main.jsp";
-if(request.getParameter("main") != null) {
-	mainPage = request.getParameter("main");
-}
-String root	= request.getContextPath();
-%>
-<body>
-<div class="layout menu">
+<div class="layout menu" >
 	<jsp:include page="layout/menu.jsp"/>
 </div>
+<style type="text/css">
+.main {
+	padding: 0px;
+}
+</style>
+</head>
+<%
+	String mainPage = "layout/main.jsp";
+	if(request.getParameter("main") != null) {
+		mainPage = request.getParameter("main");
+	}
+	String root	= request.getContextPath();
+%>
+<body>
+<!-- 페이지 전환시 navbar 위 공간 오류 원인 -->
 <div class="layout main">
 	<jsp:include page="<%=mainPage %>"/>
 </div>
