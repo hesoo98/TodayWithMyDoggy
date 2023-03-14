@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	안녕댓글창
+	
 </body>
 </html>

@@ -3,12 +3,12 @@
 <html>
 <head>
 <meta charset="utf-8">
-<<<<<<< HEAD
+
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
-=======
+
 <title>Index</title>
->>>>>>> youngdon
+
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -25,16 +25,15 @@
 	<jsp:include page="layout/menu.jsp"/>
 </div>
 <style type="text/css">
-<<<<<<< HEAD
 
+	.main {
+		padding: 0px;
 	}
-=======
-.main {
-	padding: 0px;
-}
->>>>>>> youngdon
 </style>
+
 </head>
+
+
 <%
 	String mainPage = "layout/main.jsp";
 	if(request.getParameter("main") != null) {
@@ -42,10 +41,12 @@
 	}
 	String root	= request.getContextPath();
 %>
+
+
 <body>
-<!-- 페이지 전환시 navbar 위 공간 오류 원인 -->
-<div class="layout main">
-	<jsp:include page="<%=mainPage %>"/>
-</div>
+	<!-- 페이지 전환시 navbar 위 공간 오류 원인 -->
+	<div class="layout main">
+		<jsp:include page="<%=mainPage %>"/>
+	</div>
 </body>
 </html>
