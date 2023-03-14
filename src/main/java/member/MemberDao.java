@@ -153,6 +153,30 @@ public class MemberDao {
 		
 		return nickname;
 	}
-	
+	//id에 따른 auth값 return
+	//재승이 영역인데 필요해서 김희수가 추가함.
+	public String getAuth(String id) {
+		String auth = "0";
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql = "select * from member where id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				//auth = rs.getInt("auth");
+				auth = rs.getString("auth");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return auth;
+	}
+
 
 }
