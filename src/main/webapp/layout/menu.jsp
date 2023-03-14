@@ -64,7 +64,7 @@ String isAdmin = (String)session.getAttribute("isAdmin");
 				href="<%=root%>/index.jsp?main=login/loginform.jsp"><i class=""></i>로그인</a>
 			</li>
 			<li class="nav-item"><a class="nav-link"
-				href="<%=root%>/index.jsp?main=signup/addform.jsp"><i class=""></i>회원가입</a>
+				href="<%=root%>/index.jsp?main=signup/terms.jsp"><i class=""></i>회원가입</a>
 			</li>
 		</ul>
 	</div>

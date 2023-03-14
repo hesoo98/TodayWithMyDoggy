@@ -90,7 +90,7 @@
 	<div style="margin:30px 30px;">
 	<input type="hidden" id="num" value="<%=num%>">
 		<table class="table table-bordered" style="width: 500px;">
-			<caption><h3><b><%=dto.getSubject() %></b></h3></caption>
+			<h3><b><%=dto.getSubject() %></b></h3>
 			<tr>
 				<td>
 					<b>작성자 : <%=dto.getNickname() %></b><br>

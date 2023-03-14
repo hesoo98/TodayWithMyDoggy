@@ -174,6 +174,14 @@
 				</span> -->
 			</td>
 		</tr>
+     <%}else{%>
+  			<tr>
+  				<td colspan="6">
+    	 		<input type="checkbox" class="alldelcheck">전체선택
+					<button type="button" class="btn btn-success btn-sm" style="float:right"
+					onclick="alert('로그인 후 이용해주세요')"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
+				</td>
+			</tr>
      <%}
      %>
    </table>
