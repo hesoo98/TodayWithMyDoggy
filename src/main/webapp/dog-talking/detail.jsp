@@ -33,6 +33,11 @@
 	.wrapper-comment{
 	  margin-bottom: 20px;
 	}
+	
+	#comment-box{
+	  margin: 10px; 20px;
+	  border: 1px solid gray;
+	}
 
 </style>
 
@@ -64,41 +69,63 @@ DogTalkingBoardDto dto=dao.getData(num);
 	  <div class="wrapper-comment">
 	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>likes</span>
 	    <span> <%=dto.getLikes() %></span>
-	    <span> 댓글 0</span>
+	    <span id="comment" style="cursor: pointer;"> 댓글 0</span>
+	    <div id="comment-box">
+	    <%
+	    String loginok=(String)session.getAttribute("loginok");
+	    
+	    //로그인했다면 댓글 입력창
+	    if(loginok!=null){%>
+			<jsp:include page="answer.jsp"/>
+	    <%}
+	    %>
+	    </div>
 	  </div>
 	  
 	  <script type="text/javascript">
 	  
-	  //좋아요
+	  //좋아요 (미완성)
 	  function updateLikes(){
+		  var num=$("#likes").attr("num");
 		  
-		  var num=$(this).attr("num");
-		  var tag=$(this);
 		  <%
 		  //로그인 한 사람만 좋아요 가능
-		  String loginok=(String)session.getAttribute("loginok");
 		  if(loginok==null){%>
-			  alert("로그인 해야 좋아요 됩니다.");
-			  //return;
+			  var a=confirm("로그인 하시겠습니까?");
 			  
-		  <%}else{%>
+			  if (a) location.href="../index.jsp?main=login/loginform.jsp";
 			  
-		  $.ajax({
+		  <%}%>
+			  alert(num);
 			  
-			  type:"get",
-			  url:"dog-talking/likes.jsp",
-			  dataType:"json",
-			  data:{"num":num},
-			  success: function(res){
-				  tag.next().text(res.likes);
-			  }
+			  $.ajax({
+				  
+				  type:"get",
+				  url:"dog-talking/likes.jsp",
+				  dataType:"json",
+				  data:{"num":num},
+				  success: function(res){
+					  alert("왜안되니?")
+				  }
+				  
+			  })
+		
+	  }
+	  
+	  //댓글
+	  $(function(){
+	  
+		  //댓글창 안보이게
+		  $("#comment-box").hide();
+			  
+		  //댓글 누르면 보이게
+		  $("#comment").click(function(){
+			  $("#comment-box").toggle();
 			  
 		  })
 		  
-		  <%}
-		  %>
-		
-	  }
+	  })
+	  
 	  
 	  </script>
 	  
