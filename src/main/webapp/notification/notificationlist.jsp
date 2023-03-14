@@ -20,13 +20,10 @@ body {
   padding-top: 70px;
   padding-bottom: 30px;
 }
-
 .container {
    width: 800px;
 }
-
 .content {
-
 }
 </style>
 

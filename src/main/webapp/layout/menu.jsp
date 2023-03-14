@@ -9,13 +9,8 @@
 </head>
 <body>
 
-	<a href="#">메인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="#">마이페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="index.jsp?main=dog-talking/write.jsp">같이걸어요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="#">우리강아지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="#">같이가요</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="index.jsp?main=qna/qnalist.jsp">Q&A</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="index.jsp?main=notification/notificationlist.jsp">공지사항</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	
+	
 	<%
 	//프로젝트 경로구하기
 	String root = request.getContextPath();
@@ -23,6 +18,12 @@
 	if (session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
 	}
+	
+	//로그인 상태인지?
+	String loginok = (String)session.getAttribute("loginok");
+	// 관리자 계정인지?
+	String isAdmin = (String)session.getAttribute("isAdmin");
+	
 	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
@@ -41,11 +42,17 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="<%=root%>/index.jsp">메인</a></li>
-				<li><a href="<%=root%>/index.jsp?main=loginmain.jsp">마이페이지</a></li>
-				<li><a href="<%=root%>/index.jsp?main=member/addform.jsp">같이걸어요</a></li>
+			
+			<%if(loginok != null && isAdmin.equals("0")){%>
+				<li><a href="index.jsp?main=mypage/userMyPage.jsp">마이페이지</a></li>
+			<%} else {%>
+				<li><a href="index.jsp?main=mypage/adminMyPage.jsp">마이페이지</a></li>
+			<%}%>
+				<li><a href="index.jsp?main=dog-talking/write.jsp">같이걸어요</a></li>
 				<li><a href="<%=root%>/index.jsp?main=guest/guestlist.jsp">우리강아지</a></li>
 				<li><a href="<%=root%>/index.jsp?main=board/boardlist.jsp">같이가요</a></li>
-				<li><a href="<%=root%>/index.jsp?main=board/boardlist.jsp">Q&A</a></li>
+				<li><a href="index.jsp?main=qna/qnalist.jsp">Q&A</a></li>
+				<li><a href="index.jsp?main=notification/notificationlist.jsp">공지사항</a></li>
 			</ul>
 			<%
 			// 회원이 아닌 경우

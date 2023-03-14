@@ -20,13 +20,7 @@
 	
 		<div style="width:90%; margin : 10px auto;">
 			<div style="float:left; margin-left:150px;"><img src="https://via.placeholder.com/200x200" width="200" height="200" id="dogprofile" style="border-radius: 200px;"></div>
-			<div style="float:left;margin-left:150px; width:400px; border:1px solid black;width: 500px;height: 300px;">
-				<button style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
-			<%if (dogCnt == 0) {%>
-				<b>등록된 강아지가 없어요!</b>
-			<%}%>
-				
-			</div>
+			<div style="float:left;margin-left:150px; width:400px; border:1px solid black;width: 500px;height: 300px;"></div>
 		</div>
 		<div style="margin-top:200px;">
 			<div style="float:left; border:1px solid black;width: 400px;height: 300px; margin-left:100px;">나의 활동</div>

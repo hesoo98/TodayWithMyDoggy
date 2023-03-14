@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-
 	}
 </style>
 
