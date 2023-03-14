@@ -19,6 +19,10 @@
 String root = request.getContextPath();
 %>
 
+</head>
+
+<body>
+
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 	<a class="navbar-brand navbar-logo" href="index.jsp?main.jsp">개
 		커뮤니티</a>
@@ -58,5 +62,6 @@ String root = request.getContextPath();
 </nav>
 </head>
 <body>
+</body>
 </body>
 </html>

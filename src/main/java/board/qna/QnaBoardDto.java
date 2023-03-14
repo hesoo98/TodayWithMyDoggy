@@ -2,7 +2,7 @@ package board.qna;
 
 import java.sql.Timestamp;
 
-public class QnaBoard {
+public class QnaBoardDto {
 	private String idx;
 	private String nickname;
 	private String title;
