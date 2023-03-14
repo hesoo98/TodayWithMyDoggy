@@ -78,21 +78,51 @@
     
     //비밀번호 확인
     function passCheck(f){
-    	if(f.password.value!=f.password2.value){
-    		alert("비밀번호가 서로 다릅니다");
-    		
+    	 var pw = $("#password").val();
+    	 var num = pw.search(/[0-9]/g);
+    	 var eng = pw.search(/[a-z]/ig);
+    	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+    	 if(pw.length < 8 || pw.length > 20){
+    	  alert("8자리 ~ 20자리 이내로 입력해주세요.");
+    	  	f.password.value="";
+  		  	f.password2.value="";
+    	  return false;
+    	 }else if(pw.search(/\s/) != -1){
+    	  alert("비밀번호는 공백 없이 입력해주세요.");
+    	  	f.password.value="";
+  		 	f.password2.value="";
+    	  return false;
+    	 }else if(num < 0 || eng < 0 || spe < 0 ){
+    	  alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
+    	  	f.password.value="";
+  		  	f.password2.value="";
+    	  return false;
+    	 }else if(f.password.value!=f.password2.value){
+    	  alert("비밀번호가 서로 다릅니다");
     		f.password.value="";
     		f.password2.value="";
     		
     		return false;//action이 호출되지 않는다.
-    	}
+    		
+    		
+    	}else {
+    		console.log("통과"); 
+    	    return true;
+    	 }
+    	
+    	
     }
-    
+    function chkPW(){
+
+    	
+
+    	}
     </script>
     
 </head>
 <body>
-	<form action="addaction.jsp" method="post" onsubmit="return passCheck(this)">
+	<form action="signup/addaction.jsp" method="post" onsubmit="return passCheck(this)">
 		<table style="width:500px;">
 			<tr>
 				<th width="100">아이디</th>
@@ -106,8 +136,9 @@
 			<tr>
 				<th width="100">비밀번호</th>
 				<td>
-					<input type="password" name="password" required="required"
+					<input type="password" id="password" name="password" required="required"
 					style="width:120px;" placeholder="비밀번호">
+					<span>영문, 숫자, 특수문자를 혼합한 8~20자리</span>
 				</td>
 			</tr>
 			

@@ -22,7 +22,6 @@
 	<div style="margin-left:130px;">
 		<form action="login/loginaction.jsp" method="post">
 			<table style="width:300px;">
-				<caption><b>세션 로그인</b></caption>
 				<tr>
 					<td colspan="2" align="center">
 						<input type="checkbox" name="cbsave"<%=saveok==null?"":"checked" %>>아이디저장
