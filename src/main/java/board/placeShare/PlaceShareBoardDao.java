@@ -1,6 +1,6 @@
 package board.placeShare;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -19,10 +19,10 @@ public class PlaceShareBoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getNickname());
-			pstmt.setString(1, dto.getSubject());
-			pstmt.setString(1, dto.getContent());
-			pstmt.setString(1, dto.getPhotoName());
-			pstmt.setString(1, dto.getTitlePhotoName());
+			pstmt.setString(2, dto.getSubject());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getPhotoName());
+			pstmt.setString(5, dto.getTitlePhotoName());
 			pstmt.execute();
 		} catch (SQLException e) {
 			System.out.println("INSERT ERROR: e.getMessage()");

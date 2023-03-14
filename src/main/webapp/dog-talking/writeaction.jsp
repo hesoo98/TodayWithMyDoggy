@@ -7,6 +7,8 @@
     pageEncoding="utf-8"%>
 <%
 
+request.setCharacterEncoding("utf-8");
+
 //file upload, 이미지가 업로드되는 실제경로
 String realPath=getServletContext().getRealPath("/dog-talking-photo");
 System.out.print(realPath);
