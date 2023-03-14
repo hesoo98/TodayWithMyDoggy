@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Index</title>
 
 <!-- Latest compiled and minified CSS -->
@@ -16,14 +17,9 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<div class="layout menu" >
+<div class="layout menu">
 	<jsp:include page="layout/menu.jsp"/>
 </div>
-<style type="text/css">
-.main {
-	padding: 0px;
-}
-</style>
 </head>
 <%
 	String mainPage = "layout/main.jsp";

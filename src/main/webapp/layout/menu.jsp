@@ -57,4 +57,6 @@ String root = request.getContextPath();
 	</div>
 </nav>
 </head>
+<body>
+</body>
 </html>
