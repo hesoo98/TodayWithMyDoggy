@@ -14,10 +14,10 @@ DogTalkingBoardDto dto=new DogTalkingBoardDto();
 String num=request.getParameter("num");
 %>
 
-	<form id="answerform" method="post" action="dog-talking/answeraction.jsp">
+	<form method="post" action="dog-talking/answeraction.jsp">
 	  <input type="hidden" value="<%=num %>" name="num">
 	  <textarea rows="2" cols="70" name="answer" placeholder="댓글을 입력하세요"></textarea>
-	  <input type="submit" value="쓰기">
+	  <input type="submit" value="쓰기" style="margin-bottom: 10px;">
 	</form>
 </body>
 </html>

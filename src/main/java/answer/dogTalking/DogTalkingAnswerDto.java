@@ -3,8 +3,9 @@ package answer.dogTalking;
 import java.sql.Timestamp;
 
 public class DogTalkingAnswerDto {
+
 	private String idx;
-	private String boardNum;
+	private String boardnum;
 	private String nickname;
 	private String content;
 	private Timestamp writeday;
@@ -15,11 +16,11 @@ public class DogTalkingAnswerDto {
 	public void setIdx(String idx) {
 		this.idx = idx;
 	}
-	public String getBoardNum() {
-		return boardNum;
+	public String getBoardnum() {
+		return boardnum;
 	}
-	public void setBoardNum(String boardNum) {
-		this.boardNum = boardNum;
+	public void setBoardnum(String boardnum) {
+		this.boardnum = boardnum;
 	}
 	public String getNickname() {
 		return nickname;
@@ -39,4 +40,6 @@ public class DogTalkingAnswerDto {
 	public void setWriteday(Timestamp writeday) {
 		this.writeday = writeday;
 	}
+	
+	
 }

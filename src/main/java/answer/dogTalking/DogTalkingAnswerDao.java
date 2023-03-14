@@ -1,4 +1,4 @@
-package board.dogTalking;
+package answer.dogTalking;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,7 +60,7 @@ public class DogTalkingAnswerDao {
 				
 				dto.setIdx(rs.getString("idx"));
 				dto.setNickname(rs.getString("nickname"));
-				dto.setBoardnum(rs.getString("boardnum"));
+				dto.setBoardnum(rs.getString("board_num"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				
@@ -76,5 +76,28 @@ public class DogTalkingAnswerDao {
 		
 		
 		return list;
+	}
+	
+	//delete
+	public void deleteAnswer(String idx) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="delete from dog_talking_answer where idx=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, idx);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+				
 	}
 }
