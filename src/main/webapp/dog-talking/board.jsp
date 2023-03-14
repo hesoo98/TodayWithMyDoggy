@@ -95,7 +95,7 @@
 		  <tr>
 		    <td><%=no++ %></td>
 		    <td>
-		      <a href="dog-talking/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
+		      <a href="index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
 		      <%=dto.getSubject() %>
 		      </a>
 		      [<%=alist.size() %>]
