@@ -14,7 +14,7 @@ public class PlaceShareBoardDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into place_share_board values(?,?,?,?,?,now())";
+		String sql = "insert into place_share_board(nickname,subject,content,photo_name,title_photo_name,writeday) values(?,?,?,?,?,now())";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -25,7 +25,7 @@ public class PlaceShareBoardDao {
 			pstmt.setString(5, dto.getTitlePhotoName());
 			pstmt.execute();
 		} catch (SQLException e) {
-			System.out.println("INSERT ERROR: e.getMessage()");
+			System.out.println("INSERT ERROR: "+ e.getMessage());
 		} finally {
 			db.dbClose(pstmt, conn);
 		}
