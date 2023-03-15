@@ -63,7 +63,7 @@ public class DogProfileDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from dog_profile where num = ? order by idx desc ";
+		String sql = "select * from dog_profile where member_num = ? order by idx";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
