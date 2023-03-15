@@ -1,3 +1,5 @@
+<%@page import="member.MemberDto"%>
+<%@page import="member.MemberDao"%>
 <%@page import="java.util.List"%>
 <%@page import="profile.dogProfile.DogProfileDto"%>
 <%@page import="profile.dogProfile.DogProfileDao"%>
@@ -31,11 +33,22 @@
 </head>
 <body>
 <%
-	String num = (String)session.getAttribute("");
-	DogProfileDao dao = new DogProfileDao();
-	int dogCnt = dao.getTotalDogCount();
-	List<DogProfileDto> myDogList = dao.getMyDogList(num);
-	for (DogProfileDto dto: )
+	//로그인한 사용자 아이디 가져와서 사용자 num값 추출.
+	String id = (String)session.getAttribute("myid");
+	MemberDao memberDao = new MemberDao();
+	String num = memberDao.getNum(id);
+		
+	int isMainDog = 0;//사용자가 대표강아지가 있는지 없는지 있으면 1 없으면 0
+	
+	DogProfileDao dogDao = new DogProfileDao();
+	//int dogCnt = dogDao.getTotalDogCount(); //모든사용자들의 총 강아지 마리수.
+	List<DogProfileDto> myDogList = dogDao.getMyDogList(num);//현재 로그인한 사용자의 강아지 리스트.(다른사람강아지 포함x)
+	
+	for (DogProfileDto dto: myDogList){
+		if(dto.getMainDog() == 1) {
+			isMainDog = 1;
+		}
+	}
 %>
 	<div class="container main" style="border:1px solid red;">
 		<h1>유저마이페이지</h1>
@@ -46,9 +59,12 @@
 			</div>
 			<div class="rectangle">
 				<button style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
-			<%if (dogCnt == 0) {%>
-				<b>등록된 강아지가 없어요!</b>
-			<%}%>
+			<%if (isMainDog == 1) {%>
+				<b>대표 강아지 있음!</b>
+			<%} else {%>
+				<b>대표 강아지가 없어요!</b>
+			<% }%>
+
 				
 			</div>
 		</div>
