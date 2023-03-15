@@ -1,3 +1,5 @@
+<%@page import="profile.dogProfile.DogProfileDto"%>
+<%@page import="profile.dogProfile.DogProfileDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="answer.dogTalking.DogTalkingAnswerDao"%>
@@ -91,6 +93,8 @@
 </head>
 
 <%
+//id session
+String id=(String)session.getAttribute("myid");
 
 //num에 해당하는 data 받기
 String num=request.getParameter("num");
@@ -111,11 +115,22 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  <h4><span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=dto.getNickname() %>
 	  
 	  <%
-	  //강아지 정보 불러오기
 	  
+	  
+	  MemberDao mdao=new MemberDao();
+	  
+	  //강아지 정보 불러오기
+	  DogProfileDao ddao=new DogProfileDao();
+	  
+	  //writer
+	  String writer_nick=dto.getNickname();
+	  //writer의 멤버 num
+	  String member_num=mdao.getNumWithNickname(writer_nick);
+	  //글쓴 member의 pet info
+	  DogProfileDto ddto=ddao.getPetInfo(member_num);
 	  %>
 	  
-	  <span style="font-size: 12px;">멍멍(11) 중성 대전 어쩌구</span>
+	  <span style="font-size: 12px;"><%=ddto.getName() %>( <%=ddto.getGender() %>|<%=ddto.getDogSize() %> )</span>
 	  </h4>
 	  
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
@@ -161,8 +176,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	          
 				<%
 				  // 내댓글 표시 + 댓글 수정,삭제버튼
-			 	  String id=(String)session.getAttribute("myid");
-				  MemberDao mdao=new MemberDao();
+				  
 				  String nickname=mdao.getNickname(id);
 				  
 				  if(loginok!=null && adto.getNickname().equals(nickname)){%>
@@ -280,10 +294,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  </script>
 	  
 	  <%
-
-		//myid session
-		String id=(String)session.getAttribute("myid");
-	    MemberDao mdao=new MemberDao();
+;
 	    String nickname=mdao.getNickname(id);
 	    
 	    //currentpage
