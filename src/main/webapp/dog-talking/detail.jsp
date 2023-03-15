@@ -128,6 +128,8 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  String member_num=mdao.getNumWithNickname(writer_nick);
 	  //글쓴 member의 pet info
 	  DogProfileDto ddto=ddao.getPetInfo(member_num);
+	  //조회수 1 증가
+	  dao.updateReadCount(num);
 	  %>
 	  
 	  <span style="font-size: 12px;"><%=ddto.getName() %>( <%=ddto.getGender() %>|<%=ddto.getDogSize() %> )</span>
