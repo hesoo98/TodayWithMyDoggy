@@ -197,5 +197,23 @@ public class DogTalkingBoardDao {
 
 		}
 	  }
+	//조회수 1 증가
+	public void updateReadCount(String num) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update dog_talking_board set readcount=readcount+1 where num=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+	}
 		
 }

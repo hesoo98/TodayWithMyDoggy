@@ -118,21 +118,6 @@
        <td>조회수</td>
        <td>좋아요</td>
      </tr>
-		<script type="text/javascript">
-		function sortselect(obj){
-			var selectsort = $(obj).val();
-			
-			if(selectsort=="default"){
-				alert("디폴트");
-			}else if(selectsort=="rc"){
-				alert("as");
-			}else{
-				alert("asdf");
-			}
-			
-		}
-			
-	</script>
 		<%
 		if(totalCount==0){
 			%>
