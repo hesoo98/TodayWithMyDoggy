@@ -17,9 +17,11 @@
 <style type="text/css">
 
 	.wrapper{
-  	  width: 500px;
-  	  margin-left: 300px;
-  	  margin-top: 20px;	
+  	  width: 800px auto;
+  	  margin: 50px 160px;
+  	  border: 1px lightgray solid;
+  	  border-radius: 30px;
+  	  padding: 40px 90px;
 	}
 	
 	.wrapper-subject{
@@ -36,6 +38,12 @@
 	
 	.wrapper-comment{
 	  margin-bottom: 20px;
+	  width: 80% auto;
+	}
+	
+	.line{
+	  width: 90% auto;
+	  margin: 50px 0px;
 	}
 	
 	/* 댓글 */
@@ -46,6 +54,7 @@
 	.writer{
 	  font-weight: 600;
 	  font-size: 14px;
+	  position: absolute;
 	}
 	
 	.writeday {
@@ -73,6 +82,7 @@
 	  font-size: 10px;
 	  border-radius: 5px;
 	  border: 1px solid gray;
+
 	}
 	
 	
@@ -97,14 +107,28 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	  <div class="wrapper-subject">
 	  <h2><%=dto.getSubject() %></h2>
-	  <h4><%=dto.getNickname() %></h4>
+	  
+	  <h4><span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=dto.getNickname() %>
+	  
+	  <%
+	  //강아지 정보 불러오기
+	  
+	  %>
+	  
+	  <span style="font-size: 12px;">멍멍(11) 중성 대전 어쩌구</span>
+	  </h4>
+	  
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
 	  </div>
 	  
+	  <hr class="line">
+	  
 	  <div class="wrapper-content">
 	    <%=dto.getContent() %>
 	  </div>
+	  
+	  <hr class="line">
 	  
 	  <div class="wrapper-comment">
 	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>likes</span>
@@ -151,11 +175,20 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				  <%}
 				%>
 	          <br>
-	          <span class="comment content"><%=adto.getContent() %></span>
+	          <span id="gu-an" class="comment content"><%=adto.getContent() %></span>
 	          
 	          <!-- 수정창 hidden -->
 	          <br>
-	          <input class="mod-form" type="text" value="<%=adto.getContent()%>">
+	          <!--<input class="mod-form" type="text" value="<%=adto.getContent()%>">  -->
+	          
+	          <!-- 영돈 -->
+	          <span class="updateAn">
+              <textarea><%=adto.getContent().replace("\n", "<br>")%></textarea>
+              <button class="btn btn-warning wd" value="<%=adto.getIdx()%>" 
+              style="width: 100px">댓글수정</button>
+              </span>
+	          
+                        
 	          
 	          <hr>
 	          
@@ -201,7 +234,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		  //$("#comment-box").hide();
 
 		  //댓글 수정창 안보이게
-		  $(".mod-form").hide();
+		  $("span.updateAn").hide();
 			  
 		  //댓글 누르면 보이게
 		  $("#comment").click(function(){
@@ -228,6 +261,9 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					  location.reload();
 				  }
 			   })
+			   
+			} else {
+				return false;
 			}
 	    })
 	    
@@ -235,7 +271,8 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  $(document).on("click","#btn-comment-mod",function(){
 		  var idx=$(this).attr("idx");
 		  
-		  
+	         $(this).parent().parent().find("#gu-an").hide();
+	         $("span.updateAn").show();
 		  
 	  })
 	  
