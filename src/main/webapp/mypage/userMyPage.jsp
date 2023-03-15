@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="profile.dogProfile.DogProfileDto"%>
 <%@page import="profile.dogProfile.DogProfileDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -20,20 +22,28 @@
 			padding: 10px;
 		}
 		#dogprofile {
-
+			border:1px solid gray;
+			border-radius: 200px;
+			width:200px;
+			height:200px;
 		}
 	</style>
 </head>
 <body>
 <%
+	String num = (String)session.getAttribute("");
 	DogProfileDao dao = new DogProfileDao();
 	int dogCnt = dao.getTotalDogCount();
+	List<DogProfileDto> myDogList = dao.getMyDogList(num);
+	for (DogProfileDto dto: )
 %>
 	<div class="container main" style="border:1px solid red;">
 		<h1>유저마이페이지</h1>
 	
 		<div class="firstLine">
-			<div class="rectangle"><img src="https://via.placeholder.com/200x200" width="200" height="200" id="dogprofile" style="border-radius: 200px;"></div>
+			<div class="rectangle">
+				<img src="" id="dogprofile">
+			</div>
 			<div class="rectangle">
 				<button style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
 			<%if (dogCnt == 0) {%>
