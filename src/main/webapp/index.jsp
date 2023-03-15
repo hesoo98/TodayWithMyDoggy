@@ -25,6 +25,32 @@
 <div class="layout menu">
 	<jsp:include page="layout/menu.jsp"/>
 </div>
+
+<style type="text/css">
+
+	.main{
+	  height: 500px;
+	}
+	
+	.footer{
+	  
+	}
+	
+	/*  footer 하단고정 못하겠어
+	.main{
+	  height: auto;
+	  min-height: 100%;
+	  padding-bottom: 200px;
+	}
+	
+	footer{
+	  height: 200px;
+	  position : relative;
+	  transform : translateY(-100%);
+	}
+ */
+</style>
+
 </head>
 
 <%
@@ -40,5 +66,10 @@
 	<div class="layout main">
 		<jsp:include page="<%=mainPage %>"/>
 	</div>
+	
+	<div class="layout footer">
+		<jsp:include page="layout/footer.jsp" />
+	</div>
+	
 </body>
 </html>
