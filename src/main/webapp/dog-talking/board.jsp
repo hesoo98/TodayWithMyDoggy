@@ -13,6 +13,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
+
+<style type="text/css">
+
+  #list-cnt{
+    margin-left: 10px;
+  }
+
+</style>
+
 </head>
 <body>
 
@@ -58,7 +67,7 @@
 	
 	<div style=" margin: 20px 300px;">
 	
-	  <b>총 <%=totalCount %>개의 게시글이 있습니다</b>
+	  <b id="list-cnt">총 <%=totalCount %>개의 게시글이 있습니다</b>
 	  <%
 	  
 	  //로그인 한 유저만 글쓰기 버튼	  

@@ -200,6 +200,30 @@ public class MemberDao {
 		}
 		return num;
 	}
+	
+	public String getNumWithNickname(String nickname) {
+		String num = "0";
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql = "select * from member where nickname=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
 
-
+				num = rs.getString("num");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return num;
+	}
+	
+	
 }
