@@ -32,7 +32,10 @@
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
 		String photoName = multi.getFilesystemName("photo1");	
-		String titlePhotoName = multi.getParameter("titlePhoto");	
+		String titlePhotoName = multi.getParameter("titlePhoto");
+		String placeLa = multi.getParameter("latitude");
+		String placeMa = multi.getParameter("longitude");
+		String placeName = multi.getParameter("placeName");
 		
 		PlaceShareBoardDto dto = new PlaceShareBoardDto();
 		dto.setNickname(nickname);
@@ -43,7 +46,7 @@
 		
 		dao.insertBoard(dto);
 		
-		response.sendRedirect("../index.jsp?main=place-share/place-share-datail.jsp");
+		response.sendRedirect("../index.jsp?main=place-share/datail.jsp");
 
 	} catch(Exception e) {
        response.sendRedirect("UploadFail.jsp");
