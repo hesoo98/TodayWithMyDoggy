@@ -22,6 +22,22 @@
 			height:200px;
 		}
 	</style>
+	<script type="text/javascript">
+		$(function(){
+			
+		});
+		
+		function readURL(input) {
+			if(input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#dogprofile').attr("src", e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		
+	</script>
 </head>
 <body>
 	<div class="container main" style="border:1px solid red;">
@@ -30,7 +46,7 @@
 		<div class="firstLine">
 			<form action="mypage/addDogAction.jsp" method="post" enctype="multipart/form-data">
 				<div class="rectangle">
-					<img "src="https://via.placeholder.com/200x200" id="dogprofile">
+					<img src="" id="dogprofile">
 					<div>
 						<b>강아지 사진 등록</b>
 				 		<input type="file" name="photo" id="photo" onchange="readURL(this)">
@@ -50,11 +66,6 @@
 						<tr>
 							<td>성별 : &nbsp;&nbsp;&nbsp;</td>
 							<td>
-								<!-- <select name="gender" class="form-control" required="required">
-									<option value="암">암</option>
-									<option value="수">수</option>
-									<option value="중성화">중성화</option>
-								</select>-->
 								<input type="radio" name="gender" value="암">암&nbsp;&nbsp;
 								<input type="radio" name="gender" value="수">수&nbsp;&nbsp;
 								<input type="radio" name="gender" value="중성화">중성화&nbsp;&nbsp;

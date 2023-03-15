@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Vector;
 
 import mysql.db.DbConnect;
 
@@ -11,11 +13,11 @@ public class DogProfileDao {
 	DbConnect db = new DbConnect();
 
 	// insert
-	public void addMember(DogProfileDto dto) {
+	public void insertDogProfile(DogProfileDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into dog_profile values(null,?,?,?,?,?,?)";
+		String sql = "insert into dog_profile (member_num,name,gender,dog_size,birthday,photo,main_dog)values(?,?,?,?,?,?,0)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getMemberNum());
@@ -52,5 +54,40 @@ public class DogProfileDao {
 			db.dbClose(rs, pstmt, conn);
 		}
 		return n;
+	}
+	
+	//나의 강아지들 리스트 반환
+	public List<DogProfileDto> getMyDogList(String num) {
+		List<DogProfileDto> list = new Vector<>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from dog_profile where num = ? order by idx desc ";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				DogProfileDto dto = new DogProfileDto();
+				dto.setIdx(rs.getString("idx"));
+				dto.setMemberNum(rs.getString("member_num"));
+				dto.setName(rs.getString("name"));
+				dto.setGender(rs.getString("gender"));
+				dto.setDogSize(rs.getString("dog_size"));
+				dto.setBirthday(rs.getString("birthday"));
+				dto.setPhoto(rs.getString("photo"));
+				dto.setMainDog(rs.getInt("main_dog"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
 	}
 }

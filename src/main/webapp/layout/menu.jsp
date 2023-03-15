@@ -1,3 +1,4 @@
+<%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -21,6 +22,10 @@ String root = request.getContextPath();
 String loginok = (String)session.getAttribute("loginok");
 // 관리자 계정인지?
 String isAdmin = (String)session.getAttribute("isAdmin");
+//아이디얻기
+String myid=(String)session.getAttribute("myid");
+MemberDao dao=new MemberDao();
+String nickname=dao.getNickname(myid);
 %>
 
 </head>
@@ -55,19 +60,35 @@ String isAdmin = (String)session.getAttribute("isAdmin");
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=dog-talking/board.jsp"><i class=""></i>우리강아지</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="<%=root%>/index.jsp?main=place-share/placeShareBoardInput.jsp"><i class=""></i>같이가요</a></li>
+				href="<%=root%>/index.jsp?main=place-share/place-share-list.jsp"><i class=""></i>같이가요</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=qna/qnalist.jsp"><i class="qnaBoard"></i>Q&A 게시판</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=notification/notificationlist.jsp"><i class="notificationBoard"></i>공지사항</a></li>
+			<div style="float: right;">
+			<%
+		if(loginok==null){%>
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=login/loginform.jsp"><i class=""></i>로그인</a>
 			</li>
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=signup/terms.jsp"><i class=""></i>회원가입</a>
 			</li>
+		<%}else{%>
+			<li class="nav-item" style="margin-left:200px;"><%=nickname %>님 로그인 중
+			<button type="button" class="btn btn-success" style="width:100px;"
+			onclick="location.href='login/logoutaction.jsp'">로그아웃</button>	
+			</li>
+		<%}
+		%>
+		
+		
+	</div>
+			
+			
 		</ul>
 	</div>
+
 </nav>
 </head>
 <body>
