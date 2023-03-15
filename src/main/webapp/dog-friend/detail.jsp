@@ -1,3 +1,6 @@
+<%@page import="answer.dogFriend.DogFriendAnswerDto"%>
+<%@page import="java.util.List"%>
+<%@page import="answer.dogFriend.DogFriendAnswerDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="member.MemberDao"%>
 <%@page import="board.dogFriend.DogFriendBoardDto"%>
@@ -12,12 +15,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     
-    <style type="text/css">
+<style type="text/css">
 
 	.wrapper{
-  	  width: 500px;
-  	  margin-left: 300px;
-  	  margin-top: 20px;	
+  	  width: 800px auto;
+  	  margin: 50px 160px;
+  	  border: 1px lightgray solid;
+  	  border-radius: 30px;
+  	  padding: 40px 90px;
 	}
 	
 	.wrapper-subject{
@@ -34,43 +39,60 @@
 	
 	.wrapper-comment{
 	  margin-bottom: 20px;
+	  width: 80% auto;
 	}
+	
+	.line{
+	  width: 90% auto;
+	  margin: 50px 0px;
+	}
+	
+	/* 댓글 */
+	.comment{
+	  opacity: 0.8;
+	}
+	
+	.writer{
+	  font-weight: 600;
+	  font-size: 14px;
+	  position: absolute;
+	}
+	
+	.writeday {
+	  float: right;
+	}
+	
+	.content{
+	  margin-left: 5px;
+	}
+	
+	#btn-box{
+	  float: right;
+	}
+	
+	#btn-comment-del{
+	  padding-right: 10px;
+	}
+	
+	#btn-comment-mod, #btn-comment-del{
+	  cursor: pointer;
+	}
+	
+	#my-comment{
+	  color: gray;
+	  font-size: 10px;
+	  border-radius: 5px;
+	  border: 1px solid gray;
 
+	}
+	
+	
 </style>
-    
+
 </head>
 
 <body>
-	  <script type="text/javascript">
-	  $("span.likes").click(function(){
-		  
-			var num = $(this).attr("num");
-			var tag=$(this);
-			
-			//alert(num);
-			$.ajax({
-				
-				type:"get",
-				dataType:"json",
-				url:"dog-friend/likes.jsp",
-				data:{"num":num},
-				success:function(res){
-					
-					//alert(res.chu);
-					tag.next().text(res.likes);
-					
-					tag.next().next().animate({"font-size":"20px"},1000,function(){
-						
-						//애니메이션이 끝난후 글꼴크기 0px
-						$(this).css("font-size","0px")
-					});
-				}
-				
-				
-			});
-	  });
-	  
-	  </script>
+
 <%
 	
 	DogFriendBoardDao dao=new DogFriendBoardDao();
@@ -102,36 +124,77 @@
 			<tr>
 				<td>
 					<%=dto.getContent() %>
-					<br><br>
-					<span class="likes" style="cursor: pointer;">likes <%=dto.getLikes() %></span><span> 댓글 0</span>
+								 <div class="wrapper-comment">
+	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>likes</span>
+	    <span> <%=dto.getLikes() %></span>
+	    
+	    <!-- 댓글 -->
+	    <%
+	    DogFriendAnswerDao adao=new DogFriendAnswerDao();
+	    String board_num=dto.getNum();
+	    List<DogFriendAnswerDto> list=adao.showAnswers(board_num);
+	    %>
+	    <span id="comment" style="cursor: pointer;"> 댓글 <%=list.size() %></span>
+	    <div id="comment-box" name="num" value="<%=dto.getNum() %>">
+	    <%
+	    String loginok=(String)session.getAttribute("loginok");
+	    
+	    //로그인했다면 댓글 입력창
+	    if(loginok!=null){%>
+			<jsp:include page="answer.jsp"/>
+	    <%}
+	    %>
+	    
+	      <!-- 댓글 보이는 부분 -->
+	      <div id="comment-list">
+	        <%
+	        for(DogFriendAnswerDto adto:list){%>
+	        
+	          <span class="comment writer"><%=adto.getNickname() %></span>
+	          <span class="comment writeday"><%=sdf.format(adto.getWriteday()) %></span>
+	          
+				<%
+				  // 내댓글 표시 + 댓글 수정,삭제버튼
+			 	  String id=(String)session.getAttribute("myid");
+				  MemberDao mdao=new MemberDao();
+				  String nickname=mdao.getNickname(id);
+				  
+				  if(loginok!=null && adto.getNickname().equals(nickname)){%>
+					  <span id="my-comment" style="float: left;">내댓글</span>
+					  
+	          <div id="btn-box">
+			      <a id="btn-comment-mod" idx="<%=adto.getIdx() %>">수정</a>
+			      <a id="btn-comment-del" idx="<%=adto.getIdx() %>" href="dog-friend/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
+	          </div>
+				  <%}
+				%>
+	          <br>
+	          <span id="gu-an" class="comment content"><%=adto.getContent() %></span>
+	          
+	          <!-- 수정창 hidden -->
+	          <br>
+	          <!--<input class="mod-form" type="text" value="<%=adto.getContent()%>">  -->
+	          
+	          <!-- 영돈 -->
+	          <span class="updateAn">
+              <textarea><%=adto.getContent().replace("\n", "<br>")%></textarea>
+              <button class="btn btn-warning wd" value="<%=adto.getIdx()%>" 
+              style="width: 100px">댓글수정</button>
+              </span>
+	          <hr>
+	          
+	       <% }
+	        %>
+	      </div>
+	    </div>
+	  </div>
+			
 				</td>
-				
 			</tr>
-			  
 
 			
-			<!-- 댓글 -->
 			<tr>
-				<td>
-					<b class="acount">댓글 <span></span></b>
-					<div class="alist">
-						댓글 목록
-					</div>
-					
-					<div class="aform form-inline">
-						<input type="text" id="nickname" class="form-control" style="width: 100px;"
-						placeholder="닉네임 입력">
-						
-						<input type="text" id="content" class="form-control" style="width: 300px;"
-						placeholder="댓글 입력">
-						
-						<button type="button" id="btnanswer" class="btn btn-info">저장</button>
-						
-					</div>
-				</td>
-			</tr>
 			
-			<tr>
 				<td>
 					<button type="button" class="btn btn-default"
 					onclick="location.href='index.jsp?main=dog-friend/write.jsp'">
@@ -153,9 +216,10 @@
 				</td>
 			</tr>
 		</table>
+		
+		
 	</div>
 
-	
 	<script type="text/javascript">
 		function funcdel(num,currentPage){
 			//alert(num+","+currentPage);
@@ -164,6 +228,80 @@
 				location.href="dog-friend/delete.jsp?num="+num+"&currentPage="+currentPage;
 			}
 		}
+		
+		  //좋아요 (미완성)
+		  function updateLikes(){
+			  var num=$("#likes").attr("num");
+			  
+			  <%
+			  //로그인 한 사람만 좋아요 가능
+			  if(loginok==null){%>
+				  var a=alert("로그인 후 이용해주세요.");
+				  return false;
+				  
+			  <%}%>
+				  
+				  $.ajax({
+					  
+					  type:"get",
+					  url:"dog-friend/likes.jsp",
+					  dataType:"json",
+					  data:{"num":num},
+					  success: function(res){
+						  location.reload();
+					  }
+					  
+				  })
+		  }
+		  
+		  //댓글
+		  $(function(){
+			  
+			  //댓글창 안보이게
+			  //$("#comment-box").hide();
+
+			  //댓글 수정창 안보이게
+			  $("span.updateAn").hide();
+				  
+			  //댓글 누르면 보이게
+			  $("#comment").click(function(){
+				  $("#comment-box").toggle();
+				  
+			  })
+			  
+		  })
+		  
+		  //댓글 삭제
+		  $(document).on("click","#btn-comment-del",function(){
+			  var idx=$(this).attr("idx");
+			  
+			  var a=confirm("댓글을 삭제하시려면 확인을 눌러주세요");
+			  
+			  if(a){
+			  
+				  $.ajax({
+					  type:"get",
+					  url:"dog-friend/deleteanswer.jsp",
+					  dataType:"html",
+					  data:{"idx":idx},
+					  success:function(res){
+						  location.reload();
+					  }
+				   })
+				   
+				} else {
+					return false;
+				}
+		    })
+		    
+		  //댓글 수정
+		  $(document).on("click","#btn-comment-mod",function(){
+			  var idx=$(this).attr("idx");
+			  
+		         $(this).parent().parent().find("#gu-an").hide();
+		         $("span.updateAn").show();
+			  
+		  })
 	</script>
 </body>
 </html>
