@@ -27,6 +27,7 @@ String isAdmin = (String)session.getAttribute("isAdmin");
 
 <body>
 
+
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 	<a class="navbar-brand navbar-logo" href="index.jsp?main.jsp">개
 		커뮤니티</a>
@@ -50,20 +51,20 @@ String isAdmin = (String)session.getAttribute("isAdmin");
 				href="<%=root%>/index.jsp?main=mypage/adminMyPage.jsp"><i class=""></i>관리자페이지</a></li>
 			<%}%>
 			<li class="nav-item active"><a class="nav-link"
-				href="javascript:void(0);"><i class="far"></i>같이 걸어요</a></li>
+				href="<%=root%>/index.jsp?main=dog-friend/board.jsp"><i class="far"></i>같이 걸어요</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="<%=root%>/index.jsp?main=guest/guestlist.jsp"><i class=""></i>우리강아지</a></li>
+				href="<%=root%>/index.jsp?main=dog-talking/board.jsp"><i class=""></i>우리강아지</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="<%=root%>/index.jsp?main=placeShareBoardInput.jsp"><i class=""></i>같이가요</a></li>
+				href="<%=root%>/index.jsp?main=place-share/place-share-list.jsp"><i class=""></i>같이가요</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=qna/qnalist.jsp"><i class="qnaBoard"></i>Q&A 게시판</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=notification/notificationlist.jsp"><i class="notificationBoard"></i>공지사항</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="<%=root%>/index.jsp?main=member/addform.jsp"><i class=""></i>로그인</a>
+				href="<%=root%>/index.jsp?main=login/loginform.jsp"><i class=""></i>로그인</a>
 			</li>
 			<li class="nav-item"><a class="nav-link"
-				href="<%=root%>/index.jsp?main=member/addform.jsp"><i class=""></i>회원가입</a>
+				href="<%=root%>/index.jsp?main=signup/terms.jsp"><i class=""></i>회원가입</a>
 			</li>
 		</ul>
 	</div>
