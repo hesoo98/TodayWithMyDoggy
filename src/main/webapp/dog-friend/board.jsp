@@ -1,3 +1,5 @@
+<%@page import="answer.dogFriend.DogFriendAnswerDto"%>
+<%@page import="answer.dogFriend.DogFriendAnswerDao"%>
 <%@page import="board.dogFriend.DogFriendBoardDao"%>
 <%@page import="board.dogFriend.DogFriendBoardDto"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -51,7 +53,10 @@
     		
     	})
     	
+    	
     })
+    
+
     </script>
 </head>
 <body>
@@ -98,11 +103,10 @@
    no=totalCount-(currentPage-1)*perPage;
    %>
    
-   <div style=" margin: 20px 300px;">
+   <div style=" margin: 20px 300px;" id="abc">
    
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
 
-     
      <br><br>
    
    <table class="table table-bordered" style="width: 600px;">
@@ -114,7 +118,6 @@
        <td>조회수</td>
        <td>좋아요</td>
      </tr>
-		
 		<%
 		if(totalCount==0){
 			%>
@@ -124,9 +127,12 @@
 				</td>
 			</tr>
 			<%
-		}else{
+		}else {
 			for(DogFriendBoardDto dto:list){
-				
+				  //게시글 옆 댓글 수 표시
+				  DogFriendAnswerDao adao=new DogFriendAnswerDao();
+				  String board_num=dto.getNum();
+				  List<DogFriendAnswerDto> alist=adao.showAnswers(board_num);
 				%>
 				<tr>
 					<td align="center">
@@ -137,7 +143,7 @@
 					
 					<td>
 						<a href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
-						<%=dto.getSubject() %></a>
+						<%=dto.getSubject() %></a>[<%=alist.size() %>]
 
 					</td>
 					
@@ -163,15 +169,7 @@
 				<input type="checkbox" class="alldelcheck">전체선택
 					<button type="button" class="btn btn-success btn-sm" style="float:right"
 					onclick="location.href='index.jsp?main=dog-friend/write.jsp'"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
-					
-<!-- 				auth가 1일 때만 보이게 하기
-					<span style="float:right">
-					<button type="button" class="btn btn-danger btn-sm"
-					id="btndel"><span class="glyphicon glyphicon-trash"></span>삭제</button>
-					
-					&nbsp;
-					
-				</span> -->
+	
 			</td>
 		</tr>
      <%}else{%>
@@ -218,6 +216,7 @@
          }
          %>
       </ul>
+   </div>
    </div>
 </body>
 </html>

@@ -124,6 +124,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 <body>
 	<div class="wrapper">
 	
+
 		  <%
 		  MemberDao mdao=new MemberDao();
 		  
@@ -152,6 +153,32 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		  (<%=ddto.getGender() %>|<%=ddto.getDogSize() %>|주소지<%=mdto.getAddr() %> )
 		  
 		  </span>
+
+	  <div class="wrapper-subject">
+	  <h2><%=dto.getSubject() %></h2>
+	  
+	  <h4><span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=dto.getNickname() %>
+	  
+	  <%
+	  
+	  
+	  MemberDao mdao=new MemberDao();
+	  
+	  //강아지 정보 불러오기
+	  DogProfileDao ddao=new DogProfileDao();
+	  
+	  //writer
+	  String writer_nick=dto.getNickname();
+	  //writer의 멤버 num
+	  String member_num=mdao.getNumWithNickname(writer_nick);
+	  //글쓴 member의 pet info
+	  DogProfileDto ddto=ddao.getPetInfo(member_num);
+	  //조회수 1 증가
+	  dao.updateReadCount(num);
+	  %>
+	  
+	  <span style="font-size: 12px;"><%=ddto.getName() %>( <%=ddto.getGender() %>|<%=ddto.getDogSize() %> )</span>
+
 	  </h4>
 	  
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
