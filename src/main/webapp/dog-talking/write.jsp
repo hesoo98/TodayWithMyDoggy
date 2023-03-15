@@ -32,7 +32,7 @@ body {
          <h2>산책 친구 게시판</h2>
          <br>
          <form method="post" action="dog-talking/writeaction.jsp" enctype="multipart/form-data">
-            <div class="subjext">
+            <div class="subject">
                <div>제목</div>
                <input type="text" class="form-control" name="subject" id="subject" placeholder="제목을 입력해 주세요">
             </div>
