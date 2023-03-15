@@ -82,14 +82,6 @@ img:hover {
 }
 </style>
 
-<script type="text/javascript">
-	$(function () {
-		$("#img").click(function () {
-			var num = $("#num").val();
-			location.href="index.jsp?place-share/detail.jsp?num="+num;
-		});
-	});
-</script>
 <%
 PlaceShareBoardDao dao = new PlaceShareBoardDao();
 List<PlaceShareBoardDto> list = dao.getList();
@@ -111,12 +103,14 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				%>
 				<div class="col">
 					<div class="card border-light mb-10" width="100%" style="border-radius: 10%">
-						<div class="card-img" style="border-radius: 12%">
-							<img class="img" id="img" vlaue="<%=dto.getNum() %>" class="bd-placeholder-img card-img-top" style="border-radius: 7%"
+						<div class="card-img" id="img" style="border-radius: 12%">
+							<input type="hidden" id="num" name="num" value="<%=dto.getNum() %>">
+							<img class="img" class="bd-placeholder-img card-img-top" style="border-radius: 7%"
 								src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>"
 								height="250px;" xmlns="http://www.w3.org/2000/svg"
 								role="img" aria-label="Placeholder: Thumbnail"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
+								preserveAspectRatio="xMidYMid slice" focusable="false"
+								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum() %>'"+>
 						</div>
 						<div class="card-body">
 							<p class="card-subject"><%=dto.getSubject()%></p>

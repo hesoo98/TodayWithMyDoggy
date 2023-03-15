@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import board.dogTalking.DogTalkingBoardDto;
 import mysql.db.DbConnect;
 
 public class PlaceShareBoardDao {
@@ -70,5 +71,40 @@ public class PlaceShareBoardDao {
 			db.dbClose(rs, pstmt, conn);
 		}
 		return list;
+	}
+	
+public PlaceShareBoardDto getData(String num) {
+		
+		PlaceShareBoardDto dto = new PlaceShareBoardDto();
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select * from place_share_board where num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				dto.setNum(rs.getString("num"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setPhotoName(rs.getString("photo_name"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setReadCount(rs.getInt("readcount"));
+				dto.setLikes(rs.getInt("likes"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
 	}
 }
