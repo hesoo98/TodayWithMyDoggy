@@ -48,12 +48,19 @@
 	width: 1200px;
 }
 
-.card-img-top {
-	border-radius: 5%
+div.col {
+	border: 2px solid red;
+}
+
+svg.card-img-top {
+	border: 2px solid black;
+	border-radius: 20px;
+	background-color: blue;
 }
 
 .card-body {
-	border: 0px solid;
+	border: 2px solid black;
+	background-color: lightblue;
 }
 
 @media ( min-width : 768px) {
@@ -86,7 +93,7 @@
 						<svg class="bd-placeholder-img card-img-top" width="100%"
 							height="250" xmlns="http://www.w3.org/2000/svg" role="img"
 							preserveAspectRatio="xMidYMid slice" focusable="false">
-							<image href="<%=dto.getPhotoName()%>"></image>
+							<image href="<%=dto.getPhotoName()%>" style="background-color: blue;"></image>
 							</svg>
 
 						<div class="card-body">

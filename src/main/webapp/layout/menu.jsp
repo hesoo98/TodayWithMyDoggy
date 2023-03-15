@@ -60,7 +60,7 @@ String nickname=dao.getNickname(myid);
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=dog-talking/board.jsp"><i class=""></i>우리강아지</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="<%=root%>/index.jsp?main=place-share/placeShareBoardInput.jsp"><i class=""></i>같이가요</a></li>
+				href="<%=root%>/index.jsp?main=place-share/place-share-list.jsp"><i class=""></i>같이가요</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=qna/qnalist.jsp"><i class="qnaBoard"></i>Q&A 게시판</a></li>
 			<li class="nav-item"><a class="nav-link"
