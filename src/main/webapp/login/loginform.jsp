@@ -66,8 +66,10 @@
 				<tr>
 				  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 				 </tr>
+				 
 			</table>
 		</form>
 	</div>
+	<script src="/js/user.js"></script>
 </body>
 </html>
