@@ -19,10 +19,9 @@ String nickname=dao.getNickname(myid);
 
 %>
 	<div>
-		<b><%=nickname %>님 환영합니다</b>
+		<b><%=nickname %>님 방문을 환영합니다</b>
 		
 		<button type="button" onclick="location.href='mypage/userMyPage.jsp'">마이페이지</button>
-		<button type="button" onclick="location.href='login/logoutaction.jsp'">로그아웃</button>
 	</div>
 </body>
 </html>
