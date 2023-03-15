@@ -1,3 +1,5 @@
+<%@page import="board.placeShare.PlaceShareBoardDao"%>
+<%@page import="board.placeShare.PlaceShareBoardDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -16,9 +18,18 @@
 	}
 </style>
 </head>
+<%
+	String num = request.getParameter("num");
+	PlaceShareBoardDao dao = new PlaceShareBoardDao();	
+	PlaceShareBoardDto dto = dao.getData(num);
+%>
 <body>
 	<div class="container">
 	<img class="top-img" src="">
+	<br>
+	<div>
+		<img src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>" id="title-img">
+	</div>
 	</div>
 	</body>
 </html>

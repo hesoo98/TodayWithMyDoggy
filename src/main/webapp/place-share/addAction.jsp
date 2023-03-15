@@ -46,7 +46,7 @@
 		
 		dao.insertBoard(dto);
 		
-		response.sendRedirect("../index.jsp?main=place-share/datail.jsp");
+		response.sendRedirect("../index.jsp?main=place-share/boardList.jsp");
 
 	} catch(Exception e) {
        response.sendRedirect("UploadFail.jsp");
