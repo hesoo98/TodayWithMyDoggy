@@ -6,9 +6,10 @@
     <%
     
     String num=request.getParameter("num");
+    String currentPage=request.getParameter("currentPage");
     
     DogTalkingBoardDao dao=new DogTalkingBoardDao();
     dao.deleteBoard(num);
     
-    response.sendRedirect("../index.jsp?main=dog-talking/board.jsp");
+    response.sendRedirect("../index.jsp?main=dog-talking/board.jsp?currentPage="+currentPage);
     %>

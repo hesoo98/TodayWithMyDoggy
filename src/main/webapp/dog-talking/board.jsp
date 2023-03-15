@@ -65,7 +65,7 @@
 	
 	%>
 	
-	<div style=" margin: 20px 300px;">
+	<div class="container">
 	
 	  <b id="list-cnt">총 <%=totalCount %>개의 게시글이 있습니다</b>
 	  <%
@@ -79,19 +79,20 @@
 	  %>
 	  <br><br>
 	
-	<table class="table table-bordered" style="width: 600px;">
+	<table class="table table-hover" style="width: 700px;">
 	  <tr>
-	    <td width="10">번호</td>
-	    <td>제목</td>
-	    <td>작성자</td>
-	    <td>작성일</td>
-	    <td>조회수</td>
+	    <td width="50">번호</td>
+	    <td width="300">제목</td>
+	    <td width="150">작성자</td>
+	    <td width="200">작성일</td>
+	    <td width="50">조회수</td>
 	  </tr>
+	  
+	  <jsp:include page="../dog-talking/board-rank.jsp"></jsp:include>
 	  
 	  <%
 	  
 	  //본문
-	  int no=1;
 	  for(DogTalkingBoardDto dto:list){
 	  
 		  //게시글 옆 댓글 수 표시
@@ -102,7 +103,7 @@
 	  %>
 		  
 		  <tr>
-		    <td><%=no++ %></td>
+		    <td><%=dto.getNum() %></td>
 		    <td>
 		      <a href="index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
 		      <%=dto.getSubject() %>

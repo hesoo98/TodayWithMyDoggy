@@ -174,6 +174,8 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
 		}
 		return auth;
 	}
@@ -197,12 +199,16 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
 		}
 		return num;
 	}
 	
-	public String getNumWithNickname(String nickname) {
-		String num = "0";
+	//nickname 으로 id 구하기 (detailpage petinfo 불러올때 필요)
+	public String getIdWithNickname(String nickname) {
+
+		String id="";
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -215,15 +221,16 @@ public class MemberDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 
-				num = rs.getString("num");
+				id = rs.getString("id");
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
 		}
-		return num;
+		return id;
 	}
-	
 	
 }

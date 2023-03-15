@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="profile.dogProfile.DogProfileDto"%>
 <%@page import="profile.dogProfile.DogProfileDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -18,6 +19,15 @@
 
 <style type="text/css">
 
+    #a-tag{
+      color: black;
+    }
+    
+    #a-tag:hover{
+      color: black;
+      text-decoration: none;
+    }
+
 	.wrapper{
   	  width: 800px auto;
   	  margin: 50px 160px;
@@ -32,10 +42,6 @@
 	
 	.gray-font{
  	  color: gray;	
-	}
-	
-	.wrapper-content{
-	  height: 300px;
 	}
 	
 	.wrapper-comment{
@@ -87,6 +93,15 @@
 
 	}
 	
+	#comment-info{
+	  font-size: 10px;
+	  font-weight: 300;
+	}
+	
+	#commenter-div{
+	  float: left;
+	}
+	
 	
 </style>
 
@@ -109,6 +124,36 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 <body>
 	<div class="wrapper">
 	
+
+		  <%
+		  MemberDao mdao=new MemberDao();
+		  
+		  //강아지 정보 불러오기
+		  DogProfileDao ddao=new DogProfileDao();
+		  
+		  //writer
+		  String writerNick=dto.getNickname();
+		  //writer의 id
+		  String writerId=mdao.getIdWithNickname(writerNick);
+		  //id로 구한 멤버 num
+		  String memberNum=mdao.getNum(writerId);
+		  //글쓴 member의 pet info
+		  DogProfileDto ddto=ddao.getPetInfo(memberNum);
+		  MemberDto mdto=new MemberDto();
+		  %>
+		  
+		  <div class="wrapper-subject">
+		  <h2><%=dto.getSubject() %></h2>
+		  
+		  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=<%=memberNum%>">
+		    <h4><img src="dog-talking-photo/04.png" style="width: 20px;"><span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=dto.getNickname() %>
+		  </a>
+		  
+		  <span style="font-size: 12px;"><%=ddto.getName() %>
+		  (<%=ddto.getGender() %>|<%=ddto.getDogSize() %>|주소지<%=mdto.getAddr() %> )
+		  
+		  </span>
+
 	  <div class="wrapper-subject">
 	  <h2><%=dto.getSubject() %></h2>
 	  
@@ -133,6 +178,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  %>
 	  
 	  <span style="font-size: 12px;"><%=ddto.getName() %>( <%=ddto.getGender() %>|<%=ddto.getDogSize() %> )</span>
+
 	  </h4>
 	  
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
@@ -143,6 +189,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  
 	  <div class="wrapper-content">
 	    <%=dto.getContent() %>
+	    <%=dto.getPhoto() %>
 	  </div>
 	  
 	  <hr class="line">
@@ -153,9 +200,21 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    
 	    <!-- 댓글 -->
 	    <%
+	    DogTalkingAnswerDto adto=new DogTalkingAnswerDto();
 	    DogTalkingAnswerDao adao=new DogTalkingAnswerDao();
 	    String board_num=dto.getNum();
 	    List<DogTalkingAnswerDto> list=adao.showAnswers(board_num);
+	    
+	  	  //댓글쓴사람의 강아지 정보 불러오기
+		  
+		  //answerwriter
+		  String answerNick=adto.getNickname();
+		  //writer의 id
+		  String answerId=mdao.getIdWithNickname(answerNick);
+		  //id로 구한 멤버 num
+		  String answerWriterNum=mdao.getNum(answerId);
+		  //댓글쓴 member의 pet info
+		  DogProfileDto addto=ddao.getPetInfo(memberNum);
 	    %>
 	    <span id="comment" style="cursor: pointer;"> 댓글 <%=list.size() %></span>
 	    <div id="comment-box" name="num" value="<%=dto.getNum() %>">
@@ -171,36 +230,47 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	      <!-- 댓글 보이는 부분 -->
 	      <div id="comment-list">
 	        <%
-	        for(DogTalkingAnswerDto adto:list){%>
+	        for(DogTalkingAnswerDto dogAnswer:list){%>
 	        
-	          <span class="comment writer"><%=adto.getNickname() %></span>
-	          <span class="comment writeday"><%=sdf.format(adto.getWriteday()) %></span>
+	          <div id="commenter-div">
+	          <!-- 이름부분 누르면 마이페이지로 이동 -->
+	            <%
+	            //for문 내부에서 댓글 쓴사람의 memberId -> num 구해서 mypage url
+	            String answerWriterNumEach=mdao.getNum(mdao.getIdWithNickname(dogAnswer.getNickname()));
+	            %>
+	            <a href="../index.jsp?main=mypage/userMyPage.jsp?num=<%=answerWriterNumEach%>">
+	          	  <span class="comment writer"><%=dogAnswer.getNickname() %></span>
+	              <span id="comment-info">(<%=ddto.getGender() %>|<%=ddto.getDogSize() %>|주소지<%=mdto.getAddr() %> )</span>
+	            </a>
+	          </div>
+	          
+	          <span class="comment writeday"><%=sdf.format(dogAnswer.getWriteday()) %></span>
 	          
 				<%
 				  // 내댓글 표시 + 댓글 수정,삭제버튼
 				  
 				  String nickname=mdao.getNickname(id);
 				  
-				  if(loginok!=null && adto.getNickname().equals(nickname)){%>
+				  if(loginok!=null && dogAnswer.getNickname().equals(nickname)){%>
 					  <span id="my-comment" style="float: left;">내댓글</span>
 					  
 	          <div id="btn-box">
-			      <a id="btn-comment-mod" idx="<%=adto.getIdx() %>">수정</a>
-			      <a id="btn-comment-del" idx="<%=adto.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
+			      <a id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>">수정</a>
+			      <a id="btn-comment-del" idx="<%=dogAnswer.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
 	          </div>
 				  <%}
 				%>
 	          <br>
-	          <span id="gu-an" class="comment content"><%=adto.getContent() %></span>
+	          <span id="gu-an" class="comment content"><%=dogAnswer.getContent() %></span>
 	          
 	          <!-- 수정창 hidden -->
 	          <br>
-	          <!--<input class="mod-form" type="text" value="<%=adto.getContent()%>">  -->
+	          <!--<input class="mod-form" type="text" value="<%=dogAnswer.getContent()%>">  -->
 	          
 	          <!-- 영돈 -->
 	          <span class="updateAn">
-              <textarea><%=adto.getContent().replace("\n", "<br>")%></textarea>
-              <button class="btn btn-warning wd" value="<%=adto.getIdx()%>" 
+              <textarea><%=dogAnswer.getContent().replace("\n", "<br>")%></textarea>
+              <button class="btn btn-warning wd" value="<%=dogAnswer.getIdx()%>" 
               style="width: 100px">댓글수정</button>
               </span>
 	          
@@ -228,8 +298,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			  if (a) location.href="../index.jsp?main=login/loginform.jsp";
 			  
 		  <%}%>
-			  alert(num);
-			  
 			  $.ajax({
 				  
 				  type:"get",
@@ -237,7 +305,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				  dataType:"json",
 				  data:{"num":num},
 				  success: function(res){
-					  alert("왜안되니?");;;;;;;;;;
+					  
 				  }
 				  
 			  })
@@ -304,9 +372,26 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  
 	    if(nickname.equals(dto.getNickname())){%>
 	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/#####.jsp?num=<%=dto.getNum()%>'">수정</button>
-	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/delete.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'">삭제</button>	    	
+	  		<button type="button" id="btn-board-del">삭제</button>	    	
 	    <%}
 	  %>
+	  
+	  <script type="text/javascript">
+	  
+	    //게시글 삭제
+	  	$("#btn-board-del").click(function(){
+
+			var a=confirm("게시글을 삭제하시겠습니까?");
+			
+			if(a){
+				 location.href='dog-talking/delete.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>';
+			}else{
+				return false;
+			}
+	  	})
+	    
+	  
+	  </script>
 	  <button type="button" onclick="history.back()">뒤로가기</button>
 	</div>
 </body>
