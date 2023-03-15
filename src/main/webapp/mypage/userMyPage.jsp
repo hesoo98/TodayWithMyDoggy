@@ -33,17 +33,20 @@
 </head>
 <body>
 <%
-	//로그인한 사용자 아이디 가져와서 사용자 num값 추출.
+	String realPath=getServletContext().getRealPath("/mypage/dogImg");
+	
+	//로그인한 사용자 아이디 가져와서 사용자 member_num(시퀀스)값 추출.
 	String id = (String)session.getAttribute("myid");
 	MemberDao memberDao = new MemberDao();
-	String num = memberDao.getNum(id);
+	String member_num = memberDao.getNum(id);
 		
-	int isMainDog = 0;//사용자가 대표강아지가 있는지 없는지 있으면 1 없으면 0
+	int isMainDog = 0;//사용자가 대표강아지가 있는지 없는지 판별하는 변수, 있으면 1 없으면 0
 	
 	DogProfileDao dogDao = new DogProfileDao();
 	//int dogCnt = dogDao.getTotalDogCount(); //모든사용자들의 총 강아지 마리수.
-	List<DogProfileDto> myDogList = dogDao.getMyDogList(num);//현재 로그인한 사용자의 강아지 리스트.(다른사람강아지 포함x)
-	
+	List<DogProfileDto> myDogList = dogDao.getMyDogList(member_num);//현재 로그인한 사용자의 강아지 리스트.(다른사람강아지 포함x)
+	List<DogProfileDto> myNotMainDogList = dogDao.getMyNotMainDogList(member_num); // 대표가 아닌 강아지들 리스트
+	//내 강아지들 중에 대표 강아지가 있는지 없는지 판별 하는 반복문.
 	for (DogProfileDto dto: myDogList){
 		if(dto.getMainDog() == 1) {
 			isMainDog = 1;
@@ -52,22 +55,38 @@
 %>
 	<div class="container main" style="border:1px solid red;">
 		<h1>유저마이페이지</h1>
-	
-		<div class="firstLine">
-			<div class="rectangle">
-				<img src="" id="dogprofile">
+		<%
+		if (isMainDog == 1) {  
+			DogProfileDto dto = dogDao.getMyMainDog(member_num);%>
+			<div class="firstLine">
+				<div class="rectangle">	
+					<img src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
+				</div>
+				<div class="rectangle">
+					<button style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
+		
+						<p>강아지이름 : <%=dto.getName() %></p>
+						<p>강아지성별 : <%=dto.getGender() %></p>
+						<p>강아지크기 : <%=dto.getDogSize() %></p>
+						<p>강아지생일 : <%=dto.getBirthday() %></p>
+						<p>강아지사진 : <%=dto.getPhoto() %></p>
+				</div>
 			</div>
-			<div class="rectangle">
-				<button style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
-			<%if (isMainDog == 1) {%>
-				<b>대표 강아지 있음!</b>
-			<%} else {%>
-				<b>대표 강아지가 없어요!</b>
-			<% }%>
+					<%	
+		} else {%>
+			<div class="firstLine">
+				<div class="rectangle">	
+					<img src="" id="dogprofile">
+				</div>
+				<div class="rectangle">
+					<button style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
+					<b>대표 강아지가 없어요</b>
+				</div>
+			</div>
+			<%
+		}
+		%>
 
-				
-			</div>
-		</div>
 		<div class="secondLine">
 			<div class="rectangle">나의 활동</div>
 			<div class="rectangle">나의 좋아요</div>

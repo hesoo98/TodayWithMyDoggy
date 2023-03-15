@@ -1,3 +1,5 @@
+<%@page import="profile.dogProfile.DogProfileDao"%>
+<%@page import="profile.dogProfile.DogProfileDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -49,7 +51,7 @@
 					<img src="" id="dogprofile">
 					<div>
 						<b>강아지 사진 등록</b>
-				 		<input type="file" name="photo" id="photo" onchange="readURL(this)">
+				 		<input type="file" name="photo" id="photo" onchange="readURL(this)" required="required">
 				 	</div>
 				</div>
 				<div class="rectangle">

@@ -1,7 +1,7 @@
 <%@page import="profile.dogProfile.DogProfileDto"%>
 <%@page import="java.util.List"%>
-<%@page import="member.MemberDao"%>
 <%@page import="profile.dogProfile.DogProfileDao"%>
+<%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,33 +13,28 @@
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<style type="text/css">
+	
+		.profileBox {
+			border:5px solid yellow;
+		}
 		.rectangle {
+			width:65%;
 			float:left;
 			border:1px solid black;
-			width: 400px;
-			height: 300px;
+			margin : 10px;
+			
 		}
-		
-		.button {
-			border: 1px solid green;
-		}
-		
-		.main{
-			padding: 10px;
-		}
-		
-		.addNewProfile {
-			cursor: pointer;
-		}
-		
-		.changeMainDog {
-			cursor: pointer;
+		.selectBox {
+			width:30%;
+			float:left;
+			border:1px solid pink;
+			margin-top: 10px;	
 		}
 	</style>
+	
 </head>
 <body>
 <%
-	String realPath=getServletContext().getRealPath("/mypage/dogImg");
 	String id = (String)session.getAttribute("myid");
 	MemberDao memberDao = new MemberDao();
 	String member_num = memberDao.getNum(id);
@@ -57,36 +52,12 @@
 		}
 	}
 %>
+
 	<div class="container main" style="border:1px solid red;">
-		<h1>강아지 정보 더보기</h1>
+		<h1>나의 강아지들 프로필</h1>
+		<div class="profileBox">
 	
-		<div class="firstLine">
-			<div class="rectangle">
-				<div class="button addNewProfile" onclick="location.href='index.jsp?main=mypage/addMyDogForm.jsp?member_num=<%=member_num%>'">새 강아지프로필 추가</div>
-				<div class="button changeMainDog" onclick="location.href='index.jsp?main=mypage/selectMainDog.jsp'">대표 강아지 변경</div>
-			</div>
-			<div class="rectangle">
-				<%if(isMainDog == 0){%>
-					<b>대표강아지가 없어요!</b>
-				<%} else { 
-					DogProfileDto dto = dogDao.getMyMainDog(member_num);
-				%>
-					
-					<p>강아지이름 : <%=dto.getName() %></p>
-					<p>강아지성별 : <%=dto.getGender() %></p>
-					<p>강아지크기 : <%=dto.getDogSize() %></p>
-					<p>강아지생일 : <%=dto.getBirthday() %></p>
-					<p>강아지사진 : <%=dto.getPhoto() %></p>
-					<img src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" width="100" height="100">
-					
-				<%} %>
-			</div>
-		</div>
-		<div class="secondLine">
-	
-		<%for (DogProfileDto dto: myNotMainDogList){
-			if (dto.getMainDog() == 0) {%>
-				
+		<%for (DogProfileDto dto: myDogList){%>
 			<div class="rectangle">
 				<p>강아지이름 : <%=dto.getName() %></p>
 				<p>강아지성별 : <%=dto.getGender() %></p>
@@ -94,11 +65,19 @@
 				<p>강아지생일 : <%=dto.getBirthday() %></p>
 				<p>강아지사진 : <%=dto.getPhoto() %></p>
 				<img src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" width="100" height="100">
-			</div>	
-				
-			<%}
+			</div>
+			<div class="selectBox">
+				<%if(dto.getMainDog() == 1) {%>
+					<p>대표 강아지</p>
+					<span class="glyphicon glyphicon-king"></span>
+				<%} else {%>
+					<p>일반 강아지</p>
+					<button onclick="location.href='index.jsp?main=mypage/selectMainDogAction.jsp?idx=<%=dto.getIdx()%>'">이 강아지를 대표강아지로 설정</button>
+					<%-- ?num=<%=member_num%>&idx=<%=dto.getIdx()%> --%>
+				<%} %>
+			</div>
+			<%
 		}%>
-		
 		</div>
 	</div>
 </body>

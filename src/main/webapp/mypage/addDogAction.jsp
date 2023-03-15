@@ -6,11 +6,13 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
+
+	DogProfileDao dogDao = new DogProfileDao();
 	//db에 저장할 member_num가져오기
-	String myid = (String)session.getAttribute("myid");
-	MemberDao xdao = new MemberDao();//여기서만 쓰이는 dao라 x붙임.
-	String member_num = xdao.getNum(myid);
-	
+	String id = (String)session.getAttribute("myid");
+	MemberDao memberDao = new MemberDao();
+	String member_num = memberDao.getNum(id);
+	int myDogCount = dogDao.getMyDogList(member_num).size();
 	//이미지가 업로드되는 실제경로
 	String realPath=getServletContext().getRealPath("/mypage/dogImg");
 	System.out.println(realPath);
@@ -38,7 +40,13 @@
 		
 		//dao선언
 		DogProfileDao dao = new DogProfileDao();
-		dao.insertDogProfile(dto);
+		//if 최초 강아지 추가이면 대표강아지로 추가한다.
+		if (myDogCount == 0){
+			dao.insertMainDogProfile(dto);
+		} else {
+			//else 강아지가 한마리가 아니면(대표강아지가 있다고가정).//최초강아지가 아니고 이미 대표강아지가 있으면
+			dao.insertDogProfile(dto);
+		}
 		
 		// 목록으로 이동
 		response.sendRedirect("../index.jsp?main=mypage/dogMorePage.jsp");
