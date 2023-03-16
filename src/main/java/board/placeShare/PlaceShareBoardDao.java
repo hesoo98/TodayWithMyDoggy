@@ -97,7 +97,7 @@ public PlaceShareBoardDto getData(String num) {
 				dto.setPhotoName(rs.getString("photo_name"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
-				dto.setReadCount(rs.getInt("readcount"));
+				dto.setReadCount(rs.getInt("read_count"));
 				dto.setLikes(rs.getInt("likes"));
 			}
 		} catch (SQLException e) {
