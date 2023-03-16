@@ -338,7 +338,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		  
 	  })
 	  
-	  
 	  </script>
 	  
 	  <%
@@ -347,7 +346,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    String currentPage=request.getParameter("currentPage");
 	  
 	    if(nickname.equals(sessionNickname)){%>
-	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/modify.jsp?num=<%=dto.getNum()%>'">수정</button>
+	  		<button type="button" onclick="location.href='index-form.jsp?main=dog-talking/modify.jsp?num=<%=dto.getNum()%>'">수정</button>
 	  		<button type="button" id="btn-board-del">삭제</button>	    	
 	    <%}
 	  %>
