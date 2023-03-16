@@ -28,7 +28,7 @@ if (saveok != null) {
 	<!-- partial:index.partial.html -->
 	<div id="login-form-wrap">
 		<div id="title">Login</div>
-		<form id="login-form">
+		<form id="login-form" action="login/loginaction.jsp" method="post">
 			<p>
 				<input type="text" id="username" name="id" placeholder="아이디를 입력해주세요"
 					required value="<%=myid%>"><i class="validation"><span></span><span></span></i>
