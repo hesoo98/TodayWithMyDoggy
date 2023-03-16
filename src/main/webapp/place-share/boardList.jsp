@@ -121,28 +121,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 							</div>
 						</div>
 					</div>
-					<!-- 
-				</div>
-				<div class="col">
-					<div class="card border-light mb-10">
-						<svg class="bd-placeholder-img card-img-top" width="100%"
-							height="250" xmlns="http://www.w3.org/2000/svg" role="img"
-							aria-label="Placeholder: Thumbnail"
-							preserveAspectRatio="xMidYMid slice" focusable="false">
-							<title>Placeholder</title><rect width="100%" height="100%"
-								fill="#55595c" />
-							<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-						<div class="card-body">
-							<p class="card-text">작성자 & 내용</p>
-							<div class="d-flex justify-content-between align-items-center">
-								
-								<small class="text-muted">작성 날짜 및 시간</small>
-							</div>
-						</div>
-					</div>
-				</div>
-				-->
 				</div>
 				<%
 				}

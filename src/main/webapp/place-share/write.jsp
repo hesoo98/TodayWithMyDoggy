@@ -255,7 +255,7 @@ img {
 		<div class="container" role="main">
 			<br>
 			<form method="post" action="place-share/addAction.jsp"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data" >
 				<input type="hidden" name="titlePhoto" id="titlePhoto" value="">
 				<div class="subject">
 					<input type="text" class="form-control" name="subject" id="subject"
