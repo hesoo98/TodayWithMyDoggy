@@ -97,6 +97,7 @@ MemberDao mdao = new MemberDao();
 String nickname = mdao.getNickname(myid);
 
 String boardnum = request.getParameter("num");
+
 PlaceShareBoardDao dao = new PlaceShareBoardDao();
 PlaceShareBoardDto dto = dao.getData(boardnum);
 String boardId = dto.getId();
@@ -111,8 +112,6 @@ DogProfileDao proDao = new DogProfileDao();
 DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
 String proPhoto = proDto.getPhoto();
 
-System.out.println(memberNum);
-System.out.println(proPhoto);
 %>
 <body>
 	<div class="container" role="main">
