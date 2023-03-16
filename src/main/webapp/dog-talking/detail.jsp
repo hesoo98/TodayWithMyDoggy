@@ -125,61 +125,41 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	<div class="wrapper">
 	
 
-		  <%
-		  MemberDao mdao=new MemberDao();
-		  
-		  //강아지 정보 불러오기
-		  DogProfileDao ddao=new DogProfileDao();
-		  
-		  //writer
-		  String writerNick=dto.getNickname();
-		  //writer의 id
-		  String writerId=mdao.getIdWithNickname(writerNick);
-		  //id로 구한 멤버 num
-		  String memberNum=mdao.getNum(writerId);
-		  //글쓴 member의 pet info
-		  DogProfileDto ddto=ddao.getPetInfo(memberNum);
-		  MemberDto mdto=new MemberDto();
-		  %>
-		  
-		  <div class="wrapper-subject">
-		  <h2><%=dto.getSubject() %></h2>
-		  
-		  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=<%=memberNum%>">
-		    <h4><img src="dog-talking-photo/04.png" style="width: 20px;"><span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=dto.getNickname() %>
-		  </a>
-		  
-		  <span style="font-size: 12px;"><%=ddto.getName() %>
-		  (<%=ddto.getGender() %>|<%=ddto.getDogSize() %>|주소지<%=mdto.getAddr() %> )
-		  
-		  </span>
-
-	  <div class="wrapper-subject">
-	  <h2><%=dto.getSubject() %></h2>
-	  
-	  <h4><span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=dto.getNickname() %>
-	  
 	  <%
-	  
-	  
 	  MemberDao mdao=new MemberDao();
 	  
 	  //강아지 정보 불러오기
 	  DogProfileDao ddao=new DogProfileDao();
 	  
 	  //writer
-	  String writer_nick=dto.getNickname();
-	  //writer의 멤버 num
-	  String member_num=mdao.getNumWithNickname(writer_nick);
+	  String writerNick=dto.getNickname();
+	  //writer의 id
+	  String writerId=mdao.getIdWithNickname(writerNick);
+	  //id로 구한 멤버 num
+	  String memberNum=mdao.getNum(writerId);
 	  //글쓴 member의 pet info
-	  DogProfileDto ddto=ddao.getPetInfo(member_num);
+	  DogProfileDto ddto=ddao.getPetInfo(memberNum);
+	  MemberDto mdto=new MemberDto();
+
 	  //조회수 1 증가
 	  dao.updateReadCount(num);
 	  %>
 	  
-	  <span style="font-size: 12px;"><%=ddto.getName() %>( <%=ddto.getGender() %>|<%=ddto.getDogSize() %> )</span>
+	  <div class="wrapper-subject">
+	  <h2><%=dto.getSubject() %></h2>
+	  
+	  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=<%=memberNum%>">
+	    <h4>
+	      <img src="dog-talking-photo/04.png" style="width: 20px;">
+	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=dto.getNickname() %>
+	    </h4>
+	  </a>
+	  
+	  <span style="font-size: 12px;"><%=ddto.getName() %>
+	  (<%=ddto.getGender() %>|<%=ddto.getDogSize() %>|주소지<%=mdto.getAddr() %> )
+	  
+	  </span>
 
-	  </h4>
 	  
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
@@ -215,6 +195,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		  String answerWriterNum=mdao.getNum(answerId);
 		  //댓글쓴 member의 pet info
 		  DogProfileDto addto=ddao.getPetInfo(memberNum);
+		  
 	    %>
 	    <span id="comment" style="cursor: pointer;"> 댓글 <%=list.size() %></span>
 	    <div id="comment-box" name="num" value="<%=dto.getNum() %>">
@@ -305,7 +286,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				  dataType:"json",
 				  data:{"num":num},
 				  success: function(res){
-					  
+					  location.reload();
 				  }
 				  
 			  })
@@ -364,7 +345,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  </script>
 	  
 	  <%
-;
+
 	    String nickname=mdao.getNickname(id);
 	    
 	    //currentpage
