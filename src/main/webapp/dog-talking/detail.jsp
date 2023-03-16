@@ -54,6 +54,11 @@
 	  margin: 50px 0px;
 	}
 	
+	#photo{
+	  width: 200px;
+	  height: 200px;
+	}
+	
 	/* 댓글 */
 	.comment{
 	  opacity: 0.8;
@@ -108,13 +113,17 @@
 </head>
 
 <%
-//id session
-String id=(String)session.getAttribute("myid");
-
 //num에 해당하는 data 받기
 String num=request.getParameter("num");
+
 DogTalkingBoardDao dao=new DogTalkingBoardDao();
 DogTalkingBoardDto dto=dao.getData(num);
+MemberDao mdao=new MemberDao();
+
+String id=(String)session.getAttribute("myid"); //sessionid
+String sessionNickname=mdao.getNickname(id); //sessionnickname
+String nickname=mdao.getNickname(dto.getId()); //writernickname
+
 
 //format
 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -124,42 +133,33 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 <body>
 	<div class="wrapper">
 	
-
 	  <%
-	  MemberDao mdao=new MemberDao();
 	  
-	  //강아지 정보 불러오기
-	  DogProfileDao ddao=new DogProfileDao();
 	  
-	  //writer
-	  String writerNick=dto.getNickname();
-	  //writer의 id
-	  String writerId=mdao.getIdWithNickname(writerNick);
-	  //id로 구한 멤버 num
-	  String memberNum=mdao.getNum(writerId);
-	  //글쓴 member의 pet info
-	  DogProfileDto ddto=ddao.getPetInfo(memberNum);
-	  MemberDto mdto=new MemberDto();
-
 	  //조회수 1 증가
 	  dao.updateReadCount(num);
 	  %>
 	  
 	  <div class="wrapper-subject">
-	  <h2><%=dto.getSubject() %></h2>
 	  
-	  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=<%=memberNum%>">
+	  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
 	    <h4>
 	      <img src="dog-talking-photo/04.png" style="width: 20px;">
-	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=dto.getNickname() %>
+	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=nickname %>
 	    </h4>
 	  </a>
-	  
-	  <span style="font-size: 12px;"><%=ddto.getName() %>
-	  (<%=ddto.getGender() %>|<%=ddto.getDogSize() %>|주소지<%=mdto.getAddr() %> )
-	  
-	  </span>
-
+	  <!-- pet info -->
+	  <%
+	    //writer_num
+	    String writerNum=mdao.getNum(dto.getId());
+	    DogProfileDao pdao=new DogProfileDao();
+	    DogProfileDto pdto=pdao.getPetInfo(writerNum);
+	    
+	    if(pdto.getIdx()==null){%>
+	    (멍멍)
+	    <%}else{%>
+	    <span style="font-size: 12px;"><%=pdto.getName() %> ( <%=pdto.getGender() %>|<%=pdto.getDogSize() %> )</span>
+	    <%} %>
 	  
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
@@ -168,8 +168,9 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  <hr class="line">
 	  
 	  <div class="wrapper-content">
+	    <img id="photo" src="dog-talking-photo/<%=dto.getPhoto()%>">
+	    <br>
 	    <%=dto.getContent() %>
-	    <%=dto.getPhoto() %>
 	  </div>
 	  
 	  <hr class="line">
@@ -182,19 +183,8 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    <%
 	    DogTalkingAnswerDto adto=new DogTalkingAnswerDto();
 	    DogTalkingAnswerDao adao=new DogTalkingAnswerDao();
-	    String board_num=dto.getNum();
-	    List<DogTalkingAnswerDto> list=adao.showAnswers(board_num);
-	    
-	  	  //댓글쓴사람의 강아지 정보 불러오기
-		  
-		  //answerwriter
-		  String answerNick=adto.getNickname();
-		  //writer의 id
-		  String answerId=mdao.getIdWithNickname(answerNick);
-		  //id로 구한 멤버 num
-		  String answerWriterNum=mdao.getNum(answerId);
-		  //댓글쓴 member의 pet info
-		  DogProfileDto addto=ddao.getPetInfo(memberNum);
+	    String boardNum=dto.getNum();
+	    List<DogTalkingAnswerDto> list=adao.showAnswers(boardNum);
 		  
 	    %>
 	    <span id="comment" style="cursor: pointer;"> 댓글 <%=list.size() %></span>
@@ -215,13 +205,22 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	        
 	          <div id="commenter-div">
 	          <!-- 이름부분 누르면 마이페이지로 이동 -->
-	            <%
-	            //for문 내부에서 댓글 쓴사람의 memberId -> num 구해서 mypage url
-	            String answerWriterNumEach=mdao.getNum(mdao.getIdWithNickname(dogAnswer.getNickname()));
-	            %>
-	            <a href="../index.jsp?main=mypage/userMyPage.jsp?num=<%=answerWriterNumEach%>">
-	          	  <span class="comment writer"><%=dogAnswer.getNickname() %></span>
-	              <span id="comment-info">(<%=ddto.getGender() %>|<%=ddto.getDogSize() %>|주소지<%=mdto.getAddr() %> )</span>
+	            <a href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
+	          	 
+	          	<%
+	          	//댓글쓴사람 강아지정보 불러오기
+			    String answerNum=mdao.getNum(dogAnswer.getId());
+			    DogProfileDto answerPdto=pdao.getPetInfo(answerNum);
+	          	%> 
+	          	 
+	          	 <span class="comment writer"><%=mdao.getNickname(dogAnswer.getId()) %></span>
+	          	 <% 
+	          	if(answerPdto.getIdx()==null){%>
+	    	    (멍멍)
+	    	    <%}else{%>
+	    	    <span id="comment-info"><%=answerPdto.getName() %>(<%=answerPdto.getGender() %>|<%=answerPdto.getDogSize() %>|지역)</span>
+	    	    <%} %>
+	             
 	            </a>
 	          </div>
 	          
@@ -230,13 +229,11 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				<%
 				  // 내댓글 표시 + 댓글 수정,삭제버튼
 				  
-				  String nickname=mdao.getNickname(id);
-				  
-				  if(loginok!=null && dogAnswer.getNickname().equals(nickname)){%>
+				  if(loginok!=null && sessionNickname.equals(nickname)){%>
 					  <span id="my-comment" style="float: left;">내댓글</span>
 					  
 	          <div id="btn-box">
-			      <a id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>">수정</a>
+			      <a id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>" href="">수정</a>
 			      <a id="btn-comment-del" idx="<%=dogAnswer.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
 	          </div>
 				  <%}
@@ -346,13 +343,11 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  
 	  <%
 
-	    String nickname=mdao.getNickname(id);
-	    
 	    //currentpage
 	    String currentPage=request.getParameter("currentPage");
 	  
-	    if(nickname.equals(dto.getNickname())){%>
-	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/#####.jsp?num=<%=dto.getNum()%>'">수정</button>
+	    if(nickname.equals(sessionNickname)){%>
+	  		<button type="button" onclick="location.href='../index.jsp?main=dog-talking/modify.jsp?num=<%=dto.getNum()%>'">수정</button>
 	  		<button type="button" id="btn-board-del">삭제</button>	    	
 	    <%}
 	  %>

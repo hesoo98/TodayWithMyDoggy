@@ -1,3 +1,4 @@
+<%@page import="member.MemberDao"%>
 <%@page import="answer.dogTalking.DogTalkingAnswerDto"%>
 <%@page import="answer.dogTalking.DogTalkingAnswerDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -27,6 +28,7 @@
 
 	<%
     DogTalkingBoardDao dao=new DogTalkingBoardDao();
+	DogTalkingBoardDto ddto=new DogTalkingBoardDto();
 	
 	int totalCount;
 	int totalPage;//총페이지수
@@ -82,7 +84,7 @@
 	<table class="table table-hover" style="width: 700px;">
 	  <tr>
 	    <td width="50">번호</td>
-	    <td width="300">제목</td>
+	    <td width="300">내용</td>
 	    <td width="150">작성자</td>
 	    <td width="200">작성일</td>
 	    <td width="50">조회수</td>
@@ -106,11 +108,16 @@
 		    <td><%=dto.getNum() %></td>
 		    <td>
 		      <a href="index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
-		      <%=dto.getSubject() %>
+		      <%=dto.getContent() %>
 		      </a>
 		      [<%=alist.size() %>]
 		    </td>
-		    <td><%=dto.getNickname() %></td>
+		    
+		    <%//닉네임찾기
+			  MemberDao mdao=new MemberDao();
+			  String nickname=mdao.getNickname(dto.getId());
+		    %>
+		    <td><%=nickname %></td>
 		    <td><%=sdf.format(dto.getWriteday()) %></td>
 		    <td><%=dto.getReadCount()%></td>
 		  </tr>

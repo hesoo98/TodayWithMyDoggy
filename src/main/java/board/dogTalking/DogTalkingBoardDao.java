@@ -18,15 +18,14 @@ public class DogTalkingBoardDao {
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 
-		String sql="insert into dog_talking_board(nickname,subject,photo,content,writeday) values(?,?,?,?,now())";
+		String sql="insert into dog_talking_board(id,photo,content,writeday) values(?,?,?,now())";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getNickname());
-			pstmt.setString(2, dto.getSubject());
-			pstmt.setString(3, dto.getPhoto());
-			pstmt.setString(4, dto.getContent());
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPhoto());
+			pstmt.setString(3, dto.getContent());
 			
 			pstmt.execute();
 			
@@ -90,8 +89,7 @@ public class DogTalkingBoardDao {
 				DogTalkingBoardDto dto=new DogTalkingBoardDto();
 				
 				dto.setNum(rs.getString("num"));
-				dto.setNickname(rs.getString("nickname"));
-				dto.setSubject(rs.getString("subject"));
+				dto.setId(rs.getString("id"));
 				dto.setPhoto(rs.getString("photo"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
@@ -132,8 +130,7 @@ public class DogTalkingBoardDao {
 			while(rs.next()) {
 				
 				dto.setNum(rs.getString("num"));
-				dto.setNickname(rs.getString("nickname"));
-				dto.setSubject(rs.getString("subject"));
+				dto.setId(rs.getString("id"));
 				dto.setPhoto(rs.getString("photo"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));

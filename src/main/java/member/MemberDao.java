@@ -204,33 +204,6 @@ public class MemberDao {
 		}
 		return num;
 	}
-	
-	//nickname 으로 id 구하기 (detailpage petinfo 불러올때 필요)
-	public String getIdWithNickname(String nickname) {
 
-		String id="";
-		Connection conn=db.getConnection();
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String sql = "select * from member where nickname=?";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nickname);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-
-				id = rs.getString("id");
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			db.dbClose(rs, pstmt, conn);
-		}
-		return id;
-	}
 	
 }

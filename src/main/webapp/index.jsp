@@ -10,6 +10,22 @@
 <title>Insert title here</title>
 <title>Index</title>
 
+<style type="text/css">
+
+	@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
+	*{
+	  font-family: Dovemayo_gothic;
+	}
+
+
+</style>
+
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
