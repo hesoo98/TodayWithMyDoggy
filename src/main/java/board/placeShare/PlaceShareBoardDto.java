@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class PlaceShareBoardDto {
 	private String num;
-	private String nickname;
+	private String id;
 	private String subject;
 	private String content;
 	private String photoName;
@@ -19,11 +19,11 @@ public class PlaceShareBoardDto {
 	public void setNum(String num) {
 		this.num = num;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getId() {
+		return id;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getSubject() {
 		return subject;
