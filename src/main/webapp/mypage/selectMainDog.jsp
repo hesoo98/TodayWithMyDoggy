@@ -50,7 +50,7 @@
 %>
 
 	<div class="container" style="border:1px solid red;">
-		<h1>나의 강아지들 프로필</h1>
+		<h1>대표 강아지 선택 페이지</h1>
 		
 		
 		<div class="row profilebox" style="width:800px;margin:0 auto;">

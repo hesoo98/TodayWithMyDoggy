@@ -33,8 +33,8 @@
 			height:200px;
 			margin:0 auto;
 		}
-		div.p {
-		font-size: 3.5rem;
+		div > p {
+			font-size: 2rem;
 		}
 	</style>
 </head>
@@ -73,7 +73,7 @@
 				DogProfileDto dto = dogDao.getMyMainDog(member_num);
 			%>
 			<div class="row">
-				<div class="col-6 rectangle" style="margin:0 auto;">
+				<div class="col-5 rectangle" style="margin:0 auto;">
 					<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 				</div>
 				<div class="col rectangle">
@@ -84,7 +84,7 @@
 					<p>강아지사진 : <%=dto.getPhoto() %></p>
 				</div>
 				<div class="col">
-					<i class="fa-solid fa-crown fa-3x" style="text-align: center;"></i>
+					<i class="fa-solid fa-crown fa-4x" style="text-align: center;"></i>
 				</div>
 			</div>
 				
@@ -97,7 +97,7 @@
 			if (dto.getMainDog() == 0) {%>
 				
 			<div class="row" style="margin-top:50px;">
-				<div class="col-6 rectangle" style="margin:0 auto;">
+				<div class="col-5 rectangle" style="margin:0 auto;">
 					<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 				</div>
 				<div class="col rectangle">
