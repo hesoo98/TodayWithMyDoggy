@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <script type="text/javascript">
+    
+    //스크롤 안내리면 동의 비활성화
+
+
+    
 	function chk(){
  	var req = document.form.req.checked;
  	var num = 0;
@@ -15,6 +20,7 @@
  	 num = 1;
  	}
  	if(num==1){
+ 		
   	location.href="index.jsp?main=signup/addform.jsp";
  	}else{
  	 alert("개인정보 약관에 동의하셔야 합니다.");
@@ -23,6 +29,23 @@
 	function nochk(){
 	 alert("동의하지 않으면 가입하실 수 없습니다");
 	return false;}
+	
+	
+	$(function(){
+		$(".tbox").scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var innerHeight = $(this).innerHeight();
+        var scrollHeight = $(this).prop('scrollHeight');
+
+        
+        if (scrollTop + innerHeight >= scrollHeight-10) {
+        $("#agree").attr('disabled', false);
+        } else {
+        $("#agree").attr('disabled', true);
+        }
+})
+
+});
 	</script>
     
 </head>
@@ -43,7 +66,9 @@
    </p>
    <br>
    <textarea
-     rows="20" cols="150">제1조 목적
+     rows="20" cols="150" class="tbox">
+     
+제1조 목적
 
 본 이용약관은 “멍멍이와 함께하는 하루"의 서비스의 이용조건과 운영에 관한 제반사항 규정을 목적으로 합니다.
 
@@ -173,7 +198,7 @@
   </tr>
   <tr>
    <td align="center" valign="top">
-    <input type="button" value="동의" onclick="chk()"/>&nbsp;&nbsp;&nbsp;
+    <input type="button" id="agree" disabled value="동의" onclick="chk()"/>&nbsp;&nbsp;&nbsp;
     <input type="button" value="동의하지 않습니다" onclick="nochk()"/>
    </td>
   </tr>

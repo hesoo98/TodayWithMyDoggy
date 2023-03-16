@@ -9,8 +9,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
 </head>
@@ -55,6 +53,7 @@
 					</td>
 				</tr>
 			</table>
+			
 		</form>
 	</div>
 </body>
