@@ -47,7 +47,9 @@ String nickname=dao.getNickname(myid);
 				<div class="left"></div>
 				<div class="right"></div>
 			</div>
-			<%if(loginok != null && isAdmin.equals("0")){%>
+			<%if(loginok == null) {%>
+				<!-- 로그인 하지 않았을경우 관리자,마이페이지 안보이게 -->
+			<%} else if(loginok != null && isAdmin.equals("0")){%>
 			<li class="nav-item"><a class="nav-link"
 				href="<%=root%>/index.jsp?main=mypage/userMyPage.jsp"><i class=""></i>마이페이지</a>
 			</li>
