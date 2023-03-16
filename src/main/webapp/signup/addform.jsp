@@ -9,6 +9,11 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <script type="text/javascript">
+    //전화번호 4자리 입력하면 넘어가기
+   	function goFocus(hp){
+   		if(hp.value.length==4)
+   			frm.hp3.focus();
+   	}
     $(function(){
     	//id중복체크
     	$("#btncheck").click(function(){
@@ -28,7 +33,8 @@
     					$("span.idsuccess").text("중복된 아이디입니다.");
     					$("#id").val('');
     					$("#id").focus();
-    				}else{
+    					}
+    					else{
     					//alert("가입 가능한 아이디입니다.");
     					$("span.idsuccess").text("사용가능한 아이디입니다.");
     				}
@@ -53,9 +59,10 @@
     				if(res.count==1){
     					//alert("이미 가입된 아이디입니다.\n다시 입력해 주세요.");
     					$("span.nicknamesuccess").text("중복된 닉네임입니다.");
-    					$("#nickname").val('');
-    					$("#nickname").focus();
-    				}else{
+    					$("#id").val('');
+    					$("#id").focus();
+    					}
+    					else{
     					//alert("가입 가능한 아이디입니다.");
     					$("span.nicknamesuccess").text("사용가능한 닉네임입니다.");
     				}
@@ -64,14 +71,23 @@
     		})
     		
     	})
-    	
-    	//이거 왜안되는지 모르겠음
-    	$("#signup").click(function(){
-    		if($("span.nicknamesuccess")==null){
-    			alert("중복확인을 해라.");
-    		}
-    	})
-    	
+    	//아이디, 닉네임 중복확인 체크
+    	   $("#signup").click(function(){
+    		  if($("span.idsuccess").text() === ""){
+    	  	  alert("아이디 중복확인 후 사용해주세요");
+    	  	  return false;
+    	 	 }else if($("span.idsuccess").text() === "중복된 닉네임입니다."){
+    	 		 alert("아이디가 중복되었습니다.");
+    	 		 return false;
+    	 	 }else if($("span.nicknamesuccess").text() === ""){
+    	 	   alert("닉네임 중복확인 후 사용해주세요");
+    	 	   return false;
+    	 	 }else if($("span.nicknamesuccess").text() === "중복된 닉네임입니다."){
+    	 		 alert("닉네임이 중복되었습니다.");
+    	 		 return false;
+    	 	 };
+    		});
+
     	//이메일 선택
     	$("#selEmail").change(function(){
     		if($(this).val()=='-'){
@@ -118,9 +134,6 @@
     	
     	
     }
-    function chkPW(){
-
-    	}
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -174,7 +187,7 @@
     
 </head>
 <body>
-	<form action="signup/addaction.jsp" method="post" onsubmit="return passCheck(this)">
+	<form action="signup/addaction.jsp" method="post" onsubmit="return passCheck(this)" name="frm">
 		<table style="width:500px;">
 			<tr>
 				<th width="100">아이디</th>
@@ -234,7 +247,7 @@
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" required="required"><br>
 					<input type="text" id="sample6_address" placeholder="주소" required="required" name=addr1><br>
 					<input type="text" id="sample6_detailAddress" placeholder="상세주소" required="required" name=addr2>
-					<input type="text" id="sample6_extraAddress">
+					<input type="text" id="sample6_extraAddress" placeholder="참고항목">
 				</td>
 			</tr>
 			

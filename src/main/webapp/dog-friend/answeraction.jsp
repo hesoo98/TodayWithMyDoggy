@@ -20,7 +20,7 @@
     
     dto.setBoardNum(num);
     dto.setContent(answer);
-    dto.setNickname(nickname);
+    dto.setId(id);
     
     DogFriendAnswerDao dao=new DogFriendAnswerDao();
     dao.insertAnswer(dto);

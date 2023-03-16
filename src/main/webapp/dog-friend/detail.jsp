@@ -96,6 +96,7 @@
 <%
 	
 	DogFriendBoardDao dao=new DogFriendBoardDao();
+	MemberDao mdao=new MemberDao();
 	String num=request.getParameter("num");
 	String currentPage=request.getParameter("currentPage");
 	
@@ -115,7 +116,7 @@
 			<h3><b><%=dto.getSubject() %></b></h3>
 			<tr>
 				<td>
-					<b>작성자 : <%=dto.getNickname() %></b><br>
+					<b>작성자 : <%=mdao.getNickname(dto.getId())%></b><br>
 					<span><%=dto.getWriteday() %></span>
 	  	<span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
 				</td>
@@ -150,16 +151,15 @@
 	        <%
 	        for(DogFriendAnswerDto adto:list){%>
 	        
-	          <span class="comment writer"><%=adto.getNickname() %></span>
+	          <span class="comment writer"><%=mdao.getNickname(dto.getId()) %></span>
 	          <span class="comment writeday"><%=sdf.format(adto.getWriteday()) %></span>
 	          
 				<%
 				  // 내댓글 표시 + 댓글 수정,삭제버튼
 			 	  String id=(String)session.getAttribute("myid");
-				  MemberDao mdao=new MemberDao();
-				  String nickname=mdao.getNickname(id);
+				  String nickname=mdao.getNickname(adto.getId());
 				  
-				  if(loginok!=null && adto.getNickname().equals(nickname)){%>
+				  if(loginok!=null && mdao.getNickname(adto.getId()).equals(nickname)){%>
 					  <span id="my-comment" style="float: left;">내댓글</span>
 					  
 	          <div id="btn-box">

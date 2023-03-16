@@ -22,7 +22,7 @@ String nickname=dao.getNickname(id);
 		<b><%=nickname %>님의 가입을 환영합니다.</b>
 		<br><br>
 		
-		<button type="button" class="btn btn-success" onclick="location.href='index.jsp?main=dog-friend/write.jsp'">로그인</button>
+		<button type="button" class="btn btn-success" onclick="location.href='index.jsp?main=login/loginform.jsp'">로그인</button>
 		<button type="button" class="btn btn-success" onclick="#">메인 페이지로</button>
 	</div>
 </body>
