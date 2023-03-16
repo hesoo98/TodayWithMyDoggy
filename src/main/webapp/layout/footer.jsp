@@ -48,10 +48,11 @@
             <div class="social mb-4">
               <h3>Stay in touch</h3>
               <ul class="list-unstyled">
-                <li class="in"><a href="#"><span class="icon-github"></span></a></li>
-                <li class="tw"><a href="#"><span class="icon-github"></span></a></li>
-                <li class="fb"><a href="#"><span class="icon-github"></span></a></li>
-                <li class="dr"><a href="#"><span class="icon-github"></span></a></li>
+                <li><a href="https://github.com/SIST1/TodayWithMyDoggy"><span class="icon-github"></span></a></li>
+                <li class="in"><a href="https://github.com/lambdaramge"><span class="icon-github"></span></a></li>
+                <li class="tw"><a href="https://github.com/tenta3802"><span class="icon-github"></span></a></li>
+                <li class="fb"><a href="https://github.com/hesoo98"><span class="icon-github"></span></a></li>
+                <li class="dr"><a href="https://github.com/028902"><span class="icon-github"></span></a></li>
               </ul>
             </div>
 

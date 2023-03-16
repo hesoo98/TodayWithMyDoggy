@@ -194,6 +194,7 @@ public class DogTalkingBoardDao {
 
 		}
 	  }
+	
 	//조회수 1 증가
 	public void updateReadCount(String num) {
 		Connection conn=db.getConnection();
@@ -210,6 +211,31 @@ public class DogTalkingBoardDao {
 		}finally {
 			db.dbClose(pstmt, conn);
 		}
+		
+	}
+	
+	//update
+	public void updateBoard(DogTalkingBoardDto dto) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update dog_talking_board set photo=?,content=? where num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getPhoto());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getNum());
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+		
 		
 	}
 		

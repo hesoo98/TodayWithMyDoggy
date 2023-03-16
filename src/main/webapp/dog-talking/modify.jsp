@@ -1,4 +1,5 @@
 <%@page import="board.dogTalking.DogTalkingBoardDto"%>
+<%@page import="board.dogTalking.DogTalkingBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -54,13 +55,15 @@
 	  background-color: rgba(0, 0, 0, 0.2);
 	  position: absolute;
 	  left:0px;
-	  top:0px;
+	  top:-10px;
 	  text-align: right;
 	}
 	
 	#showimg{
 	  width: 200px;
 	  height: 200px;
+	  position: relative;
+	  left: 100px;
 	}
 
 	textarea {
@@ -69,11 +72,11 @@
 	  border: none;
 	  color: #311b92;
 	  width: 300px; height: 300px;
+	  position: relative;
+	  right:50px;
 	}
 	
-	#content{
-	  margin-left: 100px;
-	}
+	
 		
 </style>
 
@@ -87,9 +90,6 @@
       $("span.camera").click(function(){
          $("#photo").trigger("click");
       });
-      $("span.camera-mod").click(function(){
-    	  $("#photo-mod").trigger("click");
-      })
       
    });
    
@@ -108,27 +108,29 @@
     }
     </script>
 
+<body>
+
 <%
+String num=request.getParameter("num");
+String currentPage=request.getParameter("currentPage");
 
-DogTalkingBoardDto dto=new DogTalkingBoardDto();
-
+DogTalkingBoardDao dao=new DogTalkingBoardDao();
+DogTalkingBoardDto dto=dao.getData(num);
 
 %>
 
-<body>
 
 <div id="modal" class="modal__background" style="display: hidden;">
   <div class="modal__box">
     
-	  <h4 id="top">수정하기<button type="botton" onclick="history.back()"><span class="glyphicon glyphicon-remove"></span></button></h4>
-	<form action="dog-talking/writeaction.jsp" method="post" enctype="multipart/form-data">
+	  <h4 id="top">수정하기<button type="button" onclick="history.back()"><span class="glyphicon glyphicon-remove"></span></button></h4>
+	<form action="dog-talking/modifyaction.jsp" method="post" enctype="multipart/form-data">
 	<table style="top:150px;">
 	  <tr>
 	    <td>
 	    	<!-- 이미지 미리보기 -->
-	        <img id="showimg" alt="사진을 넣어주세요">
-	  		<input type="file" name="photo" id="photo" style="visibility: hidden;" onchange="readURL(this)" required> 
-	 		<input type="file" name="photo-mod" id="photo-mod" style="visibility: hidden;" onchange="readURL(this)"> 
+	        <img id="showimg" src="<%=dto.getPhoto()==null?"":"dog-talking-photo/"+dto.getPhoto()%>">
+	  		<input type="file" name="photo" id="photo" style="visibility: hidden;" onchange="readURL(this)"> 
 	    </td>
 	    <td>
 		    <div id="content">
@@ -139,11 +141,11 @@ DogTalkingBoardDto dto=new DogTalkingBoardDto();
 	  <tr>
 	    <td>
 	      <div>
-	      <span class="glyphicon glyphicon-camera camera"> 사진첨부</span>
+	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-camera camera">사진첨부</span>
 	      </div>
 	    </td>
 	    <td align="center">
-		  <button type="submit">저장</button>
+		  <button type="submit">수정</button>
 	    </td>
 	  </tr>
 	</table>

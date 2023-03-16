@@ -76,7 +76,7 @@
 	  String loginok=(String)session.getAttribute("loginok");
 	  
 	  if (loginok!=null){%>
-		  <button type="button" onclick="location.href='index.jsp?main=dog-talking/write.jsp'">글쓰기</button>
+		  <button type="button" onclick="location.href='index-form.jsp?main=dog-talking/write.jsp'">글쓰기</button>
 	  <%}
 	  %>
 	  <br><br>
