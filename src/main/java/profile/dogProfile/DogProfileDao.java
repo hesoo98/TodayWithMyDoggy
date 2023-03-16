@@ -94,7 +94,7 @@ public class DogProfileDao {
 	}
 
 	// 다른 게시판에서 멍멍이 불러오기
-	public DogProfileDto getPetInfo(String num) {
+	public DogProfileDto getMainDogInfo(String num) {
 
 		DogProfileDto dto = new DogProfileDto();
 
@@ -102,7 +102,7 @@ public class DogProfileDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from dog_profile where member_num=?";
+		String sql = "select * from dog_profile where member_num=? and main_dog=1";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
