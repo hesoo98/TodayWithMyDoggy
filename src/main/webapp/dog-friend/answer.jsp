@@ -17,7 +17,7 @@ String num=request.getParameter("num");
 	<form method="post" action="dog-friend/answeraction.jsp" style="margin-bottom: 50px;">
 	  <input type="hidden" value="<%=num %>" name="num">
 	  <div style="display: inline-flex ; margin: 20px 0px;">
-	    <textarea cols="70" name="answer" placeholder="댓글을 입력하세요"></textarea>
+	    <textarea cols="100" name="answer" placeholder="댓글을 입력하세요"></textarea>
 	    <input type="submit" value="입력" style="height: 20px; align-items: center;">
 	  </div>
 	</form>

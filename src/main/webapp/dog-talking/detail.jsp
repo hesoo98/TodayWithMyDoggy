@@ -153,7 +153,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    //writer_num
 	    String writerNum=mdao.getNum(dto.getId());
 	    DogProfileDao pdao=new DogProfileDao();
-	    DogProfileDto pdto=pdao.getPetInfo(writerNum);
+	    DogProfileDto pdto=pdao.getMainDogInfo(writerNum);
 	    
 	    if(pdto.getIdx()==null){%>
 	    (멍멍)
@@ -210,7 +210,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	          	<%
 	          	//댓글쓴사람 강아지정보 불러오기
 			    String answerNum=mdao.getNum(dogAnswer.getId());
-			    DogProfileDto answerPdto=pdao.getPetInfo(answerNum);
+			    DogProfileDto answerPdto=pdao.getMainDogInfo(answerNum);
 	          	%> 
 	          	 
 	          	 <span class="comment writer"><%=mdao.getNickname(dogAnswer.getId()) %></span>
