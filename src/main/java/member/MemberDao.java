@@ -228,6 +228,7 @@ public class MemberDao {
 				dto.setHp(rs.getString("hp"));
 				dto.setAddr(rs.getString("addr"));
 				dto.setEmail(rs.getString("email"));
+				dto.setCreateDay(rs.getTimestamp("create_day"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
