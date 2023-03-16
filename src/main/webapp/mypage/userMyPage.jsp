@@ -15,19 +15,15 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<style type="text/css">
 		.rectangle {
-			float:left;
 			border:1px solid black;
-			width: 400px;
-			height: 300px;
 		}
-		.main{
-			padding: 10px;
-		}
+		
 		#dogprofile {
 			border:1px solid gray;
 			border-radius: 200px;
 			width:200px;
 			height:200px;
+			margin:0 auto;
 		}
 	</style>
 </head>
@@ -53,33 +49,34 @@
 		}
 	}
 %>
-	<div class="container main" style="border:1px solid red;">
-		<h1>유저마이페이지</h1>
+	<div class="container" style="border:1px solid red;">
+		<h1>유저 마이 페이지</h1>
+		<div class="" style="width:800px;margin:0 auto;">
 		<%
 		if (isMainDog == 1) {  
 			DogProfileDto dto = dogDao.getMyMainDog(member_num);%>
-			<div class="firstLine">
-				<div class="rectangle">	
-					<img src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
+			<h1>대표 강아지 프로필</h1>
+			<div class="row">
+				<div class="col-6 rectangle" style="margin:0 auto;">
+					<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 				</div>
-				<div class="rectangle">
-					<button style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
-		
-						<p>강아지이름 : <%=dto.getName() %></p>
-						<p>강아지성별 : <%=dto.getGender() %></p>
-						<p>강아지크기 : <%=dto.getDogSize() %></p>
-						<p>강아지생일 : <%=dto.getBirthday() %></p>
-						<p>강아지사진 : <%=dto.getPhoto() %></p>
+				<div class="col rectangle">
+					<button type="button" class="btn btn-warning" style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
+					<p>강아지이름 : <%=dto.getName() %></p>
+					<p>강아지성별 : <%=dto.getGender() %></p>
+					<p>강아지크기 : <%=dto.getDogSize() %></p>
+					<p>강아지생일 : <%=dto.getBirthday() %></p>
+					<p>강아지사진 : <%=dto.getPhoto() %></p>
 				</div>
 			</div>
 					<%	
 		} else {%>
-			<div class="firstLine">
-				<div class="rectangle">	
+			<div class="row">
+				<div class="col-md-auto rectangle">	
 					<img src="" id="dogprofile">
 				</div>
-				<div class="rectangle">
-					<button style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
+				<div class="col rectangle">
+					<button type="button" class="btn btn-warning" style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
 					<b>대표 강아지가 없어요</b>
 				</div>
 			</div>
@@ -87,9 +84,12 @@
 		}
 		%>
 
-		<div class="secondLine">
-			<div class="rectangle">나의 활동</div>
-			<div class="rectangle">나의 좋아요</div>
+			<div class="row" style="height: 300px; margin-top: 50px;">
+				<div class="col rectangle">나의 활동</div>
+			</div>
+			<div class="row" style="height: 300px; margin-top: 50px; margin-bottom: 100px;">
+				<div class="col rectangle">나의 좋아요</div>
+			</div>
 		</div>
 	</div>
 </body>

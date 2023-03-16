@@ -12,23 +12,19 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 	<style type="text/css">
-	
 		.profileBox {
 			border:5px solid yellow;
-		}
-		.rectangle {
-			width:65%;
-			float:left;
-			border:1px solid black;
 			margin : 10px;
-			
 		}
+		
+		.rectangle {
+			border:1px solid black;
+		}
+		
 		.selectBox {
-			width:30%;
-			float:left;
 			border:1px solid pink;
-			margin-top: 10px;	
 		}
 	</style>
 	
@@ -53,27 +49,34 @@
 	}
 %>
 
-	<div class="container main" style="border:1px solid red;">
+	<div class="container" style="border:1px solid red;">
 		<h1>나의 강아지들 프로필</h1>
-		<div class="profileBox">
-	
-		<%for (DogProfileDto dto: myDogList){%>
-			<div class="rectangle">
-				<p>강아지이름 : <%=dto.getName() %></p>
-				<p>강아지성별 : <%=dto.getGender() %></p>
-				<p>강아지크기 : <%=dto.getDogSize() %></p>
-				<p>강아지생일 : <%=dto.getBirthday() %></p>
-				<p>강아지사진 : <%=dto.getPhoto() %></p>
-				<img src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" width="100" height="100">
+		
+		
+		<div class="row profilebox" style="width:800px;margin:0 auto;">
+		<%for (DogProfileDto dto: myDogList) {%>
+			<div class="col-7 rectangle">
+				<div class="row">
+					<div class="col-4">
+						<img src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" width="100" height="100">
+					</div>
+					<div class="col">
+						<p>강아지이름 : <%=dto.getName() %></p>
+						<p>강아지성별 : <%=dto.getGender() %></p>
+						<p>강아지크기 : <%=dto.getDogSize() %></p>
+						<p>강아지생일 : <%=dto.getBirthday() %></p>
+						<p>강아지사진 : <%=dto.getPhoto() %></p>
+					</div>
+				</div>
 			</div>
-			<div class="selectBox">
+			<div class="col selectBox">
 				<%if(dto.getMainDog() == 1) {%>
-					<p>대표 강아지</p>
-					<span class="glyphicon glyphicon-king"></span>
+					<!-- 대표 강아지 -->
+					<i class="fa-solid fa-crown fa-3x" style="text-align: center;"></i>
 				<%} else {%>
-					<p>일반 강아지</p>
-					<button onclick="location.href='index.jsp?main=mypage/selectMainDogAction.jsp?idx=<%=dto.getIdx()%>'">이 강아지를 대표강아지로 설정</button>
-					<%-- ?num=<%=member_num%>&idx=<%=dto.getIdx()%> --%>
+					<!-- 일반 강아지 -->
+					<button type="button" class="btn btn-warning btn-lg"
+					onclick="location.href='index.jsp?main=mypage/selectMainDogAction.jsp?idx=<%=dto.getIdx()%>'">이 강아지를 대표강아지로 설정</button>
 				<%} %>
 			</div>
 			<%
