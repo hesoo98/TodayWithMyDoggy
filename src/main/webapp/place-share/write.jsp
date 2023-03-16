@@ -53,8 +53,8 @@ body {
 }
 
 img {
-	width: 00px;
-	height: 200px;
+	width: 100%;
+	height: 100%;
 	opacity: 0.3;
 }
 
@@ -266,7 +266,7 @@ img {
 				<div class="card-deck">
 					<div class="card">
 
-						<img src="" class="card-img-top" id="card1">
+						<img src="" class="card-img-top" id="card1" width=100% height="300px;">
 						<div class="card-body">
 							<p class="card-text">
 								<input type="file" class="form-control" name="photo1"
