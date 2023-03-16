@@ -11,52 +11,91 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<style>
-body {
-  padding-top: 70px;
-  padding-bottom: 30px;
-}
+<style type="text/css">
 
-.container {
-   width: 800px;
-}
+	#photo-box{
+	  border: 1px solid black;
+	  width: 200px;
+	  height: 200px;
+	  text-align: center;
+	  line-height: 200px;
+	  position:absolute;
+	  left:200px;
+	}
+	
+	#showimg{
+	  position:absolute;
+	  left:200px;
+	  width: 200px;
+	  height: 200px;
+	}
+	
+	.camera{
+	  font-size: 15px;
+	  font-weight:200;
+	}
+	
+	.camera-mod{
+	  top:120px;
+	  left:70px;
+	}
 
-.content {
-
-}
 </style>
+
 </head>
+
+	<script type="text/javascript">
+   $(function(){
+      //수정창 숨김
+      $(".camera-mod").hide();
+      
+      //trigger 이벤트 강제 호출 
+      $("span.camera").click(function(){
+         $("#photo").trigger("click");
+      });
+      $("span.camera-mod").click(function(){
+    	  $("#photo-mod").trigger("click");
+      })
+      
+   });
+   
+    //이미지 미리보기   
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+            reader.onload = function (e) {
+            //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                $('#showimg').attr('src', e.target.result);
+            	$(".camera-mod").show();
+            	$(".camera").hide();
+            }                   
+            reader.readAsDataURL(input.files[0]);
+            //File내용을 읽어 dataURL형식의 문자열로 저장
+        }
+        
+    }
+    </script>
+
 <body>
-   <article>
-      <div class="container" role="main">
-         <h2>산책 친구 게시판</h2>
-         <br>
-         <form method="post" action="dog-talking/writeaction.jsp" enctype="multipart/form-data">
-            <div class="subject">
-               <div>제목</div>
-               <input type="text" class="form-control" name="subject" id="subject" placeholder="제목을 입력해 주세요">
-            </div>
-            <br>
-            
-            <div class="photo">
-               <div>사진</div>
-               <input type="file" multiple="multiple" name="photo" id="photo">
-            </div>
-            
-            <br>         
-            <div class="content">
-               <div>내용</div>
-               <textarea class="form-control" rows="10" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
-            </div>
-            
-         <div>
-            <br><br>
-            <button type="submit" class="btn btn-sm btn-primary" id="btnSave">저장</button>
-            <button type="button" onclick="location.href='index.jsp?main=dog-talking/board.jsp'" class="btn btn-sm btn-primary" id="btnList">목록</button>
-         </div>
-            
-         </form>
-      </div>
-   </article>
+  <div class="container">
+	<form action="dog-talking/answeraction.jsp" method="post" enctype="multipart/form-data">
+	  <!-- 이미지 미리보기 -->
+      <img id="showimg">
+	  <div id="photo-box">
+	    <span class="glyphicon glyphicon-camera camera"> 사진을 넣어주세요</span>
+	    <span class="glyphicon glyphicon-camera camera-mod"> 사진 수정</span>
+	  <input type="file" name="photo" id="photo" style="visibility: hidden;" onchange="readURL(this)" required> 
+	  <input type="file" name="photo-mod" id="photo-mod" style="visibility: hidden;" onchange="readURL(this)"> 
+	  </div>
+	  <div id="content-box">
+	    <div id="subject"><input type="text" placeholder="제목을 입력하세요" required></div>
+	    <div id="content"><input type="text" placeholder="내용을 입력하세요" required></div>
+	  </div>
+	  <button type="submit">저장</button>
+	</form>
+  </div>
+
+  
+         
 </body>
 </html>

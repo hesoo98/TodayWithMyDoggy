@@ -105,7 +105,7 @@
 		  <tr>
 		    <td><%=dto.getNum() %></td>
 		    <td>
-		      <a href="index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
+		      <a href="index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
 		      <%=dto.getSubject() %>
 		      </a>
 		      [<%=alist.size() %>]
@@ -120,6 +120,8 @@
 	  
 	  %>
 	</table>
+	
+	</div>
 	
 	<!-- 페이징 출력 -->
 	<div style="width: 500px; text-align: center;">
