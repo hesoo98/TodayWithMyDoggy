@@ -1,3 +1,7 @@
+<%@page import="member.MemberDto"%>
+<%@page import="member.MemberDao"%>
+<%@page import="profile.dogProfile.DogProfileDto"%>
+<%@page import="profile.dogProfile.DogProfileDao"%>
 <%@page import="board.placeShare.PlaceShareBoardDao"%>
 <%@page import="board.placeShare.PlaceShareBoardDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -15,7 +19,9 @@
 <style type="text/css">
 .container {
 	border: 1px solid blue;
-	padding-bottom: 100px;
+	width: 800px;
+	padding-bottom: 130px;
+	padding-top: 70px;
 }
 
 #title-img {
@@ -77,25 +83,53 @@ input[type="button"]:hover {
 div {
 	font-size: 10pt
 }
+
+#dogimg {
+	width: 100%
+}
 </style>
 </head>
 <%
-String num = request.getParameter("num");
+//로그인한 사람 아이디
+String myid = (String)session.getAttribute("myid");
+
+MemberDao mdao = new MemberDao();
+String nickname = mdao.getNickname(myid);
+
+String boardnum = request.getParameter("num");
 PlaceShareBoardDao dao = new PlaceShareBoardDao();
-PlaceShareBoardDto dto = dao.getData(num);
+PlaceShareBoardDto dto = dao.getData(boardnum);
+String boardId = dto.getId();
+
+MemberDao memberdao = new MemberDao();
+MemberDto memberdto = memberdao.getMemeber(boardId);
+
+String memberId = memberdto.getId();
+String memberNum = memberdao.getNum(memberId);
+
+DogProfileDao proDao = new DogProfileDao();
+DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
+String proPhoto = proDto.getPhoto();
+
+System.out.println(memberNum);
+System.out.println(proPhoto);
 %>
 <body>
 	<div class="container" role="main">
 		<div id="subject">
 			<%=dto.getSubject()%>
 		</div>
+		유저 사진 & 닉네임 쓸 곳
+		<br>
+		<img alt="강아지 프로필 사진" src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="dogImg"
+		style="width: 20px;">
+		<%=nickname %><br>
+		이미지: <%=proPhoto%>
 		<hr>
 		<img
 			src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>"
 			id="title-img">
-		<hr>
-		유저 사진 & 닉네임 쓸 곳
-		<hr>
+		<br>
 		<hr>
 		<div>
 			내용 :

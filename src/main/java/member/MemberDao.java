@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import board.placeShare.PlaceShareBoardDto;
 import mysql.db.DbConnect;
 
 public class MemberDao {
@@ -205,5 +206,35 @@ public class MemberDao {
 		return num;
 	}
 
+	public MemberDto getMemeber(String id) {
+
+		MemberDto dto = new MemberDto();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from member where id=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				dto.setNickname(rs.getString("nickname"));
+				dto.setId(rs.getString("id"));
+				dto.setHp(rs.getString("hp"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setEmail(rs.getString("email"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
 	
 }

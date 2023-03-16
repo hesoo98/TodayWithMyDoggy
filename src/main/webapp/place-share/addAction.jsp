@@ -27,7 +27,6 @@
 		MemberDao memberDao = new MemberDao();
 		PlaceShareBoardDao dao = new PlaceShareBoardDao();
 		String myid = (String)session.getAttribute("myid");
-		String nickname = memberDao.getNickname(myid);
 		
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
@@ -38,7 +37,7 @@
 		String placeName = multi.getParameter("placeName");
 		
 		PlaceShareBoardDto dto = new PlaceShareBoardDto();
-		dto.setNickname(nickname);
+		dto.setId(myid);
 		dto.setSubject(subject);
 		dto.setContent(content);
 		dto.setPhotoName(photoName);

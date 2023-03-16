@@ -71,7 +71,6 @@ img {
 	max-width: 100%;
 	cursor: pointer;
 	transition: transform .3s; /* Animation */
-  
 }
 img:hover {
 	transform: scale(1.1);
@@ -102,10 +101,10 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				for (PlaceShareBoardDto dto : list) {
 				%>
 				<div class="col">
-					<div class="card border-light mb-10" width="100%" style="border-radius: 10%">
-						<div class="card-img" id="img" style="border-radius: 12%">
+					<div class="card border-light mb-10" width="100%" style="border-radius: 10%;">
+						<div class="card-img" id="img" style="border-radius: 12%; ">
 							<input type="hidden" id="num" name="num" value="<%=dto.getNum() %>">
-							<img class="img" class="bd-placeholder-img card-img-top" style="border-radius: 7%"
+							<img class="img" class="bd-placeholder-img card-img-top" style="border-radius: 7%"  width="600px;"
 								src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>"
 								height="250px;" xmlns="http://www.w3.org/2000/svg"
 								role="img" aria-label="Placeholder: Thumbnail"
@@ -116,7 +115,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 							<p class="card-subject"><%=dto.getSubject()%></p>
 							<p class="card-content"><%=dto.getContent()%></p>
 							<div class="d-flex justify-content-between align-items-center">
-								<small class="text-muted">작성자:<%=dto.getNickname()%>
+								<small class="text-muted">작성자(들어갈곳인데 아이디로 대체):<%=dto.getId()%>
+								<br>
 									조회수:<%=dto.getReadCount()%> 좋아요수:<%=dto.getLikes()%></small>
 							</div>
 						</div>
