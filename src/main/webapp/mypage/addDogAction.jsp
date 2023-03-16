@@ -8,11 +8,15 @@
 <%
 
 	DogProfileDao dogDao = new DogProfileDao();
+	MemberDao memberDao = new MemberDao();
+	
 	//db에 저장할 member_num가져오기
 	String id = (String)session.getAttribute("myid");
-	MemberDao memberDao = new MemberDao();
 	String member_num = memberDao.getNum(id);
+	
+	// 내 모든 강아지 마리 수
 	int myDogCount = dogDao.getMyDogList(member_num).size();
+	
 	//이미지가 업로드되는 실제경로
 	String realPath=getServletContext().getRealPath("/mypage/dogImg");
 	System.out.println(realPath);
@@ -38,14 +42,12 @@
 		dto.setBirthday(birthday);
 		dto.setPhoto(photoname);
 		
-		//dao선언
-		DogProfileDao dao = new DogProfileDao();
 		//if 최초 강아지 추가이면 대표강아지로 추가한다.
 		if (myDogCount == 0){
-			dao.insertMainDogProfile(dto);
+			dogDao.insertMainDogProfile(dto);
 		} else {
 			//else 강아지가 한마리가 아니면(대표강아지가 있다고가정).//최초강아지가 아니고 이미 대표강아지가 있으면
-			dao.insertDogProfile(dto);
+			dogDao.insertDogProfile(dto);
 		}
 		
 		// 목록으로 이동
