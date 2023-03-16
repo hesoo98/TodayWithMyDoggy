@@ -24,7 +24,7 @@ public class DogFriendAnswerDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getNickname());
+			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getBoardNum());
 			pstmt.setString(3, dto.getContent());
 			
@@ -59,7 +59,7 @@ public class DogFriendAnswerDao {
 				DogFriendAnswerDto dto=new DogFriendAnswerDto();
 				
 				dto.setIdx(rs.getString("idx"));
-				dto.setNickname(rs.getString("nickname"));
+				dto.setId(rs.getString("id"));
 				dto.setBoardNum(rs.getString("board_num"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));

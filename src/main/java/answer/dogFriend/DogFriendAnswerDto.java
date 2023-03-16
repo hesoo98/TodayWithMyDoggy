@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class DogFriendAnswerDto {
 	private String idx;
-	private String nickname;
+	private String id;
 	private String boardNum;
 	private String content;
 	private Timestamp writeday;
@@ -15,11 +15,11 @@ public class DogFriendAnswerDto {
 	public void setIdx(String idx) {
 		this.idx = idx;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getId() {
+		return id;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getBoardNum() {
 		return boardNum;

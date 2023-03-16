@@ -16,7 +16,7 @@
 
 	dao.getData(myid);
 	//dto에 저장
-	dto.setNickname(myid);
+	dto.setId(myid);
 	dto.setSubject(subject);
 	dto.setContent(content);
 	
