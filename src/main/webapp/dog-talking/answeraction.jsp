@@ -14,13 +14,12 @@
     //nickname
     MemberDao mdao=new MemberDao();
     String id=(String)session.getAttribute("myid");
-    String nickname=mdao.getNickname(id);
     
     DogTalkingAnswerDto dto=new DogTalkingAnswerDto();
     
     dto.setBoardnum(num);
     dto.setContent(answer);
-    dto.setNickname(nickname);
+    dto.setId(id);
     
     DogTalkingAnswerDao dao=new DogTalkingAnswerDao();
     dao.insertAnswer(dto);

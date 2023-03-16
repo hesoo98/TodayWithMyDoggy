@@ -1,3 +1,4 @@
+<%@page import="board.dogTalking.DogTalkingBoardDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -107,12 +108,19 @@
     }
     </script>
 
+<%
+
+DogTalkingBoardDto dto=new DogTalkingBoardDto();
+
+
+%>
+
 <body>
 
 <div id="modal" class="modal__background" style="display: hidden;">
   <div class="modal__box">
     
-	  <h4 id="top">입력창<button type="botton" onclick="history.back()"><span class="glyphicon glyphicon-remove"></span></button></h4>
+	  <h4 id="top">수정하기<button type="botton" onclick="history.back()"><span class="glyphicon glyphicon-remove"></span></button></h4>
 	<form action="dog-talking/writeaction.jsp" method="post" enctype="multipart/form-data">
 	<table style="top:150px;">
 	  <tr>
@@ -124,7 +132,7 @@
 	    </td>
 	    <td>
 		    <div id="content">
-		      <textarea name="content" placeholder="내용을 입력하세요" required></textarea>
+		      <textarea name="content" placeholder="내용을 입력하세요" required><%=dto.getContent() %></textarea>
 		    </div>
 	    </td>
 	  </tr>

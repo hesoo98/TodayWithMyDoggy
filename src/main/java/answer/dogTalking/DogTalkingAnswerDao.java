@@ -12,7 +12,7 @@ import mysql.db.DbConnect;
 public class DogTalkingAnswerDao {
 
 	DbConnect db=new DbConnect();
-	
+
 	//insert
 	public void insertAnswer(DogTalkingAnswerDto dto) {
 		
@@ -25,7 +25,7 @@ public class DogTalkingAnswerDao {
 			pstmt=conn.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getBoardnum());
-			pstmt.setString(2, dto.getNickname());
+			pstmt.setString(2, dto.getId());
 			pstmt.setString(3, dto.getContent());
 			
 			pstmt.execute();
@@ -59,7 +59,7 @@ public class DogTalkingAnswerDao {
 				DogTalkingAnswerDto dto=new DogTalkingAnswerDto();
 				
 				dto.setIdx(rs.getString("idx"));
-				dto.setNickname(rs.getString("nickname"));
+				dto.setId(rs.getString("id"));
 				dto.setBoardnum(rs.getString("board_num"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));

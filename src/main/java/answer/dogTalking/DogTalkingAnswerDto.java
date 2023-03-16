@@ -6,7 +6,7 @@ public class DogTalkingAnswerDto {
 
 	private String idx;
 	private String boardnum;
-	private String nickname;
+	private String id;
 	private String content;
 	private Timestamp writeday;
 	
@@ -22,11 +22,11 @@ public class DogTalkingAnswerDto {
 	public void setBoardnum(String boardnum) {
 		this.boardnum = boardnum;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getId() {
+		return id;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getContent() {
 		return content;
