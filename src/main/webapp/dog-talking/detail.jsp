@@ -37,7 +37,7 @@
 	}
 	
 	.wrapper-subject{
-	  margin-bottom: 50px;	
+	  margin-bottom: 20px;	
 	}
 	
 	.gray-font{
@@ -51,12 +51,23 @@
 	
 	.line{
 	  width: 90% auto;
-	  margin: 50px 0px;
+	  margin: 40px 0px;
+	}
+	
+	.nickname{
+	  font-size: 20px;
+	  font-weight: 700;
 	}
 	
 	#photo{
 	  width: 200px;
 	  height: 200px;
+	}
+	
+	.dog-photo{
+	  width: 30px;
+	  height: 30px;
+	  border-radius: 30px;
 	}
 	
 	/* 댓글 */
@@ -67,7 +78,6 @@
 	.writer{
 	  font-weight: 600;
 	  font-size: 14px;
-	  position: absolute;
 	}
 	
 	.writeday {
@@ -102,7 +112,6 @@
 	#comment-info{
 	  font-size: 10px;
 	  font-weight: 300;
-	  padding-left: 30px;
 	}
 	
 	#commenter-div{
@@ -143,13 +152,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  %>
 	  
 	  <div class="wrapper-subject">
-	  
-	  <a class="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
-	    <h4>
-	      <img src="dog-talking-photo/04.png" style="width: 20px;">
-	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=nickname %>
-	    </h4>
-	  </a>
 	  <!-- pet info -->
 	  <%
 	    //writer_num
@@ -157,12 +159,17 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    DogProfileDao pdao=new DogProfileDao();
 	    DogProfileDto pdto=pdao.getMainDogInfo(writerNum);
 	    
+	    // 프로필사진
 	    if(pdto.getIdx()==null){%>
-	    (멍멍)
+		<span class="dog-photo"><i class="fa-solid fa-dog fa-lg"></i></span>
+		<span class="nickname"><%=nickname %></span>
 	    <%}else{%>
+		<img class="dog-photo" src="dog-talking-photo/<%=pdto.getPhoto()%>">
+	    <span class="nickname"><%=nickname %></span>
+	    <br>
 	    <span style="font-size: 12px;"><%=pdto.getName() %> ( <%=pdto.getGender() %>|<%=pdto.getDogSize() %> )</span>
 	    <%} %>
-	  
+	  <br>
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
 	  </div>
@@ -211,30 +218,31 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	          	//댓글쓴사람 강아지정보 불러오기
 			    String answerNum=mdao.getNum(dogAnswer.getId());
 			    DogProfileDto answerPdto=pdao.getMainDogInfo(answerNum);
-	          	%> 
+	          	%>
 	          	 
 	          	 <span class="comment writer"><%=mdao.getNickname(dogAnswer.getId()) %></span>
 	          	 <% 
 	          	if(answerPdto.getIdx()==null){%>
-	    	    (멍멍)
+	    	    	<i class="fa-solid fa-bone"></i>
 	    	    <%}else{%>
-	    	    <span id="comment-info"><%=answerPdto.getName() %>(<%=answerPdto.getGender() %>|<%=answerPdto.getDogSize() %>|지역)</span>
+	    	    	<img style="width: 20px; height: 20px; border-radius: 20px;" 
+	    	    	src="dog-talking-photo/<%=answerPdto.getPhoto()%>">
+	    	    	<span id="comment-info"><%=answerPdto.getName() %>
+	    	    	(<%=answerPdto.getGender() %>|<%=answerPdto.getDogSize() %>|지역)</span>
 	    	    <%} %>
 	             
 	          </div>
-	          
 	          <span class="comment writeday"><%=sdf.format(dogAnswer.getWriteday()) %></span>
 	          
 				<%
 				  // 내댓글 표시 + 댓글 수정,삭제버튼
-				  // 닉네임!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!문제인듯함
-				  if(loginok!=null && sessionNickname.equals(nickname)){%>
+				  if(loginok!=null && sessionNickname.equals(mdao.getNickname(dogAnswer.getId()))){%>
 					  <span id="my-comment" style="float: left;">&nbsp;내댓글</span>
 					  
-	          <div id="btn-box">
-			      <a class="a-tag" id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>" href="">수정</a>
-			      <a class="a-tag" id="btn-comment-del" idx="<%=dogAnswer.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
-	          </div>
+		          <div id="btn-box">
+				      <a class="a-tag" id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>" href="">수정</a>
+				      <a class="a-tag" id="btn-comment-del" idx="<%=dogAnswer.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
+		          </div>
 				  <%}
 				%>
 	          <br>
@@ -284,9 +292,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  
 	  //댓글
 	  $(function(){
-		  
-		  //댓글창 안보이게
-		  //$("#comment-box").hide();
 
 		  //댓글 수정창 안보이게
 		  $(".form-comment-mod").hide();
@@ -339,8 +344,8 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    String currentPage=request.getParameter("currentPage");
 	  
 	    if(nickname.equals(sessionNickname)){%>
-	  		<button type="button" onclick="location.href='index-form.jsp?main=dog-talking/modify.jsp?num=<%=dto.getNum()%>'">수정</button>
-	  		<button type="button" id="btn-board-del">삭제</button>	    	
+	  		<button class="button-primary-outlined" type="button" onclick="location.href='index-form.jsp?main=dog-talking/modify.jsp?num=<%=dto.getNum()%>'">수정</button>
+	  		<button class="btn btn-warning btn-ghost btn-open-line" type="button" id="btn-board-del">삭제</button>	    	
 	    <%}
 	  %>
 	  
