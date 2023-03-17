@@ -46,7 +46,7 @@ public class PlaceShareBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from place_share_board order by num";
+		String sql = "select * from place_share_board order by num desc";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
