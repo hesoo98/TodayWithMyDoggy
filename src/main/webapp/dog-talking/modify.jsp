@@ -90,6 +90,16 @@
       $("span.camera").click(function(){
          $("#photo").trigger("click");
       });
+
+      //esc로 모달 닫기
+      $(document).keydown(function(e){
+      	//keyCode 구 브라우저, which 현재 브라우저
+          var code = e.keyCode || e.which;
+       
+          if (code == 27) { // 27은 ESC 키번호
+              history.back();
+          }
+      });
       
    });
    

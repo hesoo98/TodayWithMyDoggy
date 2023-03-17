@@ -89,7 +89,18 @@
          $("#photo").trigger("click");
       });
       
+      //esc로 모달 닫기
+      $(document).keydown(function(e){
+    		//keyCode 구 브라우저, which 현재 브라우저
+    	    var code = e.keyCode || e.which;
+    	 
+    	    if (code == 27) { // 27은 ESC 키번호
+    	        history.back();
+    	    }
+    	});
+      
    });
+   	 
    
     //이미지 미리보기   
     function readURL(input) {
@@ -104,11 +115,12 @@
         }
         
     }
+    
     </script>
 
 <body>
 
-<div id="modal" class="modal__background" style="display: hidden;">
+<div id="modal" class="modal__background" style="display: hidden;" tabindex="0">
   <div class="modal__box">
     
 	  <h4 id="top">입력창<button type="button" onclick="history.back()"><span class="glyphicon glyphicon-remove"></span></button></h4>
@@ -133,7 +145,7 @@
 	      </div>
 	    </td>
 	    <td align="center">
-		  <button type="submit">저장</button>
+		  <button type="submit" id="submit">저장</button>
 	    </td>
 	  </tr>
 	</table>
