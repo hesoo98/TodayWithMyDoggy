@@ -15,7 +15,6 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript" src="js/layout.js"></script>
 <link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
 <meta charset="utf-8">
@@ -37,21 +36,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
-<!-- Favicons -->
-<link rel="apple-touch-icon"
-	href="/docs/5.1/assets/img/favicons/apple-touch-icon.png"
-	sizes="180x180">
-<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png"
-	sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png"
-	sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
-<link rel="mask-icon"
-	href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg"
-	color="#7952b3">
-<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
-<meta name="theme-color" content="#7952b3">
 
 <style>
 .bd-placeholder-img {
@@ -195,12 +179,31 @@ img:hover {
 							    DogProfileDto pdto=pdao.getMainDogInfo(writerNum); //강아지이름구하기
 								%>
 								<small class="text-muted"><%=nickname%>&nbsp;&nbsp;&nbsp;
-								<i class="fa-solid fa-bone"></i>
+								
+								<% //강아지 정보 있을때만 강아지이름 출력
+								if (pdto.getIdx()!=null){%>
+								<img src="dog-talking-photo/<%=pdto.getPhoto() %>" alt="" width="30" height="30" style="border-radius: 20px;">
 								<%=pdto.getName() %>
 								<br>
+								<%}else{%>
+									<i class="fa-solid fa-bone"></i>
+								<%}
+								%>
 									<div style="display: flex; justify-content: flex-end;">
+									
+									<%//댓글 있으면 댓글 수 , 없으면 조회수 출력
+									DogTalkingAnswerDao adao=new DogTalkingAnswerDao();
+									DogTalkingAnswerDto adto=new DogTalkingAnswerDto();
+									List<DogTalkingAnswerDto> alist=adao.showAnswers(dto.getNum());
+									
+									if(alist.size()==0){%>
 									<i class="fa-solid fa-paw"></i>
 									<%=dto.getReadCount()%>명이 봤어요
+									<%}else{%>
+									<i class="fa-solid fa-paw"></i>
+									<%=alist.size()%>개의 댓글이 있어요
+									<%}
+									%>
 									<br>
 									<i class="fa-solid fa-fire"></i>
 									<%=dto.getLikes()%>명이 좋아해요</small>

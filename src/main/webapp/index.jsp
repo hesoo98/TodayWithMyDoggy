@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-<title>Insert title here</title>
-<title>Index</title>
+<title>Today With My Doggy</title>
 
 <style type="text/css">
 @font-face {

@@ -1,3 +1,6 @@
+<%@page import="member.MemberDao"%>
+<%@page import="profile.dogProfile.DogProfileDto"%>
+<%@page import="profile.dogProfile.DogProfileDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -18,6 +21,7 @@
 		text-align: center;
 	}
 	
+	/* 말풍선 */
 	.box {
 	  width: 400px;
 	  margin: 50px auto;
@@ -55,12 +59,32 @@
 	  right: 50%;
 	  bottom: -18px;
 	}
+	
+	.w-mydog{
+	  margin-top: -30px;
+	  margin-bottom: 30px;
+	  left:100px;
+	  width: 50px;
+	  height: 50px;
+	  border-radius: 50px;
+	}
 
 </style>
 
 </head>
-<body>
 
+<%
+String id=(String)session.getAttribute("myid");
+MemberDao mdao=new MemberDao();
+String num=mdao.getNum(id);
+
+DogProfileDao dao=new DogProfileDao();
+DogProfileDto dto=dao.getMyMainDog(num);
+
+%>
+
+<body>
+	
 	<div id="wrapper">
 		<div  class="box sb">
 		<span id="w-temp">온도</span>
@@ -69,7 +93,12 @@
 		<br>
 		<span id="w-comment">문장</span>
 		</div>
-		<i class="fa-solid fa-dog fa-xl"></i>
+		
+		<%if(id!=null){%>
+			<img class="w-mydog" src="dog-talking-photo/<%=dto.getPhoto()%>">
+		<%}else{%>
+			<span class="w-mydog"><i class="fa-solid fa-dog fa-xl"></i></span>
+		<%} %>
 	</div>
 
 
