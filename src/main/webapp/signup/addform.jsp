@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link rel="stylesheet" href="signup/signup.css">
     <style type="text/css">
@@ -16,8 +15,6 @@
 	font-family: "Open Sans", sans-serif;
 	color: #2b3e51;
 }
-  
-  
     </style>
     <script type="text/javascript">
     //전화번호 4자리 입력하면 넘어가기
@@ -142,58 +139,9 @@
     		console.log("통과"); 
     	    return true;
     	 }
-    	
-    	
-    }
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
-            }
-        }).open();
-    }
     
-
+    	
+    }
     </script>
     
 </head>
@@ -260,11 +208,25 @@
 			<tr>
 				<th width="100">주소</th>
 				<td>
-					<input type="text" id="sample6_postcode" placeholder="우편번호" required="required">
-					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" required="required"><br>
-					<input type="text" id="sample6_address" placeholder="주소" required="required" name=addr1><br>
-					<input type="text" id="sample6_detailAddress" placeholder="상세주소" required="required" name=addr2>
-					<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+					<select name="address" size="1" class="nice-select">
+						<option value="강원">강원</option>
+						<option value="경기">경기</option>
+						<option value="경남">경남</option>
+						<option value="경북">경북</option>
+						<option value="광주">광주</option>
+						<option value="대구">대구</option>
+						<option value="대전">대전</option>
+						<option value="부산">부산</option>
+						<option value="서울" selected>서울</option>
+						<option value="세종">세종</option>
+						<option value="울산">울산</option>
+						<option value="인천">인천</option>
+						<option value="전남">전남</option>
+						<option value="전북">전북</option>
+						<option value="제주">제주</option>
+						<option value="충남">충남</option>
+						<option value="충북">충북</option>
+					</select>
 				</td>
 			</tr>
 			

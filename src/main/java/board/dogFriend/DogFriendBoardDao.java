@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Vector;
 
 import board.dogTalking.DogTalkingBoardDto;
+import member.MemberDto;
 import mysql.db.DbConnect;
 
 public class DogFriendBoardDao {
@@ -119,7 +120,6 @@ public class DogFriendBoardDao {
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReadCount(rs.getInt("read_count"));
-				dto.setLikes(rs.getInt("likes"));
 				
 				list.add(dto);
 			}
@@ -160,7 +160,6 @@ public class DogFriendBoardDao {
 				dto.setContent(rs.getString("content"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReadCount(rs.getInt("read_count"));
-				dto.setLikes(rs.getInt("likes"));
 				
 			}
 			
@@ -255,36 +254,35 @@ public class DogFriendBoardDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
-	public List<DogFriendBoardDto> getRcList(int start,int perpage){
-		List<DogFriendBoardDto> list=new ArrayList<DogFriendBoardDto>();
+	
+	//데이터 받아오기
+	public MemberDto getMemberData(String id) {
+		MemberDto dto=new MemberDto();
 		
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
-		String sql="select * from dog_friend_board order by read_count desc limit ?,?";
+		String sql="select * from member where id=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, perpage);
+			pstmt.setString(1, id);
 			
 			rs=pstmt.executeQuery();
-			
-			while(rs.next()) {
-				DogFriendBoardDto dto=new DogFriendBoardDto();
+			if(rs.next()) {
 				
 				dto.setNum(rs.getString("num"));
 				dto.setId(rs.getString("id"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("content"));
-				dto.setWriteday(rs.getTimestamp("writeday"));
-				dto.setReadCount(rs.getInt("read_count"));
-				dto.setLikes(rs.getInt("likes"));
+				dto.setPassword(rs.getString("password"));
+				dto.setHp(rs.getString("hp"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setEmail(rs.getString("email"));
+				dto.setCreateDay(rs.getTimestamp("create_day"));
 				
-				list.add(dto);
 			}
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -292,49 +290,6 @@ public class DogFriendBoardDao {
 		} finally {
 			db.dbClose(rs, pstmt, conn);
 		}
-		
-		
-		return list;
-	}
-	public List<DogFriendBoardDto> getLikesList(int start,int perpage){
-		List<DogFriendBoardDto> list=new ArrayList<DogFriendBoardDto>();
-		
-		Connection conn=db.getConnection();
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String sql="select * from dog_friend_board order by likes desc limit ?,?";
-		
-		try {
-			pstmt=conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, perpage);
-			
-			rs=pstmt.executeQuery();
-			
-			while(rs.next()) {
-				DogFriendBoardDto dto=new DogFriendBoardDto();
-				
-				dto.setNum(rs.getString("num"));
-				dto.setId(rs.getString("id"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("content"));
-				dto.setWriteday(rs.getTimestamp("writeday"));
-				dto.setReadCount(rs.getInt("read_count"));
-				dto.setLikes(rs.getInt("likes"));
-				
-				list.add(dto);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			db.dbClose(rs, pstmt, conn);
-		}
-		
-		
-		return list;
+		return dto;
 	}
 }
