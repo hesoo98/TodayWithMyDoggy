@@ -14,7 +14,14 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 	<style type="text/css">
+		@font-face {
+		    font-family: 'Dovemayo_gothic';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
 		.rectangle {
 			border:1px solid black;
 		}
@@ -56,23 +63,23 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 	<div class="container" style="border:1px solid red;">
-		<h1>유저 마이 페이지</h1>
+		<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">유저 마이 페이지</p>
 		<div class="" style="width:800px;margin:0 auto;">
 		<%
 		if (isMainDog == 1) {
 			DogProfileDto dto = dogDao.getMyMainDog(member_num);%>
-			<h1>나의 프로필</h1>
-			<div class="row">
+			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">나의 프로필</p>
+			<div class="row" style="margin-bottom: 50px;">
 				<div class="col-6 rectangle">
 					<p>닉네임</p>
 					<p><%=memberDto.getNickname() %></p>
 					<p>아이디</p>
 					<p><%=memberDto.getId() %></p>
-					<p>전화번호</p>
+					<p>핸드폰</p>
 					<p><%=memberDto.getHp() %></p>
 				</div>
 				<div class="col rectangle">
-					<button type="button" class="btn btn-warning btn-lg" style="float:right;" onclick="location.href='#'">사용자 프로필 수정</button>
+					<button type="button" class="btn btn-warning btn-lg" style="float:right;" onclick="location.href='index.jsp?main=mypage/userProfileUpdateForm.jsp'">나의 프로필 수정</button>
 					<p>주소</p>
 					<p><%=memberDto.getAddr() %></p>
 					<p>이메일</p>
@@ -82,8 +89,7 @@
 				</div>
 			</div>
 			
-			
-			<h1 style="margin-top: 50px;">대표 강아지 프로필</h1>
+			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">대표 강아지 프로필</p>
 			<div class="row">
 				<div class="col-6 rectangle" style="margin:0 auto;">
 					<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
@@ -99,31 +105,41 @@
 			</div>
 					<%	
 		} else {%>
-			<h1>나의 프로필</h1>
-			<div style="height: 50px;">
-				<div class="row">
-					<div class="col rectangle">
-						<p>닉네임</p>
-						<p></p>
-						<p>아이디</p>
-						<p>전화번호</p>
-					</div>
-					<div class="col rectangle">
-						<p>주소</p>
-						<p>이메일</p>
-						<p>생성일</p>
-					</div>
+			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">나의 프로필</p>
+			<div class="row" style="margin-bottom: 50px;">
+				<div class="col-6 rectangle">
+					<p>닉네임</p>
+					<p><%=memberDto.getNickname() %></p>
+					<p>아이디</p>
+					<p><%=memberDto.getId() %></p>
+					<p>핸드폰</p>
+					<p><%=memberDto.getHp() %></p>
+				</div>
+				<div class="col rectangle">
+					<button type="button" class="btn btn-warning btn-lg" style="float:right;" onclick="location.href='index.jsp?main=mypage/userProfileUpdateForm.jsp'">나의 프로필 수정</button>
+					<p>주소</p>
+					<p><%=memberDto.getAddr() %></p>
+					<p>이메일</p>
+					<p><%=memberDto.getEmail() %></p>
+					<p>생성일</p>
+					<p><%=sdf.format(memberDto.getCreateDay()) %></p>
 				</div>
 			</div>
+			
+			
+			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">대표 강아지 프로필</p>
 			<div class="row">
-				<div class="col-md-auto rectangle">	
-					<img src="" id="dogprofile">
+				<div class="col-6 rectangle" style="margin:0 auto;">
+					<img class="mx-auto d-block"src="" id="dogprofile">
 				</div>
 				<div class="col rectangle">
 					<button type="button" class="btn btn-warning" style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
 					<b>대표 강아지가 없어요</b>
 				</div>
 			</div>
+			
+			
+	
 			<%
 		}
 		%>
