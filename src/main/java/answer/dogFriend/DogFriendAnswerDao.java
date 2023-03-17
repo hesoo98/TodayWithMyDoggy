@@ -100,4 +100,58 @@ public class DogFriendAnswerDao {
 		
 				
 	}
+	
+	//idx에 대한 하나의 dto
+	public DogFriendAnswerDto getAnswerData(String idx) {
+		DogFriendAnswerDto dto=new DogFriendAnswerDto();
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select * from dog_friend_answer where idx=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setIdx(rs.getString("idx"));
+				dto.setId(rs.getString("id"));
+				dto.setBoardNum(rs.getString("board_num"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return dto;
+	}
+	
+	//수정
+	public void updateAnswer(DogFriendAnswerDto dto) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update dog_friend_answer set content=? where idx=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getContent());
+			pstmt.setString(2, dto.getIdx());
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 }

@@ -237,5 +237,56 @@ public class MemberDao {
 		}
 		return dto;
 	}
-	
+
+	//hp에 따른 id값 리턴
+	public String getId(String hp) {
+		String id="";
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select id from member where hp=?";
+
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, hp);
+				
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()) {
+					id=rs.getString("id");
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return id;
+		}
+	//id에 따른 password값 리턴
+		public String getPassword(String id) {
+			String password="";
+			
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			String sql = "select password from member where id=?";
+
+				try {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, id);
+					
+					rs=pstmt.executeQuery();
+					
+					if(rs.next()) {
+						password=rs.getString("password");
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+			}
+			return password;
+			}
 }
