@@ -289,4 +289,28 @@ public class MemberDao {
 			}
 			return password;
 			}
+		
+		// dto받아와서 멤버의 프로필 수정
+		public void updateMemberProfile(MemberDto dto) {
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+			System.out.println(dto.getId());
+
+			String sql = "update member set nickname=?, hp=?, email=?,addr=? where id=?";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, dto.getNickname());
+				pstmt.setString(2, dto.getHp());
+				pstmt.setString(3, dto.getEmail());
+				pstmt.setString(4, dto.getAddr());
+				pstmt.setString(5, dto.getId());
+				
+				pstmt.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(pstmt, conn);
+			}
+		}
 }
