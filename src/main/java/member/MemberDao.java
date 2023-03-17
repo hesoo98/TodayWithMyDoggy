@@ -294,7 +294,6 @@ public class MemberDao {
 		public void updateMemberProfile(MemberDto dto) {
 			Connection conn = db.getConnection();
 			PreparedStatement pstmt = null;
-			System.out.println(dto.getId());
 
 			String sql = "update member set nickname=?, hp=?, email=?,addr=? where id=?";
 
