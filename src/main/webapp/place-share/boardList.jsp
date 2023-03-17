@@ -1,3 +1,6 @@
+<%@page import="profile.dogProfile.DogProfileDto"%>
+<%@page import="profile.dogProfile.DogProfileDao"%>
+<%@page import="member.MemberDto"%>
 <%@page import="member.MemberDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.placeShare.PlaceShareBoardDto"%>
@@ -79,14 +82,20 @@ img:hover {
   -ms-transform: scale(1.1); /* IE */
   -o-transform: scale(1.1);  /* 오페라 */
 }
+
+#profile-img {
+	width: 20px;
+	border-radius: 30px 30px;
+}
 </style>
 
 <%
 PlaceShareBoardDao dao = new PlaceShareBoardDao();
-List<PlaceShareBoardDto> list = dao.getList();
+List<PlaceShareBoardDto> list = dao.getBoardList();
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
+<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -99,6 +108,19 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 				<%
 				for (PlaceShareBoardDto dto : list) {
+					String boardNum = dto.getNum();
+					
+					String boardId = dto.getId();
+
+					MemberDao memberdao = new MemberDao();
+					MemberDto memberdto = memberdao.getMemeber(boardId);
+
+					String memberId = memberdto.getId();
+					String memberNum = memberdao.getNum(memberId);
+
+					DogProfileDao proDao = new DogProfileDao();
+					DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
+					String proPhoto = proDto.getPhoto();
 				%>
 				<div class="col">
 					<div class="card border-light mb-10" width="100%" style="border-radius: 10%;">
@@ -112,12 +134,17 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum() %>'"+>
 						</div>
 						<div class="card-body">
-							<p class="card-subject"><%=dto.getSubject()%></p>
-							<p class="card-content"><%=dto.getContent()%></p>
+							<div class="card-subject"><%=dto.getSubject()%></div>
+							<div class="card-content" style="font-size: 13px;"><%=dto.getContent()%></div>
+							<br>
 							<div class="d-flex justify-content-between align-items-center">
-								<small class="text-muted">작성자(들어갈곳인데 아이디로 대체):<%=dto.getId()%>
+								<small class="text-muted"><img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="profile-img" style="width: 20px;">
+								<%=memberdto.getNickname() %>님
+								&emsp;&emsp;&emsp;&emsp;
+								<i class="fa-regular fa-eye"></i><%=dto.getReadCount()%> | <i class="fa-solid fa-heart" style="color: red"></i><%=dto.getLikes()%>
+								</small>
 								<br>
-									조회수:<%=dto.getReadCount()%> 좋아요수:<%=dto.getLikes()%></small>
+									
 							</div>
 						</div>
 					</div>

@@ -11,19 +11,18 @@
 <title>Index</title>
 
 <style type="text/css">
+@font-face {
+	font-family: 'Dovemayo_gothic';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
 
-	@font-face {
-    font-family: 'Dovemayo_gothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-	}
-	
-	*{
-	  font-family: Dovemayo_gothic;
-	}
-
-
+* {
+	font-family: Dovemayo_gothic;
+}
 </style>
 
 
@@ -43,9 +42,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<div class="layout menu">
-	<jsp:include page="layout/menu.jsp" />
-</div>
+
 
 <style type="text/css">
 .main {
@@ -77,7 +74,12 @@ String root = request.getContextPath();
 <body>
 	<!-- 페이지 전환시 navbar 위 공간 오류 원인 -->
 	<div class="layout main">
-		<jsp:include page="<%=mainPage%>" />
+		<div class="layout menu">
+			<jsp:include page="layout/menu.jsp" />
+		</div>
+		<div>
+			<jsp:include page="<%=mainPage%>" />
+		</div>
 		<div id="layout footer">
 			<jsp:include page="layout/footer.jsp" />
 		</div>

@@ -17,6 +17,7 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+	font-size: 20px;
 	}
 	
 	*{

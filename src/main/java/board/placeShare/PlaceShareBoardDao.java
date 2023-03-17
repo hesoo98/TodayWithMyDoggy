@@ -40,7 +40,7 @@ public class PlaceShareBoardDao {
 		return cnt;
 	}
 
-	public List<PlaceShareBoardDto> getList() {
+	public List<PlaceShareBoardDto> getBoardList() {
 		List<PlaceShareBoardDto> list = new Vector<>();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
