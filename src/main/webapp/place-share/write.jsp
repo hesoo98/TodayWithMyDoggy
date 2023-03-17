@@ -13,6 +13,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0168677f39871625290af327bd783770&libraries=services"></script>
+<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#cardImg").hide();
@@ -46,11 +47,6 @@
 	
 </script>
 <style>
-body {
-	padding-top: 70px;
-	padding-bottom: 30px;
-}
-
 input {
 	font-size: 20p
 }
@@ -258,7 +254,15 @@ img {
 article {
 	margin-left: 150px;;
 	margin-right: 150px;
-	font-size: 15px;
+	font-size: 13px;
+}
+
+p {
+	color: gray;
+}
+
+#btnSave, #btnList {
+	font-size: 13px;
 }
 </style>
 </head>
@@ -272,34 +276,39 @@ article {
 				<input type="hidden" name="titlePhoto" id="titlePhoto" value="">
 				<div class="subject">
 					<input type="text" class="form-control mr-5" name="subject"
-						id="subject" placeholder="제목을 입력해 주세요" required="required">
+						id="subject" placeholder="제목을 입력해 주세요" required="required" style="width:500px; height: 30px; font-size: 13px; margin-top: 50px;">
 				</div>
 				<br>
 				<div class="card-deck mr-5">
-					<div class="input-group mb-5 mr-5 ml-4">
+					<div class="input-group mb-5 mr-5 ml-4" style="width: 500px;">
 						<input type="file" class="form-control" id="inputGroupFile02"
-							name="photo1" onchange="readURL1(this)">
+							name="photo1" onchange="readURL1(this)" style="height: 30px;">
 						<button type="button" class="input-group-text btn btn-warning"
 							for="inputGroupFile02" id="albtn">미리보기</button>
 					</div>
 
 					<div class="card" id="cardImg"
-						style="margin-right: 50%; margin-bottom: 50px; border-radius: 13%">
+						style="margin-right: 70%; margin-bottom: 50px; border-radius: 10%">
 						<img src="" class="card-img-top" id="card1"
-							style="border-radius: 13%; filter: drop-shadow(2px 2px 2px #dcdcdc);">
+							style="border-radius: 10%; filter: drop-shadow(2px 2px 2px #dcdcdc);">
 					</div>					
 				</div>
 
 				<div class="content">
-					<textarea type="text" class="form-control" rows="15" name="content"
-						id="content" placeholder="내용을 입력해주세요" required="required"></textarea>
+					<textarea type="text" class="form-control" rows="17" name="content"
+						id="content" placeholder="내용을 입력해주세요" required="required"
+						style="font-size: 13px;"></textarea>
 				</div>
 				
-				<input type="text" id="sample5_address" placeholder="주소" style="margin-top: 100px;"> <input
+				<div class="map-search" style="margin-top: 200px; margin-bottom: 100px;">
+				<p><i>- 상호명이 검색되지 않는다면 정확한 주소(도로명)를 입력해주세요!</i></p>
+				<p><i>- 주소가 입력되면 하단에 지도가 표시됩니다</i></p>
+
+				<input type="text" id="sample5_address" placeholder="주소" style="width: 300px;"> <input
 					type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 				<div id="map"
 					style="width: 350px; height: 350px; margin-top: 10px; display: none"></div>
-
+				</div>
 				<script
 					src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 				<script
