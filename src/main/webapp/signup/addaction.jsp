@@ -12,7 +12,7 @@ String nickname=request.getParameter("nickname");
 String id=request.getParameter("id");
 String password=request.getParameter("password");
 String hp=request.getParameter("hp1")+"-"+request.getParameter("hp2")+"-"+request.getParameter("hp3");
-String addr=request.getParameter("addr1")+" "+request.getParameter("addr2");
+String addr=request.getParameter("address");
 String email=request.getParameter("email1")+"@"+request.getParameter("email2");
 
 MemberDto dto=new MemberDto();

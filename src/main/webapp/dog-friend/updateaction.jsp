@@ -16,7 +16,7 @@ String currentPage=request.getParameter("currentPage");
 DogFriendBoardDao dao=new DogFriendBoardDao();
 
 //dto에 저장
-dto.setNickname(myid);
+dto.setId(myid);
 dto.setSubject(subject);
 dto.setContent(content);
 dto.setNum(num);

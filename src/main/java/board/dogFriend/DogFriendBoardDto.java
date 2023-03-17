@@ -9,7 +9,6 @@ public class DogFriendBoardDto {
 	private String content;
 	private Timestamp writeday;
 	private int readCount;
-	private int likes;
 	
 	public String getNum() {
 		return num;
@@ -46,11 +45,5 @@ public class DogFriendBoardDto {
 	}
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
-	}
-	public int getLikes() {
-		return likes;
-	}
-	public void setLikes(int likes) {
-		this.likes = likes;
 	}
 }

@@ -1,7 +1,6 @@
+<%@page import="member.MemberDto"%>
 <%@page import="javax.script.ScriptContext"%>
 <%@page import="member.MemberDao"%>
-<%@page import="answer.dogFriend.DogFriendAnswerDto"%>
-<%@page import="answer.dogFriend.DogFriendAnswerDao"%>
 <%@page import="board.dogFriend.DogFriendBoardDao"%>
 <%@page import="board.dogFriend.DogFriendBoardDto"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -101,6 +100,7 @@
    int perPage=5; //한페이지에 보여질 글의 갯수
    int perBlock=5; //한블럭당 보여지는 페이지개수
    int currentPage; //현재페이지
+   int no;
    
    //총개수
    totalCount=dao.getTotalCount();
@@ -125,10 +125,16 @@
    start=(currentPage-1)*perPage;
    //각페이지에서 필요한 게시글 가져오기
    List<DogFriendBoardDto> list=dao.getList(start, perPage);
-   List<DogFriendBoardDto> rclist=dao.getRcList(start, perPage);
-   List<DogFriendBoardDto> likeslist=dao.getLikesList(start, perPage);
    
    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+   
+   no=totalCount-(currentPage-1)*perPage;
+   
+   MemberDao mdao=new MemberDao();
+   
+   String myid=(String)session.getAttribute("myid");
+   MemberDto mdto=mdao.getMemeber(myid);
+	
    
    %>
    
@@ -138,21 +144,16 @@
 
      <br><br>
      
-    <!-- 제발정렬되어주세요 --> 
-   <div>
-   <button id="sortbtn"> 기본정렬</button>
-   <button id="rcsortbtn"> 조회순정렬</button>
-   <button id="likessortbtn">좋아요순 정렬</button>
-   </div>
+     
    
    <table class="table table-bordered" style="width: 600px;" id="sort">
      <tr>
        <td>번호</td>
+       <td>지역</td>
        <td>제목</td>
        <td>작성자</td>
        <td>작성일</td>
        <td>조회수</td>
-       <td>좋아요</td>
      </tr>
 		<%
 		if(totalCount==0){
@@ -165,29 +166,31 @@
 			<%
 		}else{
 			for(DogFriendBoardDto dto:list){
-				  //게시글 옆 댓글 수 표시
-				  DogFriendAnswerDao adao=new DogFriendAnswerDao();
-				  MemberDao mdao=new MemberDao();
 				  String board_num=dto.getNum();
-				  List<DogFriendAnswerDto> alist=adao.showAnswers(board_num);
+				  MemberDto memDto=mdao.getMemeber(dto.getId());
+				  
 				%>
 				<tr>
 					<td align="center">
 						<input type="checkbox" class="alldel" value="<%=dto.getNum()%>">
 						&nbsp;&nbsp;
-						<%=dto.getNum() %>
+						<%=no-- %>
+					</td>
+					
+					<td>
+						<%-- 테이블에서 가져온 id로 dto넣기 --%>
+						<%=memDto.getAddr()%>
 					</td>
 					
 					<td>
 						<a href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
-						<%=dto.getSubject() %></a>[<%=alist.size() %>]
+						<%=dto.getSubject() %></a>
 
 					</td>
 					
 					<td><%=mdao.getNickname(dto.getId()) %></td>
 					<td><%=sdf.format(dto.getWriteday()) %></td>
 					<td><%=dto.getReadCount() %></td>
-					<td><%=dto.getLikes() %></td>
 				</tr>
 				<%
 			}
@@ -196,11 +199,20 @@
 		
      <%
      
-     //로그인 한 유저만 글쓰기 버튼     
+     //로그인 한 유저만 글쓰기 버튼 및 관리자만 삭제 가능하게 설정    
      String loginok=(String)session.getAttribute("loginok");
-     
-     
-     if (loginok!=null){%>
+     if(loginok!=null && myid.equals("admin")){%>
+	 <tr>
+		<td colspan="6">
+ 		<input type="checkbox" class="alldelcheck">전체선택
+			<button type="button" class="btn btn-danger btn-sm" style="float:right"
+			id="btndel"><span class="glyphicon glyphicon-trash"></span>삭제</button>
+		<button type="button" class="btn btn-success btn-sm" style="float:right"
+		onclick="location.href='index.jsp?main=dog-friend/write.jsp'"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
+			
+		</td>
+	</tr>
+ 		<%} else if (loginok!=null){%>
      	<tr>
 			<td colspan="6">
 				<input type="checkbox" class="alldelcheck">전체선택
@@ -210,7 +222,7 @@
 	
 			</td>
 		</tr>
-     <%}else{%>
+     <%}else if(loginok==null){%>
   			<tr>
   				<td colspan="6">
     	 		<input type="checkbox" class="alldelcheck">전체선택
@@ -218,159 +230,9 @@
 					onclick="alert('로그인 후 이용해주세요')"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
 				</td>
 			</tr>
-     <%}
-     %>
+     <%}%>
+     
    </table>
-   
-   
-      <table class="table table-bordered" style="width: 600px;" id="rcsort">
-     <tr>
-       <td>번호</td>
-       <td>제목</td>
-       <td>작성자</td>
-       <td>작성일</td>
-       <td>조회수</td>
-       <td>좋아요</td>
-     </tr>
-		<%
-		if(totalCount==0){
-			%>
-			<tr>
-				<td colspan="5" align="center">
-					<h3>등록된 게시글이 없습니다.</h3>
-				</td>
-			</tr>
-			<%
-		}else{
-			for(DogFriendBoardDto dto:rclist){
-				  //게시글 옆 댓글 수 표시
-				  DogFriendAnswerDao adao=new DogFriendAnswerDao();
-				  MemberDao mdao=new MemberDao();
-				  String board_num=dto.getNum();
-				  List<DogFriendAnswerDto> alist=adao.showAnswers(board_num);
-				%>
-				<tr>
-					<td align="center">
-						<input type="checkbox" class="alldel" value="<%=dto.getNum()%>">
-						&nbsp;&nbsp;
-						<%=dto.getNum() %>
-					</td>
-					
-					<td>
-						<a href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
-						<%=dto.getSubject() %></a>[<%=alist.size() %>]
-
-					</td>
-					
-					<td><%=mdao.getNickname(dto.getId()) %></td>
-					<td><%=sdf.format(dto.getWriteday()) %></td>
-					<td><%=dto.getReadCount() %></td>
-					<td><%=dto.getLikes() %></td>
-				</tr>
-				<%
-			}
-		}
-		%>
-		
-     <%
-     
-     
-     if (loginok!=null){%>
-     	<tr>
-			<td colspan="6">
-				<input type="checkbox" class="alldelcheck">전체선택
-					<button type="button" class="btn btn-success btn-sm" style="float:right"
-					onclick="location.href='index.jsp?main=dog-friend/write.jsp'"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
-	
-			</td>
-		</tr>
-     <%}else{%>
-  			<tr>
-  				<td colspan="6">
-    	 		<input type="checkbox" class="alldelcheck">전체선택
-					<button type="button" class="btn btn-success btn-sm" style="float:right"
-					onclick="alert('로그인 후 이용해주세요')"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
-				</td>
-			</tr>
-     <%}
-     %>
-   </table>
-   
-   
-      <table class="table table-bordered" style="width: 600px;" id="likessort">
-     <tr>
-       <td>번호</td>
-       <td>제목</td>
-       <td>작성자</td>
-       <td>작성일</td>
-       <td>조회수</td>
-       <td>좋아요</td>
-     </tr>
-		<%
-		if(totalCount==0){
-			%>
-			<tr>
-				<td colspan="5" align="center">
-					<h3>등록된 게시글이 없습니다.</h3>
-				</td>
-			</tr>
-			<%
-		}else{
-			for(DogFriendBoardDto dto:likeslist){
-				  //게시글 옆 댓글 수 표시
-				  DogFriendAnswerDao adao=new DogFriendAnswerDao();
-				  MemberDao mdao=new MemberDao();
-				  String board_num=dto.getNum();
-				  List<DogFriendAnswerDto> alist=adao.showAnswers(board_num);
-				%>
-				<tr>
-					<td align="center">
-						<input type="checkbox" class="alldel" value="<%=dto.getNum()%>">
-						&nbsp;&nbsp;
-						<%=dto.getNum()%>
-					</td>
-					
-					<td>
-						<a href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
-						<%=dto.getSubject() %></a>[<%=alist.size() %>]
-
-					</td>
-					
-					<td><%=mdao.getNickname(dto.getId()) %></td>
-					<td><%=sdf.format(dto.getWriteday()) %></td>
-					<td><%=dto.getReadCount() %></td>
-					<td><%=dto.getLikes() %></td>
-				</tr>
-				<%
-			}
-		}
-		%>
-		
-     <%
-     
-     
-     
-     if (loginok!=null){%>
-     	<tr>
-			<td colspan="6">
-				<input type="checkbox" class="alldelcheck">전체선택
-					<button type="button" class="btn btn-success btn-sm" style="float:right"
-					onclick="location.href='index.jsp?main=dog-friend/write.jsp'"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
-	
-			</td>
-		</tr>
-     <%}else{%>
-  			<tr>
-  				<td colspan="6">
-    	 		<input type="checkbox" class="alldelcheck">전체선택
-					<button type="button" class="btn btn-success btn-sm" style="float:right"
-					onclick="alert('로그인 후 이용해주세요')"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
-				</td>
-			</tr>
-     <%}
-     %>
-   </table>
-   
    <!-- 페이징 출력 -->
    <div style="width: 500px; text-align: center;">
       <ul class="pagination">
