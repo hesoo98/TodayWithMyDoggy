@@ -110,6 +110,48 @@ public class DogTalkingBoardDao {
 		return list;
 	}
 	
+	//rank list
+	public List<DogTalkingBoardDto> getList(){
+		List<DogTalkingBoardDto> list=new ArrayList<DogTalkingBoardDto>();
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select * from dog_talking_board "
+				+ "where date_format(writeday,\"%Y-%m-%d\")>=date_add(curdate(),interval -7 day) and "
+				+ "date_format(writeday,\"%Y-%m-%d\")<=curdate() order by likes desc limit 0,4";
+		
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				DogTalkingBoardDto dto=new DogTalkingBoardDto();
+				
+				dto.setNum(rs.getString("num"));
+				dto.setId(rs.getString("id"));
+				dto.setPhoto(rs.getString("photo"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setReadCount(rs.getInt("readcount"));
+				dto.setLikes(rs.getInt("likes"));
+				
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
+	
 	//getdata for detailpage
 	public DogTalkingBoardDto getData(String num) {
 		

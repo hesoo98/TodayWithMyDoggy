@@ -19,11 +19,11 @@
 
 <style type="text/css">
 
-    #a-tag{
+    .a-tag{
       color: black;
     }
     
-    #a-tag:hover{
+    .a-tag:hover{
       color: black;
       text-decoration: none;
     }
@@ -95,12 +95,14 @@
 	  font-size: 10px;
 	  border-radius: 5px;
 	  border: 1px solid gray;
-
+	  width:35px;
+	  text-align: center;
 	}
 	
 	#comment-info{
 	  font-size: 10px;
 	  font-weight: 300;
+	  padding-left: 30px;
 	}
 	
 	#commenter-div{
@@ -142,7 +144,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  
 	  <div class="wrapper-subject">
 	  
-	  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
+	  <a class="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
 	    <h4>
 	      <img src="dog-talking-photo/04.png" style="width: 20px;">
 	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=nickname %>
@@ -204,8 +206,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	        for(DogTalkingAnswerDto dogAnswer:list){%>
 	        
 	          <div id="commenter-div">
-	          <!-- 이름부분 누르면 마이페이지로 이동 -->
-	            <a href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
 	          	 
 	          	<%
 	          	//댓글쓴사람 강아지정보 불러오기
@@ -221,20 +221,19 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    	    <span id="comment-info"><%=answerPdto.getName() %>(<%=answerPdto.getGender() %>|<%=answerPdto.getDogSize() %>|지역)</span>
 	    	    <%} %>
 	             
-	            </a>
 	          </div>
 	          
 	          <span class="comment writeday"><%=sdf.format(dogAnswer.getWriteday()) %></span>
 	          
 				<%
 				  // 내댓글 표시 + 댓글 수정,삭제버튼
-				  
+				  // 닉네임!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!문제인듯함
 				  if(loginok!=null && sessionNickname.equals(nickname)){%>
-					  <span id="my-comment" style="float: left;">내댓글</span>
+					  <span id="my-comment" style="float: left;">&nbsp;내댓글</span>
 					  
 	          <div id="btn-box">
-			      <a id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>" href="">수정</a>
-			      <a id="btn-comment-del" idx="<%=dogAnswer.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
+			      <a class="a-tag" id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>" href="">수정</a>
+			      <a class="a-tag" id="btn-comment-del" idx="<%=dogAnswer.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
 	          </div>
 				  <%}
 				%>
@@ -243,16 +242,10 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	          
 	          <!-- 수정창 hidden -->
 	          <br>
-	          <!--<input class="mod-form" type="text" value="<%=dogAnswer.getContent()%>">  -->
-	          
-	          <!-- 영돈 -->
-	          <span class="updateAn">
+	          <span class="form-comment-mod">
               <textarea><%=dogAnswer.getContent().replace("\n", "<br>")%></textarea>
-              <button class="btn btn-warning wd" value="<%=dogAnswer.getIdx()%>" 
-              style="width: 100px">댓글수정</button>
+              <button class="btn btn-warning wd" value="<%=dogAnswer.getIdx()%>">수정</button>
               </span>
-	          
-                        
 	          
 	          <hr>
 	          
@@ -296,7 +289,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		  //$("#comment-box").hide();
 
 		  //댓글 수정창 안보이게
-		  $("span.updateAn").hide();
+		  $(".form-comment-mod").hide();
 			  
 		  //댓글 누르면 보이게
 		  $("#comment").click(function(){
@@ -331,11 +324,11 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    
 	  //댓글 수정
 	  $(document).on("click","#btn-comment-mod",function(){
-		  var idx=$(this).attr("idx");
-		  
-	         $(this).parent().parent().find("#gu-an").hide();
-	         $("span.updateAn").show();
-		  
+		 var idx=$(this).attr("idx");
+
+		 $("#gu-an").hide();
+		 $(this).parent().find(".form-comment-mod").show();
+		
 	  })
 	  
 	  </script>
