@@ -15,7 +15,6 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript" src="js/layout.js"></script>
 <link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
 <meta charset="utf-8">
