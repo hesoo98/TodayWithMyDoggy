@@ -57,7 +57,9 @@ if (saveok != null) {
 		</form>
 		<div id="create-account-wrap">
 			<p>
-				비밀번호를 잊으셨나요? <a href="#">여기</a>
+			 	<a href="index.jsp?main=login/idfind/findid.jsp">아이디 찾기</a>
+			 	|
+			 	<a href="index.jsp?main=login/passwordfind/findpassword.jsp">비밀번호 찾기</a>
 			<p>
 		</div>
 		<!--create-account-wrap-->

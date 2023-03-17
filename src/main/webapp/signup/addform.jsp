@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <link rel="stylesheet" href="signup/signup.css">
+    <style type="text/css">
+  	body {
+	background-color: #9f9da7;
+	font-size: 1.6rem;
+	font-family: "Open Sans", sans-serif;
+	color: #2b3e51;
+}
+  
+  
+    </style>
     <script type="text/javascript">
     //전화번호 4자리 입력하면 넘어가기
    	function goFocus(hp){
@@ -187,13 +198,19 @@
     
 </head>
 <body>
-	<form action="signup/addaction.jsp" method="post" onsubmit="return passCheck(this)" name="frm">
-		<table style="width:500px;">
+<div class="container" style="border:0px solid gray" >
+<div style="width:600px; margin: 0 auto;" id="signuptable">
+	<form action="signup/addaction.jsp" method="post" onsubmit="return passCheck(this)" name="frm" id="sign-form" >
+		<div id="signuptext">
+		회원가입
+		</div>
+		<br>
+		<table style="border: 0px solid gray; width:500px;" >
 			<tr>
 				<th width="100">아이디</th>
 				<td>
 					<input type="text" name="id" id="id" required="required" style="width:120px;">
-					<button type="button" id="btncheck">중복체크</button>
+					<button type="button" id="btncheck" class="w-btn-outline w-btn-yellow-outline">중복체크</button>
 					<span class="idsuccess"></span>
 				</td>
 			</tr>
@@ -276,5 +293,7 @@
 			</tr>
 		</table>
 	</form>
+	</div>
+	</div>
 </body>
 </html>

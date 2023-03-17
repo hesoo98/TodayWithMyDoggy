@@ -152,6 +152,7 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
 			
 			 <div class="wrapper-subject">
 	  
+	  <!-- 프사 누르면 이동 -->
 	  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
 	    <h4>
 	      <img src="dog-talking-photo/04.png" style="width: 20px;">
@@ -159,7 +160,7 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
 	    </h4>
 	  </a>
 	  
-	  <!-- pet info -->
+	  <!-- 펫정보 -->
 	  <%
 	    //writer_num
 	    String writerNum=mdao.getNum(dto.getId());
@@ -172,6 +173,7 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
 	    <span style="font-size: 12px;"><%=pdto.getName() %> ( <%=pdto.getGender() %>|<%=pdto.getDogSize() %> )</span>
 	    <%} %>
 	  
+	  <!-- 날짜, 조회수, 좋아요 밑 내용, 좋아요 클릭함수-->
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
 	  <hr>
