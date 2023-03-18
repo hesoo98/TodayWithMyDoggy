@@ -35,6 +35,8 @@
 		String placeLa = multi.getParameter("la");
 		//경도
 		String placeMa = multi.getParameter("ma");
+		//맵 주소
+		String mapAddr = multi.getParameter("mapAddr");
 		
 		PlaceShareBoardDto dto = new PlaceShareBoardDto();
 		dto.setId(myid);
@@ -43,6 +45,7 @@
 		dto.setPhotoName(photoName);
 		dto.setPlaceLa(placeLa);
 		dto.setPlaceMa(placeMa);
+		dto.setMapAddr(mapAddr);
 		
 		dao.insertBoard(dto);
 		

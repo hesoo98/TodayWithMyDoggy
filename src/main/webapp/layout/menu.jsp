@@ -29,8 +29,6 @@ String nickname = dao.getNickname(myid);
 </head>
 
 <body>
-
-
 	<nav class="navbar navbar-expand-custom navbar-mainbg m-0 p-0">
 		<a class="navbar-brand navbar-logo ml-1 pt-3" href="index.jsp?main.jsp">
 			TodayWithMyDoggy </a>
@@ -41,7 +39,7 @@ String nickname = dao.getNickname(myid);
 		</button>
 		<!-- search bar start-->
 			<div
-				class="p-1 bg-light rounded rounded-pill shadow-sm ml-5 mg-5 pr-3"
+				class="p-1 bg-light rounded rounded-pill shadow-sm ml-5 mg-5 pr-4"
 				style="padding-right: 150px; margin-left: 30px;">
 				<div class="input-group">
 					<div class="input-group-prepend">
@@ -52,11 +50,11 @@ String nickname = dao.getNickname(myid);
 					</div>
 					<input type="search" placeholder="검색할 단어를 입력하세요!"
 						aria-describedby="button-addon2"
-						class="form-control border-0 bg-light px-4" style="width: 280px;">
+						class="form-control border-0 bg-light px-4" style="width: 230px;">
 				</div>
 			</div>
 			<!-- search bar end-->
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-0">
 				<div class="hori-selector">
 					<div class="left"></div>
@@ -96,7 +94,7 @@ String nickname = dao.getNickname(myid);
 				<li class="nav-item"><a class="nav-link"
 					href="<%=root%>/index.jsp?main=notification/notificationlist.jsp"><i
 						class="notificationBoard"></i>공지사항</a></li>
-				<div style="float: right;">
+				<div style="float: right;">	
 					<%
 					if (loginok == null) {
 					%>
@@ -109,7 +107,7 @@ String nickname = dao.getNickname(myid);
 					<%
 					} else {
 					%>
-					<li class="nav-item" style="margin-left: 200px;"><%=nickname%>님
+					<li class="nav-item" style="padding-top: 20px; padding-left: 30px;"><%=nickname%>님
 						로그인 중
 						<button type="button" class="btn btn-success"
 							style="width: 100px;"

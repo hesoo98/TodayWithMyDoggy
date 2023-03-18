@@ -18,7 +18,7 @@ public class PlaceShareBoardDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into place_share_board(id,subject,content,photo_name,place_la,place_ma,writeday) values(?,?,?,?,?,?,now())";
+		String sql = "insert into place_share_board(id,subject,content,photo_name,place_la,place_ma,map_addr,writeday) values(?,?,?,?,?,?,?,now())";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -28,6 +28,7 @@ public class PlaceShareBoardDao {
 			pstmt.setString(4, dto.getPhotoName());
 			pstmt.setString(5, dto.getPlaceLa());
 			pstmt.setString(6, dto.getPlaceMa());
+			pstmt.setString(7, dto.getMapAddr());
 			
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -103,6 +104,7 @@ public class PlaceShareBoardDao {
 				dto.setLikes(rs.getInt("likes"));
 				dto.setPlaceLa(rs.getString("place_la"));
 				dto.setPlaceMa(rs.getString("place_ma"));
+				dto.setMapAddr(rs.getString("map_addr"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -116,7 +118,7 @@ public class PlaceShareBoardDao {
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		
-		String sql="update place_share_board set subject=?, content=?, photo_name=?, place_la=?, place_ma=? where num=?";
+		String sql="update place_share_board set subject=?, content=?, photo_name=?, place_la=?, place_ma=?, map_addr=? where num=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -126,10 +128,9 @@ public class PlaceShareBoardDao {
 			pstmt.setString(3, dto.getPhotoName());
 			pstmt.setString(4, dto.getPlaceLa());
 			pstmt.setString(5, dto.getPlaceMa());
-			pstmt.setString(6, dto.getNum());
-		
-			System.out.println("num=" + dto.getNum());
-			
+			pstmt.setString(6, dto.getMapAddr());
+			pstmt.setString(7, dto.getNum());
+					
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

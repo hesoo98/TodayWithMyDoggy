@@ -1,3 +1,4 @@
+<%@page import="answer.placeShare.PlaceShareAnswerDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="member.MemberDto"%>
@@ -49,7 +50,7 @@ input {
 input[type="text"] {
 	width: 140%;
 	height: 100%;
-	border: none;
+	border-radius: 17px;
 	font-size: 1em;
 	padding-left: 5px;
 	font-style: oblique;
@@ -89,6 +90,11 @@ div {
 #dogimg {
 	width: 100%
 }
+
+#map-addr:hover {
+	color: #e3d82b
+}
+
 </style>
 </head>
 <%
@@ -123,11 +129,14 @@ DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
 String proPhoto = proDto.getPhoto();
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
+
+PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
+int totalAnswerCnt = answerDao.getTotalCount();
 %>
 <body>
 	<div class="container" role="main">
 		<br>
-		<div class="profile-box" style="margin-bottom: 100px;">
+		<div class="profile-box" style="margin-bottom: 70px;">
 			<div class="img-box"
 				style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left;">
 				<img alt="강아지 프로필 사진"
@@ -141,46 +150,77 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
 					<%=sdf.format(dto.getWriteday())%><br>
 				</div>
 			</div>
+			<% 
+		 String loginok=(String)session.getAttribute("loginok");
+		if(loginok != null) {
+				
+		%>
+		<div style="margin-left: 50%">
+			<button type="button" class="btn btn-success"
+				style="width: 60px; height: 30px; border-radius: 50px;"
+				onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정하기</button>
+			<button type="button" class="btn btn-danger"
+				style="width: 60px; height: 30px; border-radius: 50px;" id="delete"
+				onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제하기</button>
 		</div>
-
+		<%
+			}
+		%>
+		</div>
+		<hr style="width: 700px;">
 		<br>
 		<div id="subject">
 			<%=dto.getSubject()%>
 		</div>
 		<br>
-		<div>
+		<div style="font-size: 17px;">
 			<%=dto.getContent()%>
 		</div>
 		<div class="content-img" style="margin: 50px 0; padding-bottom: 30px;">
 			<img
 				src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>"
-				id="title-img" style="width: 25%">
+				id="title-img" style="width: 40%">
 		</div>
 
 		<!-- 지도 -->
-		<div id="map" style="width: 50%; height: 350px; margin-bottom: 100px;"></div>
-		<input type="hidden" id="la" value="<%=dto.getPlaceLa()%>"> <input
-			type="hidden" id="ma" value="<%=dto.getPlaceMa()%>">
-
+		<i style="color: #aaaaaa">하단 주소 클릭시 길찾기 페이지로 이동</i><br>
+		<div class="map-box" style="margin-bottom: 100px;">
+			<div id="map" style="width: 50%; height: 350px; margin-bottom: 20px;"></div>
+			<input type="hidden" id="la" value="<%=dto.getPlaceLa()%>"> 
+			<input type="hidden" id="ma" value="<%=dto.getPlaceMa()%>">
+			<input type="hidden" id="mapAddr" value="<%=dto.getMapAddr() %>">
+			<div id="map-addr" style="font-size: 17px; cursor: pointer;"
+			onclick="window.open('https://map.kakao.com/link/to/<%=dto.getMapAddr() %>,<%=dto.getPlaceLa()%>,<%=dto.getPlaceMa()%>', '_blank')">
+			<img src="/TodayWithMyDoggy/place-share/place-photo/kakaomap.png"
+			style="width: 25px; border-radius: 5px; margin-right: 10px;"><%=dto.getMapAddr() %></div>
+		</div>
+		
 		<!-- 댓글 -->
+		<hr style="width: 550px;">
+		<br>
 		<div class="answer-box">
-			<div class="answer-input">
+			<div class="img-box"
+				style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 10px;">
+				<img alt="강아지 프로필 사진"
+					src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="dogImg"
+					style="width: 100%; height: 100%;">&nbsp;&nbsp;
+			</div>
+			<div class="answer-input" style="float: left;">
 				<input type="text" name="answer" value=""
-					class="form-control answer" placeholder="댓글을 입력해주세요"
-					style="float: left; width: 400px;"> <input type="button"
+					class="form-control answer" placeholder="  댓글을 입력해주세요"
+					style="float: left; width: 500px;"> <input type="button"
 					value="전송" class="btn-answer" style="float: left; margin-top: 5px;">
 			</div>
-			<br> <br>
-			<div class="answer-list">
-				댓글쓴 사람<br>댓글 생성 날짜시간<br> 댓글 내용<br> 답글/수정/삭제
-			</div>
+			<br> 
 		</div>
-		<br> <br>
-		<input type="hidden" id="num" value="<%=boardnum%>">
-		<button type="button" class="btn btn-info" style="width: 25%; height: 30px;"
-			onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정하기</button>
-		<button type="button" class="btn btn-info" style="width: 25%; height: 30px;" id="delete"
-			onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제하기</button>
+		<br>
+		<div class="answer-list" style="margin: 30px;">
+				<div style="font-size: 15px;">댓글 수 <%=totalAnswerCnt %>개</div>
+				<div style="margin: 20px;">
+					<br>댓글쓴 사람<br>댓글 생성 날짜시간<br> 댓글 내용<br> 답글/수정/삭제
+				</div>
+		</div>
+		<br> <br> <input type="hidden" id="num" value="<%=boardnum%>">
 	</div>
 
 	<script
@@ -214,15 +254,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
 		// 마커이미지 설정 
 		});
 		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setOpacity(0.5);
+		marker.setOpacity(0.7);
 		marker.setMap(map);
 	</script>
 	<script type="text/javascript">
-		$("#delete").click(function () {
+		$("#delete").click(function() {
 			var del = confirm("글을 삭제하시겠습니까?");
 			var num = $("num").val();
-			if(del) {
-				location.href="place-share/deleteAction.jsp?num="+num;
+			if (del) {
+				location.href = "place-share/deleteAction.jsp?num=" + num;
 			}
 		});
 	</script>

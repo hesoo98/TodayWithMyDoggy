@@ -325,6 +325,7 @@ p {
 						style="width: 100%; height: 350px; margin-top: 10px; display: none"></div>
 					<input type="hidden" name="la" value="" id="la">
 					<input type="hidden" name="ma" value="" id="ma">
+					<input type="hidden" name="mapAddr" value="" id="mapAddr">
 				</div>
 				<script
 					src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -361,7 +362,8 @@ p {
 										
 				                        la = result.y;
 				                        ma = result.x;
-				                        
+				  
+				                        $("#mapAddr").val(addr);
 				                        $("#la").val(la);
 				                        $("#ma").val(ma);
 				                        

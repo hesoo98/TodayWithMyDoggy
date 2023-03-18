@@ -30,7 +30,8 @@
 		String photoName = multi.getFilesystemName("photo1");
 		String placeLa = multi.getParameter("la");
 		String placeMa = multi.getParameter("ma");
-		
+		String mapAddr = multi.getParameter("mapAddr");
+
 		PlaceShareBoardDto dto = new PlaceShareBoardDto();
 		dto.setNum(num);
 		dto.setSubject(subject);
@@ -38,6 +39,7 @@
 		dto.setPhotoName(photoName);
 		dto.setPlaceLa(placeLa);
 		dto.setPlaceMa(placeMa);
+		dto.setMapAddr(mapAddr);
 		
 		PlaceShareBoardDao dao = new PlaceShareBoardDao();
 		dao.updateBoard(dto);

@@ -13,6 +13,7 @@ public class PlaceShareBoardDto {
 	private int likes;
 	private String placeLa;
 	private String placeMa;
+	private String mapAddr;
 	
 	public String getNum() {
 		return num;
@@ -73,5 +74,11 @@ public class PlaceShareBoardDto {
 	}
 	public void setPlaceMa(String placeMa) {
 		this.placeMa = placeMa;
+	}
+	public String getMapAddr() {
+		return mapAddr;
+	}
+	public void setMapAddr(String mapAddr) {
+		this.mapAddr = mapAddr;
 	}
 }
