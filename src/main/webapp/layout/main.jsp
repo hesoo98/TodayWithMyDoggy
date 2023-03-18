@@ -94,7 +94,7 @@ DogProfileDto dto=dao.getMyMainDog(num);
 		<span id="w-comment">문장</span>
 		</div>
 		
-		<%if(id!=null){%>
+		<%if(dto.getIdx()!=null){%>
 			<img class="w-mydog" src="dog-talking-photo/<%=dto.getPhoto()%>">
 		<%}else{%>
 			<span class="w-mydog"><i class="fa-solid fa-dog fa-xl"></i></span>

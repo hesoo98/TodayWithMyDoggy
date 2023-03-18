@@ -3,23 +3,25 @@ package board.qna;
 import java.sql.Timestamp;
 
 public class QnaBoardDto {
-	private String idx;
-	private String nickname;
+	private String num;
+	private String id;
 	private String title;
 	private String content;
 	private Timestamp writeday;
+	private int readcount;
+	private String secret;
 	
-	public String getIdx() {
-		return idx;
+	public String getNum() {
+		return num;
 	}
-	public void setIdx(String idx) {
-		this.idx = idx;
+	public void setNum(String num) {
+		this.num = num;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getId() {
+		return id;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getTitle() {
 		return title;
@@ -39,4 +41,17 @@ public class QnaBoardDto {
 	public void setWriteday(Timestamp writeday) {
 		this.writeday = writeday;
 	}
+	public int getReadcount() {
+		return readcount;
+	}
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
+	public String getSecret() {
+		return secret;
+	}
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
+	
 }
