@@ -176,8 +176,11 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
 			</div>
 		</div>
 		<br> <br>
-		<button type="button" class="btn btn-info" style="width: 100px;"
+		<input type="hidden" id="num" value="<%=boardnum%>">
+		<button type="button" class="btn btn-info" style="width: 25%; height: 30px;"
 			onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정하기</button>
+		<button type="button" class="btn btn-info" style="width: 25%; height: 30px;" id="delete"
+			onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제하기</button>
 	</div>
 
 	<script
@@ -213,6 +216,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
 		// 마커가 지도 위에 표시되도록 설정합니다
 		marker.setOpacity(0.5);
 		marker.setMap(map);
+	</script>
+	<script type="text/javascript">
+		$("#delete").click(function () {
+			var del = confirm("글을 삭제하시겠습니까?");
+			var num = $("num").val();
+			if(del) {
+				location.href="place-share/deleteAction.jsp?num="+num;
+			}
+		});
 	</script>
 </body>
 </html>

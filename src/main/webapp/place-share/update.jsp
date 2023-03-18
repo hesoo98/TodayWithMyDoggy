@@ -317,7 +317,7 @@ p {
 				
 				<input type="hidden" name="la" value="" id="la">
 				<input type="hidden" name="ma" value="" id="ma">
-				<div class="map-search" style="margin-top: 200px; margin-bottom: 100px;">
+				<div class="map-search" style="margin-top: 270px; margin-bottom: 100px;">
 				<p><i>- 상호명이 검색되지 않는다면 정확한 주소(도로명)를 입력해주세요!</i></p>
 				<p><i>- 주소가 입력되면 하단에 지도가 표시됩니다</i></p>
 
