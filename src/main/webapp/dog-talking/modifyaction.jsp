@@ -37,7 +37,7 @@
   		dto.setNum(num);
   		dto.setContent(content);
   		dto.setPhoto(photoname==null?gu_photoname:photoname); //현재 사진 없으면 이전 사진 넣기
-  		
+  		System.out.println(num);
   		//update
   		dao.updateBoard(dto);
   		
