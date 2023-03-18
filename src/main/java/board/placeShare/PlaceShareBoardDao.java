@@ -65,6 +65,7 @@ public class PlaceShareBoardDao {
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReadCount(rs.getInt("read_count"));
 				dto.setLikes(rs.getInt("likes"));
+				dto.setMapAddr(rs.getString("map_addr"));
 				list.add(dto);
 			}
 		} catch (SQLException e) {
