@@ -49,6 +49,8 @@ getJSON(url_ok,function(err, data) {
 			  $("#w-comment").text("비와도 산책할 수 있어요!");
 		  }else if(main=="Snow"){
 			  $("#w-comment").text("눈 보러가요!!!");
+		  }else{
+			  $("#w-comment").text("산책해요 멍멍")
 		  }
 		  
 	  }

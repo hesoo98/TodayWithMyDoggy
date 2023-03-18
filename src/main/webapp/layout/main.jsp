@@ -89,12 +89,11 @@ DogProfileDto dto=dao.getMyMainDog(num);
 		<div  class="box sb">
 		<span id="w-temp">온도</span>
 		<span id="w-desc">날씨</span>
-		<img id="w-img">
 		<br>
 		<span id="w-comment">문장</span>
 		</div>
 		
-		<%if(id!=null){%>
+		<%if(dto.getIdx()!=null){%>
 			<img class="w-mydog" src="dog-talking-photo/<%=dto.getPhoto()%>">
 		<%}else{%>
 			<span class="w-mydog"><i class="fa-solid fa-dog fa-xl"></i></span>
