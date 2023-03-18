@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class QnaAnswerDto {
 	private String idx;
 	private String boardNum;
-	private String adminName;
+	private String adminId;
 	private String content;
 	private Timestamp writeday;
 	
@@ -21,11 +21,11 @@ public class QnaAnswerDto {
 	public void setBoardNum(String boardNum) {
 		this.boardNum = boardNum;
 	}
-	public String getAdminName() {
-		return adminName;
+	public String getAdminId() {
+		return adminId;
 	}
-	public void setAdminName(String adminName) {
-		this.adminName = adminName;
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
 	}
 	public String getContent() {
 		return content;

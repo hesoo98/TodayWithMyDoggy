@@ -35,7 +35,7 @@
    <form action="qna/modifyaction.jsp" method="post">
    <table class="table table-bordered" style="width: 800px;">
    <span>수정하기</span>
-   	   <input type="text" name="num" value="<%=dto.getNum()%>">
+   	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
        <tr>
        	<td>제목</td>
        	<td><input type="text" name="title" value="<%=dto.getTitle() %>"
@@ -45,9 +45,7 @@
        <tr>
        	<td>내용</td>
        	<td colspan="2">
-       	<textarea name="content" placeholder="내용을 입력하세요" style="width: 100%; height: 300px;">
-       	<%=dto.getContent() %>
-       	</textarea>
+       	<textarea name="content" placeholder="내용을 입력하세요" style="width: 100%; height: 300px;"><%=dto.getContent() %></textarea>
        	</td>
        </tr>
        

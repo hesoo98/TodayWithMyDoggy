@@ -1,3 +1,5 @@
+<%@page import="answer.qna.QnaAnswerDto"%>
+<%@page import="answer.qna.QnaAnswerDao"%>
 <%@page import="member.MemberDao"%>
 <%@page import="board.qna.QnaBoardDto"%>
 <%@page import="java.util.List"%>
@@ -18,12 +20,21 @@
 		margin: 50px 20px;
 	}
 	
+	.wrapper-top{
+		float: right;
+		margin-bottom: 20px;
+	}
+	
 	.a-tag{
 		color: black;
 	}
 	
 	.a-tag:hover{
 		color: black;
+	}
+	
+	.my-qna{
+		color: gold;
 	}
 	
 	.disabled{
@@ -50,9 +61,11 @@ String myid=(String)session.getAttribute("myid");
 
 	<div class="wrapper container">
 	
+	<div class="wrapper-top">
 	<%
 	// 상단 안내 부분
 	if(loginok!=null && isAdmin.equals("0")){  //로그인 상태+일반회원이면 글쓰기 버튼 %> 
+		<span class="my-qna">내가 작성한 글은 노란색으로 표시됩니다.</span>
 		<button class="btn btn-warning" onclick="location.href='index.jsp?main=qna/write.jsp'">문의하기</button>
 	<%}else if(loginok!=null && isAdmin.equals("1")){  //관리자 %>
 		<span class="alert alert-warning">관리자님 안녕하세요</span>
@@ -60,6 +73,7 @@ String myid=(String)session.getAttribute("myid");
 		<span class="alert alert-warning">로그인하셔야 문의가 가능합니다.</span>
 	<%}
 	%>
+	</div>
 	
 	<table class="table table-hover">
 	  <tr>
@@ -96,7 +110,7 @@ String myid=(String)session.getAttribute("myid");
 		    	
 		    	//비밀글
 		    	if(myid.equals(dto.getId())){ //본인-> 링크 + 열린자물쇠%>
-	    		<a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=dto.getNum()%>">
+	    		<a class="a-tag my-qna" href="index.jsp?main=qna/detail.jsp?num=<%=dto.getNum()%>">
 	    		<i class="fa-solid fa-lock-open"></i>
 			    <%=dto.getTitle() %>
 		 		</a>
@@ -122,7 +136,18 @@ String myid=(String)session.getAttribute("myid");
 		    </td>
 		    
 		    <td><%=dto.getReadcount() %></td>
-		    <td>대기중</td>
+		    
+		    <%
+		    //답변여부 확인
+		    QnaAnswerDao adao=new QnaAnswerDao();
+		    QnaAnswerDto adto=adao.getAnswer(dto.getNum());
+		    
+		    if(adto.getIdx()==null){%>
+			    <td>대기중</td>
+		    <%}else{%>
+		    	<td>답변완료</td>
+		    <%}
+		    %>
 		  </tr>
 		<%}
 	  %>

@@ -89,7 +89,6 @@ DogProfileDto dto=dao.getMyMainDog(num);
 		<div  class="box sb">
 		<span id="w-temp">온도</span>
 		<span id="w-desc">날씨</span>
-		<img id="w-img">
 		<br>
 		<span id="w-comment">문장</span>
 		</div>
