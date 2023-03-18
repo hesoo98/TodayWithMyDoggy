@@ -18,7 +18,7 @@ public class PlaceShareBoardDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into place_share_board(id,subject,content,photo_name,title_photo_name,writeday) values(?,?,?,?,?,now())";
+		String sql = "insert into place_share_board(id,subject,content,photo_name,place_la,place_ma,writeday) values(?,?,?,?,?,?,now())";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -26,7 +26,9 @@ public class PlaceShareBoardDao {
 			pstmt.setString(2, dto.getSubject());
 			pstmt.setString(3, dto.getContent());
 			pstmt.setString(4, dto.getPhotoName());
-			pstmt.setString(5, dto.getTitlePhotoName());
+			pstmt.setString(5, dto.getPlaceLa());
+			pstmt.setString(6, dto.getPlaceMa());
+			
 			pstmt.execute();
 		} catch (SQLException e) {
 			System.out.println("INSERT ERROR: " + e.getMessage());
@@ -99,6 +101,8 @@ public class PlaceShareBoardDao {
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReadCount(rs.getInt("read_count"));
 				dto.setLikes(rs.getInt("likes"));
+				dto.setPlaceLa(rs.getString("place_la"));
+				dto.setPlaceMa(rs.getString("place_ma"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,5 +110,32 @@ public class PlaceShareBoardDao {
 			db.dbClose(rs, pstmt, conn);
 		}
 		return dto;
+	}
+	
+	public void updateBoard(PlaceShareBoardDto dto) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update place_share_board set subject=?, content=?, photo_name=?, place_la=?, place_ma=? where num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getSubject());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getPhotoName());
+			pstmt.setString(4, dto.getPlaceLa());
+			pstmt.setString(5, dto.getPlaceMa());
+			pstmt.setString(6, dto.getNum());
+		
+			System.out.println("num=" + dto.getNum());
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 }

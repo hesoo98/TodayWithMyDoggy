@@ -8,10 +8,11 @@ public class PlaceShareBoardDto {
 	private String subject;
 	private String content;
 	private String photoName;
-	private String titlePhotoName;
 	private Timestamp writeday;
 	private int readCount;
 	private int likes;
+	private String placeLa;
+	private String placeMa;
 	
 	public String getNum() {
 		return num;
@@ -43,12 +44,6 @@ public class PlaceShareBoardDto {
 	public void setPhotoName(String photoName) {
 		this.photoName = photoName;
 	}
-	public String getTitlePhotoName() {
-		return titlePhotoName;
-	}
-	public void setTitlePhotoName(String titlePhotoName) {
-		this.titlePhotoName = titlePhotoName;
-	}
 	public Timestamp getWriteday() {
 		return writeday;
 	}
@@ -66,5 +61,17 @@ public class PlaceShareBoardDto {
 	}
 	public void setLikes(int likes) {
 		this.likes = likes;
+	}
+	public String getPlaceLa() {
+		return placeLa;
+	}
+	public void setPlaceLa(String placeLa) {
+		this.placeLa = placeLa;
+	}
+	public String getPlaceMa() {
+		return placeMa;
+	}
+	public void setPlaceMa(String placeMa) {
+		this.placeMa = placeMa;
 	}
 }

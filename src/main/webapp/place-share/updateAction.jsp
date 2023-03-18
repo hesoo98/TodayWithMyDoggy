@@ -24,27 +24,23 @@
 		
 		multi=new MultipartRequest(request,realPath,uploadSize,"utf-8",new DefaultFileRenamePolicy());
 
-		MemberDao memberDao = new MemberDao();
-		PlaceShareBoardDao dao = new PlaceShareBoardDao();
-		String myid = (String)session.getAttribute("myid");
-		
+		String num = multi.getParameter("num");
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
-		String photoName = multi.getFilesystemName("photo1");	
-		//위도
+		String photoName = multi.getFilesystemName("photo1");
 		String placeLa = multi.getParameter("la");
-		//경도
 		String placeMa = multi.getParameter("ma");
 		
 		PlaceShareBoardDto dto = new PlaceShareBoardDto();
-		dto.setId(myid);
+		dto.setNum(num);
 		dto.setSubject(subject);
 		dto.setContent(content);
 		dto.setPhotoName(photoName);
 		dto.setPlaceLa(placeLa);
 		dto.setPlaceMa(placeMa);
 		
-		dao.insertBoard(dto);
+		PlaceShareBoardDao dao = new PlaceShareBoardDao();
+		dao.updateBoard(dto);
 		
 		response.sendRedirect("../index.jsp?main=place-share/boardList.jsp");
 
