@@ -254,4 +254,36 @@ public class DogProfileDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	
+	//idx를 받아서 dogProfileDto를 반환
+	public DogProfileDto getDogProfileDto(String idx) {
+		DogProfileDto dogDto = new DogProfileDto();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from dog_profile where idx=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dogDto.setIdx(rs.getString("idx"));
+				dogDto.setMemberNum(rs.getString("member_num"));
+				dogDto.setName(rs.getString("name"));
+				dogDto.setGender(rs.getString("gender"));
+				dogDto.setDogSize(rs.getString("dog_size"));
+				dogDto.setBirthday(rs.getString("birthday"));
+				dogDto.setPhoto(rs.getString("photo"));
+				dogDto.setMainDog(rs.getInt("main_dog"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+		return dogDto;
+	}
 }

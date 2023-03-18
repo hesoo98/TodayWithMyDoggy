@@ -11,7 +11,6 @@
 	<meta charset="utf-8">
 	<title>Insert title here</title>
 	<link href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
@@ -62,15 +61,15 @@
 	}
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
-	<div class="container" style="border:1px solid red;">
-		<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">유저 마이 페이지</p>
+	<div class="container" style="border:3px solid #FFCD00; border-radius: 30px; margin-top: 50px;">
+		<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem; margin:20px;">유저 마이 페이지</p>
 		<div class="" style="width:800px;margin:0 auto;">
 		<%
 		if (isMainDog == 1) {
 			DogProfileDto dto = dogDao.getMyMainDog(member_num);%>
 			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">나의 프로필</p>
 			<div class="row" style="margin-bottom: 50px;">
-				<div class="col-6 rectangle">
+				<div class="col-6">
 					<p>닉네임</p>
 					<p><%=memberDto.getNickname() %></p>
 					<p>아이디</p>
@@ -78,7 +77,7 @@
 					<p>핸드폰</p>
 					<p><%=memberDto.getHp() %></p>
 				</div>
-				<div class="col rectangle">
+				<div class="col">
 					<button type="button" class="btn btn-warning btn-lg" style="float:right;" onclick="location.href='index.jsp?main=mypage/userProfileUpdateForm.jsp'">나의 프로필 수정</button>
 					<p>주소</p>
 					<p><%=memberDto.getAddr() %></p>
@@ -91,10 +90,10 @@
 			
 			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">대표 강아지 프로필</p>
 			<div class="row">
-				<div class="col-6 rectangle" style="margin:0 auto;">
+				<div class="col-6" style="margin:0 auto;">
 					<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 				</div>
-				<div class="col rectangle">
+				<div class="col">
 					<button type="button" class="btn btn-warning btn-lg" style="float:right;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
 					<p>강아지이름 : <%=dto.getName() %></p>
 					<p>강아지성별 : <%=dto.getGender() %></p>

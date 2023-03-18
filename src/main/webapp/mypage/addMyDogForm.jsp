@@ -5,9 +5,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Insert title here</title>
+	<title>강아지 프로필 수정 폼</title>
 	<link href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
@@ -23,10 +22,6 @@
 		}
 	</style>
 	<script type="text/javascript">
-		$(function(){
-			
-		});
-		
 		function readURL(input) {
 			if(input.files && input.files[0]) {
 				var reader = new FileReader();
@@ -36,17 +31,15 @@
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
-		
 	</script>
 </head>
 <body>
 	<div class="container main" style="border:1px solid red;">
 		<h1>강아지 추가 폼</h1>
 	
-		<div class="" style="width:800px;margin:0 auto;">
+		<div style="width:800px; margin:0 auto;">
 			<form action="mypage/addDogAction.jsp" method="post" enctype="multipart/form-data">
-			
-				<div class="row rectangle" style="float:none;">
+				<div class="row" style="float:none;">
 					<div class="row" style="float:none;margin:0 auto;">
 						<img src="" id="dogprofile">
 					</div>

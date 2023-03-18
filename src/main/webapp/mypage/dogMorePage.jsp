@@ -9,7 +9,6 @@
 	<meta charset="utf-8">
 	<title>Insert title here</title>
 	<link href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
@@ -58,61 +57,63 @@
 		}
 	}
 %>
-	<div class="container main" style="border:1px solid red;">
+	<div class="container main">
 		<h1>강아지 정보 더보기</h1>
-	<div class="" style="width:800px;margin:0 auto;">
-		<div class="firstLine">
-			<div class="rectangle mx-auto d-block">
-				<button type="button" class="btn btn-warning btn-lg" onclick="location.href='index.jsp?main=mypage/addMyDogForm.jsp'">새 강아지프로필 추가</button>
-				<button type="button" class="btn btn-warning btn-lg" onclick="location.href='index.jsp?main=mypage/selectMainDog.jsp'">대표 강아지 변경</button>
-			</div>
+		<div class="" style="width:800px;margin:0 auto;">
+			<div class="firstLine">
+				<div class="mx-auto d-block" style="margin-bottom: 50px;">
+					<button type="button" class="btn btn-warning btn-lg" onclick="location.href='index.jsp?main=mypage/addMyDogForm.jsp'">새 강아지프로필 추가</button>
+					<button type="button" class="btn btn-warning btn-lg" onclick="location.href='index.jsp?main=mypage/selectMainDog.jsp'">대표 강아지 변경</button>
+				</div>
+				
+				<%if(isMainDog == 0){%>
+					<b>대표강아지가 없어요!</b>
+				<%} else { 
+					DogProfileDto dto = dogDao.getMyMainDog(member_num);
+				%>
+				<div class="row">
+					<div class="col-5" style="margin:0 auto;">
+						<div class="col" style="position: absolute;">
+							<i class="fa-solid fa-crown fa-4x" style="text-align: center;"></i>
+						</div>
+						<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
+					</div>
+					<div class="col">
+						<button style="float: right;" class="btn btn-lg btn-warning" onclick="location.href='index.jsp?main=mypage/updateDogProfile.jsp?idx=<%=dto.getIdx()%>'">강아지 프로필 수정</button>
+						<p>강아지이름 : <%=dto.getName() %></p>
+						<p>강아지성별 : <%=dto.getGender() %></p>
+						<p>강아지크기 : <%=dto.getDogSize() %></p>
+						<p>강아지생일 : <%=dto.getBirthday() %></p>
+						<p>강아지사진 : <%=dto.getPhoto() %></p>
+					</div>
+					
+				</div>
+					
+				<%} %>
 			
-			<%if(isMainDog == 0){%>
-				<b>대표강아지가 없어요!</b>
-			<%} else { 
-				DogProfileDto dto = dogDao.getMyMainDog(member_num);
-			%>
-			<div class="row">
-				<div class="col-5 rectangle" style="margin:0 auto;">
-					<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
-				</div>
-				<div class="col rectangle">
-					<p>강아지이름 : <%=dto.getName() %></p>
-					<p>강아지성별 : <%=dto.getGender() %></p>
-					<p>강아지크기 : <%=dto.getDogSize() %></p>
-					<p>강아지생일 : <%=dto.getBirthday() %></p>
-					<p>강아지사진 : <%=dto.getPhoto() %></p>
-				</div>
-				<div class="col">
-					<i class="fa-solid fa-crown fa-4x" style="text-align: center;"></i>
-				</div>
 			</div>
-				
-			<%} %>
+			<div class="secondLine">
 		
-		</div>
-		<div class="secondLine">
-	
-		<%for (DogProfileDto dto: myNotMainDogList){
-			if (dto.getMainDog() == 0) {%>
+			<%for (DogProfileDto dto: myNotMainDogList){
+				if (dto.getMainDog() == 0) {%>
+					
+				<div class="row" style="margin-top:50px;margin-bottom: 50px;">
+					<div class="col-5" style="margin:0 auto;">
+						<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
+					</div>
+					<div class="col">
+						<button style="float: right;" class="btn btn-lg btn-warning" onclick="location.href='index.jsp?main=mypage/updateDogProfile.jsp?idx=<%=dto.getIdx()%>'">강아지 프로필 수정</button>
+						<p>강아지이름 : <%=dto.getName() %></p>
+						<p>강아지성별 : <%=dto.getGender() %></p>
+						<p>강아지크기 : <%=dto.getDogSize() %></p>
+						<p>강아지생일 : <%=dto.getBirthday() %></p>
+						<p>강아지사진 : <%=dto.getPhoto() %></p>
+					</div>
+				</div>
 				
-			<div class="row" style="margin-top:50px;">
-				<div class="col-5 rectangle" style="margin:0 auto;">
-					<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
-				</div>
-				<div class="col rectangle">
-					<p>강아지이름 : <%=dto.getName() %></p>
-					<p>강아지성별 : <%=dto.getGender() %></p>
-					<p>강아지크기 : <%=dto.getDogSize() %></p>
-					<p>강아지생일 : <%=dto.getBirthday() %></p>
-					<p>강아지사진 : <%=dto.getPhoto() %></p>
-				</div>
+				<%}
+			}%>
 			</div>
-				
-			<%}
-		}%>
-		
-		</div>
 		</div>
 	</div>
 </body>
