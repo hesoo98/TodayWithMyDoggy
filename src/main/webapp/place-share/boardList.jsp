@@ -87,6 +87,15 @@ img:hover {
 	width: 20px;
 	border-radius: 30px 30px;
 }
+/*말 줄임표 생성 시작*/
+.card-subject, .card-content {
+    display: block;
+    max-width: calc(100%);
+  	overflow: hidden;
+  	white-space: nowrap;
+  	text-overflow: ellipsis;
+}
+/*말 줄임표 생성 끝*/
 </style>
 
 <%
@@ -134,14 +143,20 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum() %>'"+>
 						</div>
 						<div class="card-body">
-							<div class="card-subject"><%=dto.getSubject()%></div>
-							<div class="card-content" style="font-size: 13px;"><%=dto.getContent()%></div>
+							<span class="card-subject" style="font-size: 18px;"><%=dto.getSubject()%></span>
+							<span class="card-content" style="font-size: 13px;"><%=dto.getContent()%></span>
 							<br>
 							<div class="d-flex justify-content-between align-items-center">
-								<small class="text-muted"><img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="profile-img" style="width: 20px;">
-								<%=memberdto.getNickname() %>님
-								&emsp;&emsp;&emsp;&emsp;
-								<i class="fa-regular fa-eye"></i><%=dto.getReadCount()%> | <i class="fa-solid fa-heart" style="color: red"></i><%=dto.getLikes()%>
+								<small class="text-muted">
+									<div class="img-box" style="width: 30px; height: 30px; border-radius: 70%; overflow: hidden; float: left;
+									margin-right: 5px;">
+										<img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="profile-img" style="width: 100%; height: 100%">
+									</div>
+									<div style="float: left; padding-top: 5px;">
+										<%=memberdto.getNickname() %>님
+										&emsp;&emsp;&emsp;
+										<i class="fa-regular fa-eye"></i><%=dto.getReadCount()%> | <i class="fa-solid fa-heart" style="color: red"></i><%=dto.getLikes()%>
+									</div>
 								</small>
 								<br>
 									

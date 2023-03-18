@@ -1,3 +1,5 @@
+<%@page import="board.placeShare.PlaceShareBoardDto"%>
+<%@page import="board.placeShare.PlaceShareBoardDao"%>
 <%@page import="member.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -13,8 +15,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0168677f39871625290af327bd783770&libraries=services"></script>
-<script src="https://kit.fontawesome.com/2663817d27.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#cardImg").hide();
@@ -273,19 +274,24 @@ p {
 	font-size: 13px;
 }
 </style>
+<%
+	String num = request.getParameter("num");
+	PlaceShareBoardDao dao = new PlaceShareBoardDao();
+	PlaceShareBoardDto dto = dao.getData(num);
+%>
 </head>
-
 <body>
 	<article>
 		<div class="container" role="main">
 			<br>
-			<form method="post" action="place-share/addAction.jsp"
+			<form method="post" action="place-share/updateAction.jsp"
 				enctype="multipart/form-data">
+			<input type="hidden" name="num" value=<%=num %>>
 				<input type="hidden" name="titlePhoto" id="titlePhoto" value="">
 				<div class="subject">
 					<input type="text" class="form-control mr-5" name="subject"
-						id="subject" placeholder="제목을 입력해 주세요" required="required"
-						style="width: 500px; height: 30px; font-size: 13px; margin-top: 50px;">
+						id="subject" placeholder="제목을 입력해 주세요" required="required" value="<%=dto.getSubject() %>"
+						style="width:500px; height: 30px; font-size: 13px; margin-top: 50px;">
 				</div>
 				<br>
 				<div class="card-deck mr-5">
@@ -300,32 +306,25 @@ p {
 						style="margin-right: 70%; margin-bottom: 50px; border-radius: 10%">
 						<img src="" class="card-img-top" id="card1"
 							style="border-radius: 10%; filter: drop-shadow(2px 2px 2px #dcdcdc);">
-					</div>
+					</div>					
 				</div>
 
 				<div class="content">
 					<textarea type="text" class="form-control" rows="17" name="content"
 						id="content" placeholder="내용을 입력해주세요" required="required"
-						style="font-size: 13px;"></textarea>
+						style="font-size: 13px;"><%=dto.getContent() %></textarea>
 				</div>
+				
+				<input type="hidden" name="la" value="" id="la">
+				<input type="hidden" name="ma" value="" id="ma">
+				<div class="map-search" style="margin-top: 270px; margin-bottom: 100px;">
+				<p><i>- 상호명이 검색되지 않는다면 정확한 주소(도로명)를 입력해주세요!</i></p>
+				<p><i>- 주소가 입력되면 하단에 지도가 표시됩니다</i></p>
 
-				<div class="map-search"
-					style="margin-top: 270px; margin-bottom: 100px;">
-					<p>
-						<i>- 상호명이 검색되지 않는다면 정확한 주소(도로명)를 입력해주세요!</i>
-					</p>
-					<p>
-						<i>- 주소가 입력되면 하단에 지도가 표시됩니다</i>
-					</p>
-
-					<input type="text" id="sample5_address" placeholder="주소"
-						style="width: 300px;"> <input type="button"
-						onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-					<div id="map"
-						style="width: 100%; height: 350px; margin-top: 10px; display: none"></div>
-					<input type="hidden" name="la" value="" id="la">
-					<input type="hidden" name="ma" value="" id="ma">
-					<input type="hidden" name="mapAddr" value="" id="mapAddr">
+				<input type="text" id="sample5_address" placeholder="주소" style="width: 300px;"> <input
+					type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+				<div id="map"
+					style="width: 100%; height: 350px; margin-top: 10px; display: none"></div>
 				</div>
 				<script
 					src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -333,7 +332,7 @@ p {
 				    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 				        mapOption = {
 				            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-				            level: 4 // 지도의 확대 레벨
+				            level: 5 // 지도의 확대 레벨
 				        };
 				
 				    //지도를 미리 생성
@@ -346,24 +345,24 @@ p {
 				        map: map
 				    });
 				
+				
 				    function sample5_execDaumPostcode() {
 				        new daum.Postcode({
 				            oncomplete: function(data) {
 				                var addr = data.address; // 최종 주소 변수
+				
 				                // 주소 정보를 해당 필드에 넣는다.
 				                document.getElementById("sample5_address").value = addr;
 				                // 주소로 상세 정보를 검색
 				                geocoder.addressSearch(data.address, function(results, status) {
-
 				                    // 정상적으로 검색이 완료됐으면
 				                    if (status === daum.maps.services.Status.OK) {
 				
 				                        var result = results[0]; //첫번째 결과의 값을 활용
-										
+				
 				                        la = result.y;
 				                        ma = result.x;
-				  
-				                        $("#mapAddr").val(addr);
+				                        
 				                        $("#la").val(la);
 				                        $("#ma").val(ma);
 				                        
@@ -375,7 +374,7 @@ p {
 				                        // 지도 중심을 변경한다.
 				                        map.setCenter(coords);
 				                        // 마커를 결과값으로 받은 위치로 옮긴다.
-				                        marker.setPosition(coords);
+				                        marker.setPosition(coords)
 				                    }
 				                });
 				            }
@@ -384,10 +383,8 @@ p {
 				</script>
 				<div style="margin-bottom: 100px;">
 					<br>
-					<button type="submit" class="btn btn-sm btn-warning" id="btnSave"
-						style="width: 45%; height: 30px;">저장</button>
-					<button type="button" class="btn btn-sm btn-warning" id="btnList"
-						style="width: 45%; height: 30px;">목록</button>
+					<button type="submit" class="btn btn-sm btn-warning" id="btnSave" style="width: 45%; height: 30px;">수정</button>
+					<button type="button" class="btn btn-sm btn-warning" id="btnList" style="width: 45%;  height: 30px;">목록</button>
 				</div>
 			</form>
 		</div>
