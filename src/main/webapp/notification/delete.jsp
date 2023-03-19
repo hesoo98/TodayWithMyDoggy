@@ -1,14 +1,12 @@
+<%@page import="board.notification.NotificationDao"%>
+<%@page import="board.notification.NotificationDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Insert title here</title>
-	<link href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-공사중.
-</body>
-</html>
+<%
+	String num = request.getParameter("num");
+	
+	NotificationDao dao = new NotificationDao();
+	dao.deleteNotification(num);
+	
+	////TodayWithMyDoggy/mypage/dogImg/
+	response.sendRedirect("../index.jsp?main=notification/notificationlist.jsp");
+%>
