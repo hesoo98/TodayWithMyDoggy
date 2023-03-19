@@ -116,7 +116,6 @@ img:hover {
 	padding-left: 20px;
 }
 </style>
-
 <%
 PlaceShareBoardDao dao = new PlaceShareBoardDao();
 List<PlaceShareBoardDto> list = dao.getBoardList();
@@ -164,7 +163,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 							<button id="img-addr-text" style="color: #fff"><%=place %></button>			
 						</div>
 							<input type="hidden" id="num" name="num"
-								value="<%=dto.getNum()%>"> <img class="img"
+								value="<%=dto.getNum()%>"> <img class="img" id="cardImg"
 								class="bd-placeholder-img card-img-top"
 								style="border-radius: 7%" width="600px;"
 								src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>"

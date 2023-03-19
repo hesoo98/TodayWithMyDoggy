@@ -94,8 +94,67 @@ div {
 #map-addr:hover {
 	color: #e3d82b
 }
-
 </style>
+<script type="text/javascript">
+$(function() {
+	//처음에 시작시 리스트 호출
+	list();
+	
+	var boardnum = $("#boardnum").val();
+	
+	$("#btnanswer").click(function() {
+	alert(boardnum);
+
+	$.ajax({	
+		type: "get",
+		url: "place-share/answerAddAction.jsp",
+		dataType: "html",
+		data: {"boardnum":boardnum, "myid": $("#myid").val(), "content":$("#content").val()},
+		success: function(res) {
+			$("#content").val(" ");
+			
+			list();
+			}
+		});
+	});	
+});
+
+//사용자 정의 호출
+function list() {	
+	$.ajax({
+		type: "get",
+		url: "place-share/answerList.jsp",
+		data: {"boardnum":$("#boardnum").val()},
+		dataType: "json",
+		success: function(res) {
+			var s = "";
+			var nickname = $("#nickname").val();
+			var photo = $("#photo").val();
+			$.each(res, function(idx, item) {
+				s += "<div class='img-box' style='width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 20px;'>";
+				s += "<img alt='강아지 프로필 사진' src='/TodayWithMyDoggy/mypage/dogImg/"+photo+"' id='dogImg' style='width: 100%; height: 100%;'>&nbsp;&nbsp;</div>";
+				s += "<div style='margin-botton: 40px;'>"+nickname+"님&nbsp;&nbsp;&nbsp;<span class='aday' style='color: gray'>" + item.writeday + "</span></div>";
+				s += "<div style='width: 500px; font-size:15px; margin-top:10px;'>" + item.content;
+				s += "<button type='button' idx='" + item.idx + "' id='adel' class='adel btn btn-warning' style='width: 30px; margin-left: 200px;'>삭제</button>";
+				s += "&nbsp;<button type='button' idx='" + item.idx + "' id='amod' class='amod btn btn-warning' style='width: 30px'>수정</button>";
+				s += "<br><br><br><br></div>";
+				
+			});
+			
+			$("#answerView").html(s);
+		},
+		statusCode: {
+			404: function() {
+				alert("json파일을 못잡음");
+			},
+			
+			500: function() {
+				alert("서버오류..코드");
+			}
+		}
+	});
+}
+</script>
 </head>
 <%
 //로그인한 사람 아이디
@@ -132,6 +191,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
 
 PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
 int totalAnswerCnt = answerDao.getTotalCount();
+
+dao.addReadCount(boardnum);
 %>
 <body>
 	<div class="container" role="main">
@@ -150,22 +211,21 @@ int totalAnswerCnt = answerDao.getTotalCount();
 					<%=sdf.format(dto.getWriteday())%><br>
 				</div>
 			</div>
-			<% 
-		 String loginok=(String)session.getAttribute("loginok");
-		if(loginok != null) {
-				
-		%>
-		<div style="margin-left: 50%">
-			<button type="button" class="btn btn-success"
-				style="width: 60px; height: 30px; border-radius: 50px;"
-				onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정하기</button>
-			<button type="button" class="btn btn-danger"
-				style="width: 60px; height: 30px; border-radius: 50px;" id="delete"
-				onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제하기</button>
-		</div>
-		<%
+			<%
+			String loginok = (String) session.getAttribute("loginok");
+			if (loginok != null) {
+			%>
+			<div style="margin-left: 50%">
+				<button type="button" class="btn btn-success"
+					style="width: 60px; height: 30px; border-radius: 50px;"
+					onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정하기</button>
+				<button type="button" class="btn btn-danger"
+					style="width: 60px; height: 30px; border-radius: 50px;" id="delete"
+					onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제하기</button>
+			</div>
+			<%
 			}
-		%>
+			%>
 		</div>
 		<hr style="width: 700px;">
 		<br>
@@ -186,15 +246,15 @@ int totalAnswerCnt = answerDao.getTotalCount();
 		<i style="color: #aaaaaa">하단 주소 클릭시 길찾기 페이지로 이동</i><br>
 		<div class="map-box" style="margin-bottom: 100px;">
 			<div id="map" style="width: 50%; height: 350px; margin-bottom: 20px;"></div>
-			<input type="hidden" id="la" value="<%=dto.getPlaceLa()%>"> 
-			<input type="hidden" id="ma" value="<%=dto.getPlaceMa()%>">
-			<input type="hidden" id="mapAddr" value="<%=dto.getMapAddr() %>">
+			<input type="hidden" id="la" value="<%=dto.getPlaceLa()%>"> <input
+				type="hidden" id="ma" value="<%=dto.getPlaceMa()%>"> <input
+				type="hidden" id="mapAddr" value="<%=dto.getMapAddr()%>">
 			<div id="map-addr" style="font-size: 17px; cursor: pointer;"
-			onclick="window.open('https://map.kakao.com/link/to/<%=dto.getMapAddr() %>,<%=dto.getPlaceLa()%>,<%=dto.getPlaceMa()%>', '_blank')">
-			<img src="/TodayWithMyDoggy/place-share/place-photo/kakaomap.png"
-			style="width: 25px; border-radius: 5px; margin-right: 10px;"><%=dto.getMapAddr() %></div>
+				onclick="window.open('https://map.kakao.com/link/to/<%=dto.getMapAddr()%>,<%=dto.getPlaceLa()%>,<%=dto.getPlaceMa()%>', '_blank')">
+				<img src="/TodayWithMyDoggy/place-share/place-photo/kakaomap.png"
+					style="width: 25px; border-radius: 5px; margin-right: 10px;"><%=dto.getMapAddr()%></div>
 		</div>
-		
+
 		<!-- 댓글 -->
 		<hr style="width: 550px;">
 		<br>
@@ -205,22 +265,33 @@ int totalAnswerCnt = answerDao.getTotalCount();
 					src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="dogImg"
 					style="width: 100%; height: 100%;">&nbsp;&nbsp;
 			</div>
-			<div class="answer-input" style="float: left;">
-				<input type="text" name="answer" value=""
-					class="form-control answer" placeholder="  댓글을 입력해주세요"
-					style="float: left; width: 500px;"> <input type="button"
-					value="전송" class="btn-answer" style="float: left; margin-top: 5px;">
-			</div>
-			<br> 
+			<form action="place-share/answerAddAction.jsp">
+				<input type="hidden" id="boardnum" value="<%=boardnum%>">
+				<input type="hidden" id="myid" value="<%=myid%>">
+				<input type="hidden" id="nickname" value="<%=nickname%>">
+				<input type="hidden" id="photo" value="<%=proPhoto%>">
+				<div class="answer-input" style="float: left;">
+					<input type="text" id="content" 
+						class="form-control answer" placeholder="댓글을 입력해주세요"
+						style="float: left; width: 500px; padding: 0 20px;"> 
+						<input type="button" id="btnanswer" value="전송" class="btn-answer"
+						style="float: left; margin-top: 5px;">
+				</div>
+			</form>
+			<br>
 		</div>
 		<br>
 		<div class="answer-list" style="margin: 30px;">
-				<div style="font-size: 15px;">댓글 수 <%=totalAnswerCnt %>개</div>
-				<div style="margin: 20px;">
-					<br>댓글쓴 사람<br>댓글 생성 날짜시간<br> 댓글 내용<br> 답글/수정/삭제
-				</div>
+			<div style="font-size: 15px;">
+				댓글 수
+				<%=totalAnswerCnt%>개
+			</div>
+			<div style="margin: 20px;">
+				<span id="answerView"></span>
+			</div>
 		</div>
-		<br> <br> <input type="hidden" id="num" value="<%=boardnum%>">
+		<br> <br> <input type="hidden" id="num"
+			value="<%=boardnum%>">
 	</div>
 
 	<script
