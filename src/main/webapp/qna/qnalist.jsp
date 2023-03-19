@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="answer.qna.QnaAnswerDto"%>
 <%@page import="answer.qna.QnaAnswerDao"%>
 <%@page import="member.MemberDao"%>
@@ -47,6 +48,43 @@
 </head>
 
 <%
+QnaBoardDao dao=new QnaBoardDao();
+QnaBoardDto dto=new QnaBoardDto();
+
+int totalCount;
+int totalPage;//총페이지수
+int startPage;//각블럭의 시작페이지
+int endPage;//각블럭의 끝페이지
+int start; //각페이지의 시작번호
+int perPage=10; //한페이지에 보여질 글의 갯수
+int perBlock=5; //한블럭당 보여지는 페이지개수
+int currentPage; //현재페이지
+
+//총개수
+totalCount=dao.getTotalCount();
+//현재페이지번호 읽기(단 null 일때는 1페이지로 설정)
+if(request.getParameter("currentPage")==null)
+	currentPage=1;
+else
+currentPage=Integer.parseInt(request.getParameter("currentPage"));
+
+//총 페이지 갯수
+totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
+
+//각블럭의 시작페이지..현재페이지가 3(s:1,e:5) 6(s:6 e:10)
+startPage=(currentPage-1)/perBlock*perBlock+1;
+endPage=startPage+perBlock-1;
+
+//총페이지가 8. (6~10...endpage를 8로 수정해주어야 한다)
+if(endPage>totalPage)
+	endPage=totalPage;
+
+//각페이지에서 불러올 시작번호
+start=(currentPage-1)*perPage;
+//각페이지에서 필요한 게시글 가져오기
+List<QnaBoardDto> list=dao.showAllQna(start, perPage);
+
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 //로그인여부 체크
 String loginok=(String)session.getAttribute("loginok");
@@ -80,26 +118,24 @@ String myid=(String)session.getAttribute("myid");
 	    <td width="50">번호</td>
 	    <td width="100">작성자</td>
 	    <td width="200">제목</td>
-	    <td width="50">조회수</td>
+	    <td width="50">날짜</td>
 	    <td width="50">답변</td>
 	  </tr>
 	  
 	  <%
 		//내용
-		QnaBoardDao dao=new QnaBoardDao();
-		List<QnaBoardDto> list=dao.showAllQna();
 		
-		for(QnaBoardDto dto:list){
+		for(QnaBoardDto q:list){
 		
 			//닉네임설정
 			MemberDao mdao=new MemberDao();
-			String nickname=mdao.getNickname(dto.getId());
+			String nickname=mdao.getNickname(q.getId());
 			//비밀글확인
-			String flag=dao.isSecret(dto.getNum());
+			String flag=dao.isSecret(q.getNum());
 			
 		%>
 		  <tr>
-		    <td><%=dto.getNum() %></td>
+		    <td><%=q.getNum() %></td>
 		    <td><%=nickname %></td>
 		    
 		    <!-- 제목 -->
@@ -109,38 +145,46 @@ String myid=(String)session.getAttribute("myid");
 		    if(flag.equals("1")){ 
 		    	
 		    	//비밀글
-		    	if(myid.equals(dto.getId())){ //본인-> 링크 + 열린자물쇠%>
-	    		<a class="a-tag my-qna" href="index.jsp?main=qna/detail.jsp?num=<%=dto.getNum()%>">
+		    	if(loginok!=null && myid.equals(q.getId())){ //본인-> 링크 + 열린자물쇠%>
+	    		<a class="a-tag my-qna" href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>">
 	    		<i class="fa-solid fa-lock-open"></i>
-			    <%=dto.getTitle() %>
+			    <%=q.getTitle() %>
 		 		</a>
 			 		
 		    	<%}else if(isAdmin.equals("1")){ //관리자-> 링크 + 닫힌자물쇠 %>
-		    	<a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=dto.getNum()%>">
+		    	<a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>">
 	    		<i class="fa-solid fa-lock"></i>
-			    <%=dto.getTitle() %>
+			    <%=q.getTitle() %>
 		 		</a>
 		    	
 		    	<%}else{ //그 외-> 링크x + 닫힌자물쇠 %>
 				    <i class="fa-solid fa-lock"></i>
-				    <span class="disabled"><%=dto.getTitle() %></span>
+				    <span class="disabled"><%=q.getTitle() %></span>
 		    	<%}
 		    	
-		    }else{ //공개글%>
-		    	<a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=dto.getNum()%>">
-			    <%=dto.getTitle() %>
+		    }else{ 
+		    	
+		    	//공개글
+		    	if(loginok!=null && myid.equals(q.getId())){ //내가쓴 공개글%>
+		    	<a class="a-tag my-qna" href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>">
+			    <%=q.getTitle() %>
 			  	</a>
+		    	<%}else{%>
+		    	<a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>">
+			    <%=q.getTitle() %>
+			  	</a>
+		    	<%}%>
 		   <%}
 		    %>
 			  
 		    </td>
 		    
-		    <td><%=dto.getReadcount() %></td>
+		    <td><%=sdf.format(q.getWriteday()) %></td>
 		    
 		    <%
 		    //답변여부 확인
 		    QnaAnswerDao adao=new QnaAnswerDao();
-		    QnaAnswerDto adto=adao.getAnswer(dto.getNum());
+		    QnaAnswerDto adto=adao.getAnswer(q.getNum());
 		    
 		    if(adto.getIdx()==null){%>
 			    <td>대기중</td>
@@ -152,9 +196,43 @@ String myid=(String)session.getAttribute("myid");
 		<%}
 	  %>
 	  
-	  
 	</table>
 	</div>
+	
+	<!-- 페이징 출력 -->
+	<div style="display: flex; justify-content: center;">
+		<ul class="pagination">
+			<%
+			//이전
+			if (startPage > 1) {
+			%>
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=startPage - 1%>">이전</a>
+			</li>
+			<%
+			}
+			for (int pp = startPage; pp <= endPage; pp++) {
+			if (pp == currentPage) {
+			%>
+			<li class="active"><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a>
+			</li>
+			<%
+			} else {
+			%>
+
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+			<%
+			}
+			}
+			//다음
+			if (endPage < totalPage) {
+			%>
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+			<%
+			}
+			%>
+		</ul>
+	</div>
+	
 </body>
 <script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 </html>

@@ -179,7 +179,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  <div class="wrapper-content">
 	    <img id="photo" src="dog-talking-photo/<%=dto.getPhoto()%>">
 	    <br>
-	    <%=dto.getContent() %>
+	    <%=dto.getContent().replace("\n", "<br>") %>
 	  </div>
 	  
 	  <hr class="line">

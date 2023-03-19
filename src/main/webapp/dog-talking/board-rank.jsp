@@ -63,7 +63,7 @@
 .card-content {
 	text-overflow: ellipsis;  /* 말줄임 적용 */
 	display:inline-block;
-	width: 180px;
+	width: 220px;
 	white-space: nowrap;
 	overflow: hidden;
 }
@@ -121,7 +121,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					onclick="location.href='index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum() %>'">
 						<div class="card-img" id="img" style="border-radius: 12%; ">
 							<input type="hidden" id="num" name="num" value="<%=dto.getNum() %>">
-							<img class="img" class="bd-placeholder-img card-img-top" style="border-radius: 7%"  width="230px;"
+							<img class="img" class="bd-placeholder-img card-img-top" style="border-radius: 7%"  width="280px;"
 								src="/TodayWithMyDoggy/dog-talking-photo/<%=dto.getPhoto()%>"
 								height="230px;" xmlns="http://www.w3.org/2000/svg"
 								role="img" aria-label="Placeholder: Thumbnail"
@@ -159,15 +159,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 									
 									if(alist.size()==0){%>
 									<i class="fa-solid fa-paw"></i>
-									<%=dto.getReadCount()%>명이 봤어요
+									조회수 <%=dto.getReadCount()%>
 									<%}else{%>
 									<i class="fa-solid fa-paw"></i>
-									<%=alist.size()%>개의 댓글이 있어요
+									댓글 <%=alist.size()%>
 									<%}
 									%>
 									<br>
 									<i class="fa-solid fa-fire"></i>
-									<%=dto.getLikes()%>명이 좋아해요</small>
+									좋아요 <%=dto.getLikes()%></small>
 									</div>
 							</div>
 						</div>
