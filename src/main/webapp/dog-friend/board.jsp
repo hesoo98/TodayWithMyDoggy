@@ -13,40 +13,16 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <title>Insert title here</title>
+
+<style type="text/css">
+
+</style>
     <script type="text/javascript">
-    
+   
     $(function(){
-    	  
-    	
-       	$("#rcsort").hide();
-    	$("#likessort").hide();
-    	
-    	$("#sortbtn").click(function(){
-    		$(".alldel").prop('checked', false);
-    		$(".alldelcheck").prop('checked', false);
-    		$("#sort").show();
-    		$("#rcsort").hide();
-        	$("#likessort").hide();
-        	
-    	});
-    	
-    	$("#rcsortbtn").click(function(){
-    		$(".alldel").prop('checked', false);
-    		$(".alldelcheck").prop('checked', false);
-    		$("#sort").hide();
-    		$("#rcsort").show();
-    		$("#likessort").hide();
-    	});
-       	$("#likessortbtn").click(function(){
-    		$(".alldel").prop('checked', false);
-    		$(".alldelcheck").prop('checked', false);
-    		$("#sort").hide();
-    		$("#rcsort").hide();
-    		$("#likessort").show();
-    	});
     	
     	//전체체크클릭시 체크값 얻어서 모든 체크값에 전달
     	$(".alldelcheck").click(function(){
@@ -81,9 +57,25 @@
     		}
     		
     	})
- 
-    })
+    	const checkboxes = document.querySelectorAll('input[name="category"]');
+    	const posts = document.querySelectorAll('.post');
 
+    	function filterPosts() {
+    	  const checkedCategories = Array.from(checkboxes)
+    	    .filter(checkbox => checkbox.checked)
+    	    .map(checkbox => checkbox.value);
+    	  posts.forEach(post => {
+    	    if (checkedCategories.length === 0 || checkedCategories.includes(post.classList[1])) {
+    	      post.style.display = 'block';
+    	    } else {
+    	      post.style.display = 'none';
+    	    }
+    	  });
+    	}
+
+    	checkboxes.forEach(checkbox => checkbox.addEventListener('change', filterPosts));
+    })
+	
 
     </script>
 </head>
@@ -97,8 +89,8 @@
    int startPage;//각블럭의 시작페이지
    int endPage;//각블럭의 끝페이지
    int start; //각페이지의 시작번호
-   int perPage=5; //한페이지에 보여질 글의 갯수
-   int perBlock=5; //한블럭당 보여지는 페이지개수
+   int perPage=100; //한페이지에 보여질 글의 갯수
+   int perBlock=100; //한블럭당 보여지는 페이지개수
    int currentPage; //현재페이지
    int no;
    
@@ -137,24 +129,64 @@
 	
    
    %>
-   
+	
+	
+	
    <div style=" margin: 20px 300px;" id="abc">
    
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
-
-     <br><br>
-     
-     
    
-   <table class="table table-bordered" style="width: 600px;" id="sort">
-     <tr>
-       <td>번호</td>
-       <td>지역</td>
-       <td>제목</td>
-       <td>작성자</td>
-       <td>작성일</td>
-       <td>조회수</td>
-     </tr>
+       <h1>게시판</h1>
+    <form>
+    	
+      <input type="checkbox" id="checkbox1" name="category" value="강원">
+      <label for="checkbox1">강원</label>
+      <input type="checkbox" id="checkbox2" name="category" value="경기">
+      <label for="checkbox2">경기</label>
+      <input type="checkbox" id="checkbox3" name="category" value="경남">
+      <label for="checkbox3">경남</label>
+      <input type="checkbox" id="checkbox4" name="category" value="경북">
+      <label for="checkbox4">경북</label>
+      <input type="checkbox" id="checkbox4" name="category" value="광주">
+      <label for="checkbox5">광주</label>
+      <input type="checkbox" id="checkbox4" name="category" value="대구">
+      <label for="checkbox6">대구</label>
+      <input type="checkbox" id="checkbox4" name="category" value="대전">
+      <label for="checkbox7">대전</label>
+      <input type="checkbox" id="checkbox4" name="category" value="부산">
+      <label for="checkbox8">부산</label>
+      <input type="checkbox" id="checkbox4" name="category" value="서울">
+      <label for="checkbox9">서울</label>
+      <br>
+      <input type="checkbox" id="checkbox4" name="category" value="세종">
+      <label for="checkbox10">세종</label>
+      <input type="checkbox" id="checkbox4" name="category" value="울산">
+      <label for="checkbox11">울산</label>
+      <input type="checkbox" id="checkbox4" name="category" value="인천">
+      <label for="checkbox12">인천</label>
+      <input type="checkbox" id="checkbox4" name="category" value="전남">
+      <label for="checkbox13">전남</label>
+      <input type="checkbox" id="checkbox4" name="category" value="전북">
+      <label for="checkbox14">전북</label>
+      <input type="checkbox" id="checkbox4" name="category" value="제주">
+      <label for="checkbox15">제주</label>
+      <input type="checkbox" id="checkbox4" name="category" value="충남">
+      <label for="checkbox16">충남</label>
+      <input type="checkbox" id="checkbox4" name="category" value="충북">
+      <label for="checkbox17">충북</label>
+      
+    </form>
+    
+   <table style="width: 1000px; table-layout: fixed; border:1px solid gray" id="sort" >
+   <tr>
+   	<td width=100px;>번호</td>
+   	<td width=100px;>지역</td>
+   	<td width=300px;>제목</td>
+   	<td width=100px;>작성자</td>
+   	<td width=300px;>작성일</td>
+   	<td width=100px;>조회수</td>
+   </tr>
+
 		<%
 		if(totalCount==0){
 			%>
@@ -170,27 +202,29 @@
 				  MemberDto memDto=mdao.getMemeber(dto.getId());
 				  
 				%>
-				<tr>
-					<td align="center">
+				
+				
+				<tr id="posts" class="post <%=memDto.getAddr()%>" style="width:1000px;">
+					<td align="center" width=100px;>
 						<input type="checkbox" class="alldel" value="<%=dto.getNum()%>">
 						&nbsp;&nbsp;
 						<%=no-- %>
 					</td>
-					
-					<td>
+					<td width=100px;>
 						<%-- 테이블에서 가져온 id로 dto넣기 --%>
 						<%=memDto.getAddr()%>
 					</td>
 					
-					<td>
+					<td width=300px;>
 						<a href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
 						<%=dto.getSubject() %></a>
 
 					</td>
 					
-					<td><%=mdao.getNickname(dto.getId()) %></td>
-					<td><%=sdf.format(dto.getWriteday()) %></td>
-					<td><%=dto.getReadCount() %></td>
+					<td width=100px;><%=mdao.getNickname(dto.getId()) %></td>
+					<td width=300px;><%=sdf.format(dto.getWriteday()) %></td>
+					<td width=100px;><%=dto.getReadCount() %></td>
+					
 				</tr>
 				<%
 			}
@@ -233,39 +267,6 @@
      <%}%>
      
    </table>
-   <!-- 페이징 출력 -->
-   <div style="width: 500px; text-align: center;">
-      <ul class="pagination">
-         <%
-         //이전
-         if (startPage > 1) {
-         %>
-         <li><a href="index.jsp?main=dog-friend/board.jsp?currentPage=<%=startPage - 1%>">이전</a>
-         </li>
-         <%
-         }
-         for (int pp = startPage; pp <= endPage; pp++) {
-         if (pp == currentPage) {
-         %>
-         <li class="active"><a href="index.jsp?main=dog-friend/board.jsp?currentPage=<%=pp%>"><%=pp%></a>
-         </li>
-         <%
-         } else {
-         %>
-
-         <li><a href="index.jsp?main=dog-friend/board.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
-         <%
-         }
-         }
-         //다음
-         if (endPage < totalPage) {
-         %>
-         <li><a href="index.jsp?main=dog-friend/board.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
-         <%
-         }
-         %>
-      </ul>
-   </div>
    </div>
 </body>
 </html>
