@@ -14,7 +14,7 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript" src="js/layout.js"></script>
-<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/ut/css.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
 <meta charset="utf-8">
@@ -57,6 +57,16 @@
 	}
 }
 
+.wrapper-top{
+	display: flex;
+	justify-content: center;
+}
+
+#search-bar{
+	width: 500px;
+}
+
+
 .card-content {
 	text-overflow: ellipsis;  /* 말줄임 적용 */
 	display:inline-block;
@@ -88,9 +98,10 @@ img:hover {
 }
 
 
-  #list-cnt{
+#list-cnt{
     margin-left: 10px;
-  }
+}
+
 
 </style>
 
@@ -132,7 +143,8 @@ img:hover {
 	//각페이지에서 불러올 시작번호
 	start=(currentPage-1)*perPage;
 	//각페이지에서 필요한 게시글 가져오기
-	List<DogTalkingBoardDto> list=dao.getList(start, perPage);
+	String word=request.getParameter("word");
+	List<DogTalkingBoardDto> list=dao.getList(start, perPage, word);
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
@@ -146,7 +158,7 @@ img:hover {
 	 
 		<div class="container">
 		
-		 <b id="list-cnt">총 <%=totalCount %>개의 게시글이 있습니다</b>
+		<div class="wrapper-top">
 		 <%
 		 
 		 //로그인 한 유저만 글쓰기 버튼	  
@@ -156,9 +168,34 @@ img:hover {
 		  <button type="button" class="btn btn-warning" onclick="location.href='index-form.jsp?main=dog-talking/write.jsp'">글쓰기</button>
 		 <%}
 		 %>
-		 <br><br>
 		 
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
+		 <!-- 검색 -->
+		 <form action="./dog-talking/board.jsp" method="get" id="search-bar">
+			<div
+				class="p-1 bg-light rounded rounded-pill shadow-sm ml-5 mg-5 pr-4"
+				style="padding-right: 150px; margin-left: 30px;">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<button id="button-addon2" type="submit"
+							class="btn btn-link text-warning">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+					<input type="search" placeholder="내용으로 검색해보세요!"
+						 name="word" 
+						class="border-0 bg-light" style="width: 230px;">
+					<%
+					if(word!=null){%>
+					<button type="button" onclick="history.back()">전체글보기</button>
+					<%}
+					%>
+				</div>
+			</div>
+		 </form>
+		 </div>
+		 <br>
+		 
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4 main">
 
 				<%
 				for (DogTalkingBoardDto dto : list) {
