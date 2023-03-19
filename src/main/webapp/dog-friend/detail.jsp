@@ -15,16 +15,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     
 
 <style type="text/css">
 
-	/* 댓글 검정색으로 */
-	#comment-list a{
-	color: black;
-	}
     #a-tag{
       color: black;
     }
@@ -65,10 +60,6 @@
 	  height: 200px;
 	}
 	
-	/* 댓글 */
-	.comment{
-	  opacity: 0.8;
-	}
 	
 	.writer{
 	  font-weight: 600;
