@@ -7,12 +7,13 @@
 
     
     <%
+    request.setCharacterEncoding("utf-8");
     
-  //세션에 저장한 id 
+    //세션에 저장한 id 
   	String id=(String)session.getAttribute("myId");
   	
   	//file upload, 이미지가 업로드되는 실제경로
-  	String realPath=getServletContext().getRealPath("/save");
+  	String realPath=getServletContext().getRealPath("/dog-talking-photo");
   	System.out.print(realPath);
   	
   	int uploadSize=1024*1024*2; //2mb
