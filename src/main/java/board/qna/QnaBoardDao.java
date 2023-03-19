@@ -41,17 +41,21 @@ public class QnaBoardDao {
 	}
 	
 	//select
-	public List<QnaBoardDto> showAllQna(){
+	public List<QnaBoardDto> showAllQna(int start,int perpage){
 		List<QnaBoardDto> list=new ArrayList<QnaBoardDto>();
 		
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
-		String sql="select * from qna_board order by num desc";
+		String sql="select * from qna_board order by num desc limit ?,?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
+
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, perpage);
+			
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -78,6 +82,34 @@ public class QnaBoardDao {
 		
 		return list;
 	}
+	
+	//전체 글 개수
+	public int getTotalCount() {
+		int n=0;
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select count(*) from qna_board";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				n=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return n;
+	}
+	
 	
 	//비밀글 체크
 	public String isSecret(String num) {

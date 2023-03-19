@@ -57,7 +57,7 @@
        
        <tr>
        	<td width="100">내용</td>
-       	<td colspan="2"><%=dto.getContent() %></td>
+       	<td colspan="2"><%=dto.getContent().replace("\n", "<br>") %></td>
        </tr>
        
        <!-- 관리자 답변이 있으면 아래 내용 출력 -->
@@ -71,7 +71,7 @@
        
        <tr>
          <td colspan="2">
-           <%=adto.getContent() %>
+           <%=adto.getContent().replace("\n", "<br>") %>
          </td>
        </tr>
        <%}
