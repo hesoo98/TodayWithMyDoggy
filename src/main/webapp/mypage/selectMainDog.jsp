@@ -75,7 +75,7 @@
 				<%} else {%>
 					<!-- 일반 강아지 -->
 					<button type="button" class="btn btn-warning btn-lg"
-					onclick="location.href='index.jsp?main=mypage/selectMainDogAction.jsp?idx=<%=dto.getIdx()%>'">이 강아지를 대표강아지로 설정</button>
+					onclick="location.href='mypage/selectMainDogAction.jsp?idx=<%=dto.getIdx()%>'">이 강아지를 대표강아지로 설정</button>
 				<%} %>
 			</div>
 			<%

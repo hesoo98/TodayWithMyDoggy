@@ -17,9 +17,9 @@
 	String idx = request.getParameter("idx");
 	dogDao.selectMainDog(idx);
 	
-	//response.sendRedirect("../index.jsp?main=mypage/userMyPage.jsp");//작동안함.
+	response.sendRedirect("../index.jsp?main=mypage/selectMainDog.jsp");//작동안함.
 %>
 <script>
-	location.href = document.referrer;
+	<%--location.href = document.referrer;--%>
 </script>
 
