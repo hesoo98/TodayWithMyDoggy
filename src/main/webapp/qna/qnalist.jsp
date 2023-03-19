@@ -26,6 +26,16 @@
 		margin-bottom: 20px;
 	}
 	
+	#search-bar{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	}
+	
+	input:focus{
+		outline: none;
+	}
+	
 	.a-tag{
 		color: black;
 	}
@@ -42,6 +52,37 @@
 		color: gray;
 	}
 	
+	/* 페이지 */
+
+.pagination{
+  padding: 30px 0;
+}
+
+.pagination ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.pagination a{
+  display: inline-block;
+  padding: 10px 18px;
+  color: #222;
+}
+
+.p1 a{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  text-align: center;
+}
+
+li.active{
+	background-color: #fce694;
+	border-radius: 100%;
+	color: #fff;
+}
 
 </style>
 
@@ -50,6 +91,9 @@
 <%
 QnaBoardDao dao=new QnaBoardDao();
 QnaBoardDto dto=new QnaBoardDto();
+
+//검색 word 찾기
+String word=request.getParameter("word");
 
 int totalCount;
 int totalPage;//총페이지수
@@ -82,7 +126,7 @@ if(endPage>totalPage)
 //각페이지에서 불러올 시작번호
 start=(currentPage-1)*perPage;
 //각페이지에서 필요한 게시글 가져오기
-List<QnaBoardDto> list=dao.showAllQna(start, perPage);
+List<QnaBoardDto> list=dao.showAllQna(start, perPage, word);
 
 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -99,7 +143,32 @@ String myid=(String)session.getAttribute("myid");
 
 	<div class="wrapper container">
 	
+	<!-- 검색 -->
+		 <form action="./qna/qnalist.jsp" method="get" id="search-bar">
+			<div
+				class="p-1 bg-light rounded rounded-pill shadow-sm ml-5 mg-5 pr-4"
+				style="padding-right: 150px; margin-left: 30px;">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<button id="button-addon2" type="submit"
+							class="btn btn-link text-warning">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+					<input type="search" placeholder="제목이나 내용으로 검색해보세요!"
+						 name="word" 
+						class="border-0 bg-light" style="width: 300px;">
+					<%
+					if(word!=null){%>
+					<button type="button" onclick="history.back()">전체글보기</button>
+					<%}
+					%>
+				</div>
+			</div>
+		 </form>
+	
 	<div class="wrapper-top">
+		 
 	<%
 	// 상단 안내 부분
 	if(loginok!=null && isAdmin.equals("0")){  //로그인 상태+일반회원이면 글쓰기 버튼 %> 
@@ -201,7 +270,7 @@ String myid=(String)session.getAttribute("myid");
 	
 	<!-- 페이징 출력 -->
 	<div style="display: flex; justify-content: center;">
-		<ul class="pagination">
+		<ul class="pagination p1">
 			<%
 			//이전
 			if (startPage > 1) {

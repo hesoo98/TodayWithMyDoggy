@@ -41,46 +41,88 @@ public class QnaBoardDao {
 	}
 	
 	//select
-	public List<QnaBoardDto> showAllQna(int start,int perpage){
+	public List<QnaBoardDto> showAllQna(int start,int perpage,String word){
 		List<QnaBoardDto> list=new ArrayList<QnaBoardDto>();
 		
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
-		String sql="select * from qna_board order by num desc limit ?,?";
+		String sql="";
 		
-		try {
-			pstmt=conn.prepareStatement(sql);
+		if(word!=null) {
+			
+			sql="select * from qna_board where title like ? or content like ? order by num desc limit ?,?";
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
 
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, perpage);
-			
-			rs=pstmt.executeQuery();
-			
-			while(rs.next()) {
+				pstmt.setString(1, "%"+word+"%");
+				pstmt.setString(2, "%"+word+"%");
+				pstmt.setInt(3, start);
+				pstmt.setInt(4, perpage);
 				
-				QnaBoardDto dto=new QnaBoardDto();
-				dto.setNum(rs.getString("num"));
-				dto.setId(rs.getString("id"));
-				dto.setTitle(rs.getString("title"));
-				dto.setContent(rs.getString("content"));
-				dto.setWriteday(rs.getTimestamp("writeday"));
-				dto.setReadcount(rs.getInt("readcount"));
-				dto.setSecret(rs.getString("secret"));
+				rs=pstmt.executeQuery();
 				
-				list.add(dto);
-				
+				while(rs.next()) {
+					
+					QnaBoardDto dto=new QnaBoardDto();
+					dto.setNum(rs.getString("num"));
+					dto.setId(rs.getString("id"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContent(rs.getString("content"));
+					dto.setWriteday(rs.getTimestamp("writeday"));
+					dto.setReadcount(rs.getInt("readcount"));
+					dto.setSecret(rs.getString("secret"));
+					
+					list.add(dto);
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			db.dbClose(rs, pstmt, conn);
+			
+			return list;
+			
+		}else {
+			
+			sql="select * from qna_board order by num desc limit ?,?";
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, perpage);
+				
+				rs=pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					QnaBoardDto dto=new QnaBoardDto();
+					dto.setNum(rs.getString("num"));
+					dto.setId(rs.getString("id"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContent(rs.getString("content"));
+					dto.setWriteday(rs.getTimestamp("writeday"));
+					dto.setReadcount(rs.getInt("readcount"));
+					dto.setSecret(rs.getString("secret"));
+					
+					list.add(dto);
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+			}
+			
+			return list;
 		}
 		
-		
-		return list;
 	}
 	
 	//전체 글 개수

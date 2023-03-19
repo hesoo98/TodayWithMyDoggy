@@ -66,6 +66,9 @@
 	width: 500px;
 }
 
+input:focus{
+	outline: none;
+}
 
 .card-content {
 	text-overflow: ellipsis;  /* 말줄임 적용 */
@@ -102,6 +105,37 @@ img:hover {
     margin-left: 10px;
 }
 
+/* 페이지 */
+
+.pagination{
+  padding: 30px 0;
+}
+
+.pagination ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.pagination a{
+  display: inline-block;
+  padding: 10px 18px;
+  color: #222;
+}
+
+.p1 a{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  text-align: center;
+}
+
+li.active{
+	background-color: #fce694;
+	border-radius: 100%;
+	color: #fff;
+}
 
 </style>
 
@@ -109,6 +143,10 @@ img:hover {
 <body>
 
 	<%
+
+	//프로젝트 경로구하기
+	String root=request.getContextPath();
+
     DogTalkingBoardDao dao=new DogTalkingBoardDao();
 	DogTalkingBoardDto ddto=new DogTalkingBoardDto();
 	
@@ -117,7 +155,7 @@ img:hover {
 	int startPage;//각블럭의 시작페이지
 	int endPage;//각블럭의 끝페이지
 	int start; //각페이지의 시작번호
-	int perPage=12; //한페이지에 보여질 글의 갯수
+	int perPage=8; //한페이지에 보여질 글의 갯수
 	int perBlock=5; //한블럭당 보여지는 페이지개수
 	int currentPage; //현재페이지
 	
@@ -170,7 +208,7 @@ img:hover {
 		 %>
 		 
 		 <!-- 검색 -->
-		 <form action="./dog-talking/board.jsp" method="get" id="search-bar">
+		 <form action="<%=root%>/dog-talking/board.jsp" method="get" id="search-bar">
 			<div
 				class="p-1 bg-light rounded rounded-pill shadow-sm ml-5 mg-5 pr-4"
 				style="padding-right: 150px; margin-left: 30px;">
@@ -202,7 +240,7 @@ img:hover {
 				%>
 				<div class="col">
 					<div class="card border-light mb-10" width="100%" style="border-radius: 10%;"
-					onclick="location.href='index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum() %>'">
+					onclick="location.href='<%=root%>/index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>'">
 						<div class="card-img" id="img" style="border-radius: 12%; ">
 							<input type="hidden" id="num" name="num" value="<%=dto.getNum() %>">
 							<img class="img" class="bd-placeholder-img card-img-top" style="border-radius: 7%"  width="280px;"
@@ -265,7 +303,7 @@ img:hover {
 	
 	<!-- 페이징 출력 -->
 	<div style="display: flex; justify-content: center;">
-		<ul class="pagination">
+		<ul class="pagination p1">
 			<%
 			//이전
 			if (startPage > 1) {
@@ -296,7 +334,7 @@ img:hover {
 			%>
 		</ul>
 	</div>
-	
+
 	<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 			crossorigin="anonymous"></script>
