@@ -118,6 +118,11 @@
 	String num=request.getParameter("num");
 	String currentPage=request.getParameter("currentPage");
 	DogFriendBoardDto dto=dao.getData(num);
+	
+    //writer_num
+    String writerNum=mdao.getNum(dto.getId());
+    DogProfileDao pdao=new DogProfileDao();
+    DogProfileDto pdto=pdao.getMainDogInfo(writerNum);
 
 String id=(String)session.getAttribute("myid"); //sessionid
 String sessionNickname=mdao.getNickname(id); //sessionnickname
@@ -140,23 +145,89 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
 			<h3><b><%=dto.getSubject() %></b></h3>
 			
 			<!-- 쪽지함 만들기 -->
-			<b style="float:right" id="send">쪽지</b>
+			<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal">
+				쪽지
+			</button>
+			
+			<!-- Modal -->
+	<div class="modal fade" id="exampleModal">
+  		<div class="modal-dialog">
+   		 <div class="modal-content">
+   		 
+    		 <div class="modal-header">
+    		    <h5 class="modal-title" id="exampleModalLabel">쪽지 보내기</h5>
+     		   <button type="button" class="close" data-dismiss="modal">
+    		      <span aria-hidden="true">&times;</span>
+    		    </button>
+    		 </div>
+    		  
+   		   <div class="modal-body">
+   		   	보내는 사람:<%=id %><br>
+   		   	받는 사람:<%=nickname %><br><br>
+		    <textarea rows="10" style="width:400px" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
+		    required="required"></textarea>
+    	  </div>
+    	  
+      	<div class="modal-footer">
+        	<button type="button" data-dismiss="modal">취소</button>
+        	<button type="button" >보내기</button>
+    	</div>
+    	
+   		 </div>
+  		</div>
+	</div>
+			
+			
+			
 			 <div class="wrapper-subject">
 	  
 	  <!-- 프사 누르면 이동 -->
-	  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
+	  <a id="a-tag" data-toggle="modal" data-target="#exampleModal2">
 	    <b>
 	      <img src="dog-talking-photo/04.png" style="width: 20px;">
 	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=nickname %><br>
 	    </b>
 	  </a>
+	  <!-- 프로필 모달 -->
+	  <div class="modal fade" id="exampleModal2">
+  		<div class="modal-dialog">
+   		 <div class="modal-content">
+   		 
+    		 <div class="modal-header">
+    		    <h5 class="modal-title" id="exampleModalLabel2"><%=nickname %>의 개</h5>
+     		   <button type="button" class="close" data-dismiss="modal">
+    		      <span aria-hidden="true">&times;</span>
+    		    </button>
+    		 </div>
+    		<%if(pdto.getName()==null){%>
+    			<div class="modal-body">
+    				개없음
+    			</div>
+    		<%}else{
+    			%> 
+    	   		   <div class="modal-body">
+    	   		   	이름 : <%=pdto.getName() %><br>
+    			    크기 : <%=pdto.getDogSize() %><br>
+    			    성별 : <%=pdto.getGender() %><br>
+    			    생일 : <%=pdto.getBirthday() %><br>
+    				사진 : <img src="../TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto() %>">    
+    	    	  </div>
+    		<%}%>
+    		
+    	  
+      	<div class="modal-footer">
+        	<button type="button" data-dismiss="modal">확인</button>
+    	</div>
+    	
+   		 </div>
+  		</div>
+	</div>
+	  
 	  
 	  <!-- 펫정보 -->
 	  <%
-	    //writer_num
-	    String writerNum=mdao.getNum(dto.getId());
-	    DogProfileDao pdao=new DogProfileDao();
-	    DogProfileDto pdto=pdao.getMainDogInfo(writerNum);
+
+
 	    String loginok=(String)session.getAttribute("loginok");
 	    if(pdto.getIdx()==null){%>
 	    (멍멍)
@@ -214,6 +285,7 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
 		
 	</div>
 
+
 	<script type="text/javascript">
 		function funcdel(num,currentPage){
 			//alert(num+","+currentPage);
@@ -222,6 +294,7 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
 				location.href="dog-friend/delete.jsp?num="+num+"&currentPage="+currentPage;
 			}
 		}
+		  
 	</script>
 </body>
 </html>
