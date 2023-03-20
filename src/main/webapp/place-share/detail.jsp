@@ -1,3 +1,4 @@
+<%@page import="answer.placeShare.PlaceShareAnswerDto"%>
 <%@page import="answer.placeShare.PlaceShareAnswerDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
@@ -95,56 +96,8 @@ div {
 	color: #e3d82b
 }
 </style>
-<script type="text/javascript">
-$(function() {
-	//처음에 시작시 리스트 호출
-	list();
-	
-	var boardnum = $("#boardnum").val();
-	
-	$("#btnanswer").click(function() {
-	alert(boardnum);
 
-	$.ajax({	
-		type: "get",
-		url: "place-share/answerAddAction.jsp",
-		dataType: "html",
-		data: {"boardnum":boardnum, "myid": $("#myid").val(), "content":$("#content").val()},
-		success: function(res) {
-			$("#content").val(" ");
-			
-			list();
-			}
-		});
-	});	
-});
 
-//사용자 정의 호출
-function list() {	
-	$.ajax({
-		type: "get",
-		url: "place-share/answerList.jsp",
-		data: {"boardnum":$("#boardnum").val()},
-		dataType: "json",
-		success: function(res) {
-			var s = "";
-			var nickname = $("#nickname").val();
-			var photo = $("#photo").val();
-			$.each(res, function(idx, item) {
-				s += "<div class='img-box' style='width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 20px;'>";
-				s += "<img alt='강아지 프로필 사진' src='/TodayWithMyDoggy/mypage/dogImg/"+photo+"' id='dogImg' style='width: 100%; height: 100%;'>&nbsp;&nbsp;</div>";
-				s += "<div style='margin-botton: 40px;'>"+nickname+"님&nbsp;&nbsp;&nbsp;<span class='aday' style='color: gray'>" + item.writeday + "</span>";
-				s += "<i class='fa-solid fa-ellipsis' style='padding-left: 150px; color:gray; cursor: pointer'></i></div>";
-				s += "<div style='width: 400px; font-size:15px; margin-top:20px; padding-left:60px;'>" + item.content;
-				s += "<br><br><br><br></div>";
-				
-			});
-			
-			$("#answerView").html(s);
-		}
-	});
-}
-</script>
 <script src="https://kit.fontawesome.com/2663817d27.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -179,9 +132,10 @@ DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
 // 프로필 사진 가져오기
 String proPhoto = proDto.getPhoto();
 
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm");
 
 PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
+PlaceShareAnswerDto answerDto = new PlaceShareAnswerDto();
 int totalAnswerCnt = answerDao.getTotalAnswerCount(boardnum);
 
 dao.addReadCount(boardnum);
@@ -198,7 +152,7 @@ dao.addReadCount(boardnum);
 			</div>
 			<div class="nickname"
 				style="float: left; padding-left: 10px; font-size: 15px;">
-				<%=nickname%>님<br>
+				<%=memberdao.getNickname(dto.getId())%><br>
 				<div class="date" style="color: gray">
 					<%=sdf.format(dto.getWriteday())%><br>
 				</div>
@@ -254,44 +208,7 @@ dao.addReadCount(boardnum);
 				$("#heart").css("color", "#CD0000");
 			});
 		</script>
-		<!-- 댓글 -->
-		<br>
-		<div class="answer-box">
-			<div class="img-box"
-				style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 10px;">
-				<img alt="강아지 프로필 사진"
-					src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="dogImg"
-					style="width: 100%; height: 100%;">&nbsp;&nbsp;
-			</div>
-			<form action="place-share/answerAddAction.jsp">
-				<input type="hidden" id="boardnum" value="<%=boardnum%>">
-				<input type="hidden" id="myid" value="<%=myid%>">
-				<input type="hidden" id="nickname" value="<%=nickname%>">
-				<input type="hidden" id="photo" value="<%=proPhoto%>">
-				<div class="answer-input" style="float: left;">
-					<input type="text" id="content" 
-						class="form-control answer" placeholder="댓글을 입력해주세요"
-						style="float: left; width: 500px; padding: 0 20px;"> 
-						<input type="button" id="btnanswer" value="전송" class="btn-answer"
-						style="float: left; margin-top: 5px;">
-				</div>
-			</form>
-			<br>
-		</div>
-		<br>
-		<div class="answer-list" style="margin: 30px;">
-			<div style="font-size: 15px;">
-				댓글 수
-				<%=totalAnswerCnt%>개
-			</div>
-			<div style="margin: 20px;">
-				<span id="answerView"></span>
-			</div>
-		</div>
-		<br> <br> <input type="hidden" id="num"
-			value="<%=boardnum%>">
-	</div>
-
+		
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>

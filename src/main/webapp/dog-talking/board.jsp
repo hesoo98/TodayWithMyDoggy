@@ -131,7 +131,7 @@ img:hover {
   text-align: center;
 }
 
-li.active{
+.p1 li.active{
 	background-color: #fce694;
 	border-radius: 100%;
 	color: #fff;
@@ -208,7 +208,7 @@ li.active{
 		 %>
 		 
 		 <!-- 검색 -->
-		 <form action="<%=root%>/dog-talking/board.jsp" method="get" id="search-bar">
+		 <form action="<%=root %>/board.jsp" method="get" id="search-bar">
 			<div
 				class="p-1 bg-light rounded rounded-pill shadow-sm ml-5 mg-5 pr-4"
 				style="padding-right: 150px; margin-left: 30px;">
@@ -264,7 +264,7 @@ li.active{
 								
 								<% //강아지 정보 있을때만 강아지이름 출력
 								if (pdto.getIdx()!=null){%>
-								<img src="dog-talking-photo/<%=pdto.getPhoto() %>" alt="" width="30" height="30" style="border-radius: 20px;">
+								<img src="/TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto() %>" alt="" width="30" height="30" style="border-radius: 20px;">
 								<%=pdto.getName() %>
 								<br>
 								<%}else{%>

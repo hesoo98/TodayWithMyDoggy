@@ -13,6 +13,33 @@ public class DogTalkingAnswerDao {
 
 	DbConnect db=new DbConnect();
 
+	//총 댓글 수
+	public int getTotalAnswerCount(String boardnum) {
+		int cnt = 0;
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select count(*) from dog_talking_answer where board_num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, boardnum);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return cnt;
+	}
+	
 	//insert
 	public void insertAnswer(DogTalkingAnswerDto dto) {
 		
