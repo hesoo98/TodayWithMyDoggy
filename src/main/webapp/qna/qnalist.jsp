@@ -78,7 +78,7 @@
   text-align: center;
 }
 
-li.active{
+.p1 li.active{
 	background-color: #fce694;
 	border-radius: 100%;
 	color: #fff;
