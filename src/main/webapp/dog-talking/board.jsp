@@ -14,7 +14,7 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript" src="js/layout.js"></script>
-<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/ut/css.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
 <meta charset="utf-8">
@@ -57,6 +57,19 @@
 	}
 }
 
+.wrapper-top{
+	display: flex;
+	justify-content: center;
+}
+
+#search-bar{
+	width: 500px;
+}
+
+input:focus{
+	outline: none;
+}
+
 .card-content {
 	text-overflow: ellipsis;  /* 말줄임 적용 */
 	display:inline-block;
@@ -88,9 +101,41 @@ img:hover {
 }
 
 
-  #list-cnt{
+#list-cnt{
     margin-left: 10px;
-  }
+}
+
+/* 페이지 */
+
+.pagination{
+  padding: 30px 0;
+}
+
+.pagination ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.pagination a{
+  display: inline-block;
+  padding: 10px 18px;
+  color: #222;
+}
+
+.p1 a{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  text-align: center;
+}
+
+li.active{
+	background-color: #fce694;
+	border-radius: 100%;
+	color: #fff;
+}
 
 </style>
 
@@ -98,6 +143,10 @@ img:hover {
 <body>
 
 	<%
+
+	//프로젝트 경로구하기
+	String root=request.getContextPath();
+
     DogTalkingBoardDao dao=new DogTalkingBoardDao();
 	DogTalkingBoardDto ddto=new DogTalkingBoardDto();
 	
@@ -106,7 +155,7 @@ img:hover {
 	int startPage;//각블럭의 시작페이지
 	int endPage;//각블럭의 끝페이지
 	int start; //각페이지의 시작번호
-	int perPage=12; //한페이지에 보여질 글의 갯수
+	int perPage=8; //한페이지에 보여질 글의 갯수
 	int perBlock=5; //한블럭당 보여지는 페이지개수
 	int currentPage; //현재페이지
 	
@@ -132,7 +181,8 @@ img:hover {
 	//각페이지에서 불러올 시작번호
 	start=(currentPage-1)*perPage;
 	//각페이지에서 필요한 게시글 가져오기
-	List<DogTalkingBoardDto> list=dao.getList(start, perPage);
+	String word=request.getParameter("word");
+	List<DogTalkingBoardDto> list=dao.getList(start, perPage, word);
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
@@ -146,7 +196,7 @@ img:hover {
 	 
 		<div class="container">
 		
-		 <b id="list-cnt">총 <%=totalCount %>개의 게시글이 있습니다</b>
+		<div class="wrapper-top">
 		 <%
 		 
 		 //로그인 한 유저만 글쓰기 버튼	  
@@ -156,16 +206,41 @@ img:hover {
 		  <button type="button" class="btn btn-warning" onclick="location.href='index-form.jsp?main=dog-talking/write.jsp'">글쓰기</button>
 		 <%}
 		 %>
-		 <br><br>
 		 
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
+		 <!-- 검색 -->
+		 <form action="<%=root%>/dog-talking/board.jsp" method="get" id="search-bar">
+			<div
+				class="p-1 bg-light rounded rounded-pill shadow-sm ml-5 mg-5 pr-4"
+				style="padding-right: 150px; margin-left: 30px;">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<button id="button-addon2" type="submit"
+							class="btn btn-link text-warning">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+					<input type="search" placeholder="내용으로 검색해보세요!"
+						 name="word" 
+						class="border-0 bg-light" style="width: 230px;">
+					<%
+					if(word!=null){%>
+					<button type="button" onclick="history.back()">전체글보기</button>
+					<%}
+					%>
+				</div>
+			</div>
+		 </form>
+		 </div>
+		 <br>
+		 
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4 main">
 
 				<%
 				for (DogTalkingBoardDto dto : list) {
 				%>
 				<div class="col">
 					<div class="card border-light mb-10" width="100%" style="border-radius: 10%;"
-					onclick="location.href='index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum() %>'">
+					onclick="location.href='<%=root%>/index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>'">
 						<div class="card-img" id="img" style="border-radius: 12%; ">
 							<input type="hidden" id="num" name="num" value="<%=dto.getNum() %>">
 							<img class="img" class="bd-placeholder-img card-img-top" style="border-radius: 7%"  width="280px;"
@@ -228,7 +303,7 @@ img:hover {
 	
 	<!-- 페이징 출력 -->
 	<div style="display: flex; justify-content: center;">
-		<ul class="pagination">
+		<ul class="pagination p1">
 			<%
 			//이전
 			if (startPage > 1) {
@@ -259,7 +334,7 @@ img:hover {
 			%>
 		</ul>
 	</div>
-	
+
 	<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 			crossorigin="anonymous"></script>

@@ -43,7 +43,6 @@
 
 .container {
 	width: 1200px;
-	margin-bottom: 50px;
 }
 
 @media ( min-width : 768px) {
@@ -52,12 +51,18 @@
 	}
 }
 
-#title{
+.top{
 	display: flex;
 	justify-content: center;
+}
+
+.title{
 	font-weight: 600;
 	font-size: 2em;
-	margin-bottom: 10px;
+}
+
+.subtitle{
+	margin-bottom: 20px;
 }
 
 .card-content {
@@ -109,7 +114,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 <body>
 	<div class="album py-5 bg-light">
 		<div class="container">
-			<span id="title">이번주 인기멍멍이</span>
+			<span class="top title">이번주 인기멍멍이</span>
+			<span class="top subtitle">일주일 간의 좋아요 순으로 집계됩니다</span>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
 
 				<%

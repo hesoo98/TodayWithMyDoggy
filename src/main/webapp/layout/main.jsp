@@ -87,6 +87,7 @@ DogProfileDto dto=dao.getMyMainDog(num);
 	
 	<div id="wrapper">
 		<div  class="box sb">
+		<span id="w-city">지역</span>
 		<span id="w-temp">온도</span>
 		<span id="w-desc">날씨</span>
 		<br>

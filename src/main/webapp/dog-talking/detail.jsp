@@ -365,7 +365,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    
 	  
 	  </script>
-	  <button type="button" onclick="history.back()">뒤로가기</button>
+	  <button type="button" onclick="location.href='index.jsp?main=dog-talking/board.jsp?currentPage=<%=currentPage%>'">목록</button>
 	</div>
 </body>
 </html>

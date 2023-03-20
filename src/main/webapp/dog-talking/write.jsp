@@ -5,79 +5,10 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-   href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/form.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-<script
-   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<style type="text/css">
-
-	body{
-	  overflow: hidden;
-	}
-	
-	.camera{
-	  font-size: 15px;
-	  font-weight:200;
-	}
-	
-	.camera-mod{
-	  top:120px;
-	  left:70px;
-	}
-	
-	/* 모달창의 배경을 만든다 */
-	.modal__background{
-	  position: fixed;
-	  top:0; left: 0; bottom: 0; right: 0;
-	  background: rgba(0, 0, 0, 0.5);
-	}
-	 
-	/* 모달창 영역을 꾸민다 */
-	.modal__box{
-	  position: absolute;
-	  top: calc(30vh - 100px); left: 250px;
-	  background-color: white;
-	  display: flex; justify-content: center;
-	  align-items: center;
-	  border-radius: 10px;
-	  width: 700px;
-	  height: 400px;
-	  padding-top: 30px;
-	}
-	
-	/* 모달창 내부 */
-	#top{
-	  width: 100%;
-	  background-color: rgba(0, 0, 0, 0.2);
-	  position: absolute;
-	  left:0px;
-	  top:-10px;
-	  text-align: right;
-	}
-	
-	#showimg{
-	  width: 200px;
-	  height: 200px;
-	  position: relative;
-	  left: 100px;
-	}
-
-	textarea {
-	  margin-left: 200px;
-	  border-radius: 4px;
-	  border: none;
-	  color: #311b92;
-	  width: 300px; height: 300px;
-	  position: relative;
-	  right:50px;
-	}
-	
-	
-		
-</style>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 </head>
 
 	<script type="text/javascript">
@@ -123,7 +54,7 @@
 <div id="modal" class="modal__background" style="display: hidden;" tabindex="0">
   <div class="modal__box">
     
-	  <h4 id="top">입력창<button type="button" onclick="history.back()"><span class="glyphicon glyphicon-remove"></span></button></h4>
+	<h4 id="top">입력하기<i id="btn-close" onclick="history.back()" class="fa-solid fa-circle-xmark"></i></h4>
 	<form action="dog-talking/writeaction.jsp" method="post" enctype="multipart/form-data">
 	<table style="top:150px;">
 	  <tr>
@@ -141,7 +72,8 @@
 	  <tr>
 	    <td>
 	      <div>
-	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-camera camera"> 사진첨부</span>
+	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="camera">
+	      <i class="fa-solid fa-camera-retro icon"></i> 사진첨부</span>
 	      </div>
 	    </td>
 	    <td align="center">

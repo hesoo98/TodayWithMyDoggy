@@ -1,41 +1,23 @@
-const getJSON = function(url, callback) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.responseType = 'json';
-  xhr.onload = function() {
-    const status = xhr.status;
-    if(status === 200) {
-      callback(null, xhr.response);
-    } else {
-      callback(status, xhr.response);
-    }
-  };
-  xhr.send();
-};
+const API_KEY="e94b45e623f0fe23460ab9298bc2271b";
 
-//현재 위치 불러오기
-var lat="";
-var lon="";
-navigator.geolocation.getCurrentPosition(function(pos){
-	console.log(pos);
-	
-	lat=Math.round(pos.coords.latitude,3);
-	lon=Math.round(pos.coords.longitude,3);
-})
-var api="e94b45e623f0fe23460ab9298bc2271b";
-//var url="https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+api;
-var url_ok="https://api.openweathermap.org/data/2.5/weather?q=seoul&appid="+api;
-
-getJSON(url_ok,function(err, data) {
-  if(err !== null) {
-    alert('날씨를 불러올수 없습니다' + err);
-  } else {
-	  var main=data.weather[0].main;
-	  var w_desc=data.weather[0].description;
-	  var temp=Math.round(data.main.temp- 273.15); //섭씨계산
+function onGeoOk(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    
+	fetch(url)
+        .then(response => response.json())
+        .then(data => {
+	  console.log(lat,lon)
 	  
+	  const city=data.name;
+	  const main=data.weather[0].main;
+	  const desc=data.weather[0].description;
+	  const temp=Math.round(data.main.temp);
+
+	  $("#w-city").text(city);
 	  $("#w-temp").text(temp+"°");
-	  $("#w-desc").text(w_desc);
+	  $("#w-desc").text(desc);
 	  $("#w-img").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
 	  
 	  if(temp>35 || temp<-10){
@@ -54,7 +36,11 @@ getJSON(url_ok,function(err, data) {
 		  }
 		  
 	  }
-  }
-  
-});
+        });
+}
 
+function onGeoError() {
+    alert("날씨를 제공할 위치를 찾을 수 없습니다.")
+}
+
+navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
