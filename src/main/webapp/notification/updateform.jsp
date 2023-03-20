@@ -22,7 +22,7 @@
 </head>
 <body>
    <article>
-      <div class="container" role="main">
+      <div class="container">
          <h2>공지사항 글쓰기 폼</h2>
          <br>
          <form method="post" action="notification/updateaction.jsp">
