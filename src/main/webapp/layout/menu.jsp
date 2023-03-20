@@ -107,6 +107,8 @@ String nickname = dao.getNickname(myid);
 					<%
 					} else {
 					%>
+					
+					<a href="index.jsp?main=message/list.jsp"><i class="fa-regular fa-envelope"></i>쪽지함</a>
 					<li class="nav-item" style="padding-top: 20px; padding-left: 30px;"><%=nickname%>님
 						로그인 중
 						<button type="button" class="btn btn-success"
@@ -119,5 +121,6 @@ String nickname = dao.getNickname(myid);
 			</ul>
 		</div>
 	</nav>
-</head>
+</body>
+<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 </html>
