@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Vector;
 
 import board.placeShare.PlaceShareBoardDto;
 import mysql.db.DbConnect;
+import profile.dogProfile.DogProfileDto;
 
 public class MemberDao {
 	DbConnect db=new DbConnect();
@@ -311,5 +314,38 @@ public class MemberDao {
 			} finally {
 				db.dbClose(pstmt, conn);
 			}
+		}
+		
+		//모든 사용자 dto 리스트 반환
+		public List<MemberDto> getAllUserList() {
+			List<MemberDto> list = new Vector<>();
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member order by num desc";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					MemberDto dto = new MemberDto();
+					dto.setNum(rs.getString("num"));
+					dto.setNickname(rs.getString("nickname"));
+					dto.setId(rs.getString("id"));
+					dto.setPassword(rs.getString("password"));
+					dto.setHp(rs.getString("hp"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setEmail(rs.getString("email"));
+					dto.setCreateDay(rs.getTimestamp("create_day"));
+					dto.setAuth(rs.getInt("auth"));
+					list.add(dto);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+			}
+			return list;
 		}
 }
