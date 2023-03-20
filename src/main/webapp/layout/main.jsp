@@ -81,6 +81,8 @@ String num=mdao.getNum(id);
 DogProfileDao dao=new DogProfileDao();
 DogProfileDto dto=dao.getMyMainDog(num);
 
+String proPhoto = dto.getPhoto();
+
 %>
 
 <body>
@@ -95,7 +97,7 @@ DogProfileDto dto=dao.getMyMainDog(num);
 		</div>
 		
 		<%if(dto.getIdx()!=null){%>
-			<img class="w-mydog" src="dog-talking-photo/<%=dto.getPhoto()%>">
+			<img class="w-mydog" src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>">
 		<%}else{%>
 			<span class="w-mydog"><i class="fa-solid fa-dog fa-xl"></i></span>
 		<%} %>

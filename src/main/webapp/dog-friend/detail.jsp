@@ -124,9 +124,9 @@
     DogProfileDao pdao=new DogProfileDao();
     DogProfileDto pdto=pdao.getMainDogInfo(writerNum);
 
-String id=(String)session.getAttribute("myid"); //sessionid
-String sessionNickname=mdao.getNickname(id); //sessionnickname
-String nickname=mdao.getNickname(dto.getId()); //writernickname
+	String id=(String)session.getAttribute("myid"); //sessionid
+	String sessionNickname=mdao.getNickname(id); //sessionnickname
+	String nickname=mdao.getNickname(dto.getId()); //writernickname
 	
 	//조회수 1 증가
 	dao.updateReadCount(num);
@@ -138,18 +138,18 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
 %>
 
 	<div style="margin:30px 30px;">
-	<input type="hidden" id="num" value="<%=num%>">
-		<table class="table table-bordered" style="width: 500px;">
-		<tr>
-		<td>
-			<h3><b><%=dto.getSubject() %></b></h3>
-			
-			<!-- 쪽지함 만들기 -->
-			<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal">
-				쪽지
-			</button>
-			
-			<!-- Modal -->
+	<input type="hidden" id="num" name="num" value="<%=dto.getNum()%>">
+	<table class="table table-bordered" style="width: 500px;">
+	<tr>
+	<td>
+	<h3><b><%=dto.getSubject() %></b></h3>
+	
+	<!-- 쪽지함 만들기 -->
+	<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal">
+		쪽지
+	</button>
+	
+	<!-- Modal -->
 	<div class="modal fade" id="exampleModal">
   		<div class="modal-dialog">
    		 <div class="modal-content">
@@ -161,25 +161,27 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
     		    </button>
     		 </div>
     		  
-   		   <div class="modal-body">
-   		   	보내는 사람:<%=id %><br>
-   		   	받는 사람:<%=nickname %><br><br>
-		    <textarea rows="10" style="width:400px" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
-		    required="required"></textarea>
-    	  </div>
+	   <div class="modal-body">
+	   <form action="message/writeaction.jsp" method="post">
+	   	보내는 사람:<%=id %><br>
+	   	받는 사람:<%=nickname %><br><br>
+	    <textarea rows="10" style="width:400px" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
+	    required="required"></textarea>
+   	  </div>
     	  
       	<div class="modal-footer">
         	<button type="button" data-dismiss="modal">취소</button>
-        	<button type="button" >보내기</button>
+        	<button type="submit" >보내기</button>
     	</div>
     	
+	   </form>
    		 </div>
   		</div>
 	</div>
 			
 			
 			
-			 <div class="wrapper-subject">
+	 <div class="wrapper-subject">
 	  
 	  <!-- 프사 누르면 이동 -->
 	  <a id="a-tag" data-toggle="modal" data-target="#exampleModal2">
