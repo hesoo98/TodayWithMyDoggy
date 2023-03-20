@@ -132,13 +132,10 @@
 	
 	
 	
-   <div style=" margin: 20px 300px;" id="abc">
+   <div style=" margin: 20px 30px;" id="abc">
    
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
-   
-       <h1>게시판</h1>
-    <form>
-    	
+    <form id="togglecheck">
       <input type="checkbox" id="checkbox1" name="category" value="강원">
       <label for="checkbox1">강원</label>
       <input type="checkbox" id="checkbox2" name="category" value="경기">
@@ -147,37 +144,36 @@
       <label for="checkbox3">경남</label>
       <input type="checkbox" id="checkbox4" name="category" value="경북">
       <label for="checkbox4">경북</label>
-      <input type="checkbox" id="checkbox4" name="category" value="광주">
+      <input type="checkbox" id="checkbox5" name="category" value="광주">
       <label for="checkbox5">광주</label>
-      <input type="checkbox" id="checkbox4" name="category" value="대구">
+      <input type="checkbox" id="checkbox6" name="category" value="대구">
       <label for="checkbox6">대구</label>
-      <input type="checkbox" id="checkbox4" name="category" value="대전">
+      <input type="checkbox" id="checkbox7" name="category" value="대전">
       <label for="checkbox7">대전</label>
-      <input type="checkbox" id="checkbox4" name="category" value="부산">
+      <input type="checkbox" id="checkbox8" name="category" value="부산">
       <label for="checkbox8">부산</label>
-      <input type="checkbox" id="checkbox4" name="category" value="서울">
+      <input type="checkbox" id="checkbox9" name="category" value="서울">
       <label for="checkbox9">서울</label>
-      <br>
-      <input type="checkbox" id="checkbox4" name="category" value="세종">
+      <input type="checkbox" id="checkbox10" name="category" value="세종">
       <label for="checkbox10">세종</label>
-      <input type="checkbox" id="checkbox4" name="category" value="울산">
+      <input type="checkbox" id="checkbox11" name="category" value="울산">
       <label for="checkbox11">울산</label>
-      <input type="checkbox" id="checkbox4" name="category" value="인천">
+      <input type="checkbox" id="checkbox12" name="category" value="인천">
       <label for="checkbox12">인천</label>
-      <input type="checkbox" id="checkbox4" name="category" value="전남">
+      <input type="checkbox" id="checkbox13" name="category" value="전남">
       <label for="checkbox13">전남</label>
-      <input type="checkbox" id="checkbox4" name="category" value="전북">
+      <input type="checkbox" id="checkbox14" name="category" value="전북">
       <label for="checkbox14">전북</label>
-      <input type="checkbox" id="checkbox4" name="category" value="제주">
+      <input type="checkbox" id="checkbox15" name="category" value="제주">
       <label for="checkbox15">제주</label>
-      <input type="checkbox" id="checkbox4" name="category" value="충남">
+      <input type="checkbox" id="checkbox16" name="category" value="충남">
       <label for="checkbox16">충남</label>
-      <input type="checkbox" id="checkbox4" name="category" value="충북">
+      <input type="checkbox" id="checkbox17" name="category" value="충북">
       <label for="checkbox17">충북</label>
       
     </form>
     
-   <table style="width: 1000px; table-layout: fixed; border:1px solid gray" id="sort" >
+   <table style="width: 1000px; table-layout: fixed;" class="table table-hover" id="sort" >
    <tr>
    	<td width=100px;>번호</td>
    	<td width=100px;>지역</td>

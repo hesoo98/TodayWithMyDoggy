@@ -71,7 +71,7 @@
 	}
 	
 	/* 댓글 */
-	.comment{
+	.comment, #comment-info{
 	  opacity: 0.8;
 	}
 	
@@ -110,7 +110,7 @@
 	}
 	
 	#comment-info{
-	  font-size: 10px;
+	  font-size: 13px;
 	  font-weight: 300;
 	}
 	
@@ -164,10 +164,10 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		<span class="dog-photo"><i class="fa-solid fa-dog fa-lg"></i></span>
 		<span class="nickname"><%=nickname %></span>
 	    <%}else{%>
-		<img class="dog-photo" src="dog-talking-photo/<%=pdto.getPhoto()%>">
+		<img class="dog-photo" src="/TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto()%>">
 	    <span class="nickname"><%=nickname %></span>
 	    <br>
-	    <span style="font-size: 12px;"><%=pdto.getName() %> ( <%=pdto.getGender() %>|<%=pdto.getDogSize() %> )</span>
+	    <span style="font-size: 12px;"><%=pdto.getName() %></span>
 	    <%} %>
 	  <br>
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
@@ -226,9 +226,8 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    	    	<i class="fa-solid fa-bone"></i>
 	    	    <%}else{%>
 	    	    	<img style="width: 20px; height: 20px; border-radius: 20px;" 
-	    	    	src="dog-talking-photo/<%=answerPdto.getPhoto()%>">
-	    	    	<span id="comment-info"><%=answerPdto.getName() %>
-	    	    	(<%=answerPdto.getGender() %>|<%=answerPdto.getDogSize() %>|지역)</span>
+	    	    	src="/TodayWithMyDoggy/mypage/dogImg/<%=answerPdto.getPhoto()%>">
+	    	    	<span id="comment-info"><%=answerPdto.getName() %></span>
 	    	    <%} %>
 	             
 	          </div>

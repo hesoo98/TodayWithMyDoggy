@@ -165,13 +165,25 @@
 						<p>변경 전 주소</p>
 						<p><input type="text" class="form-control form-control-lg" name="oldaddr" placeholder="아이디" value="<%=memberDto.getAddr() %>" disabled></p><br>
 						<p>변경 할 주소</p>
-						<p>
-							<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" required="required" style="width:100px;display:inline-block;">
-							<input type="button" class="btn btn-warning btn-lg" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" required="required">
-						</p>
-						<input type="text" class="form-control" id="sample6_address" placeholder="주소" required="required" name=addr1 value=""><br>
-						<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소" required="required" name=addr2>
-						<input type="text" class="form-control" id="sample6_extraAddress" placeholder="참고항목"><br>
+						<select id="addr" class="form-control" name="addr" style="width: 100px; display: inline-block;">
+							<option value="강원">강원</option>
+							<option value="경기">경기</option>
+							<option value="경남">경남</option>
+							<option value="경북">경북</option>
+							<option value="광주">광주</option>
+							<option value="대구">대구</option>
+							<option value="대전">대전</option>
+							<option value="부산">부산</option>
+							<option value="서울" selected>서울</option>
+							<option value="세종">세종</option>
+							<option value="울산">울산</option>
+							<option value="인천">인천</option>
+							<option value="전남">전남</option>
+							<option value="전북">전북</option>
+							<option value="제주">제주</option>
+							<option value="충남">충남</option>
+							<option value="충북">충북</option>
+						</select>
 					</div>
 				</div>
 				

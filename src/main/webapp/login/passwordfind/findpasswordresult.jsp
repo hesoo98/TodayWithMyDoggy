@@ -1,3 +1,4 @@
+
 <%@page import="member.MemberDto"%>
 <%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,11 +24,26 @@ MemberDto dto= dao.getMemeber(id);
 <form name="idsearch" method="post">
       <%
        if (pwd != "" && dto.getHp().equals(hp)) {
+    	   
+    	   //반 잘라서 뒤에 별표 붙이기
+    	   int pwdsize=pwd.length()/2;
+    	   String result=pwd.substring(0, pwdsize);
+    	   
+    	   String tmp="";
+    	   if(pwdsize%2==1){//홀수면 하나 더 붙인다.
+    		   for(int i=0; i<pwdsize+1; i++){
+    			   tmp +="*";
+    		   }
+    	   }else{
+    		   for(int i=0; i<pwdsize; i++){
+    			   tmp +="*";
+    		   }
+    	   }
       %>
      
       <div class = "container">
       	<div class = "found-success">
-	      <div class ="found-id">회원님의 비밀번호는 <%=pwd%> 입니다.</div>
+	      <div class ="found-id">회원님의 비밀번호는 <%=result+tmp%> 입니다.</div>
 	     </div>
 	     <div class = "found-login">
  		    <input type="button" id="btnLogin" value="로그인" onclick="location.href='index.jsp?main=login/loginform.jsp'"/>
