@@ -163,11 +163,13 @@
     		  
 	   <div class="modal-body">
 	   <form action="message/writeaction.jsp" method="post">
+	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
+	   <input type="hidden" name="receiver" value="<%=dto.getId()%>">
+	   
 	   	보내는 사람:<%=id %><br>
 	   	받는 사람:<%=nickname %><br><br>
 	    <textarea rows="10" style="width:400px" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
 	    required="required"></textarea>
-   	  </div>
     	  
       	<div class="modal-footer">
         	<button type="button" data-dismiss="modal">취소</button>
@@ -175,6 +177,7 @@
     	</div>
     	
 	   </form>
+   	  	</div>
    		 </div>
   		</div>
 	</div>

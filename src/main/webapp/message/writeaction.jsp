@@ -6,17 +6,18 @@
     <%
     request.setCharacterEncoding("utf-8");
     
-    String boardNum=request.getParameter("num");
+    String num=request.getParameter("num");
+    String receiver=request.getParameter("receiver");
     String content=request.getParameter("content");
     String sender=(String)session.getAttribute("myid");
     
     MessageDto dto=new MessageDto();
-    dto.setBoardNum(boardNum);
+    dto.setReceiver(receiver);
     dto.setSender(sender);
     dto.setContent(content);
     
     MessageDao dao=new MessageDao();
     dao.insertMessage(dto);
     
-    response.sendRedirect("../index.jsp?main=dog-friend/detail.jsp?num="+boardNum);
+    response.sendRedirect("../index.jsp?main=dog-friend/detail.jsp?num="+num);
     %>
