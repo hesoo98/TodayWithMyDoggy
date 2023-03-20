@@ -15,11 +15,17 @@
 
 	.wrapper{
 	  margin: 30px 100px;
+	  display: flex;
+	  justify-content: space-between;
 	}
 
 	
 	.is-read{
 	  color: gray;
+	}
+	
+	.detail{
+	  width: 350px;
 	}
 
 
@@ -73,9 +79,9 @@
 	%>
 	
 	<div class="container wrapper">
+	<div>
+	<span>총 <span id="cnt"></span>개의 읽지 않은 쪽지가 있습니다.</span>
 	<table class="table table-hover" style="width: 700px;">
-	<span>총 <%=dao.getUnreadCount(id) %>개의 읽지 않은 쪽지가 있습니다.</span>
-	  
 	  <tr>
 	    <td width="50"><input type="checkbox"></td>
 	    <td width="50">번호</td>
@@ -89,12 +95,66 @@
 	    <td><input type="checkbox"></td>
 	    <td><%=dto.getNum() %></td>
 	    <td><%=dto.getSender() %></td>
-	    <td><%=dto.getContent() %></td>
-	    <td><%=dto.getWriteday() %></td>
 	    
-		<%} %>
-		</tr>
-		</table>
+	    <td>
+	    <span class="link-detail">
+	    <input type="hidden" id="num" value="<%=dto.getNum()%>">
+	    <% //isread 체크
+	    if(dto.getIsRead()==1){ //읽은 글%>
+	      <span class="is-read"><%=dto.getContent() %></span>
+	    <%}else{ //안읽은 글%>
+	      <span><%=dto.getContent() %></span>
+	    <%}
+	    %>
+	    </span>
+	    </td>
+	    
+	    <td><%=sdf.format(dto.getWriteday()) %></td>
+	    </tr>
+		  
+	  <%} %>
+	</table>
+	</div>
+	
+	<div class="detail"></div>
+	
+	</div>
+	
+	<script type="text/javascript">
+	
+	$(".detail").hide();
+	
+	$("#cnt").html(<%=dao.getUnreadCount(id)%>);
+	
+	$(".link-detail").click(function(){
+		var num=$(this).find("#num").val();
+		
+		$(".detail").show();
+		$(this).children().addClass("is-read");
+
+		$.ajax({
+			type:"get",
+			url:"message/detailajax.jsp",
+			dataType:"json",
+			data:{"num":num},
+			success: function(res){
+				
+				var s="";
+				s+="<span>쪽지 상세</span>"
+				s+="<table class='table'>";
+				s+="<tr><td>보낸사람</td><td>"+res.sender+"</td></tr>";
+				s+="<tr><td>보낸날짜</td><td>"+res.writeday+"</td></tr>";
+				s+="<tr><td>내용</td><td>"+res.content+"</td></tr>";
+				s+="</table>";
+				
+				$("#cnt").html(res.cnt);
+				$(".detail").html(s);
+			}
+		})
+	})
+	
+	</script>
+	
 </body>
 <script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 </html>
