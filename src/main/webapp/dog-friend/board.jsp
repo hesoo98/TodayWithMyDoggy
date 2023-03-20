@@ -132,11 +132,9 @@
 	
 	
 	
-   <div style=" margin: 20px 300px;" id="abc">
+   <div style=" margin: 20px 30px;" id="abc">
    
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
-   
-       <h1>게시판</h1>
     <form>
     	
       <input type="checkbox" id="checkbox1" name="category" value="강원">
