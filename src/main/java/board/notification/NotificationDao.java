@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.qna.QnaBoardDto;
 import mysql.db.DbConnect;
 
 public class NotificationDao {
@@ -122,5 +123,56 @@ public class NotificationDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	// 전체 글 개수
+	public int getTotalCount() {
+		int n = 0;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from notification_board";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				n = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return n;
+	}
+
+	// pagin select
+	public List<NotificationDto> selectPageingNotification(int start, int perpage) {
+		List<NotificationDto> list = new ArrayList<NotificationDto>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from notification_board order by num desc limit ?,?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, perpage);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				NotificationDto dto = new NotificationDto();
+				dto.setNum(rs.getString("num"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
 	}
 }
