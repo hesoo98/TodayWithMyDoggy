@@ -28,7 +28,7 @@
 		session.setAttribute("isAdmin", isAdmin);
 		
 		//로그인 메인 이동
-		response.sendRedirect("../index.jsp?main=mypage/userMyPage.jsp");
+		response.sendRedirect("../index.jsp?main.jsp");
 	}else{%>
 		<script type="text/javascript">
 		alert("아이디 또는 비밀번호가 맞지 않습니다.");

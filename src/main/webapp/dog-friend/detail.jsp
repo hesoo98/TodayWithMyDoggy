@@ -139,14 +139,16 @@ String nickname=mdao.getNickname(dto.getId()); //writernickname
 		<td>
 			<h3><b><%=dto.getSubject() %></b></h3>
 			
+			<!-- 쪽지함 만들기 -->
+			<b style="float:right" id="send">쪽지</b>
 			 <div class="wrapper-subject">
 	  
 	  <!-- 프사 누르면 이동 -->
 	  <a id="a-tag" href="../index.jsp?main=mypage/userMyPage.jsp?num=#">
-	    <h4>
+	    <b>
 	      <img src="dog-talking-photo/04.png" style="width: 20px;">
-	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=nickname %>
-	    </h4>
+	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=nickname %><br>
+	    </b>
 	  </a>
 	  
 	  <!-- 펫정보 -->
