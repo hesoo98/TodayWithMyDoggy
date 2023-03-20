@@ -33,6 +33,28 @@ public class DogProfileDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	
+	//강아지 수정
+	public void updateDogProfile(DogProfileDto dto) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+
+		String sql = "update dog_profile set name=?, gender=?, dog_size=?, birthday=?, photo=? where idx=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getName());
+			pstmt.setString(2, dto.getGender());
+			pstmt.setString(3, dto.getDogSize());
+			pstmt.setString(4, dto.getBirthday());
+			pstmt.setString(5, dto.getPhoto());
+			pstmt.setString(6, dto.getIdx());
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 
 	// 모든 사용자들의 반려견 총 개수 구하기
 	public int getTotalDogCount() {

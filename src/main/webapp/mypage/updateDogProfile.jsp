@@ -78,7 +78,8 @@
 	<div class="container main" style="border:1px solid red;">
 		<h1>강아지 수정 폼</h1>
 		<div class="" style="width:800px;margin:0 auto;">
-			<form action="mypage/addDogAction.jsp" method="post" enctype="multipart/form-data">
+			<form action="mypage/updateDogAction.jsp" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="idx" value="<%=dog_idx%>">
 				<div class="row" style="float:none;">
 					<div class="row" style="float:none;margin:0 auto;">
 						<img src="/TodayWithMyDoggy/mypage/dogImg/<%=photo_name %>" id="dogprofile">
