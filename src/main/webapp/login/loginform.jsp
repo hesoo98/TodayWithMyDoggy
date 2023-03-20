@@ -5,6 +5,8 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -139,5 +141,63 @@ if (saveok != null) {
 	<!--login-form-wrap-->
 	<!-- partial -->
 			 
+	<a id="kakao-login-btn"></a>
+	<button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button>
+	<div id="result">
+	</div>
+    
+   <script type="text/javascript">
+Kakao.init('c3daec463cc1c038e93542b4609bf488');
+console.log(Kakao.isInitialized());
+ 
+  Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function(result) {
+          $('#result').append(result);
+          id = result.id
+          connected_at = result.connected_at
+          kakao_account = result.kakao_account
+          $('#result').append(kakao_account);
+          resultdiv="<h2>로그인 성공 !!"
+          resultdiv += '<h4>id: '+id+'<h4>'
+          resultdiv += '<h4>connected_at: '+connected_at+'<h4>'
+          email ="";
+          if(typeof kakao_account != 'undefined'){
+        	  email = kakao_account.email;
+          }
+          resultdiv += '<h4>email: '+email+'<h4>'
+          $('#result').append(resultdiv);
+          
+        },
+        fail: function(error) {
+          alert(
+            'login success, but failed to request user information: ' +
+              JSON.stringify(error)
+          )
+        },
+      })
+    },
+    fail: function(err) {
+      alert('failed to login: ' + JSON.stringify(err))
+    },
+  })
+</script>
+        <script type="text/javascript">
+  function unlinkApp() {
+    Kakao.API.request({
+      url: '/v1/user/unlink',
+      success: function(res) {
+        alert('success: ' + JSON.stringify(res))
+      },
+      fail: function(err) {
+        alert('fail: ' + JSON.stringify(err))
+      },
+    })
+  }
+</script>
+
 </body>
 </html>
