@@ -15,17 +15,19 @@ public class PlaceShareAnswerDao {
 
 	DbConnect db = new DbConnect();
 	
-	public int getTotalCount() {
+	//총 댓글 수
+	public int getTotalAnswerCount(String boardnum) {
 		int cnt = 0;
 		
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
-		String sql="select count(*) from place_share_answer";
+		String sql="select count(*) from place_share_answer where board_num=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, boardnum);
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -59,6 +61,7 @@ public class PlaceShareAnswerDao {
 		}
 	}
 	
+	//댓글 목록 불러오기
 	public List<PlaceShareAnswerDto> getAllAnswers(String boardnum) {
 		List<PlaceShareAnswerDto> list = new Vector<>();
 		Connection conn = db.getConnection();
@@ -89,4 +92,6 @@ public class PlaceShareAnswerDao {
 		}
 		return list;
 	}
+	
+	
 }

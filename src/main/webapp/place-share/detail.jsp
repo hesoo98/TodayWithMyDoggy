@@ -133,28 +133,20 @@ function list() {
 			$.each(res, function(idx, item) {
 				s += "<div class='img-box' style='width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 20px;'>";
 				s += "<img alt='강아지 프로필 사진' src='/TodayWithMyDoggy/mypage/dogImg/"+photo+"' id='dogImg' style='width: 100%; height: 100%;'>&nbsp;&nbsp;</div>";
-				s += "<div style='margin-botton: 40px;'>"+nickname+"님&nbsp;&nbsp;&nbsp;<span class='aday' style='color: gray'>" + item.writeday + "</span></div>";
-				s += "<div style='width: 500px; font-size:15px; margin-top:10px;'>" + item.content;
-				s += "<button type='button' idx='" + item.idx + "' id='adel' class='adel btn btn-warning' style='width: 30px; margin-left: 200px;'>삭제</button>";
-				s += "&nbsp;<button type='button' idx='" + item.idx + "' id='amod' class='amod btn btn-warning' style='width: 30px'>수정</button>";
+				s += "<div style='margin-botton: 40px;'>"+nickname+"님&nbsp;&nbsp;&nbsp;<span class='aday' style='color: gray'>" + item.writeday + "</span>";
+				s += "<i class='fa-solid fa-ellipsis' style='padding-left: 150px; color:gray; cursor: pointer'></i></div>";
+				s += "<div style='width: 400px; font-size:15px; margin-top:20px; padding-left:60px;'>" + item.content;
 				s += "<br><br><br><br></div>";
 				
 			});
 			
 			$("#answerView").html(s);
-		},
-		statusCode: {
-			404: function() {
-				alert("json파일을 못잡음");
-			},
-			
-			500: function() {
-				alert("서버오류..코드");
-			}
 		}
 	});
 }
 </script>
+<script src="https://kit.fontawesome.com/2663817d27.js"
+	crossorigin="anonymous"></script>
 </head>
 <%
 //로그인한 사람 아이디
@@ -190,7 +182,7 @@ String proPhoto = proDto.getPhoto();
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
 
 PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
-int totalAnswerCnt = answerDao.getTotalCount();
+int totalAnswerCnt = answerDao.getTotalAnswerCount(boardnum);
 
 dao.addReadCount(boardnum);
 %>
@@ -216,11 +208,11 @@ dao.addReadCount(boardnum);
 			if (loginok != null) {
 			%>
 			<div style="margin-left: 50%">
-				<button type="button" class="btn btn-success"
-					style="width: 60px; height: 30px; border-radius: 50px;"
+				<button type="button" class="btn btn-warning"
+					style="width: 60px; height: 30px; border-radius: 10px;"
 					onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정하기</button>
 				<button type="button" class="btn btn-danger"
-					style="width: 60px; height: 30px; border-radius: 50px;" id="delete"
+					style="width: 60px; height: 30px; border-radius: 10px;" id="delete"
 					onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제하기</button>
 			</div>
 			<%
@@ -254,9 +246,15 @@ dao.addReadCount(boardnum);
 				<img src="/TodayWithMyDoggy/place-share/place-photo/kakaomap.png"
 					style="width: 25px; border-radius: 5px; margin-right: 10px;"><%=dto.getMapAddr()%></div>
 		</div>
-
+		<i class="fa-solid fa-heart" style="margin-left: 10px; margin-top: 2px; color: grey; font-size: 16px;
+		cursor: pointer; float: left;" id="heart"></i>&nbsp;<div style="font-size: 15px; float: left;"><%=dto.getLikes() %></div>
+		<hr style="width: 550px; margin-top: 20px">
+		<script type="text/javascript">
+			$("#heart").click(function () {
+				$("#heart").css("color", "#CD0000");
+			});
+		</script>
 		<!-- 댓글 -->
-		<hr style="width: 550px;">
 		<br>
 		<div class="answer-box">
 			<div class="img-box"
@@ -334,6 +332,8 @@ dao.addReadCount(boardnum);
 			var num = $("num").val();
 			if (del) {
 				location.href = "place-share/deleteAction.jsp?num=" + num;
+			} else {
+				location.history();
 			}
 		});
 	</script>
