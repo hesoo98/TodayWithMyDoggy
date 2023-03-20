@@ -1,3 +1,4 @@
+<%@page import="answer.placeShare.PlaceShareAnswerDao"%>
 <%@page import="profile.dogProfile.DogProfileDto"%>
 <%@page import="profile.dogProfile.DogProfileDao"%>
 <%@page import="member.MemberDto"%>
@@ -116,7 +117,6 @@ img:hover {
 	padding-left: 20px;
 }
 </style>
-
 <%
 PlaceShareBoardDao dao = new PlaceShareBoardDao();
 List<PlaceShareBoardDto> list = dao.getBoardList();
@@ -153,6 +153,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					String proPhoto = proDto.getPhoto();
 					
 					String place = dto.getMapAddr().substring(0, 2);
+					
+					PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
+					int totalAnswerCnt = answerDao.getTotalAnswerCount(boardNum);
 				%>
 				<div class="col">
 					<div class="card border-light mb-10" width="100%"
@@ -164,7 +167,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 							<button id="img-addr-text" style="color: #fff"><%=place %></button>			
 						</div>
 							<input type="hidden" id="num" name="num"
-								value="<%=dto.getNum()%>"> <img class="img"
+								value="<%=dto.getNum()%>"> <img class="img" id="cardImg"
 								class="bd-placeholder-img card-img-top"
 								style="border-radius: 7%" width="600px;"
 								src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>"
@@ -187,7 +190,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 								<div style="float: left; padding-top: 5px; font-size: 15px; color: gray">
 									<%=memberdto.getNickname()%>님 &emsp;&emsp; <i
 										class="fa-regular fa-eye"></i><%=dto.getReadCount()%>
-									  &nbsp;<i class="fa-regular fa-comment-dots"></i><%=dto.getLikes()%>
+									  &nbsp;<i class="fa-regular fa-comment-dots"></i><%=totalAnswerCnt%>
 								</div>
 								<br>
 
