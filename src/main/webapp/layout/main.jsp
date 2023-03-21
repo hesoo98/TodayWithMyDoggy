@@ -86,7 +86,7 @@ String proPhoto = dto.getPhoto();
 %>
 
 <body>
-	
+
 	<div id="wrapper">
 		<div  class="box sb">
 		<span id="w-city">지역</span>
