@@ -11,15 +11,15 @@
 <%
 //세션에 저장된 loginok 읽기
 	String loginok=(String)session.getAttribute("loginok");
-	if(loginok!=null){ //로그아웃상태
+	if(loginok==null){ //로그아웃상태
 		%>
 
 		
-		<jsp:include page="logoutform.jsp"/>
+		<jsp:include page="loginform.jsp"/>
 		<%
 	}else{
 		%>
-		로그아웃됨
+		<jsp:include page="logoutform.jsp"/>
 		<%
 	}
 %>
