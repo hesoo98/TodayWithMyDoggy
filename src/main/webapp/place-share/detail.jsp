@@ -1,4 +1,5 @@
 <%@page import="answer.placeShare.PlaceShareAnswerDto"%>
+<%@page import="java.util.List"%>
 <%@page import="answer.placeShare.PlaceShareAnswerDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
@@ -17,37 +18,26 @@
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0168677f39871625290af327bd783770&libraries=services"></script>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 .container {
-	width: 800px;
 	padding-bottom: 130px;
 	padding-top: 70px;
 }
-
 #title-img {
 	width: 40%;
 	height: 30%;
 	border-radius: 5%;
 }
-
 .answer-input {
 	width: 350px;
 	height: 40px;
 }
-
-.answer-list {
-	width: 500px;
-}
-
 input {
 	margin: 0;
 }
-
 input[type="text"] {
 	width: 140%;
 	height: 100%;
@@ -60,7 +50,6 @@ input[type="text"] {
 	box-sizing: border-box;
 	color: black;
 }
-
 input[type="button"] {
 	width: 20%;
 	height: 80%;
@@ -74,70 +63,79 @@ input[type="button"] {
 	margin-left: -80px;
 	box-sizing: border-box;
 }
-
 input[type="button"]:hover {
 	background-color: "";
 }
-
 #subject {
 	font-size: 20px;
 	font-weight: bold;
 }
-
 div {
 	font-size: 10pt
 }
-
 #dogimg {
 	width: 100%
 }
-
 #map-addr:hover {
 	color: #e3d82b
 }
 </style>
-
-
+<script type="text/javascript">
+	$(function() {
+		var boardnum = $("#boardnum").val();
+		//모든 댓글 수정 입력폼 숨기기
+		$(".modContents").hide();
+		//댓글 수정 입력폼에 값 넣기
+		var content = $("#answerContent").val();
+		$("#modContent").val(content);
+		//댓글 입력
+		$("#btnanswer").click(function() {
+			$.ajax({
+				type : "get",
+				url : "place-share/answerAddAction.jsp",
+				dataType : "html",
+				data : {
+					"boardnum" : boardnum,
+					"myid" : $("#myid").val(),
+					"content" : $("#content").val()
+				},
+				success : function(res) {
+					$("#content").val(" ");
+					location.reload();
+				}
+			});
+		});
+	});
+</script>
 <script src="https://kit.fontawesome.com/2663817d27.js"
 	crossorigin="anonymous"></script>
 </head>
 <%
 //로그인한 사람 아이디
 String myid = (String) session.getAttribute("myid");
-
 //로그인한 사람 닉네임
 MemberDao mdao = new MemberDao();
 String nickname = mdao.getNickname(myid);
-
 // 게시글 번호
 String boardnum = request.getParameter("num");
-
 // 게시글 정보 가져와서 게시글 쓴 사람 아이디 구하기
 PlaceShareBoardDao dao = new PlaceShareBoardDao();
 PlaceShareBoardDto dto = dao.getData(boardnum);
 String boardId = dto.getId();
-
 // 게시글 쓴 사람 정보 가져오기
 MemberDao memberdao = new MemberDao();
 MemberDto memberdto = memberdao.getMemeber(boardId);
-
 // 게시글 쓴 사람 id, num 가져오기
 String memberId = memberdto.getId();
 String memberNum = memberdao.getNum(memberId);
-
 // 게시글 쓴 사람 num 값으로 프로필 정보 가져오기
 DogProfileDao proDao = new DogProfileDao();
 DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
-
 // 프로필 사진 가져오기
 String proPhoto = proDto.getPhoto();
-
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm");
-
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
 PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
-PlaceShareAnswerDto answerDto = new PlaceShareAnswerDto();
 int totalAnswerCnt = answerDao.getTotalAnswerCount(boardnum);
-
 dao.addReadCount(boardnum);
 %>
 <body>
@@ -152,7 +150,7 @@ dao.addReadCount(boardnum);
 			</div>
 			<div class="nickname"
 				style="float: left; padding-left: 10px; font-size: 15px;">
-				<%=memberdao.getNickname(dto.getId())%><br>
+				<%=nickname%>님<br>
 				<div class="date" style="color: gray">
 					<%=sdf.format(dto.getWriteday())%><br>
 				</div>
@@ -164,10 +162,10 @@ dao.addReadCount(boardnum);
 			<div style="margin-left: 50%">
 				<button type="button" class="btn btn-warning"
 					style="width: 60px; height: 30px; border-radius: 10px;"
-					onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정하기</button>
+					onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정</button>
 				<button type="button" class="btn btn-danger"
 					style="width: 60px; height: 30px; border-radius: 10px;" id="delete"
-					onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제하기</button>
+					onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제</button>
 			</div>
 			<%
 			}
@@ -200,59 +198,162 @@ dao.addReadCount(boardnum);
 				<img src="/TodayWithMyDoggy/place-share/place-photo/kakaomap.png"
 					style="width: 25px; border-radius: 5px; margin-right: 10px;"><%=dto.getMapAddr()%></div>
 		</div>
-		<i class="fa-solid fa-heart" style="margin-left: 10px; margin-top: 2px; color: grey; font-size: 16px;
-		cursor: pointer; float: left;" id="heart"></i>&nbsp;<div style="font-size: 15px; float: left;"><%=dto.getLikes() %></div>
+		<i class="fa-solid fa-heart"
+			style="margin-left: 10px; margin-top: 2px; font-size: 16px; cursor: pointer; float: left;"
+			id="heart"></i>&nbsp;
+		<span class="likeview" style="font-size: 15px; float: left;"><%=dto.getLikes() %></span>
 		<hr style="width: 550px; margin-top: 20px">
+		<input type="hidden" id="heart-boardnum" value="<%=boardnum%>">
 		<script type="text/javascript">
-			$("#heart").click(function () {
-				$("#heart").css("color", "#CD0000");
+			var boardnum = $("#heart-boardnum").val();
+			heartColor = $("#heart").css("color");
+			$("#heart").css("color", heartColor);
+			$("#heart").click(function() {
+				if (heartColor === "rgb(33, 37, 41)" || heartColor === "rgb(0, 0, 0)") {
+					$("#heart").css("color", "#CD0000");
+					$.ajax({
+						type : "get",
+						url : "place-share/likeAddAction.jsp",
+						dataType : "json",
+						data : {
+							"boardnum" : boardnum
+						},
+						success : function(res) {
+							$(".likeview").text(res.likes);
+							heartColor = $("#heart").css("color");
+						}
+					});
+				} else {
+					$("#heart").css("color", "black");
+					$.ajax({
+						type : "get",
+						url : "place-share/likeMinuAction.jsp",
+						dataType : "json",
+						data : {
+							"boardnum" : boardnum
+						},
+						success : function(res) {
+							$(".likeview").text(res.likes);
+							heartColor = $("#heart").css("color");
+						}
+					});
+				}
 			});
 		</script>
-		
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new kakao.maps.LatLng($("#la").val(), $("#ma").val()), // 지도의 중심좌표
-			level : 4
-		// 지도의 확대 레벨
-		};
+		<!-- 댓글 -->
+		<br>
+		<div class="answer-box">
+			<div class="img-box"
+				style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 10px;">
+				<img alt="강아지 프로필 사진"
+					src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="dogImg"
+					style="width: 100%; height: 100%;">&nbsp;&nbsp;
+			</div>
+			<form action="place-share/answerAddAction.jsp">
+				<input type="hidden" id="boardnum" value="<%=boardnum%>"> <input
+					type="hidden" id="myid" value="<%=myid%>"> <input
+					type="hidden" id="nickname" value="<%=nickname%>"> <input
+					type="hidden" id="photo" value="<%=proPhoto%>">
+				<div class="answer-input" style="float: left; text-align: left">
+					<input type="text" id="content" class="form-control answer"
+						placeholder="댓글을 입력해주세요"
+						style="float: left; width: 500px; padding: 0 20px;"> <input
+						type="button" id="btnanswer" value="전송" class="btn-answer"
+						style="float: left; margin-top: 5px;">
+				</div>
+			</form>
+			<br>
+		</div>
+		<br>
+		<!-- 댓글 리스트 -->
+		<div class="answer-list" style="margin: 30px;">
+			<div style="font-size: 15px;">
+				댓글 수
+				<%=totalAnswerCnt%>개
+			</div>
+			<%
+			//각 방명록에 달린 댓글목록 가져오기
+			PlaceShareAnswerDao answerdao = new PlaceShareAnswerDao();
+			List<PlaceShareAnswerDto> answerlist = answerdao.getAllAnswers(boardnum);
+			for (PlaceShareAnswerDto answerdto : answerlist) {
+			%>
+			<div style="margin-top: 20px;">
+				<div id="answerView">
+					<div class="img-box"
+						style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 20px;">
+						<img alt="강아지 프로필 사진"
+							src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="dogImg"
+							style='width: 100%; height: 100%;'>&nbsp;&nbsp;
+					</div>
 
-		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption);
+					<div style="margin-botton: 40px;">
+						<span style='font-size: 15px;'><%=nickname%></span>&nbsp;&nbsp; <span
+							class='mod' style='cursor: pointer;'>수정 | </span> <span
+							class='del' style='cursor: pointer;'>삭제</span><br> <span
+							class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
+					</div>
 
-		var imageSrc = 'place-share/place-photo/_Pngtree_dog_pet_animal_pin_location_5092521-removebg-preview.png', // 마커이미지의 주소입니다    
-		imageSize = new kakao.maps.Size(94, 99), // 마커이미지의 크기입니다
-		imageOption = {
-			offset : new kakao.maps.Point(27, 69)
-		}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-		// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
-				imageOption), markerPosition = new kakao.maps.LatLng($("#la")
-				.val(), $("#ma").val()); // 마커가 표시될 위치입니다
-
-		// 마커를 생성합니다
-		var marker = new kakao.maps.Marker({
-			position : markerPosition,
-			image : markerImage,
-		// 마커이미지 설정 
-		});
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setOpacity(0.7);
-		marker.setMap(map);
-	</script>
-	<script type="text/javascript">
-		$("#delete").click(function() {
-			var del = confirm("글을 삭제하시겠습니까?");
-			var num = $("num").val();
-			if (del) {
-				location.href = "place-share/deleteAction.jsp?num=" + num;
-			} else {
-				location.history();
+					<div id='answerContent' class="answerContents"
+						style='width: 400px; font-size: 15px; margin-top: 20px; padding-left: 60px;'>
+						<%=answerdto.getContent()%>
+					</div>
+					<input type="hidden" id="<%=answerdto.getIdx()%>" name="idx"
+						value="<%=answerdto.getContent()%>">
+				</div>
+				<hr style="width: 50%">
+				<br>
+				<br>
+			</div>
+			<%
 			}
-		});
-	</script>
+			%>
+
+		</div>
+		<br>
+		<br> <input type="hidden" id="num" value="<%=boardnum%>">
+
+		<script
+			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
+			
+		</script>
+		<script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng($("#la").val(), $("#ma").val()), // 지도의 중심좌표
+				level : 4
+			// 지도의 확대 레벨
+			};
+			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+			var imageSrc = 'place-share/place-photo/_Pngtree_dog_pet_animal_pin_location_5092521-removebg-preview.png', // 마커이미지의 주소입니다    
+			imageSize = new kakao.maps.Size(94, 99), // 마커이미지의 크기입니다
+			imageOption = {
+				offset : new kakao.maps.Point(27, 69)
+			}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
+					imageOption), markerPosition = new kakao.maps.LatLng($(
+					"#la").val(), $("#ma").val()); // 마커가 표시될 위치입니다
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				position : markerPosition,
+				image : markerImage,
+			// 마커이미지 설정 
+			});
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setOpacity(0.7);
+			marker.setMap(map);
+		</script>
+		<script type="text/javascript">
+			$("#delete").click(function() {
+				var del = confirm("글을 삭제하시겠습니까?");
+				var num = $("num").val();
+				if (del) {
+					location.href = "place-share/deleteAction.jsp?num=" + num;
+				} else {
+					location.history();
+				}
+			});
+		</script>
 </body>
 </html>

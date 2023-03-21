@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <link rel="stylesheet" href="signup/signup.css">
-    <style type="text/css">
-  	body {
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<link rel="stylesheet" href="signup/signup.css">
+<style type="text/css">
+body {
 	background-color: #9f9da7;
 	font-size: 1.6rem;
 	font-family: "Open Sans", sans-serif;
 	color: #2b3e51;
 }
-    </style>
-    <script type="text/javascript">
+</style>
+<script type="text/javascript">
     //전화번호 4자리 입력하면 넘어가기
    	function goFocus(hp){
    		if(hp.value.length==4)
@@ -112,17 +112,17 @@
     	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
     	 if(pw.length < 8 || pw.length > 20){
-    	  alert("8자리 ~ 20자리 이내로 입력해주세요.");
+    	  alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요");
     	  	f.password.value="";
   		  	f.password2.value="";
     	  return false;
     	 }else if(pw.search(/\s/) != -1){
-    	  alert("비밀번호는 공백 없이 입력해주세요.");
+    	  alert("비밀번호는 공백 없이 입력해주세요");
     	  	f.password.value="";
   		 	f.password2.value="";
     	  return false;
     	 }else if(num < 0 || eng < 0 || spe < 0 ){
-    	  alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
+    	  alert("비밀번호에 영문, 숫자, 특수문자를 혼합하여 입력해주세요");
     	  	f.password.value="";
   		  	f.password2.value="";
     	  return false;
@@ -142,72 +142,91 @@
     	
     }
     </script>
-    
 </head>
 <body>
-<div class="container" style="border:0px solid gray" >
-<div style="width:600px; margin: 0 auto;" id="signuptable">
-	<form action="signup/addaction.jsp" method="post" onsubmit="return passCheck(this)" name="frm" id="sign-form" >
-		<div id="signuptext">
-		회원가입
-		</div>
-		<br>
-		<table style="border: 0px solid gray; width:500px;" >
-			<tr>
-				<th width="100">아이디</th>
-				<td>
-					<input type="text" name="id" id="id" required="required" style="width:120px;">
-					<button type="button" id="btncheck" class="w-btn-outline w-btn-yellow-outline">중복체크</button>
-					<span class="idsuccess"></span>
-				</td>
-			</tr>
-			
-			<tr>
-				<th width="100">비밀번호</th>
-				<td>
-					<input type="password" id="password" name="password" required="required"
-					style="width:120px;" placeholder="비밀번호">
-					<span>영문, 숫자, 특수문자를 혼합한 8~20자리</span>
-				</td>
-			</tr>
-			
-			<tr>
-				<th width="100">비밀번호 확인</th>
-				<td>
+	<div class="container"
+		style="border: 0px solid gray; margin-bottom: 100px; margin-top: 100px;">
+		<div style="width: 650px; height: 800px; margin: 0 auto;"
+			id="signuptable">
+
+			<form action="signup/addaction.jsp" method="post"
+				onsubmit="return passCheck(this)" name="frm" id="sign-form"
+				style="padding: 50px 100px; font-size: 13px;">
+				<div id="signuptext" style="font-size: 20px;">회원가입</div>
+				<br>
+				<span width="100">아이디</span><span style="color: red"> *</span>&nbsp;&nbsp;<span class="idsuccess" style="color: #EB0000;"></span>
+				<div>
+					<input type="text" name="id" id="id" required="required"
+						style="width: 320px; float: left" class="form-control" placeholder="아이디를 입력하세요">
+					<button type="button" id="btncheck" class="alert alert-danger"
+						style="width: 100px; margin-left: 10px; height: 40px; line-height:10px;">중복체크</button>
+						<br>
+						
+				</div>
+				<span width="100">비밀번호</span><span style="color: red"> *</span>
+				<div>
+					<input type="password" id="password" name="password"
+						required="required" style="width: 430px;"
+						placeholder="영문, 숫자, 특수문자를 혼합한 8~20자리" class="form-control">
+				</div>
+				<br>
+
+				<span width="100">비밀번호 확인</span><span style="color: red"> *</span>
+				<div>
 					<input type="password" name="password2" required="required"
-					style="width:120px;" placeholder="비밀번호 확인">
-				</td>
-			</tr>
-			
-			<tr>
-				<th width="100">닉네임</th>
-				<td>
-					<input type="text" name="nickname" id="nickname" required="required" style="width:120px;">
-					<button type="button" id="btncheck2">중복체크</button>
-					<span class="nicknamesuccess"></span>
-				</td>
-			</tr>
-			
-			<tr>
-				<th width="100">핸드폰</th>
-				<td>
-					<select name="hp1" size="1">
+						style="width: 430px;" placeholder="비밀번호 확인" class="form-control">
+				</div>
+				<br>
+
+				<span width="100">닉네임</span><span style="color: red"> *</span>&nbsp;&nbsp;<span class="nicknamesuccess" style="color: #EB0000;"></span><br>
+				
+				<div>
+					<input type="text" name="nickname" id="nickname"
+						required="required" style="width: 320px; float: left;"
+						class="form-control" placeholder="닉네임을 입력하세요">
+					<button type="button" id="btncheck2" class="alert alert-danger"
+						style="width: 100px; height: 40px; line-height:10px; margin-left: 10px;">중복체크</button>
+				</div>
+				<div width="100">전화번호 <span style="color: red; margin-right: 10px;">*</span><span style="color: grey">
+				('-'를 제외한 숫자만 입력)</span></div>
+				<div class="hp" style="width: 400px;">
+					<select name="hp1" size="1" style=" float: left; width: 80px; height: 30px; background-color: #eee"" class="form-control">
 						<option value="010">010</option>
 						<option value="011">011</option>
 						<option value="016">016</option>
 						<option value="070">070</option>
+					</select> 
+					 
+					 <input type="text" name="hp2" size="3"
+						required="required" onkeyup="goFocus(this)" class="form-control" style="width: 110px; float: left; height: 30px; margin-left: 10px;">
+					 
+					 <input type="text" name="hp3" size="3" required="required"
+						class="form-control" style="width: 110px; float: left; height: 30px; margin-left: 10px;">
+				</div>
+				<br><br>
+				<div style="margin-top: 10px;">
+				<span width="100">이메일</span><span style="color: red">*</span>
+				</div>
+				<div>
+					<input type="text" name="email1" required="required"
+						style="width: 160px; float: left;" class="form-control"> <span style="float: left; padding-top: 10px;">&nbsp;@&nbsp;</span> 
+						<input type="text" name="email2" id="email2" required="required"
+						style="width: 140px; float: left;" class="form-control"> 
+					<select id="selEmail" style="float: left; width:100px; height: 38px; margin-left: 10px; background-color: #eee" class="form-control">
+						<option value="-">직접입력</option>
+						<option value="naver.com">네이버</option>
+						<option value="gmail.com">구글</option>
+						<option value="hanmail.net">다음카카오</option>
+						<option value="nate.com">네이트</option>
 					</select>
-					<b>-</b>
-					<input type="text" name="hp2" size="3" required="required" onkeyup="goFocus(this)">
-					<b>-</b>
-					<input type="text" name="hp3" size="3" required="required">
-			</td>
-			</tr>
-			
-			<tr>
-				<th width="100">주소</th>
-				<td>
-					<select name="address" size="1" class="nice-select">
+				</div>
+				
+				<br><br>
+				<div style="margin-top: 18px;">
+					<span width="100">주소</span><span style="color: red">*</span>
+				</div>
+				<div>
+					<select name="address" size="1" class="nice-select form-control" style="width: 27%">
 						<option value="강원">강원</option>
 						<option value="경기">경기</option>
 						<option value="경남">경남</option>
@@ -226,35 +245,14 @@
 						<option value="충남">충남</option>
 						<option value="충북">충북</option>
 					</select>
-				</td>
-			</tr>
-			
-			<tr>
-				<th width="100">이메일</th>
-				<td>
-					<input type="text" name="email1" required="required" style="width:120px;">
-				<b>@</b>
-					<input type="text" name="email2" id="email2" required="required" style="width:120px;">
-					
-					<select id="selEmail">
-						<option value="-">직접입력</option>
-						<option value="naver.com">네이버</option>
-						<option value="gmail.com">구글</option>
-						<option value="hanmail.net">다음카카오</option>
-						<option value="nate.com">네이트</option>
-					</select>
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2", align="center">
-					<button type="submit" style="width:100px;" id="signup">저장하기</button>
-					<button type="reset" style="width:100px;">초기화</button>
-				</td>
-			</tr>
-		</table>
-	</form>
-	</div>
+				</div>
+				<div style="margin-top: 50px; margin-left: 120px;">
+					<button type="submit" class="btn btn-outline-secondary" style="width: 100px; color: black" id="signup">회원가입</button>
+					&nbsp;
+					<button type="reset" class="btn btn-outline-secondary" style="width: 100px; color: black">초기화</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
