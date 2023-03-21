@@ -45,48 +45,14 @@
 <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#7952b3">
 
-<style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
+<style type="text/css">
 
-.container {
-	width: 1200px;
-}
+ 	#btns{
+ 		width: 100%;
+ 	}
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-.card-img {
-	width: 100%;
-	overflow: hidden;
-}
-
-img {
-	max-width: 100%;
-	cursor: pointer;
-	transition: transform .3s; /* Animation */
-}
-img:hover {
-	transform: scale(1.1);
-  -webkit-transform: scale(1.1); /* 크롬, 사파리 */
-  -moz-transform: scale(1.1);  /* 파이어폭스 */
-  -ms-transform: scale(1.1); /* IE */
-  -o-transform: scale(1.1);  /* 오페라 */
-}
-
-#profile-img {
-	width: 20px;
-	border-radius: 30px 30px;
-}
 </style>
+
 </head>
 <%
 //세션값 얻기
@@ -117,15 +83,17 @@ if (saveok != null) {
 			<br>
 
 			<div class="form-inline form-group">
-				<div style="margin-left: 10px">
+				<div>
 					<input type="checkbox" name="cbsave"
 						<%=saveok == null ? "" : "checked"%> style="width: 13px">
 				</div>
 				<label for="phone_num" class="col-sm-0 control-label" style="padding-left: 5px; padding-top: 5px; color:gray;">아이디 저장
 				</label>
 			</div>
-			<div style="">
+			<div id="btns">
 				<input type="submit" id="login" value="Login">
+				<br>
+				<a class ="kakao-login-btn"></a>
 			</div>
 
 		</form>
@@ -141,7 +109,7 @@ if (saveok != null) {
 	<!--login-form-wrap-->
 	<!-- partial -->
 			 
-	<a class ="kakao-login-btn"></a>
+	
 	<div id="result">
 	</div>
     

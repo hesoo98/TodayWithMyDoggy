@@ -83,7 +83,10 @@
 	table{
 		table-layout: fixed
 	}
-
+	
+	a:hover{
+		color: black;
+	}
 </style>
 
 </head>

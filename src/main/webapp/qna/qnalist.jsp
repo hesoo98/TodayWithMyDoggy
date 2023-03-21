@@ -165,7 +165,7 @@ String myid=(String)session.getAttribute("myid");
 	    <td width="50">번호</td>
 	    <td width="100">작성자</td>
 	    <td width="250">제목</td>
-	    <td width="150">날짜</td>
+	    <td width="150">작성일</td>
 	    <td width="100">답변</td>
 	  </tr>
 	  
