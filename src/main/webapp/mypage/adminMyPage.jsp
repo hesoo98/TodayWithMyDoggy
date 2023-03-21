@@ -89,7 +89,7 @@
 				<div class="rectangle">
 					<div style="flex-direction: row; display: flex;">
 						<p>답변을 기다리는 질문</p>
-						<button class="moreBtn btn btn-xs btn-warning">더 보기</button>
+						<button class="moreBtn btn btn-xs btn-warning" onclick="location.href='index.jsp?main=mypage/admin/showWaitingQuestion.jsp'">더 보기</button>
 					</div>
 					<div>
 						<table class="table table-bordered">
@@ -106,7 +106,7 @@
 							<tr>
 								<td><%=q.getNum() %></td>
 								<td><%=nickname %></td>
-								<td><a href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
+								<td style='width:350px;overflow:hidden;text-overflow;ellipsis;'><a href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
 							</tr>
 							<%}%>
 						<%} else {%>
