@@ -132,7 +132,7 @@
 	
 	
 	
-   <div style=" margin: 20px 30px;" id="abc">
+   <div style=" margin: 20px 200px 20px 200px;" id="abc">
    
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
     <form id="togglecheck">

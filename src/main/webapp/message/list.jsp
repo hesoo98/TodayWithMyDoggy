@@ -330,7 +330,7 @@
 			var a=confirm(len+"개의 글을 삭제합니다.");
 
 			var n="";
-			$(".alldel:checked").each(function(idx){
+			$(".chk-del:checked").each(function(idx){
 				n+=$(this).val()+",";
 			})
 			
