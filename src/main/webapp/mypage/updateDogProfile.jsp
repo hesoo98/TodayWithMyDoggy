@@ -76,10 +76,11 @@
 	
 </script>
 	<div class="container main" style="border:1px solid red;">
-		<h1>강아지 수정 폼</h1>
 		<div class="" style="width:800px;margin:0 auto;">
+			<p style="font-size: 2rem; margin-top: 50px;">강아지 정보 수정</p>
 			<form action="mypage/updateDogAction.jsp" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="idx" value="<%=dog_idx%>">
+				<input type="hidden" name="pre_photo" value="<%=photo_name %>">
 				<div class="row" style="float:none;">
 					<div class="row" style="float:none;margin:0 auto;">
 						<img src="/TodayWithMyDoggy/mypage/dogImg/<%=photo_name %>" id="dogprofile">
@@ -121,8 +122,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<input type=submit class="btn btn-warning btn-lg" value=저장하기 style="float:right;">
+						<td colspan="2" style="text-align: right;">
+							<input type=submit class="btn btn-warning btn-lg" value=저장하기 style="margin-right: 10px;">
+							<button type="button" class="btn btn-danger btn-lg" onclick="location.href='mypage/deleteDog.jsp?idx=<%=dog_idx%>'">삭제하기</button>
 						</td>
 					</tr>
 				</table>
