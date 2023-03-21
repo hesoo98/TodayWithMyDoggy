@@ -22,6 +22,13 @@
 		}
 	</style>
 	<script type="text/javascript">
+		$(function(){
+			// 카메라 이미지 눌렀을때 선택창 클릭한 것처럼 하기.
+			$("i").click(function(){
+				$("#photo").trigger("click"); //이벤트 강제호출 : trigger
+			});
+		});
+		
 		function readURL(input) {
 			if(input.files && input.files[0]) {
 				var reader = new FileReader();
@@ -44,8 +51,13 @@
 						<img src="" id="dogprofile">
 					</div>
 				</div>
-				<div class="row">
+				<%-- <div class="row">
 				 	<input type="file" name="photo" id="photo" onchange="readURL(this)" required="required">
+				</div>--%>
+				
+				<div class="row justify-content-end">
+					<i class="fa-solid fa-camera camera">&nbsp;&nbsp;<b>사진 수정</b></i>
+				 	<input type="file" name="photo" id="photo" style="visibility: hidden;" onchange="readURL(this)" required="required">
 				</div>
 				<table class="table table-borderless align-middle">
 					<tr>
