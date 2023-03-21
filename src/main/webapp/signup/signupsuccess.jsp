@@ -22,7 +22,7 @@ String nickname=dao.getNickname(id);
 		<br><br>
 		
 		<button type="button" class="btn btn-success" onclick="location.href='index.jsp?main=login/loginform.jsp'">로그인</button>
-		<button type="button" class="btn btn-success" onclick="#">메인 페이지로</button>
+		<button type="button" class="btn btn-success" onclick="location.href='index.jsp?main.jsp'">메인 페이지로</button>
 	</div>
 </body>
 </html>

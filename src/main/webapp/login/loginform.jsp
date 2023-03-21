@@ -142,7 +142,6 @@ if (saveok != null) {
 	<!-- partial -->
 			 
 	<a id="kakao-login-btn"></a>
-	<button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button>
 	<div id="result">
 	</div>
     
@@ -160,18 +159,30 @@ console.log(Kakao.isInitialized());
           id = result.id
           connected_at = result.connected_at
           kakao_account = result.kakao_account
+          nickname= kakao_account.profile.nickname
           $('#result').append(kakao_account);
-          resultdiv="<h2>로그인 성공 !!"
-          resultdiv += '<h4>id: '+id+'<h4>'
-          resultdiv += '<h4>connected_at: '+connected_at+'<h4>'
-          email ="";
+          resultdiv=""
+          email = kakao_account.email;
           if(typeof kakao_account != 'undefined'){
         	  email = kakao_account.email;
           }
-          resultdiv += '<h4>email: '+email+'<h4>'
           $('#result').append(resultdiv);
           
-        },
+          //ajax
+          $.ajax({
+        	  type:"post",
+        	  dataType:"json",
+        	  url:"index.jsp?main=login/kakao/kakaologin.jsp",
+        	  data:{"id":id,"nickname":nickname,"email":email},
+        	  success:function(){
+        		  location.reload();
+        	  }
+        	  
+          })
+          location.href="index.jsp?main.jsp"
+        }
+      
+      ,
         fail: function(error) {
           alert(
             'login success, but failed to request user information: ' +
@@ -184,19 +195,6 @@ console.log(Kakao.isInitialized());
       alert('failed to login: ' + JSON.stringify(err))
     },
   })
-</script>
-        <script type="text/javascript">
-  function unlinkApp() {
-    Kakao.API.request({
-      url: '/v1/user/unlink',
-      success: function(res) {
-        alert('success: ' + JSON.stringify(res))
-      },
-      fail: function(err) {
-        alert('fail: ' + JSON.stringify(err))
-      },
-    })
-  }
 </script>
 
 </body>
