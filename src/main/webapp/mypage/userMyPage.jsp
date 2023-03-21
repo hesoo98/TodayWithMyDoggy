@@ -128,8 +128,11 @@
 			</div>
 		<%}%>
 
-			<div class="" style="height: 300px; margin-top: 50px;">
-				<p>나의 질문</p>
+			<div class="" style="height: 400px; margin-top: 50px;">
+				<div>
+					<p>나의 질문</p>
+					<button type="button" class="btn btn-warning float-right" onclick="location.href='index.jsp?main=mypage/myQuestionList.jsp'">더보기</button>
+				</div>
 				<table class="table table-hover">
 					<tr>
 						<td>번호</td>
