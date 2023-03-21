@@ -34,9 +34,10 @@ String nickname = dao.getNickname(myid);
 
 <body>
 	<nav class="navbar navbar-expand-custom navbar-mainbg m-0 p-0">
-		<a class="navbar-brand navbar-logo ml-4 pb-2 pt-2"
+		<img src="/TodayWithMyDoggy/css/doglogg.png" width="50px;" style=" margin-left: 80px; margin-right: 10px;">
+		<a class="navbar-brand navbar-logo pb-2 pt-2"
 			href="index.jsp?main.jsp">
-			<div style="font-size: 16px;">TodayWithMyDoggy</div>
+			<div style="font-size: 16px;"><b>TodayWithMyDoggy</b></div>
 		</a>
 		<button class="navbar-toggler" type="button"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -49,25 +50,7 @@ String nickname = dao.getNickname(myid);
 					<div class="left"></div>
 					<div class="right"></div>
 				</div>
-				<%
-				if (loginok == null) {
-				%>
-				<!-- 로그인 하지 않았을경우 관리자,마이페이지 안보이게 -->
-				<%
-				} else if (loginok != null && isAdmin.equals("0")) {
-				%>
-				<li class="nav-item"><a class="nav-link"
-					href="<%=root%>/index.jsp?main=mypage/userMyPage.jsp"><i
-						class=""></i>마이페이지</a></li>
-				<%
-				} else {
-				%>
-				<li class="nav-item"><a class="nav-link"
-					href="<%=root%>/index.jsp?main=mypage/adminMyPage.jsp"><i
-						class=""></i>관리자페이지</a></li>
-				<%
-				}
-				%>
+				
 				<li class="nav-item active"><a class="nav-link"
 					href="<%=root%>/index.jsp?main=dog-friend/board.jsp"><i
 						class="far"></i>같이 걸어요</a></li>
@@ -97,9 +80,9 @@ String nickname = dao.getNickname(myid);
 				%>
 
 				<a href="index.jsp?main=message/list.jsp"
-					style="width: 30px; padding-top: 15px; margin-left: 30px; margin-right: 15px;">
+					style="width: 25px; padding-top: 15px; margin-left: 50px; margin-right: 15px;">
 					<i class="fa-solid fa-envelope"
-					style="color: #333; font-size: 25px"></i>
+					style="color: #5b5b5b; font-size: 25px"></i>
 				</a>
 				<%
 				String memberNum = dao.getNum(myid);
@@ -117,29 +100,70 @@ String nickname = dao.getNickname(myid);
 						id="profile-img" style="width: 100%; height: 100%">
 				</div>
 				<i class="fa-solid fa-caret-down fa-rotate-270"
-					style="margin-top: 0px; margin-left: 25px; cursor: pointer;"></i>
-
+					style="margin-left: 25px; cursor: pointer;"></i>
+					
+				<div class="profile-bar">
+				
+				<%
+				if (loginok == null) {
+				%>
+				<!-- 로그인 하지 않았을경우 관리자,마이페이지 안보이게 -->
+				<%
+				} else if (loginok != null && isAdmin.equals("0")) {
+				%>
 				<i class="fa-solid fa-user"
-					style="color: #930606; padding-top: 20px; margin-left: 30px;"
-					onclick="location.href='mypage/userMyPage.jsp'"></i>
-				<span style="font-size: 13px; padding-top: 17px;"
-					onclick="location.href='mypage/userMyPage.jsp'">MyPage</span>
-
-				<div>
+						style="color: #494949; cursor: pointer;"
+						onclick="location.href='mypage/userMyPage.jsp'">
+					</i> 
+					<span
+						style="font-size: 11px; cursor: pointer;"
+						onclick="location.href='mypage/userMyPage.jsp'">마이페이지
+					</span> 
 					<i class="fa-solid fa-right-from-bracket"
-						style="color: #930606; padding-top: 20px; margin-left: 30px;"
-						onclick="location.href='login/logoutaction.jsp'"></i> <span
-						style="font-size: 13px; padding-top: 17px;"
-						onclick="location.href='login/logoutaction.jsp'">Logout</span>
+						style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
+						onclick="location.href='login/logoutaction.jsp'">
+					</i> 
+					<span
+						style="font-size: 11px; padding-bottom: 5px; cursor: pointer;"
+						onclick="location.href='login/logoutaction.jsp'">로그아웃
+					</span>
+				<%
+				} else {
+				%>
+				
+				<i class="fa-solid fa-user"
+						style="color: #494949; cursor: pointer;"
+						onclick="location.href='mypage/userMyPage.jsp'">
+					</i> 
+					<span
+						style="font-size: 11px; cursor: pointer;"
+						onclick="location.href='mypage/adminMyPage.jsp'">마이페이지
+					</span> 
+					<i class="fa-solid fa-right-from-bracket"
+						style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
+						onclick="location.href='login/logoutaction.jsp'">
+					</i> 
+					<span
+						style="font-size: 11px; padding-bottom: 5px; cursor: pointer;"
+						onclick="location.href='login/logoutaction.jsp'">로그아웃
+					</span>
+				<%
+				}
+				%>	
 				</div>
 				<%
 				}
 				%>
-
 			</ul>
 		</div>
 	</nav>
 </body>
+<script type="text/javascript">
+	$(".profile-bar").hide();
+	$(".fa-caret-down").click(function () {
+		$(".profile-bar").toggle('fast')
+	});
+</script>
 <script src="https://kit.fontawesome.com/2663817d27.js"
 	crossorigin="anonymous"></script>
 </html>

@@ -130,8 +130,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 <body>
 	<div class="album py-5 bg-light">
 		<div class="container">
-			<button type="button" class="btn btn-warning" id="moveAdd"
-				onclick="location.href='index.jsp?main=place-share/write.jsp'">글쓰기</button>
+			<button type="button" class="btn btn-light" id="moveAdd" style="font-size: 14px;"
+				onclick="location.href='index.jsp?main=place-share/write.jsp'"><i>글쓰기</i></button>
 			<br> <br>
 			<div
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
