@@ -326,4 +326,22 @@ public class DogProfileDao {
 			db.dbClose(pstmt, conn);
 		}	
 	}
+	
+	// member_num을 받아서 강아지 주인의(membernum) 모든 강아지 삭제
+	public void deleteUserDog(String member_num) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "delete from dog_profile where member_num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member_num);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}	
+	}
 }
