@@ -9,20 +9,6 @@
 <title>Today With My Doggy</title>
 
 <style type="text/css">
-@font-face {
-	font-family: 'Dovemayo_gothic';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
 
 @font-face {
     font-family: 'SUIT-Regular';
@@ -30,7 +16,6 @@
     font-weight: normal;
     font-style: normal;
 }
-
 
 * {
 	font-family: SUIT-Regular;
@@ -55,23 +40,50 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
 <style type="text/css">
-.main {
-	height: 500px;
+
+*{
+	padding: 0px;
+	margin: 0px;
 }
 
-div.main {
+.main {
 	height: auto;
 	min-height: 100%;
+	width: 1280x;
+}
+	
+#wrapper{
+	display: flex;
+	height: auto;
+	justify-content: space-between;
+	margin: 30px 0px;
+}
+
+.aside{
+	width: 200px;
 }
 
 #footer {
+	margin: auto;
+	clear: both;
 	height: 200px;
-	position: relative;
-	transform: translateY(-100%);
 }
+
+	/* css */
+	
+	input,textarea{
+		padding: 2px 3px;
+	}
+
+	input:focus,textarea:focus, select {
+	    outline: none;
+	}
+	
+	table{
+		table-layout: fixed
+	}
+
 </style>
 
 </head>
@@ -87,15 +99,25 @@ String root = request.getContextPath();
 <body>
 	<!-- 페이지 전환시 navbar 위 공간 오류 원인 -->
 	<div class="layout main">
-		<div class="layout menu">
+		<div id="menu">
 			<jsp:include page="layout/menu.jsp" />
 		</div>
-		<div>
-			<jsp:include page="<%=mainPage%>" />
-		</div>
-		<div id="layout footer">
-			<jsp:include page="layout/footer.jsp" />
+		
+		<div id="wrapper">
+			<div class="aside">
+				<jsp:include page="layout/aside-left.jsp" />
+			</div>
+			<div>
+				<jsp:include page="<%=mainPage%>" />
+			</div>
+			<div class="aside">
+				<jsp:include page="layout/aside-right.jsp" />
+			</div>
 		</div>
 	</div>
+		
+		<div id="footer">
+			<jsp:include page="layout/footer.jsp" />
+		</div>
 </body>
 </html>

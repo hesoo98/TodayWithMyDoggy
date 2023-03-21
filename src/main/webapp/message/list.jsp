@@ -28,7 +28,6 @@
 	
 	.detail{
 	  width: 350px;
-	  margin-right: 100px;
 	}
 	
 	.content{

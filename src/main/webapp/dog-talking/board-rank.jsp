@@ -42,7 +42,7 @@
 }
 
 .container {
-	width: 1200px;
+	width: 800px;
 }
 
 @media ( min-width : 768px) {
@@ -156,33 +156,34 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 								<%}
 								%>
 								
-									<div style="display: flex; justify-content: flex-end;">
-									
-									<%//댓글 있으면 댓글 수 , 없으면 조회수 출력
-									DogTalkingAnswerDao adao=new DogTalkingAnswerDao();
-									DogTalkingAnswerDto adto=new DogTalkingAnswerDto();
-									List<DogTalkingAnswerDto> alist=adao.showAnswers(dto.getNum());
-									
-									if(alist.size()==0){%>
-									<i class="fa-solid fa-paw"></i>
-									조회수 <%=dto.getReadCount()%>
-									<%}else{%>
-									<i class="fa-solid fa-paw"></i>
-									댓글 <%=alist.size()%>
-									<%}
-									%>
-									<br>
-									<i class="fa-solid fa-fire"></i>
-									좋아요 <%=dto.getLikes()%></small>
-									</div>
+								<div style="display: flex; justify-content: flex-end;">
+								
+								<%//댓글 있으면 댓글 수 , 없으면 조회수 출력
+								DogTalkingAnswerDao adao=new DogTalkingAnswerDao();
+								DogTalkingAnswerDto adto=new DogTalkingAnswerDto();
+								List<DogTalkingAnswerDto> alist=adao.showAnswers(dto.getNum());
+								
+								if(alist.size()==0){%>
+								<i class="fa-solid fa-paw"></i>
+								조회수 <%=dto.getReadCount()%>
+								<%}else{%>
+								<i class="fa-solid fa-paw"></i>
+								댓글 <%=alist.size()%>
+								<%}
+								%>
+								<br>
+								<i class="fa-solid fa-fire"></i>
+								좋아요 <%=dto.getLikes()%></small>
+								</div>
+								
 							</div>
 						</div>
 					</div>
-				</div>
 				<%
 				}
 				%>
 				
+				</div>
 			</div>
 		</div>
 		<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js"

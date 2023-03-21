@@ -14,6 +14,15 @@
 	.wrapper{
 		margin: 100px 200px;
 	}
+		
+	input:focus {
+	    outline: none;
+	}
+	
+	textarea:focus {
+	    outline: none;
+	}
+	
 
 </style>
 </head>
@@ -27,7 +36,7 @@
        <tr>
        	<td>제목</td>
        	<td><input type="text" name="title" placeholder="제목을 입력하세요" style="width: 100%;"></td>
-       	<td>
+       	<td width="100">
        	<select name="secret">
        		<option value="0">공개글</option>
        		<option value="1">비밀글</option>

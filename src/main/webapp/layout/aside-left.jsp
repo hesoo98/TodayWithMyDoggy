@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	ㅋㅋㅋㅋㅋ
+	
 </body>
 </html>
