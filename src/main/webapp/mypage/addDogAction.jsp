@@ -19,7 +19,7 @@
 	
 	//이미지가 업로드되는 실제경로
 	String realPath=getServletContext().getRealPath("/mypage/dogImg");
-	System.out.println(realPath);
+	//System.out.println(realPath);
 	
 	int uploadSize = 1024*1024*5; //5mb
 	MultipartRequest multi = null;
