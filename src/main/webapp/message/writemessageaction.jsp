@@ -1,9 +1,9 @@
-<%@page import="message.MessageDto"%>
 <%@page import="message.MessageDao"%>
+<%@page import="message.MessageDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-
-    <%
+    
+<%
     request.setCharacterEncoding("utf-8");
     
     String num=request.getParameter("num");
@@ -19,5 +19,5 @@
     MessageDao dao=new MessageDao();
     dao.insertMessage(dto);
     
-    response.sendRedirect("../index.jsp?main=dog-friend/detail.jsp?num="+num);
+    response.sendRedirect("../index.jsp?main=message/list.jsp");
     %>

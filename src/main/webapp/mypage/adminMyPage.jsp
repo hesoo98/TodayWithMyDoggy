@@ -22,7 +22,7 @@
 			margin-left: auto;
 		}
 		table {
-		table-layout:fixed;
+			table-layout:fixed;
 			text-overflow: ellipsis;
 			max-width: 500px;
 			white-space: nowrap;
@@ -33,8 +33,6 @@
 <%
 	MemberDao mdao = new MemberDao();
 	List<MemberDto> userList = mdao.getAllUserList();
-	
-
 %>
 	<div class="container" style="border:1px solid black;display: flex; justify-content: center;">
 		<div class="" style="width: 1000px; border:1px solid red; display: flex; flex-direction: column;">	
@@ -45,7 +43,7 @@
 				<div class="rectangle">
 					<div style="flex-direction: row; display: flex;">
 						<p>유저 관리</p>
-						<button class="moreBtn btn btn-xs btn-warning">더 보기</button>
+						<button class="moreBtn btn btn-xs btn-warning" onclick="location.href='index.jsp?main=mypage/admin/manageUserList.jsp'">더 보기</button>
 					</div>
 					
 					<div>
@@ -71,11 +69,13 @@
 				
 				<div class="rectangle">
 					<div style="flex-direction: row; display: flex;">
-						<p>방문자 현황</p>
+						<p>답변을 기다리는 질문</p>
 						<button class="moreBtn btn btn-xs btn-warning">더 보기</button>
 					</div>
 					<div></div>
 				</div>
+				
+				
 			</div>
 			
 			<div style="flex-direction: row; display: flex;">
@@ -89,7 +89,7 @@
 				
 				<div class="rectangle">
 					<div style="flex-direction: row; display: flex;">
-						<p>Q&A 현황</p>
+						<p>방문자 현황</p>
 						<button class="moreBtn btn btn-xs btn-warning">더 보기</button>
 					</div>
 					<div></div>
