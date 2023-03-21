@@ -1,4 +1,4 @@
-<%@page import="board.qna.QnaBoardDto"%>
+	<%@page import="board.qna.QnaBoardDto"%>
 <%@page import="board.qna.QnaBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
@@ -15,6 +15,14 @@
 
 	.wrapper{
 		margin: 100px 200px;
+	}
+	
+	input:focus {
+	    outline: none;
+	}
+	
+	textarea:focus {
+	    outline: none;
 	}
 
 </style>

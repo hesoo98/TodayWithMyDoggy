@@ -47,7 +47,7 @@
 }
 
 .container {
-	width: 1200px;
+	width: 800px;
 	margin-bottom: 50px;
 }
 
