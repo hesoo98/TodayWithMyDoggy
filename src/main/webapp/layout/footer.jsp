@@ -36,7 +36,7 @@
               <a href="index.jsp">TodayWithMyDoggy</a>
             </div>
             <ul class="list-unstyled nav-links mb-5">
-              <li><a href="#orga--">About</a></li>
+              <li><a href="#">About</a></li>
               <li><a href="#">Contact</a></li>
               <li><a href="#">Press</a></li>
               <li><a href="#">Careers</a></li>

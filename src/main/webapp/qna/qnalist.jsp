@@ -16,22 +16,12 @@
 
 <style type="text/css">
 
-	.wrapper{
-		width: 700px;
-		margin: 50px 20px;
-	}
-	
 	.wrapper-top{
 		float: right;
-		margin-bottom: 20px;
+		margin: 10px 10px;
 	}
 	
-	#search-bar{
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	}
-	
+
 	input:focus{
 		outline: none;
 	}
@@ -82,6 +72,18 @@
 	background-color: #fce694;
 	border-radius: 100%;
 	color: #fff;
+}
+
+td:not(.table-title), tr{
+	text-align: center;
+}
+
+.table-title{
+	text-align: left;
+	text-overflow: ellipsis;  /* 말줄임 적용 */
+	width: 240px;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 </style>
@@ -143,30 +145,6 @@ String myid=(String)session.getAttribute("myid");
 
 	<div class="wrapper container">
 	
-	<!-- 검색 -->
-		 <form action="./qna/qnalist.jsp" method="get" id="search-bar">
-			<div
-				class="p-1 bg-light rounded rounded-pill shadow-sm ml-5 mg-5 pr-4"
-				style="padding-right: 150px; margin-left: 30px;">
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<button id="button-addon2" type="submit"
-							class="btn btn-link text-warning">
-							<i class="fa fa-search"></i>
-						</button>
-					</div>
-					<input type="search" placeholder="제목이나 내용으로 검색해보세요!"
-						 name="word" 
-						class="border-0 bg-light" style="width: 300px;">
-					<%
-					if(word!=null){%>
-					<button type="button" onclick="history.back()">전체글보기</button>
-					<%}
-					%>
-				</div>
-			</div>
-		 </form>
-	
 	<div class="wrapper-top">
 		 
 	<%
@@ -182,13 +160,13 @@ String myid=(String)session.getAttribute("myid");
 	%>
 	</div>
 	
-	<table class="table table-hover">
+	<table class="table">
 	  <tr>
 	    <td width="50">번호</td>
 	    <td width="100">작성자</td>
-	    <td width="200">제목</td>
-	    <td width="50">날짜</td>
-	    <td width="50">답변</td>
+	    <td width="250">제목</td>
+	    <td width="150">날짜</td>
+	    <td width="100">답변</td>
 	  </tr>
 	  
 	  <%
@@ -208,7 +186,7 @@ String myid=(String)session.getAttribute("myid");
 		    <td><%=nickname %></td>
 		    
 		    <!-- 제목 -->
-			<td>
+			<td class="table-title">
 		    <%
 		    //비밀글 체크
 		    if(flag.equals("1")){ 
@@ -256,9 +234,14 @@ String myid=(String)session.getAttribute("myid");
 		    QnaAnswerDto adto=adao.getAnswer(q.getNum());
 		    
 		    if(adto.getIdx()==null){%>
-			    <td>대기중</td>
+			    <td>
+			    <button type="button" style="height: 30px; line-height: 15px;" class="btn border-secondary" disabled>대기중</button>
+			    </td>
 		    <%}else{%>
-		    	<td>답변완료</td>
+		    	<td>
+		    	<button type="button" style="height: 30px; line-height: 15px;" class="btn border-secondary" disabled>답변완료</button>
+		    	</td>
+		    	
 		    <%}
 		    %>
 		  </tr>
