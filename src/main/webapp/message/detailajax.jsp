@@ -19,7 +19,7 @@
 	ob.put("num", dto.getNum());
 	ob.put("sender", dto.getSender());
 	ob.put("receiver",dto.getReceiver());
-	ob.put("content", dto.getContent());
+	ob.put("content", dto.getContent().replace("\n", "<br>"));
 	ob.put("writeday",sdf.format(dto.getWriteday()));
 	ob.put("isRead",dto.getIsRead());
 

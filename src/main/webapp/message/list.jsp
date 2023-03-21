@@ -1,3 +1,4 @@
+<%@page import="member.MemberDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="message.MessageDto"%>
 <%@page import="java.util.List"%>
@@ -8,6 +9,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
 
@@ -26,8 +28,71 @@
 	
 	.detail{
 	  width: 350px;
+	  margin-right: 100px;
 	}
+	
+	.content{
+	  cursor: pointer;
+	}
+	
+	#btn-del:hover{
+	  background-color: #fce694;
+	}
+	
+	.span-btn{
+	  margin: 0px 2px;
+	  cursor: pointer;
+	}
+	
+	.btns-left{
+	  float: left;
+	}
+	
+	.btns-right{
+	  float: right;
+	}
+	
+	/* 페이지 */
 
+	.pagination{
+	  padding-top: 0px;
+	  padding-bottom: 30px;
+	}
+	
+	.pagination ul{
+	  margin: 0;
+	  padding: 0;
+	  list-style-type: none;
+	}
+	
+	.pagination a{
+	  display: inline-block;
+	  padding: 10px 18px;
+	  color: #222;
+	}
+	
+	.p1 a{
+	  width: 40px;
+	  height: 40px;
+	  line-height: 40px;
+	  padding: 0;
+	  text-align: center;
+	}
+	
+	.p1 li.active{
+		background-color: #fce694;
+		border-radius: 100%;
+		color: #fff;
+	}
+	
+	input[type="checkbox"]{
+		border:2px solid #F47C7C;
+	}
+	
+	input[type="checkbox"]:checked{
+		background-color: red;
+	} 
+	
 
 </style>
 
@@ -36,6 +101,7 @@
 	<%
 	
 	MessageDao dao=new MessageDao();
+	MemberDao memdao=new MemberDao();
 	
 	//로그인, 세션아이디 체크 (id=receiver인 메시지만 불러오기)
 	String loginok=(String)session.getAttribute("loginok");
@@ -81,10 +147,9 @@
 	<div class="container wrapper">
 	<div>
 	<span>총 <span id="cnt"></span>개의 읽지 않은 쪽지가 있습니다.</span>
-	<table class="table table-hover" style="width: 700px;">
+	<table class="table" style="width: 600px;">
 	  <tr>
-	    <td width="50"><input type="checkbox"></td>
-	    <td width="50">번호</td>
+	    <td width="50"><input type="checkbox" class="alldelcheck"></td>
 	    <td width="150">보낸사람</td>
 	    <td width="300">내용</td>
 	    <td width="200">보낸날짜</td>
@@ -92,18 +157,17 @@
 	  
 	  <%for(MessageDto dto:list){%>
 	  <tr>
-	    <td><input type="checkbox"></td>
-	    <td><%=dto.getNum() %></td>
-	    <td><%=dto.getSender() %></td>
+	    <td><input type="checkbox" class="chk-del" value="<%=dto.getNum()%>"></td>
+	    <td><%=dto.getSender() %>(<%=memdao.getNickname(dto.getSender()) %>)</td>
 	    
 	    <td>
 	    <span class="link-detail">
-	    <input type="hidden" id="num" value="<%=dto.getNum()%>">
+	    <input type="hidden" name="num" id="num" value="<%=dto.getNum()%>">
 	    <% //isread 체크
 	    if(dto.getIsRead()==1){ //읽은 글%>
-	      <span class="is-read"><%=dto.getContent() %></span>
+	      <span class="content is-read"><%=dto.getContent() %></span>
 	    <%}else{ //안읽은 글%>
-	      <span><%=dto.getContent() %></span>
+	      <span class="content"><%=dto.getContent() %></span>
 	    <%}
 	    %>
 	    </span>
@@ -111,9 +175,76 @@
 	    
 	    <td><%=sdf.format(dto.getWriteday()) %></td>
 	    </tr>
+	    
+	    <!-- Modal -->
+		<div class="modal fade" id="exampleModal">
+  		<div class="modal-dialog">
+   		 <div class="modal-content">
+   		 
+    		 <div class="modal-header">
+    		    <h5 class="modal-title" id="exampleModalLabel">답장하기</h5>
+     		   <button type="button" class="close" data-dismiss="modal">
+    		      <span aria-hidden="true">&times;</span>
+    		    </button>
+    		 </div>
+   		  
+		<div class="modal-body">
+		<form action="message/writemessageaction.jsp" method="post">
+		<input type="hidden" name="num" value="<%=dto.getNum()%>">
+		<input type="hidden" name="receiver" value="<%=dto.getSender()%>">
 		  
+		<textarea rows="10" style="width:400px" name="content" placeholder="답장 내용을 입력하세요"
+		required="required"></textarea>
+	  
+	 	<div class="modal-footer">
+	   	<button type="button" data-dismiss="modal">취소</button>
+	   	<button type="submit" onclick="alert('답장이 전송되었습니다.')">답장하기</button>
+		</div>
+    	
+	    </form>
+   	  	</div>
+   		 </div>
+  		</div>
+		</div>
+			
 	  <%} %>
 	</table>
+	<button type="button" id="btn-del" class="btn btn-default">전체삭제</button>
+	
+	<!-- 페이징 출력 -->
+	<div style="display: flex; justify-content: center;">
+		<ul class="pagination p1">
+			<%
+			//이전
+			if (startPage > 1) {
+			%>
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=startPage - 1%>">이전</a>
+			</li>
+			<%
+			}
+			for (int pp = startPage; pp <= endPage; pp++) {
+			if (pp == currentPage) {
+			%>
+			<li class="active"><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a>
+			</li>
+			<%
+			} else {
+			%>
+
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+			<%
+			}
+			}
+			//다음
+			if (endPage < totalPage) {
+			%>
+			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+			<%
+			}
+			%>
+		</ul>
+	</div>
+	
 	</div>
 	
 	<div class="detail"></div>
@@ -126,6 +257,7 @@
 	
 	$("#cnt").html(<%=dao.getUnreadCount(id)%>);
 	
+	//디테일페이지 나타나게
 	$(".link-detail").click(function(){
 		var num=$(this).find("#num").val();
 		
@@ -140,7 +272,9 @@
 			success: function(res){
 				
 				var s="";
-				s+="<span>쪽지 상세</span>"
+				s+="<div class='btns-left'><span>쪽지 상세</span></div>";
+				s+="<div class='btns-right'><span class='span-btn' data-toggle='modal' data-target='#exampleModal'>답장</span>";
+				s+="<span class='span-btn' onclick='delMessage("+res.num+")'>삭제</span></div>";
 				s+="<table class='table'>";
 				s+="<tr><td>보낸사람</td><td>"+res.sender+"</td></tr>";
 				s+="<tr><td>보낸날짜</td><td>"+res.writeday+"</td></tr>";
@@ -151,7 +285,64 @@
 				$(".detail").html(s);
 			}
 		})
+		
 	})
+	
+	//디테일페이지에서 쪽지 하나 삭제
+	function delMessage(n){
+		
+		var a=confirm("받은 쪽지를 삭제하시겠습니까?");
+		var num=n;
+		
+		if(a){
+			//location.href="message/delete.jsp";
+			$.ajax({
+				type:"get",
+				url:"message/delete.jsp",
+				data:{"num":num},
+				dataType:"html",
+				success: function(res){
+					alert("정상적으로 삭제되었습니다.");
+					location.reload();
+				}
+			})
+		}else{
+			return false;
+		}
+		
+	}
+	//전체 체크 클릭시 체크값 얻어서 모든 체크값에 전달
+	$(".alldelcheck").click(function(){
+		var chk=$(this).is(":checked");
+		
+		//전체체크값을 글 앞의 체크에 일괄 전달
+		$(".chk-del").prop("checked",chk);
+	})
+	
+	// 전체삭제
+	$("#btn-del").click(function(){
+		
+		//체크된 길이
+		var len=$(".chk-del:checked").length;
+		//alert(len);
+		
+		if(len==0) alert("최소 한 개 이상의 글을 선택해주세요.");
+		else {
+			var a=confirm(len+"개의 글을 삭제합니다.");
+
+			var n="";
+			$(".alldel:checked").each(function(idx){
+				n+=$(this).val()+",";
+			})
+			
+			n=n.substring(0, n.length-1);
+			
+			//삭제파일로 전송
+			location.href="message/deleteall.jsp?nums="+n;
+		}
+		
+	})
+	
 	
 	</script>
 	
