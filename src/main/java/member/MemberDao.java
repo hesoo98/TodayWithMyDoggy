@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import board.notification.NotificationDto;
 import board.placeShare.PlaceShareBoardDto;
 import mysql.db.DbConnect;
 import profile.dogProfile.DogProfileDto;
@@ -347,5 +349,74 @@ public class MemberDao {
 				db.dbClose(rs, pstmt, conn);
 			}
 			return list;
+		}
+		
+		// paging select
+		public List<MemberDto> selectPageingUserList(int start, int perpage) {
+			List<MemberDto> list = new ArrayList<MemberDto>();
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member order by num desc limit ?,?";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, perpage);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					MemberDto dto = new MemberDto();
+					dto.setNum(rs.getString("num"));
+					dto.setNickname(rs.getString("nickname"));
+					dto.setId(rs.getString("id"));
+					dto.setPassword(rs.getString("password"));
+					dto.setHp(rs.getString("hp"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setEmail(rs.getString("email"));
+					dto.setCreateDay(rs.getTimestamp("create_day"));
+					dto.setAuth(rs.getInt("auth"));
+					list.add(dto);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+			}
+			return list;
+		}
+		
+		//회원 삭제
+		public void deleteUser(String num) {
+			Connection conn=db.getConnection();
+			PreparedStatement pstmt=null;
+			String sql="delete from member where num=?";
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, num);
+				pstmt.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(pstmt, conn);
+			}
+		}
+		
+		// 일반 유저 관리자로 승격
+		public void updateAuth(String num) {
+			Connection conn=db.getConnection();
+			PreparedStatement pstmt=null;
+			String sql="update member set auth=1 where num = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, num);
+				pstmt.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(pstmt, conn);
+			}
 		}
 }

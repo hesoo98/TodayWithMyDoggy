@@ -5,6 +5,8 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -139,5 +141,61 @@ if (saveok != null) {
 	<!--login-form-wrap-->
 	<!-- partial -->
 			 
+	<a id="kakao-login-btn"></a>
+	<div id="result">
+	</div>
+    
+   <script type="text/javascript">
+Kakao.init('c3daec463cc1c038e93542b4609bf488');
+console.log(Kakao.isInitialized());
+ 
+  Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function(result) {
+          $('#result').append(result);
+          id = result.id
+          connected_at = result.connected_at
+          kakao_account = result.kakao_account
+          nickname= kakao_account.profile.nickname
+          $('#result').append(kakao_account);
+          resultdiv=""
+          email = kakao_account.email;
+          if(typeof kakao_account != 'undefined'){
+        	  email = kakao_account.email;
+          }
+          $('#result').append(resultdiv);
+          
+          //ajax
+          $.ajax({
+        	  type:"post",
+        	  dataType:"json",
+        	  url:"index.jsp?main=login/kakao/kakaologin.jsp",
+        	  data:{"id":id,"nickname":nickname,"email":email},
+        	  success:function(){
+        		  location.reload();
+        	  }
+        	  
+          })
+          location.href="index.jsp?main.jsp"
+        }
+      
+      ,
+        fail: function(error) {
+          alert(
+            'login success, but failed to request user information: ' +
+              JSON.stringify(error)
+          )
+        },
+      })
+    },
+    fail: function(err) {
+      alert('failed to login: ' + JSON.stringify(err))
+    },
+  })
+</script>
+
 </body>
 </html>
