@@ -1,3 +1,5 @@
+<%@page import="board.qna.QnaBoardDto"%>
+<%@page import="board.qna.QnaBoardDao"%>
 <%@page import="java.util.List"%>
 <%@page import="member.MemberDao"%>
 <%@page import="member.MemberDto"%>
@@ -33,6 +35,12 @@
 <%
 	MemberDao mdao = new MemberDao();
 	List<MemberDto> userList = mdao.getAllUserList();
+	
+	//Qna
+	QnaBoardDao qnaDao = new QnaBoardDao();
+	List<QnaBoardDto> qnaList = qnaDao.getAllQnaList();
+			
+			
 %>
 	<div class="container" style="border:1px solid black;display: flex; justify-content: center;">
 		<div class="" style="width: 1000px; border:1px solid red; display: flex; flex-direction: column;">	
@@ -55,6 +63,16 @@
 								<td width="30">주소</td>
 
 							</tr>
+							
+					<%if(userList.size() < 8) {%>
+						<%for(MemberDto m : userList) {%>
+							<tr><%=m.getNum() %></tr>
+							<tr><%=m.getNickname() %></tr>
+							<tr><%=m.getId() %></tr>
+							<tr><%=m.getAddr() %></tr>
+						<%}%>
+					<%} else {%>
+							
 						<%for(int i = 0 ; i < 8 ; i++) {%>
 							<tr>
 								<td><%=userList.get(i).getNum() %></td>
@@ -63,6 +81,7 @@
 								<td><%=userList.get(i).getAddr() %></td>
 							</tr>
 						<%}%>
+					<%}%>
 						</table>
 					</div>
 				</div>
@@ -70,12 +89,40 @@
 				<div class="rectangle">
 					<div style="flex-direction: row; display: flex;">
 						<p>답변을 기다리는 질문</p>
-						<button class="moreBtn btn btn-xs btn-warning">더 보기</button>
+						<button class="moreBtn btn btn-xs btn-warning" onclick="location.href='index.jsp?main=mypage/admin/showWaitingQuestion.jsp'">더 보기</button>
 					</div>
-					<div></div>
+					<div>
+						<table class="table table-bordered">
+							<tr>
+								<td width="50">번호</td>
+								<td width="100">작성자</td>
+								<td>제목</td>
+							</tr>
+							
+						<%if(qnaList.size() < 8) { %>
+							<%for(QnaBoardDto q : qnaList) {
+							//닉네임설정
+							String nickname = mdao.getNickname(q.getId());%>
+							<tr>
+								<td><%=q.getNum() %></td>
+								<td><%=nickname %></td>
+								<td style='width:350px;overflow:hidden;text-overflow;ellipsis;'><a href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
+							</tr>
+							<%}%>
+						<%} else {%>
+							<%for(int i = 0 ; i < 8 ; i ++) { %>
+							<tr>
+								<td><%=qnaList.get(i).getNum() %></td>
+								<td><%=qnaList.get(i).getNum() %></td>
+								<td><a href="index.jsp?main=qna/detail.jsp?num=<%=qnaList.get(i).getNum()%>"><%=qnaList.get(i).getNum() %></a></td>
+							</tr>
+							<%}%>
+						<%}%>
+							
+						
+						</table>
+					</div>
 				</div>
-				
-				
 			</div>
 			
 			<div style="flex-direction: row; display: flex;">
