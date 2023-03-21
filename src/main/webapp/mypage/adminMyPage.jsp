@@ -63,6 +63,16 @@
 								<td width="30">주소</td>
 
 							</tr>
+							
+					<%if(userList.size() < 8) {%>
+						<%for(MemberDto m : userList) {%>
+							<tr><%=m.getNum() %></tr>
+							<tr><%=m.getNickname() %></tr>
+							<tr><%=m.getId() %></tr>
+							<tr><%=m.getAddr() %></tr>
+						<%}%>
+					<%} else {%>
+							
 						<%for(int i = 0 ; i < 8 ; i++) {%>
 							<tr>
 								<td><%=userList.get(i).getNum() %></td>
@@ -71,6 +81,7 @@
 								<td><%=userList.get(i).getAddr() %></td>
 							</tr>
 						<%}%>
+					<%}%>
 						</table>
 					</div>
 				</div>
@@ -100,8 +111,6 @@
 						</table>
 					</div>
 				</div>
-				
-				
 			</div>
 			
 			<div style="flex-direction: row; display: flex;">
