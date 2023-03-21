@@ -6,11 +6,10 @@ public class MessageDto {
 	
 	private String num;
 	private String sender;
-	private String boardNum;
+	private String receiver;
 	private String content;
 	private Timestamp writeday;
 	private int isRead;
-	
 	public String getNum() {
 		return num;
 	}
@@ -23,11 +22,11 @@ public class MessageDto {
 	public void setSender(String sender) {
 		this.sender = sender;
 	}
-	public String getBoardNum() {
-		return boardNum;
+	public String getReceiver() {
+		return receiver;
 	}
-	public void setBoardNum(String boardNum) {
-		this.boardNum = boardNum;
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 	public String getContent() {
 		return content;
@@ -47,5 +46,6 @@ public class MessageDto {
 	public void setIsRead(int isRead) {
 		this.isRead = isRead;
 	}
-
+	
+	
 }
