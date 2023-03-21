@@ -43,9 +43,9 @@
 		// 수정 전 이미지 삭제
 		String deletePhotoName = realPath + "\\"+ prePhoto;
 		
-		System.out.println(realPath);
-		System.out.println(prePhoto);
-		System.out.println(deletePhotoName);
+		//System.out.println(realPath);
+		//System.out.println(prePhoto);
+		//System.out.println(deletePhotoName);
 		File deleteImg = new File (deletePhotoName);
 		
 		// 수정전 강아지 프로필 사진 삭제

@@ -14,7 +14,7 @@
 	String deletePhotoName = imgPath + "\\"+ photoname;
 	File deleteImg = new File (deletePhotoName);
 	
-	System.out.println(deletePhotoName);
+	//System.out.println(deletePhotoName);
 	
 	dao.deleteDog(idx);
 	
