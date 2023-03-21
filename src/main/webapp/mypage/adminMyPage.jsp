@@ -98,16 +98,28 @@
 								<td width="100">작성자</td>
 								<td>제목</td>
 							</tr>
-						<%for(QnaBoardDto q : qnaList) {
+							
+						<%if(qnaList.size() < 8) { %>
+							<%for(QnaBoardDto q : qnaList) {
 							//닉네임설정
-							String nickname = mdao.getNickname(q.getId());
-						%>
+							String nickname = mdao.getNickname(q.getId());%>
 							<tr>
 								<td><%=q.getNum() %></td>
 								<td><%=nickname %></td>
 								<td><a href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
 							</tr>
+							<%}%>
+						<%} else {%>
+							<%for(int i = 0 ; i < 8 ; i ++) { %>
+							<tr>
+								<td><%=qnaList.get(i).getNum() %></td>
+								<td><%=qnaList.get(i).getNum() %></td>
+								<td><a href="index.jsp?main=qna/detail.jsp?num=<%=qnaList.get(i).getNum()%>"><%=qnaList.get(i).getNum() %></a></td>
+							</tr>
+							<%}%>
 						<%}%>
+							
+						
 						</table>
 					</div>
 				</div>
