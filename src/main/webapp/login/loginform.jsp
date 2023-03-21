@@ -141,45 +141,40 @@ if (saveok != null) {
 	<!--login-form-wrap-->
 	<!-- partial -->
 			 
-	<a id="kakao-login-btn"></a>
+	<a class ="kakao-login-btn"></a>
 	<div id="result">
 	</div>
     
    <script type="text/javascript">
 Kakao.init('c3daec463cc1c038e93542b4609bf488');
-console.log(Kakao.isInitialized());
+//console.log(Kakao.isInitialized());
  
   Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
+    container: '.kakao-login-btn',
     success: function(authObj) {
       Kakao.API.request({
         url: '/v2/user/me',
         success: function(result) {
-          $('#result').append(result);
           id = result.id
           connected_at = result.connected_at
           kakao_account = result.kakao_account
           nickname= kakao_account.profile.nickname
-          $('#result').append(kakao_account);
-          resultdiv=""
           email = kakao_account.email;
-          if(typeof kakao_account != 'undefined'){
-        	  email = kakao_account.email;
-          }
-          $('#result').append(resultdiv);
-          
+    
           //ajax
           $.ajax({
         	  type:"post",
-        	  dataType:"json",
+        	  dataType:"html",
         	  url:"index.jsp?main=login/kakao/kakaologin.jsp",
-        	  data:{"id":id,"nickname":nickname,"email":email},
+        	  data:{"id":id,
+        		  "nickname":nickname,
+        		  "email":email,
+        		  },
         	  success:function(){
         		  location.reload();
         	  }
         	  
           })
-          location.href="index.jsp?main.jsp"
         }
       
       ,
