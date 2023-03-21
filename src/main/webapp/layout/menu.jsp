@@ -97,8 +97,10 @@ String nickname = dao.getNickname(myid);
 				%>
 
 				<a href="index.jsp?main=message/list.jsp"
-					style="width: 30px; padding-top: 15px; margin-left: 30px;  margin-right: 15px;">
-					<i class="fa-solid fa-envelope" style="color: #333; font-size: 25px"></i></a>
+					style="width: 30px; padding-top: 15px; margin-left: 30px; margin-right: 15px;">
+					<i class="fa-solid fa-envelope"
+					style="color: #333; font-size: 25px"></i>
+				</a>
 				<%
 				String memberNum = dao.getNum(myid);
 
@@ -115,16 +117,21 @@ String nickname = dao.getNickname(myid);
 						id="profile-img" style="width: 100%; height: 100%">
 				</div>
 				<i class="fa-solid fa-caret-down fa-rotate-270"
-					style="margin-top: 0px; margin-left:25px; cursor: pointer;"></i>
+					style="margin-top: 0px; margin-left: 25px; cursor: pointer;"></i>
 
-				<div class="nav-item"
-					style="padding-top: 20px; padding-left: 30px; font-size: 13px;">
-					<%=nickname%>님 로그인 중
-				</div>
-				<i class="fa-solid fa-right-from-bracket" style="color: #930606; padding-top: 20px; margin-left: 30px;"
-				onclick="location.href='login/logoutaction.jsp'"></i>
+				<i class="fa-solid fa-user"
+					style="color: #930606; padding-top: 20px; margin-left: 30px;"
+					onclick="location.href='mypage/userMyPage.jsp'"></i>
 				<span style="font-size: 13px; padding-top: 17px;"
-				onclick="location.href='login/logoutaction.jsp'">Logout</span>
+					onclick="location.href='mypage/userMyPage.jsp'">MyPage</span>
+
+				<div>
+					<i class="fa-solid fa-right-from-bracket"
+						style="color: #930606; padding-top: 20px; margin-left: 30px;"
+						onclick="location.href='login/logoutaction.jsp'"></i> <span
+						style="font-size: 13px; padding-top: 17px;"
+						onclick="location.href='login/logoutaction.jsp'">Logout</span>
+				</div>
 				<%
 				}
 				%>
