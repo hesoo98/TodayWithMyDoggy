@@ -1,3 +1,5 @@
+<%@page import="board.qna.QnaBoardDto"%>
+<%@page import="board.qna.QnaBoardDao"%>
 <%@page import="java.util.List"%>
 <%@page import="member.MemberDao"%>
 <%@page import="member.MemberDto"%>
@@ -33,6 +35,12 @@
 <%
 	MemberDao mdao = new MemberDao();
 	List<MemberDto> userList = mdao.getAllUserList();
+	
+	//Qna
+	QnaBoardDao qnaDao = new QnaBoardDao();
+	List<QnaBoardDto> qnaList = qnaDao.getAllQnaList();
+			
+			
 %>
 	<div class="container" style="border:1px solid black;display: flex; justify-content: center;">
 		<div class="" style="width: 1000px; border:1px solid red; display: flex; flex-direction: column;">	
@@ -72,7 +80,25 @@
 						<p>답변을 기다리는 질문</p>
 						<button class="moreBtn btn btn-xs btn-warning">더 보기</button>
 					</div>
-					<div></div>
+					<div>
+						<table class="table table-bordered">
+							<tr>
+								<td width="50">번호</td>
+								<td width="100">작성자</td>
+								<td>제목</td>
+							</tr>
+						<%for(QnaBoardDto q : qnaList) {
+							//닉네임설정
+							String nickname = mdao.getNickname(q.getId());
+						%>
+							<tr>
+								<td><%=q.getNum() %></td>
+								<td><%=nickname %></td>
+								<td><a href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
+							</tr>
+						<%}%>
+						</table>
+					</div>
 				</div>
 				
 				

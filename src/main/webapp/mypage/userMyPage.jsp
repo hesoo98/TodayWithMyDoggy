@@ -1,3 +1,7 @@
+<%@page import="answer.qna.QnaAnswerDto"%>
+<%@page import="answer.qna.QnaAnswerDao"%>
+<%@page import="board.qna.QnaBoardDto"%>
+<%@page import="board.qna.QnaBoardDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="member.MemberDto"%>
 <%@page import="member.MemberDao"%>
@@ -40,6 +44,7 @@
 <body>
 <%
 	String realPath=getServletContext().getRealPath("/mypage/dogImg");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	//로그인한 사용자 아이디 가져와서 사용자 member_num(시퀀스)값 추출.
 	String id = (String)session.getAttribute("myid");
@@ -59,16 +64,21 @@
 			isMainDog = 1;
 		}
 	}
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	
+	QnaBoardDao qnaDao = new QnaBoardDao();
+	List<QnaBoardDto> myQList = qnaDao.getMyBoardList(id);
+	
+	
+	
+	
 %>
 	<div class="container" style="border:3px solid #FFCD00; border-radius: 30px; margin-top: 50px;">
-		<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem; margin:20px;">유저 마이 페이지</p>
+		
 		<div class="" style="width:800px;margin:0 auto;">
-		<%
-		if (isMainDog == 1) {
-			DogProfileDto dto = dogDao.getMyMainDog(member_num);%>
-			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">나의 프로필</p>
-			<div class="row" style="margin-bottom: 50px;">
+			<p style="font-size:2.5rem; margin-bottom:20px;">마이 페이지</p>
+			<p style="font-size:2rem;">나의 프로필</p>
+			<div class="row" style="margin-bottom: 50px;" id="myprofile">
 				<div class="col-6">
 					<p>닉네임</p>
 					<p><%=memberDto.getNickname() %></p>
@@ -88,7 +98,9 @@
 				</div>
 			</div>
 			
-			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">대표 강아지 프로필</p>
+		<%if (isMainDog == 1) {
+			DogProfileDto dto = dogDao.getMyMainDog(member_num);%>
+			<p style="font-family: ''; font-size:2rem">대표 강아지 프로필</p>
 			<div class="row">
 				<div class="col-6" style="margin:0 auto;">
 					<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
@@ -102,30 +114,8 @@
 					<p>강아지사진 : <%=dto.getPhoto() %></p>
 				</div>
 			</div>
-					<%	
-		} else {%>
-			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">나의 프로필</p>
-			<div class="row" style="margin-bottom: 50px;">
-				<div class="col-6 rectangle">
-					<p>닉네임</p>
-					<p><%=memberDto.getNickname() %></p>
-					<p>아이디</p>
-					<p><%=memberDto.getId() %></p>
-					<p>핸드폰</p>
-					<p><%=memberDto.getHp() %></p>
-				</div>
-				<div class="col rectangle">
-					<button type="button" class="btn btn-warning btn-lg" style="float:right;" onclick="location.href='index.jsp?main=mypage/userProfileUpdateForm.jsp'">나의 프로필 수정</button>
-					<p>주소</p>
-					<p><%=memberDto.getAddr() %></p>
-					<p>이메일</p>
-					<p><%=memberDto.getEmail() %></p>
-					<p>생성일</p>
-					<p><%=sdf.format(memberDto.getCreateDay()) %></p>
-				</div>
-			</div>
-			
-			
+						
+		<%} else {%>
 			<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">대표 강아지 프로필</p>
 			<div class="row">
 				<div class="col-6 rectangle" style="margin:0 auto;">
@@ -136,12 +126,62 @@
 					<b>대표 강아지가 없어요</b>
 				</div>
 			</div>
-			<%
-		}
-		%>
+		<%}%>
 
-			<div class="row" style="height: 300px; margin-top: 50px;">
-				<div class="col rectangle">나의 활동</div>
+			<div class="" style="height: 300px; margin-top: 50px;">
+				<p>나의 질문</p>
+				<table class="table table-hover">
+					<tr>
+						<td>번호</td>
+						<td>제목</td>
+						<td>날짜</td>
+						<td>답변 유무</td>
+					</tr>
+					
+					
+				<%if( myQList.size() < 5) { 
+					for(QnaBoardDto q : myQList){
+						//답변여부 확인
+					    QnaAnswerDao adao=new QnaAnswerDao();
+					    QnaAnswerDto adto=adao.getAnswer(q.getNum());
+						%>
+					<tr>
+						<td><%=q.getNum() %></td>
+						<td><a href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
+						<td><%=q.getWriteday() %></td>
+				
+					<% if(adto.getIdx()==null){%>
+					    <td>대기중</td>
+				    <%}else{%>
+				    	<td>답변완료</td>
+				    <%}%>
+					</tr>
+					
+						
+					<%}%>
+				<%} else { %>
+					
+					<%for(int i = 0 ; i < 5; i ++) { 
+						//답변여부 확인
+					    QnaAnswerDao adao=new QnaAnswerDao();
+					    QnaAnswerDto adto=adao.getAnswer(myQList.get(i).getNum());
+					%>
+					<tr>
+						<td><%=myQList.get(i).getNum() %></td>
+						<td><a href="index.jsp?main=qna/detail.jsp?num=<%=myQList.get(i).getNum()%>"><%=myQList.get(i).getTitle() %></a></td>
+						<td><%=myQList.get(i).getWriteday() %></td>
+				
+					<% if(adto.getIdx()==null){%>
+					    <td>대기중</td>
+				    <%}else{%>
+				    	<td>답변완료</td>
+				    <%}%>
+					</tr>
+					
+					<%}
+					}%>
+				</table>
+				
 			</div>
 			<div class="row" style="height: 300px; margin-top: 50px; margin-bottom: 100px;">
 				<div class="col rectangle">나의 좋아요</div>
