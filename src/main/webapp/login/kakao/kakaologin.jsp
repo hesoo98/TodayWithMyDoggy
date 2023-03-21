@@ -19,6 +19,8 @@ MemberDto dto=new MemberDto();
 dto.setNickname(nickname);
 dto.setId(id);
 dto.setEmail(email);
+dto.setHp("010-0000-0000");
+dto.setAddr("없음");
 
 
 session.setMaxInactiveInterval(60*60*8);
@@ -28,10 +30,6 @@ session.setAttribute("isAdmin", isAdmin);
 
 if(dao.isIdCheck(dto.getId())==0){
 	dao.addMember(dto);
-	response.sendRedirect("../../index.jsp?main=login/kakao/kakaoprofileinputform.jsp");
-}else{
-	response.sendRedirect("../../index.jsp?main=login/loginmain.jsp");
-	System.out.println(dto.getId());
 }
 
 %>
