@@ -39,7 +39,6 @@ String hp = request.getParameter("hp");
      
 MemberDao dao = new MemberDao();
  String memberid = dao.getId(hp); //아이디를 디비에서 가져옴..실패시 널
- System.out.println(memberid);
 %>
 
   <form name="idsearch" method="post">

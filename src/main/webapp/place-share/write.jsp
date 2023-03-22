@@ -15,6 +15,7 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0168677f39871625290af327bd783770&libraries=services"></script>
 <script src="https://kit.fontawesome.com/2663817d27.js"
 	crossorigin="anonymous"></script>
+	
 <script type="text/javascript">
 	$(function() {
 		$("#cardImg").hide();
@@ -63,7 +64,7 @@ input {
 	height: 700px;
 }
 
-img {
+.card-top-img {
 	width: 100%;
 	height: 100%;
 	opacity: 0.3;

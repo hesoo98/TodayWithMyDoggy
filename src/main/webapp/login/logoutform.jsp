@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    
+    <style type="text/css">
+    .welcome{
+    font-size: 2em;
+    }
+    </style>
 </head>
 <body>
 <%
@@ -20,14 +26,14 @@ String loginok = (String) session.getAttribute("loginok");
 String nickname=dao.getNickname(myid);
 session.setAttribute("isAdmin", isAdmin);
 %>
-	<div>
-		<b><%=nickname %>님 방문을 환영합니다</b>
+	<div style="text-align: center">
+		<b class="welcome"><%=nickname %>님 방문을 환영합니다</b><br><br><br>
 		<%
 		if(loginok!=null && isAdmin.equals("1")){%>
-			<button type="button" onclick="location.href='index.jsp?main=mypage/adminMyPage.jsp'">관리자페이지</button>
+			<button type="button" onclick="location.href='index.jsp?main=mypage/adminMyPage.jsp'" class="btn btn-default btn-sm">관리자페이지</button>
 		<%}else{%>
 			
-			<button type="button" onclick="location.href='index.jsp?main=mypage/userMyPage.jsp'">마이페이지</button>
+			<button type="button" onclick="location.href='index.jsp?main=mypage/userMyPage.jsp'" class="btn btn-default btn-sm">마이페이지</button>
 		<%}
 		%>
 		
