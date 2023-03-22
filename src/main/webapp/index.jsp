@@ -123,11 +123,9 @@ String root = request.getContextPath();
 			</div>
 		</div>
 	
+	</div>
 		<div id="footer">
 			<jsp:include page="layout/footer.jsp" />
 		</div>
-	
-	</div>
-		
 </body>
 </html>
