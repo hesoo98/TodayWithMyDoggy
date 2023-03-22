@@ -45,6 +45,8 @@
 	href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg"
 	color="#7952b3">
 <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
+<link rel="stylesheet" href="place-share/btn.css">
+
 <meta name="theme-color" content="#7952b3">
 
 <style>
@@ -98,7 +100,6 @@ img:hover {
 	text-overflow: ellipsis;
 }
 /*말 줄임표 생성 끝*/
-
 .img-text {
 	position: absolute;
 	top: 5%;
@@ -126,12 +127,32 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 <script src="https://kit.fontawesome.com/2663817d27.js"
 	crossorigin="anonymous"></script>
 
+<style type="text/css">
+	.button:hover{
+		color: #555555;
+		font-size: 18px;
+	}
+</style>
 </head>
 <body>
-	<div class="album py-5 bg-light">
+	<div class="container2" style="border: 1px solid black;">
+		<div style="float: left; opacity: 0.5; padding-top: 20px;">
+		</div>
+		<div style="text-align: center; font-size: 21px; opacity: 0.8; letter-spacing:3px; ine-height:2; padding-bottom: 20px;">
+		당신의 사랑스러운 반려견과 함께 다녀온 
+		<br>특별한 장소를 소개해주세요!</div>
+		
+		<br>
+		<a href="/TodayWithMyDoggy/index.jsp?main=place-share/write.jsp" class="button">
+			<div class="button__line"></div>
+			<div class="button__line"></div> <span class="button__text" style="letter-spacing:3px;">글쓰러 가기</span>
+			<div class="button__drow1"></div>
+			<div class="button__drow2"></div>
+		</a>
+
+	</div>
+	<div class="album pb-5 bt-2">
 		<div class="container">
-			<button type="button" class="btn btn-light" id="moveAdd" style="font-size: 14px;"
-				onclick="location.href='index.jsp?main=place-share/write.jsp'"><i>글쓰기</i></button>
 			<br> <br>
 			<div
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
@@ -151,9 +172,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					DogProfileDao proDao = new DogProfileDao();
 					DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
 					String proPhoto = proDto.getPhoto();
-					
+
 					String place = dto.getMapAddr().substring(0, 2);
-					
+
 					PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
 					int totalAnswerCnt = answerDao.getTotalAnswerCount(boardNum);
 				%>
@@ -161,36 +182,39 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					<div class="card border-light mb-10" width="100%"
 						style="border-radius: 10%;">
 						<div class="card-img" id="img" style="border-radius: 12%;">
-						<div class="img-text">
-							<img src="/TodayWithMyDoggy/place-share/place-photo/marker.png" 
-							style="width: 15px; border-radius: 100%; position: absolute; margin-left: 10px; margin-top: 5px;">
-							<button id="img-addr-text" style="color: #fff"><%=place %></button>			
-						</div>
+							<div class="img-text">
+								<img src="/TodayWithMyDoggy/place-share/place-photo/marker.png"
+									style="width: 15px; border-radius: 100%; position: absolute; margin-left: 10px; margin-top: 5px;">
+								<button id="img-addr-text" style="color: #fff"><%=place%></button>
+							</div>
 							<input type="hidden" id="num" name="num"
 								value="<%=dto.getNum()%>"> <img class="img" id="cardImg"
 								class="bd-placeholder-img card-img-top"
 								style="border-radius: 7%" width="600px;"
 								src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>"
-								height="250px;" xmlns="http://www.w3.org/2000/svg" role="img"
+								height="200px;" xmlns="http://www.w3.org/2000/svg" role="img"
 								aria-label="Placeholder: Thumbnail"
 								preserveAspectRatio="xMidYMid slice" focusable="false"
 								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'">
 						</div>
 						<div class="card-body">
-							<span class="card-subject" style="font-size: 18px; cursor: pointer;"
-							onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getSubject()%></span>
-							<span class="card-content" style="font-size: 13px; cursor: pointer; margin-bottom: 7px;"
-							onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getContent()%></span>
+							<span class="card-subject"
+								style="font-size: 15px; cursor: pointer;"
+								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getSubject()%></span>
+							<span class="card-content"
+								style="font-size: 10px; cursor: pointer; margin-bottom: 7px;"
+								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getContent()%></span>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="img-box"
 									style="width: 25px; height: 25px; border-radius: 70%; overflow: hidden; float: left; margin-right: 2px;">
 									<img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>"
 										id="profile-img" style="width: 100%; height: 100%">
 								</div>
-								<div style="float: left; padding-top: 5px; font-size: 15px; color: gray">
+								<div
+									style="float: left; padding-top: 5px; font-size: 10px; color: gray">
 									<%=memberdto.getNickname()%>님 &emsp;&emsp; <i
 										class="fa-regular fa-eye"></i><%=dto.getReadCount()%>
-									  &nbsp;<i class="fa-regular fa-comment-dots"></i><%=totalAnswerCnt%>
+									&nbsp;<i class="fa-regular fa-comment-dots"></i><%=totalAnswerCnt%>
 								</div>
 								<br>
 

@@ -64,7 +64,7 @@ input {
 	height: 700px;
 }
 
-img {
+.card-top-img {
 	width: 100%;
 	height: 100%;
 	opacity: 0.3;

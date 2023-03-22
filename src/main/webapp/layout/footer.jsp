@@ -25,11 +25,11 @@
     
     <footer class="footer-16371">
         <div class="row justify-content-center">
-          <div class="col-md-9 text-center">
+          <div class="col-md text-center">
             <div class="footer-site-logo mb-4">
               <a href="index.jsp">TodayWithMyDoggy</a>
             </div>
-            <ul class="list-unstyled nav-links mb-5">
+            <ul class="list-unstyled nav-links mb-5" style="font-size: 13px;">
               <li><a href="#">About</a></li>
               <li><a href="#">Contact</a></li>
               <li><a href="#">Press</a></li>
@@ -42,11 +42,11 @@
             <div class="social mb-4">
               <h3>Stay in touch</h3>
               <ul class="list-unstyled">
-                <li><a href="https://github.com/SIST1/TodayWithMyDoggy"><span class="icon-github"></span></a></li>
-                <li class="in"><a href="https://github.com/lambdaramge"><span class="icon-github"></span></a></li>
-                <li class="tw"><a href="https://github.com/tenta3802"><span class="icon-github"></span></a></li>
-                <li class="fb"><a href="https://github.com/hesoo98"><span class="icon-github"></span></a></li>
-                <li class="dr"><a href="https://github.com/028902"><span class="icon-github"></span></a></li>
+                <li class="in"><a href="https://github.com/SIST1/TodayWithMyDoggy"><span class="icon-github"></span></a></li>
+                <li class="tw"><a href="https://github.com/lambdaramge"><span class="icon-github"></span></a></li>
+                <li class="fb"><a href="https://github.com/tenta3802"><span class="icon-github"></span></a></li>
+                <li class="dr"><a href="https://github.com/hesoo98"><span class="icon-github"></span></a></li>
+                <li class="pin"><a href="https://github.com/028902"><span class="icon-github"></span></a></li>
               </ul>
             </div>
 
