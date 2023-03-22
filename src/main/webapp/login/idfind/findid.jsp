@@ -34,9 +34,37 @@
 	    obj.value = hp;
 	}
     </script>
+    
+    <style type="text/css">
+    
+  		#wrapper-form{
+  			width: 100%;
+  			height: 100%;
+  			border: 1px solid lightgray;
+			border-radius: 10px;  			
+  			padding: 20px 50px;
+  		}
+    
+    	.search-title{
+    		margin: 5px 0px;
+    	}
+  		
+  		input[type="text"]{
+  			outline: none;
+  			border: none;
+  			width: 200px;
+  			border-bottom: 1px solid lightgray;
+  		}
+  		
+  		input[type="text"]:focus{
+  			border-bottom-color: black;
+  		}
+    
+    </style>
+    
 </head>
 <body>
-		<form name="idfindscreen" action="index.jsp?main=login/idfind/findidresult.jsp" method = "POST">
+		<form id="wrapper-form" name="idfindscreen" action="index.jsp?main=login/idfind/findidresult.jsp" method = "POST">
 			<div class = "search-title">
 				아이디 찾기
 			</div>
@@ -51,9 +79,9 @@
 			<br>
 	</section>
 	
-	<div class ="btnSearch">
-		<input type="submit" value="찾기">
-		<input type="button" value="취소" onClick="history.back()">
+	<div class="btnSearch" align="center">
+		<input class="btn btn-default" type="submit" value="찾기">
+		<input class="btn btn-default" type="button" value="취소" onClick="history.back()">
  	</div>
  	
  </form>
