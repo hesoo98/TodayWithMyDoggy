@@ -23,11 +23,20 @@
 			margin-right:10px;
 			margin-left: auto;
 		}
+		
 		table {
 			table-layout:fixed;
 			text-overflow: ellipsis;
 			max-width: 500px;
 			white-space: nowrap;
+		}
+		
+		.a-tag {
+			color: black;
+		}
+		
+		.a-tag:hover{
+			color: black;
 		}
 	</style>
 </head>
@@ -106,7 +115,7 @@
 							<tr>
 								<td><%=q.getNum() %></td>
 								<td><%=nickname %></td>
-								<td style='width:350px;overflow:hidden;text-overflow;ellipsis;'><a href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
+								<td style='width:350px;overflow:hidden;text-overflow;ellipsis;'><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
 							</tr>
 							<%}%>
 						<%} else {%>
@@ -114,7 +123,7 @@
 							<tr>
 								<td><%=qnaList.get(i).getNum() %></td>
 								<td><%=qnaList.get(i).getNum() %></td>
-								<td><a href="index.jsp?main=qna/detail.jsp?num=<%=qnaList.get(i).getNum()%>"><%=qnaList.get(i).getNum() %></a></td>
+								<td style='width:350px;overflow:hidden;text-overflow;ellipsis;'><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=qnaList.get(i).getNum()%>"><%=qnaList.get(i).getNum() %></a></td>
 							</tr>
 							<%}%>
 						<%}%>
