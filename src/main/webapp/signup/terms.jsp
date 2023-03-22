@@ -37,34 +37,36 @@
         var scrollHeight = $(this).prop('scrollHeight');
 
         
-        if (scrollTop + innerHeight >= scrollHeight-10) {
-        $("#agree").attr('disabled', false);
-        } else {
-        $("#agree").attr('disabled', true);
-        }
-})
-
-});
+        	if (scrollTop + innerHeight >= scrollHeight-10) {
+        	$("#agree").attr('disabled', false);
+      	    } else {
+       	    $("#agree").attr('disabled', true);
+       	    }
+		})
+		
+		
+		
+	})
 	</script>
     
 </head>
 <body>
 <form name="form" method="post">
- <table width="1400" height="650">
+ <table width="800px" height="650">
   <tr>
-   <td width="100%" height="10%">&nbsp; <b>회원가입</b>
+   <td width="100%" height="10%"><b>회원가입</b>
     <br>
     <hr>
    </td>
   </tr>
   <tr>
-   <td width="100%" height="50%" align="center">
+   <td width="800px" height="50%" align="center">
    <p align="left">
-   <span style="padding-left: 160px">
+   <span>
    멍멍이와 함께하는 하루 약관동의</span>
    </p>
    <br>
-   <textarea
+   <textarea style="width:800px;"
      rows="20" cols="150" class="tbox">
      
 제1조 목적
@@ -197,8 +199,8 @@
   </tr>
   <tr>
    <td align="center" valign="top">
-    <input type="button" id="agree" disabled value="동의" onclick="chk()"/>&nbsp;&nbsp;&nbsp;
-    <input type="button" value="동의하지 않습니다" onclick="nochk()"/>
+    <input type="button" class="btn btn-default" id="agree" disabled value="동의" onclick="chk()"/>&nbsp;&nbsp;&nbsp;
+    <input type="button" class="btn btn-default" value="동의하지 않습니다" onclick="nochk()"/>
    </td>
   </tr>
  </table>

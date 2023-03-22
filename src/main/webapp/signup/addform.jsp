@@ -40,8 +40,17 @@ body {
     					$("span.idsuccess").text("중복된 아이디입니다.");
     					$("#id").val('');
     					$("#id").focus();
-    					}
-    					else{
+    					
+    				} else if(res.count==0 && $(".writeid").val()===""){
+        				$("span.idsuccess").text("아이디를 입력해 주세요.");
+        				
+    				} else if(res.count==0 && $(".writeid").val().length<8 ||  $(".writeid").val().length>20){
+        				$("span.idsuccess").text("아이디는 6자 이상 20자 이내로 입력하여야 합니다.");
+        				
+    				} else if(res.count==0 && $(".writeid").val().search(/\s/) != -1){
+        				$("span.idsuccess").text("아이디에는 공백을 사용할 수 없습니다.");
+        				
+        			} else if(res.count==0){
     					//alert("가입 가능한 아이디입니다.");
     					$("span.idsuccess").text("사용가능한 아이디입니다.");
     				}
@@ -66,13 +75,18 @@ body {
     				if(res.count==1){
     					//alert("이미 가입된 아이디입니다.\n다시 입력해 주세요.");
     					$("span.nicknamesuccess").text("중복된 닉네임입니다.");
-    					$("#id").val('');
-    					$("#id").focus();
-    					}
-    					else{
+    					$("#nickname").val('');
+    					$("#nickname").focus();
+    					
+    				}else if(res.count==0 && $(".writenickname").val()===""){
+        				$("span.nicknamesuccess").text("닉네임을 입력해 주세요.");
+        				
+        			}else if(res.count==0){
     					//alert("가입 가능한 아이디입니다.");
     					$("span.nicknamesuccess").text("사용가능한 닉네임입니다.");
     				}
+    				
+    				
     			}
     			
     		})
@@ -112,7 +126,7 @@ body {
     	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
     	 if(pw.length < 8 || pw.length > 20){
-    	  alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요");
+    	  alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요!");
     	  	f.password.value="";
   		  	f.password2.value="";
     	  return false;
@@ -132,15 +146,28 @@ body {
     		f.password2.value="";
     		
     		return false;//action이 호출되지 않는다.
-    		
-    		
     	}else {
-    		console.log("통과"); 
     	    return true;
     	 }
-    
-    	
     }
+    
+    function idCheck(f2){
+   	 var id = $("#id").val();
+   	 var num = id.search(/[0-9]/g);
+   	 var eng = id.search(/[a-z]/ig);
+
+   	 if(id.length < 6 || id.length > 20){
+   	  alert("아이디는 6자리 ~ 20자리 이내로 입력해주세요");
+   	  	f2.id.value="";
+   	  return false;
+   	 }else if(id.search(/\s/) != -1){
+   	  alert("아이디는 공백 없이 입력해주세요");
+   	  	f2.id.value="";
+   	  return false;
+   	 }else {
+   	    return true;
+   	 }
+   }
     </script>
 </head>
 <body>
@@ -150,14 +177,15 @@ body {
 			id="signuptable">
 
 			<form action="signup/addaction.jsp" method="post"
-				onsubmit="return passCheck(this)" name="frm" id="sign-form"
+				onsubmit="return !!( passCheck(this) & idCheck(this));" name="frm" id="sign-form"
 				style="padding: 50px 100px; font-size: 13px;">
 				<div id="signuptext" style="font-size: 20px;">회원가입</div>
 				<br>
 				<span width="100">아이디</span><span style="color: red"> *</span>&nbsp;&nbsp;<span class="idsuccess" style="color: #EB0000;"></span>
 				<div>
 					<input type="text" name="id" id="id" required="required"
-						style="width: 320px; float: left" class="form-control" placeholder="아이디를 입력하세요">
+						style="width: 320px; float: left" class="writeid form-control"
+						placeholder="6~20자리의 아이디 입력">
 					<button type="button" id="btncheck" class="alert alert-danger"
 						style="width: 100px; margin-left: 10px; height: 40px; line-height:10px;">중복체크</button>
 						<br>
@@ -183,7 +211,7 @@ body {
 				<div>
 					<input type="text" name="nickname" id="nickname"
 						required="required" style="width: 320px; float: left;"
-						class="form-control" placeholder="닉네임을 입력하세요">
+						class="writenickname form-control" placeholder="닉네임을 입력하세요">
 					<button type="button" id="btncheck2" class="alert alert-danger"
 						style="width: 100px; height: 40px; line-height:10px; margin-left: 10px;">중복체크</button>
 				</div>
