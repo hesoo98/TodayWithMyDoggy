@@ -29,11 +29,11 @@
     }
 
 	.wrapper{
-  	  width: 800px auto;
-  	  margin: 50px 160px;
+	  width: 800px;  	  
   	  border: 1px lightgray solid;
   	  border-radius: 30px;
-  	  padding: 40px 90px;
+  	  padding: 60px 120px;
+  	  margin: 30px 0px;
 	}
 	
 	.wrapper-subject{
@@ -46,28 +46,30 @@
 	
 	.wrapper-comment{
 	  margin-bottom: 20px;
-	  width: 80% auto;
+	  width: 100% auto;
 	}
 	
 	.line{
-	  width: 90% auto;
+	  width: 100% auto;
 	  margin: 40px 0px;
+	  height: .5px;
+	  background-color: #d9e4f4;
 	}
 	
 	.nickname{
 	  font-size: 20px;
 	  font-weight: 700;
 	}
-	
-	#photo{
-	  width: 200px;
-	  height: 200px;
-	}
-	
+		
 	.dog-photo{
 	  width: 30px;
 	  height: 30px;
 	  border-radius: 30px;
+	}
+	
+	#photo{
+	  width: 200px;
+	  height: 200px;
 	}
 	
 	/* 댓글 */
@@ -88,7 +90,7 @@
 	  margin-left: 5px;
 	}
 	
-	#btn-box{
+	.btn-box{
 	  float: right;
 	}
 	
@@ -145,8 +147,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	<div class="wrapper">
 	
 	  <%
-	  
-	  
 	  //조회수 1 증가
 	  dao.updateReadCount(num);
 	  %>
@@ -238,7 +238,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				  if(loginok!=null && sessionNickname.equals(mdao.getNickname(dogAnswer.getId()))){%>
 					  <span id="my-comment" style="float: left;">&nbsp;내댓글</span>
 					  
-		          <div id="btn-box">
+		          <div class="btn-box">
 				      <a class="a-tag" id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>" href="">수정</a>
 				      <a class="a-tag" id="btn-comment-del" idx="<%=dogAnswer.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
 		          </div>
@@ -251,7 +251,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	          <br>
 	          <span class="form-comment-mod">
               <textarea><%=dogAnswer.getContent().replace("\n", "<br>")%></textarea>
-              <button class="btn btn-warning wd" value="<%=dogAnswer.getIdx()%>">수정</button>
+              <button class="btn btn-default border border-secondary btn-xs" value="<%=dogAnswer.getIdx()%>">수정</button>
               </span>
 	          
 	          <hr>
@@ -336,17 +336,106 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  })
 	  
 	  </script>
-	  
+	  <div class="btn-box">
 	  <%
 
 	    //currentpage
 	    String currentPage=request.getParameter("currentPage");
 	  
 	    if(nickname.equals(sessionNickname)){%>
-	  		<button class="button-primary-outlined" type="button" onclick="location.href='index-form.jsp?main=dog-talking/modify.jsp?num=<%=dto.getNum()%>'">수정</button>
-	  		<button class="btn btn-warning btn-ghost btn-open-line" type="button" id="btn-board-del">삭제</button>	    	
+	  		<button class="btn btn-default btn-sm border border-secondary" type="button"
+	  		  data-toggle="modal" data-target="#exampleModal">수정</button>
+	  		<button class="btn btn-default btn-sm border border-secondary" type="button" id="btn-board-del">삭제</button>	    	
 	    <%}
 	  %>
+	  
+	  		 
+		<!-- Modal 수정창 -->
+		<div class="modal fade" id="exampleModal">
+  		<div class="modal-dialog">
+   		 <div class="modal-content">
+   		 
+   		 <div class="modal-header">
+   		    <span class="modal-title" id="exampleModalLabel">수정 | 사진을 첨부하셔야 입력이 가능합니다.</span>
+    		   <button type="button" class="close" data-dismiss="modal">
+   		      <span aria-hidden="true">&times;</span>
+   		    </button>
+   		 </div>
+    		  
+	   <div class="modal-body">
+	   <form action="dog-talking/modifyaction.jsp" method="post" enctype="multipart/form-data">
+		<table class="table">
+		<input type="hidden" name="num" value="<%=dto.getNum()%>">
+		<input type="hidden" name="currentPage" value="<%=currentPage%>">
+		  <tr>
+	    	<td>
+	    	<!-- 이미지 미리보기 -->
+	        <img id="showimg" style="max-width: 200px; max-height:200px;"
+	         src="<%=dto.getPhoto()==null?"":"dog-talking-photo/"+dto.getPhoto()%>">
+	  		<input type="file" name="photo" id="input-photo" style="visibility: hidden;" onchange="readURL(this)" required> 
+		    </td>
+		    
+		    <td>
+		    <div id="content">
+		      <textarea name="content" placeholder="내용을 입력하세요" required style="width: 200px; height: 200px;"><%=dto.getContent() %></textarea>
+		    </div>
+	   		</td>
+	  	</tr>
+		<tr>
+		  <td>
+		    <span class="camera"><i class="fa-solid fa-camera-rotate icon"></i> 사진변경</span>
+		  </td>
+		  <td align="center">
+		 	<button type="submit" class="btn btn-default border border-secondary">수정</button>
+		  </td>
+		</tr>
+	  </table>
+	  
+	</form>
+   	  	</div>
+   		 </div>
+  		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+	
+   	  $(function(){
+
+      //trigger 이벤트 강제 호출 
+      $("span.camera").click(function(){
+         $("#input-photo").trigger("click");
+      });
+      
+      //esc로 모달 닫기
+      $(document).keydown(function(e){
+    		//keyCode 구 브라우저, which 현재 브라우저
+    	    var code = e.keyCode || e.which;
+    	 
+    	    if (code == 27) { // 27은 ESC 키번호
+    	        history.back();
+    	    }
+    	});
+      
+   });
+   	 
+   
+    //이미지 미리보기   
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+            reader.onload = function (e) {
+            //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                $('#showimg').attr('src', e.target.result);
+            }                   
+            reader.readAsDataURL(input.files[0]);
+            //File내용을 읽어 dataURL형식의 문자열로 저장
+        }
+        
+    }
+    
+    </script>
+	
 	  
 	  <script type="text/javascript">
 	  
@@ -364,7 +453,9 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    
 	  
 	  </script>
-	  <button type="button" onclick="location.href='index.jsp?main=dog-talking/board.jsp?currentPage=<%=currentPage%>'">목록</button>
+	  <button type="button" class="btn btn-default btn-sm border border-secondary"
+	  onclick="location.href='index.jsp?main=dog-talking/board.jsp?currentPage=<%=currentPage%>'">목록</button>
+	  </div>
 	</div>
 </body>
 </html>
