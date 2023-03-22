@@ -257,7 +257,7 @@
 		</td>
 		</tr>
 		<!-- 로그인되어있을때만 수정삭제 가능 -->
-		<%if(loginok!=null &&  isAdmin.equals("1")){
+		<%if(loginok!=null &&  isAdmin.equals("1") || id.equals(nickname)){
 			%>
 			<div>
 			<tr>
