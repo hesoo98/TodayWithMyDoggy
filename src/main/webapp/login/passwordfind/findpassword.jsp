@@ -5,6 +5,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+    <style type="text/css">
+    
+  		#wrapper-form{
+  			width: 100%;
+  			height: 100%;
+  			border: 1px solid lightgray;
+			border-radius: 10px;  			
+  			padding: 20px 50px;
+  		}
+    
+    	.search-title{
+    		margin: 5px 0px;
+    	}
+  		
+  		input[type="text"]{
+  			outline: none;
+  			border: none;
+  			width: 200px;
+  			border-bottom: 1px solid lightgray;
+  		}
+  		
+  		input[type="text"]:focus{
+  			border-bottom-color: black;
+  		}
+    
+	</style>
+
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
    <script type="text/javascript">
     function addHypen(obj) {
@@ -35,7 +63,7 @@
     </script>
 </head>
 <body>
-	<form name="pwfindscreen" action="index.jsp?main=login/passwordfind/findpasswordresult.jsp" method = "POST">
+	<form id="wrapper-form" name="pwfindscreen" action="index.jsp?main=login/passwordfind/findpasswordresult.jsp" method = "POST">
 			<div class = "search-title">
 				비밀번호 찾기
 			</div>
@@ -52,9 +80,9 @@
 			</div> 
 			<br>
 	</section>
-	<div class ="btnSearch">
-		<input type="submit"value="찾기">
-		<input type="button" name="cancle" value="취소" onClick="history.back()">
+	<div class="btnSearch"  align="center">
+		<input class="btn btn-default" type="submit" value="찾기">
+		<input class="btn btn-default" type="button" name="cancle" value="취소" onClick="history.back()">
  	</div>
  </form>
 </body>

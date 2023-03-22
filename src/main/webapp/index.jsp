@@ -47,10 +47,15 @@
 	margin: 0px;
 }
 
+.layout{
+	width: 1200px;
+}
+
+
 .main {
 	height: auto;
 	min-height: 100%;
-	width: 1280x;
+	width: 1280px;
 }
 	
 #wrapper{
@@ -117,10 +122,12 @@ String root = request.getContextPath();
 				<jsp:include page="layout/aside-right.jsp" />
 			</div>
 		</div>
-	</div>
-		
+	
 		<div id="footer">
 			<jsp:include page="layout/footer.jsp" />
 		</div>
+	
+	</div>
+		
 </body>
 </html>

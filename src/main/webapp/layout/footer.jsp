@@ -19,13 +19,7 @@
     <link rel="stylesheet" href="layout/css/style.css">
 
     <title>Footer 09</title>
-    
-    <style type="text/css">
-    	.footer-16371{
-    	  background-color: #f8f9fa;
-    	}
-    </style>
-    
+
   </head>
   <body>
     

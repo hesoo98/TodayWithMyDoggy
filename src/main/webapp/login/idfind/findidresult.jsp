@@ -1,6 +1,37 @@
 <%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+	.found{
+		width: 100%;
+		height: 100%;
+		border: 1px solid gray;
+		border-radius: 10px;  			
+		padding: 20px 50px;
+	}
+	
+	input[type="text"]{
+		outline: none;
+		border: none;
+		width: 200px;
+		border-bottom: 1px solid lightgray;
+	}
+	
+	input[type="text"]:focus{
+		border-bottom-color: black;
+	}
+
+</style>
+
+</head>
+<body>
 
 <%
  request.setCharacterEncoding("UTF-8");
@@ -18,7 +49,7 @@ MemberDao dao = new MemberDao();
       %>
       
       <div class = "container">
-      	<div class = "found-success">
+      	<div class = "found">
 	      <div class ="found-id">회원님의 아이디는 <b><%=memberid%></b> 입니다.</div>
 	     </div>
 	     <div class = "found-login">
@@ -26,10 +57,10 @@ MemberDao dao = new MemberDao();
        	</div>
        </div>
       <%
-  } else{
- %>
+	  } else{
+	 %>
         <div class = "container">
-      	<div class = "found-fail">
+      	<div class = "found">
 	      	등록된 정보가 없습니다 
 	     </div>
 	     <div class = "found-login">
@@ -38,6 +69,8 @@ MemberDao dao = new MemberDao();
        	</div>
        </div>
        <%
-  }
- %> 
+	  }
+	 %> 
       </form>
+      
+</body>
