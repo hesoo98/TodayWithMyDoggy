@@ -123,7 +123,7 @@
 							<tr>
 								<td><%=qnaList.get(i).getNum() %></td>
 								<td><%=qnaList.get(i).getNum() %></td>
-								<td style='width:350px;overflow:hidden;text-overflow;ellipsis;'><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=qnaList.get(i).getNum()%>"><%=qnaList.get(i).getNum() %></a></td>
+								<td style='width:350px;overflow:hidden;text-overflow:ellipsis;'><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=qnaList.get(i).getNum()%>"><%=qnaList.get(i).getNum() %></a></td>
 							</tr>
 							<%}%>
 						<%}%>
