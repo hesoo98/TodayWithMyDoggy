@@ -167,14 +167,17 @@
 	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
 	   <input type="hidden" name="receiver" value="<%=dto.getId()%>">
 	   
-	   	보내는 사람:<%=sessionNickname %><br>
-	   	받는 사람:<%=nickname %><br><br>
-	    <textarea rows="10" style="width:400px" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
+      <span>[보내는 사람] <%=sessionNickname %></span><br>
+	   	<span>[받는 사람] <%=nickname %></span>
+	   	
+	   	<br><br>
+	    <textarea rows="10" style="width:100%;" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
+
 	    required="required"></textarea>
     	  
       	<div class="modal-footer">
-        	<button type="button" data-dismiss="modal">취소</button>
-        	<button type="submit" >보내기</button>
+        	<button type="button" class="btn btn-default border border-secondary" data-dismiss="modal">취소</button>
+        	<button type="submit" class="btn btn-default border border-secondary" >보내기</button>
     	</div>
     	
 	   </form>
@@ -182,8 +185,6 @@
    		 </div>
   		</div>
 	</div>
-			
-			
 			
 	 <div class="wrapper-subject">
 	  

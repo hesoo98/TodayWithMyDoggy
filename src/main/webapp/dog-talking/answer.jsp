@@ -10,7 +10,7 @@
 
 <style type="text/css">
 .answer-input {
-	width: 350px;
+	width: 100%;
 	height: 40px;
 }
 
@@ -33,13 +33,13 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-	width: 20%;
+	width: 10%;
 	height: 80%;
 	background-color: lightgray;
 	border: none;
 	background-color: white;
 	font-size: 1em;
-	color: #042AaC;
+	color: #5496f2;
 	outline: none;
 	display: inline;
 	margin-left: -80px;
