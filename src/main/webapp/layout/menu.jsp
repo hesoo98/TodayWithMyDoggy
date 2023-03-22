@@ -93,7 +93,6 @@ String nickname = dao.getNickname(myid);
 				DogProfileDto proDto = proDao.getMyMainDog(memberNum);
 
 				String proPhoto = proDto.getPhoto();
-				System.out.println(memberNum);
 				%>
 
 				<div class="img-box"

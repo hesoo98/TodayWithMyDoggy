@@ -124,6 +124,7 @@
     DogProfileDao pdao=new DogProfileDao();
     DogProfileDto pdto=pdao.getMainDogInfo(writerNum);
 
+    String isAdmin = (String) session.getAttribute("isAdmin");
 	String id=(String)session.getAttribute("myid"); //sessionid
 	String sessionNickname=mdao.getNickname(id); //sessionnickname
 	String nickname=mdao.getNickname(dto.getId()); //writernickname
@@ -145,8 +146,8 @@
 	<h3><b><%=dto.getSubject() %></b></h3>
 	
 	<!-- 쪽지함 만들기 -->
-	<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal">
-		쪽지
+	<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm " >
+		<b>쪽지</b>
 	</button>
 	
 	<!-- Modal -->
@@ -166,7 +167,7 @@
 	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
 	   <input type="hidden" name="receiver" value="<%=dto.getId()%>">
 	   
-	   	보내는 사람:<%=id %><br>
+	   	보내는 사람:<%=sessionNickname %><br>
 	   	받는 사람:<%=nickname %><br><br>
 	    <textarea rows="10" style="width:400px" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
 	    required="required"></textarea>
@@ -189,8 +190,15 @@
 	  <!-- 프사 누르면 이동 -->
 	  <a id="a-tag" data-toggle="modal" data-target="#exampleModal2">
 	    <b>
-	      <img src="dog-talking-photo/04.png" style="width: 20px;">
-	      <span style="background-color : pink; border-radius: 15px; font-size: 15px; margin-right: 5px;">프사</span><%=nickname %><br>
+	    <%
+	    if(pdto.getIdx()==null){%>
+		<span class="dog-photo"><i class="fa-solid fa-dog fa-lg"></i></span>
+		<span class="nickname"><%=nickname %></span>
+	    <%}else{%>
+		<img class="dog-photo" src="/TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto()%>">
+	    <span class="nickname"><%=nickname %></span>
+	    <%}%>
+	    <br>
 	    </b>
 	  </a>
 	  <!-- 프로필 모달 -->
@@ -249,7 +257,7 @@
 		</td>
 		</tr>
 		<!-- 로그인되어있을때만 수정삭제 가능 -->
-		<%if(loginok!=null && id.equals(nickname) || id.equals("admin")){
+		<%if(loginok!=null &&  isAdmin.equals("1")){
 			%>
 			<div>
 			<tr>
