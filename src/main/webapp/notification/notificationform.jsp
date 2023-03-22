@@ -9,21 +9,24 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<style>
 		.container {
-		   width:800px;
+			width: 100%;
 		}
 		
 		.content {
-			width: 700px;
 			margin:0 auto;
 			margin-bottom: 50px;
 		}
+		
 		.subject {
 			width:700px;
 			margin:0 auto;
 		}
-		#btnSave {
-			float:right;
+		
+		#btnSave{
+			float: right;
 		}
+		
+		
 	</style>
 </head>
 <body>
@@ -41,7 +44,7 @@
 	      <div class="content">
 	         <div>내용</div>
 	         <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea><br>
-	         <button type="submit" class="btn btn-sm btn-warning" id="btnSave">저장</button>
+	         <button type="submit" class="btn btn-default border border-secondary" id="btnSave">저장</button>
 	      </div>
 	      
 	   </form>

@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript" src="js/layout.js"></script>
 <link rel="stylesheet" href="css/ut/css.css">
@@ -38,104 +39,7 @@
 	crossorigin="anonymous"></script>
 
 <style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
 
-.container {
-	width: 800px;
-	margin-bottom: 50px;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-.wrapper-top{
-	display: flex;
-	justify-content: center;
-}
-
-#search-bar{
-	width: 500px;
-}
-
-input:focus{
-	outline: none;
-}
-
-.card-content {
-	text-overflow: ellipsis;  /* 말줄임 적용 */
-	display:inline-block;
-	width: 220px;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.card-img {
-	width: 100%;
-	overflow: hidden;
-}
-
-img {
-	max-width: 100%;
-	cursor: pointer;
-	transition: transform .3s; /* Animation */
-}
-img:hover {
-	transform: scale(1.1);
-  -webkit-transform: scale(1.1); /* 크롬, 사파리 */
-  -moz-transform: scale(1.1);  /* 파이어폭스 */
-  -ms-transform: scale(1.1); /* IE */
-  -o-transform: scale(1.1);  /* 오페라 */
-}
-
-.card{
-	cursor: pointer;
-}
-
-
-#list-cnt{
-    margin-left: 10px;
-}
-
-/* 페이지 */
-
-.pagination{
-  padding: 30px 0;
-}
-
-.pagination ul{
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-.pagination a{
-  display: inline-block;
-  padding: 10px 18px;
-  color: #222;
-}
-
-.p1 a{
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  padding: 0;
-  text-align: center;
-}
-
-.p1 li.active{
-	background-color: #fce694;
-	border-radius: 100%;
-	color: #fff;
-}
 
 </style>
 
@@ -189,7 +93,7 @@ img:hover {
 	%>
 	
 	<!-- 인기글보기 -->
-	<jsp:include page="../dog-talking/board-rank.jsp"/>
+	<%-- <jsp:include page="../dog-talking/board-rank.jsp"/> --%>
 	
 
 	<div class="album py-5 bg-light">

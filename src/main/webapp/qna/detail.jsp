@@ -39,11 +39,11 @@
 <body>
 	
    <div class="container wrapper">
-   <table class="table table-bordered" style="width: 800px;">
+   <table class="table" style="width: 100%;">
        <tr>
        	<td width="100">제목</td>
        	<td><%=dto.getTitle() %></td>
-       	<td>
+       	<td width="100">
        	<%
 	      //비밀글 여부
 	      if(dto.getSecret().equals("1")){%>
@@ -82,16 +82,16 @@
          <td colspan="3" align="center">
        	 <%
        	 if(myid.equals(dto.getId())){%>
-	         <button type="button" onclick="location.href='index.jsp?main=qna/modify.jsp?num=<%=dto.getNum()%>'">수정</button>
-	         <button type="button" onclick="delFunc()">삭제</button>
+	         <button type="button" class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=qna/modify.jsp?num=<%=dto.getNum()%>'">수정</button>
+	         <button type="button" class="btn btn-default border border-secondary" onclick="delFunc()">삭제</button>
        	 <%}else if(isAdmin.equals("1") && adto.getIdx()==null){%>
-       		 <button type="button" onclick="location.href='index.jsp?main=qna-answer/write.jsp?num=<%=dto.getNum()%>'">답변하기</button>
+       		 <button type="button" class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=qna-answer/write.jsp?num=<%=dto.getNum()%>'">답변하기</button>
        	 <%}else if(isAdmin.equals("1") && adto.getIdx()!=null){%>
-       		 <button type="button" onclick="location.href='index.jsp?main=qna-answer/modify.jsp?idx=<%=adto.getIdx()%>&num=<%=dto.getNum()%>'">답변수정</button>
-       		 <button type="button" onclick="delAnswerFunc()">답변삭제</button>
+       		 <button type="button" class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=qna-answer/modify.jsp?idx=<%=adto.getIdx()%>&num=<%=dto.getNum()%>'">답변수정</button>
+       		 <button type="button" class="btn btn-default border border-secondary" onclick="delAnswerFunc()">답변삭제</button>
        	 <%}
        	 %>
-         <button type="button" onclick="location.href='index.jsp?main=qna/qnalist.jsp'">목록</button>
+         <button type="button" class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=qna/qnalist.jsp'">목록</button>
          </td>
        </tr>
        

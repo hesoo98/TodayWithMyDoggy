@@ -13,6 +13,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <title>Insert title here</title>
