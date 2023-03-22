@@ -135,10 +135,10 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 </style>
 </head>
 <body>
-	<div class="container2" style="border: 1px solid black;">
-		<div style="float: left; opacity: 0.5; padding-top: 20px;">
+	<div class="container2">
+		<div style="float: left; opacity: 0.5;">
 		</div>
-		<div style="text-align: center; font-size: 21px; opacity: 0.8; letter-spacing:3px; ine-height:2; padding-bottom: 20px;">
+		<div style="text-align: center; font-size: 22px; opacity: 0.8; letter-spacing:3px; ine-height:2;">
 		당신의 사랑스러운 반려견과 함께 다녀온 
 		<br>특별한 장소를 소개해주세요!</div>
 		
@@ -149,7 +149,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			<div class="button__drow1"></div>
 			<div class="button__drow2"></div>
 		</a>
-
 	</div>
 	<div class="album pb-5 bt-2">
 		<div class="container">
