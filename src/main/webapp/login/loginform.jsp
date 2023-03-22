@@ -138,6 +138,7 @@ Kakao.init('c3daec463cc1c038e93542b4609bf488');
         		  "email":email,
         		  },
         	  success:function(){
+        		  $(window).scrollTop(0);
         		  location.reload();
         	  }
         	  

@@ -15,6 +15,8 @@
     }
     </style>
 </head>
+
+
 <body>
 <%
 //세션으로부터 아이디 얻기
@@ -28,7 +30,7 @@ String nickname=dao.getNickname(myid);
 session.setAttribute("isAdmin", isAdmin);
 %>
 	<div style="text-align: center">
-		<b class="welcome"><%=nickname %>님 방문을 환영합니다</b><br>
+		<b class="welcome"><%=nickname %>님, 방문을 환영합니다!</b><br>
 		<%
 		if(loginok!=null && isAdmin.equals("1")){%>
 			<button type="button" onclick="location.href='index.jsp?main=mypage/adminMyPage.jsp'" class="btn btn-default btn-sm">관리자페이지</button>
@@ -67,6 +69,5 @@ session.setAttribute("isAdmin", isAdmin);
   </div>
 </div>
 	</div>
-
 </body>
 </html>
