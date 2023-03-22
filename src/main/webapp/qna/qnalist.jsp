@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
 
@@ -18,7 +19,7 @@
 
 	.wrapper-top{
 		float: right;
-		margin: 10px 10px;
+		margin: 50px 10px 10px 10px;
 	}
 	
 
@@ -31,48 +32,18 @@
 	}
 	
 	.a-tag:hover{
-		color: black;
+		color: #5496f2;
 	}
 	
 	.my-qna{
-		color: gold;
+		color: #5496f2;
 	}
 	
 	.disabled{
 		color: gray;
 	}
 	
-	/* 페이지 */
 
-.pagination{
-  padding: 30px 0;
-}
-
-.pagination ul{
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-.pagination a{
-  display: inline-block;
-  padding: 10px 18px;
-  color: #222;
-}
-
-.p1 a{
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  padding: 0;
-  text-align: center;
-}
-
-.p1 li.active{
-	background-color: #fce694;
-	border-radius: 100%;
-	color: #fff;
-}
 
 td:not(.table-title), tr{
 	text-align: center;
@@ -150,12 +121,12 @@ String myid=(String)session.getAttribute("myid");
 	<%
 	// 상단 안내 부분
 	if(loginok!=null && isAdmin.equals("0")){  //로그인 상태+일반회원이면 글쓰기 버튼 %> 
-		<span class="my-qna">내가 작성한 글은 노란색으로 표시됩니다.</span>
-		<button class="btn btn-warning" onclick="location.href='index.jsp?main=qna/write.jsp'">문의하기</button>
+		<span class="my-qna">Q&A | 내가 작성한 글은 하늘색으로 표시됩니다.</span>
+		<button class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=qna/write.jsp'">문의하기</button>
 	<%}else if(loginok!=null && isAdmin.equals("1")){  //관리자 %>
-		<span class="alert alert-warning">관리자님 안녕하세요</span>
+		<span class="alert">Q&A | 관리자님 안녕하세요</span>
 	<%}else{%>
-		<span class="alert alert-warning">로그인하셔야 문의가 가능합니다.</span>
+		<span class="alert">Q&A | 로그인하셔야 문의가 가능합니다.</span>
 	<%}
 	%>
 	</div>

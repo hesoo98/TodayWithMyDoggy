@@ -8,62 +8,30 @@
 <head>
 	<meta charset="utf-8">
 	<title>공지사항 리스트</title>
+	<link rel="stylesheet" href="css/page.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<style>
 		.container {
 			margin-top: 50px;
-			margin-bottom: 100px;
 		}
 		.writeBtn {
 			float:right;
 			margin-bottom: 20px;
 		}
 		
-		.rectangle {
-			border:2px solid pink;
-		}
-		.tableWrapper {
-			margin:0 auto;
+		td:not(.table-title), tr{
+			text-align: center;
 		}
 		
-		table td tr{
-			table-layout:fixed;
-			text-overflow: ellipsis;
-			max-width: 150px;
+		.table-title{
+			text-align: left;
+			text-overflow: ellipsis;  /* 말줄임 적용 */
+			width: 280px;
 			white-space: nowrap;
+			overflow: hidden;
 		}
-		
-		/* 페이지 */
-		.pagination{
-		  padding: 30px 0;
-		}
-		
-		.pagination ul{
-		  margin: 0;
-		  padding: 0;
-		  list-style-type: none;
-		}
-		
-		.pagination a{
-		  display: inline-block;
-		  padding: 10px 18px;
-		  color: #222;
-		}
-		
-		.p1 a{
-		  width: 40px;
-		  height: 40px;
-		  line-height: 40px;
-		  padding: 0;
-		  text-align: center;
-		}
-		
-		.p1 li.active{
-		   background-color: #fce694;
-		   border-radius: 100%;
-		   color: #fff;
-		}
+	
 		
 	</style>
 </head>
@@ -120,27 +88,30 @@
 			 <%
 			 // 로그인이 되어있고, 관리자면 글쓰기 버튼 보이게.
 			 if(loginok != null && isAdmin.equals("1")) {%>
-				<button type="button" class="rectangle btn btn-lg btn-warning writeBtn" onclick="location.href='index.jsp?main=notification/notificationform.jsp'">글쓰기</button>
+			 	<span> | 공지사항 | </span>
+				<button type="button" class="btn btn-default border border-secondary writeBtn" onclick="location.href='index.jsp?main=notification/notificationform.jsp'">글쓰기</button>
 			<%}%>
 			</div>
 	      	<div class="tableWrapper">
-				<table class="table table-hover">
+				<table class="table">
 					<%
 					SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					NotificationDao dao = new NotificationDao();
 					%>
 					
 					<tr>
-						<td width="50">번호</td>
-						<td width="400">제목</td>
-						<td width="200">작성일</td>
+						<td width="80">번호</td>
+						<td width="300">제목</td>
+						<td width="150">작성일</td>
 					</tr>
 					<%
 					for(NotificationDto dto: list){
 						%>
 					<tr>
 						<td><%=dto.getNum() %></td>
-						<td> <a style="color: black;" href="index.jsp?main=notification/notificationdetail.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle() %></a></td>
+						<td class="table-title">
+						<a style="color: black;" href="index.jsp?main=notification/notificationdetail.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle() %></a>
+						</td>
 						<td style="width: 200px;"><%=sdf.format(dto.getWriteday()) %></td>
 					</tr>
 					<%}%>

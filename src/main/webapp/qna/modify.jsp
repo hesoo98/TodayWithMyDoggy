@@ -17,13 +17,6 @@
 		margin: 100px 200px;
 	}
 	
-	input:focus {
-	    outline: none;
-	}
-	
-	textarea:focus {
-	    outline: none;
-	}
 
 </style>
 </head>
@@ -41,25 +34,25 @@
    
    <div class="container wrapper">
    <form action="qna/modifyaction.jsp" method="post">
-   <table class="table table-bordered" style="width: 800px;">
+   <table class="table" style="width: 100%;">
    <span>수정하기</span>
    	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
        <tr>
-       	<td>제목</td>
-       	<td><input type="text" name="title" value="<%=dto.getTitle() %>"
+       	<td width="100">제목</td>
+       	<td colspan="2"><input type="text" name="title" value="<%=dto.getTitle() %>"
        	 placeholder="제목을 입력하세요" style="width: 100%;"></td>
        </tr>
        
        <tr>
-       	<td>내용</td>
+       	<td width="100">내용</td>
        	<td colspan="2">
-       	<textarea name="content" placeholder="내용을 입력하세요" style="width: 100%; height: 300px;"><%=dto.getContent() %></textarea>
+       	<textarea name="content" placeholder="내용을 입력하세요" style="width: 100%;height: 300px;"><%=dto.getContent() %></textarea>
        	</td>
        </tr>
        
        <tr>
          <td colspan="3" align="center">
-           <button type="submit" class="btn btn-warning btn-sm">수정하기</button>
+           <button type="submit" class="btn btn-sm border border-secondary">수정하기</button>
          </td>
        </tr>
        
