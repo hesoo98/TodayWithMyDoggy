@@ -13,7 +13,6 @@
 <style type="text/css">
 
 	body{
-		border: 1px solid black;
 		width:100%;
 	}
 	

@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/page.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Insert title here</title>
@@ -34,10 +35,6 @@
 	  cursor: pointer;
 	}
 	
-	#btn-del:hover{
-	  background-color: #fce694;
-	}
-	
 	.span-btn{
 	  margin: 0px 2px;
 	  cursor: pointer;
@@ -49,39 +46,6 @@
 	
 	.btns-right{
 	  float: right;
-	}
-	
-	/* 페이지 */
-
-	.pagination{
-	  padding-top: 0px;
-	  padding-bottom: 30px;
-	}
-	
-	.pagination ul{
-	  margin: 0;
-	  padding: 0;
-	  list-style-type: none;
-	}
-	
-	.pagination a{
-	  display: inline-block;
-	  padding: 10px 18px;
-	  color: #222;
-	}
-	
-	.p1 a{
-	  width: 40px;
-	  height: 40px;
-	  line-height: 40px;
-	  padding: 0;
-	  text-align: center;
-	}
-	
-	.p1 li.active{
-		background-color: #fce694;
-		border-radius: 100%;
-		color: #fff;
 	}
 	
 	input[type="checkbox"]{

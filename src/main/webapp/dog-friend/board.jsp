@@ -13,16 +13,34 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <title>Insert title here</title>
 
 <style type="text/css">
+.sublink{
+color:black;
+}
 
+.sublink:hover{
+color:black;
+text-decoration:none;
+}
 </style>
     <script type="text/javascript">
    
     $(function(){
+    	$("#togglecheckbutton").click(function(){
+    		   var element = $("#togglecheck");
+    		    var visibility = element.css("visibility");
+    		    if (visibility === "visible") {
+    		        element.css("visibility", "hidden");
+    		    } else {
+    		        element.css("visibility", "visible");
+    		    }
+    	})
+    	
     	
     	//전체체크클릭시 체크값 얻어서 모든 체크값에 전달
     	$(".alldelcheck").click(function(){
@@ -122,8 +140,8 @@
    
    no=totalCount-(currentPage-1)*perPage;
    
+   String isAdmin = (String) session.getAttribute("isAdmin");
    MemberDao mdao=new MemberDao();
-   
    String myid=(String)session.getAttribute("myid");
    MemberDto mdto=mdao.getMemeber(myid);
 	
@@ -132,10 +150,11 @@
 	
 	
 	
-   <div style=" margin: 20px 200px 20px 200px;" id="abc">
+   <div style=" margin: 20px 200px 20px 200px; width: 800px;" id="abc" >
    
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
-    <form id="togglecheck">
+     <button id="togglecheckbutton" class="btn btn-default btn-sm">지역 보기</button>
+    <form id="togglecheck" style="visibility: hidden">
       <input type="checkbox" id="checkbox1" name="category" value="강원">
       <label for="checkbox1">강원</label>
       <input type="checkbox" id="checkbox2" name="category" value="경기">
@@ -153,7 +172,7 @@
       <input type="checkbox" id="checkbox8" name="category" value="부산">
       <label for="checkbox8">부산</label>
       <input type="checkbox" id="checkbox9" name="category" value="서울">
-      <label for="checkbox9">서울</label>
+      <label for="checkbox9">서울</label><br>
       <input type="checkbox" id="checkbox10" name="category" value="세종">
       <label for="checkbox10">세종</label>
       <input type="checkbox" id="checkbox11" name="category" value="울산">
@@ -173,13 +192,13 @@
       
     </form>
     
-   <table style="width: 1000px; table-layout: fixed;" class="table table-hover" id="sort" >
+   <table style="width: 800px; table-layout: fixed;" class="table table-hover" id="sort" >
    <tr>
-   	<td width=100px;>번호</td>
+   	<td width=100px; align="center">번호</td>
    	<td width=100px;>지역</td>
-   	<td width=300px;>제목</td>
+   	<td width=200px;>제목</td>
    	<td width=100px;>작성자</td>
-   	<td width=300px;>작성일</td>
+   	<td width=200px;>작성일</td>
    	<td width=100px;>조회수</td>
    </tr>
 
@@ -200,7 +219,7 @@
 				%>
 				
 				
-				<tr id="posts" class="post <%=memDto.getAddr()%>" style="width:1000px;">
+				<tr id="posts" class="post <%=memDto.getAddr()%>" style="width:800px;">
 					<td align="center" width=100px;>
 						<input type="checkbox" class="alldel" value="<%=dto.getNum()%>">
 						&nbsp;&nbsp;
@@ -211,14 +230,14 @@
 						<%=memDto.getAddr()%>
 					</td>
 					
-					<td width=300px;>
-						<a href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
+					<td width=200px;>
+						<a class="sublink" href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
 						<%=dto.getSubject() %></a>
 
 					</td>
 					
 					<td width=100px;><%=mdao.getNickname(dto.getId()) %></td>
-					<td width=300px;><%=sdf.format(dto.getWriteday()) %></td>
+					<td width=200px;><%=sdf.format(dto.getWriteday()) %></td>
 					<td width=100px;><%=dto.getReadCount() %></td>
 					
 				</tr>
@@ -231,13 +250,13 @@
      
      //로그인 한 유저만 글쓰기 버튼 및 관리자만 삭제 가능하게 설정    
      String loginok=(String)session.getAttribute("loginok");
-     if(loginok!=null && myid.equals("admin")){%>
+     if(loginok!=null && isAdmin.equals("1")){%>
 	 <tr>
 		<td colspan="6">
  		<input type="checkbox" class="alldelcheck">전체선택
-			<button type="button" class="btn btn-danger btn-sm" style="float:right"
+			<button type="button" class="btn btn-default btn-sm" style="float:right"
 			id="btndel"><span class="glyphicon glyphicon-trash"></span>삭제</button>
-		<button type="button" class="btn btn-success btn-sm" style="float:right"
+		<button type="button" class="btn btn-default btn-sm" style="float:right"
 		onclick="location.href='index.jsp?main=dog-friend/write.jsp'"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
 			
 		</td>
@@ -246,7 +265,7 @@
      	<tr>
 			<td colspan="6">
 				<input type="checkbox" class="alldelcheck">전체선택
-					<button type="button" class="btn btn-success btn-sm" style="float:right"
+					<button type="button" class="btn btn-default btn-sm" style="float:right"
 					onclick="location.href='index.jsp?main=dog-friend/write.jsp'"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
 	
 	
@@ -256,7 +275,7 @@
   			<tr>
   				<td colspan="6">
     	 		<input type="checkbox" class="alldelcheck">전체선택
-					<button type="button" class="btn btn-success btn-sm" style="float:right"
+					<button type="button" class="btn btn-default btn-sm" style="float:right"
 					onclick="alert('로그인 후 이용해주세요')"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
 				</td>
 			</tr>

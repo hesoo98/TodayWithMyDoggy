@@ -77,6 +77,10 @@
 
 	/* css */
 	
+	textarea{
+		resize: none;
+	}
+	
 	input,textarea{
 		padding: 2px 3px;
 	}
@@ -91,6 +95,10 @@
 	
 	a:hover{
 		color: black;
+	}
+	
+	button:hover{
+	    background-color:#d9e4f4;
 	}
 </style>
 
@@ -123,11 +131,9 @@ String root = request.getContextPath();
 			</div>
 		</div>
 	
+	</div>
 		<div id="footer">
 			<jsp:include page="layout/footer.jsp" />
 		</div>
-	
-	</div>
-		
 </body>
 </html>

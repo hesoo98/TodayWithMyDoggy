@@ -9,10 +9,26 @@
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<style>
-		
 		.container {
-		   width: 800px;
+			width: 100%;
 		}
+		
+		.content {
+			margin:0 auto;
+			margin-bottom: 50px;
+		}
+		
+		.subject {
+			width:700px;
+			margin:0 auto;
+		}
+		
+		#btn-save{
+			margin-top: 20px;
+			float: right;			
+		}
+		
+		
 	</style>
 	<%
 		String num = request.getParameter("num");
@@ -37,8 +53,8 @@
             <div class="content">
                <div>내용</div>
                <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요"><%=dto.getContent()%></textarea>
+            <button type="submit" class="btn btn-sm btn-default border border-secondary" id="btn-save">저장</button>
             </div>
-            <button type="submit" class="btn btn-sm btn-primary" id="btnSave">저장</button>
          </form>
       </div>
    </article>

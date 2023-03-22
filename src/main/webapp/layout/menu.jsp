@@ -82,7 +82,7 @@ String nickname = dao.getNickname(myid);
 				%>
 
 				<a href="index.jsp?main=message/list.jsp"
-					style="width: 25px; padding-top: 15px; margin-left: 50px; margin-right: 15px;">
+					style="width: 25px; padding-top: 15px; margin-left: 100px; margin-right: 15px;">
 					<i class="fa-solid fa-envelope"
 					style="color: #5b5b5b; font-size: 25px"></i>
 				</a>
@@ -93,7 +93,6 @@ String nickname = dao.getNickname(myid);
 				DogProfileDto proDto = proDao.getMyMainDog(memberNum);
 
 				String proPhoto = proDto.getPhoto();
-				System.out.println(memberNum);
 				%>
 
 				<div class="img-box"
@@ -102,7 +101,7 @@ String nickname = dao.getNickname(myid);
 						id="profile-img" style="width: 100%; height: 100%">
 				</div>
 				<i class="fa-solid fa-caret-down fa-rotate-270"
-					style="margin-left: 25px; cursor: pointer;"></i>
+					style="margin-left: 30px; cursor: pointer;"></i>
 
 				<div class="profile-bar">
 
@@ -117,7 +116,7 @@ String nickname = dao.getNickname(myid);
 						style="color: #494949; cursor: pointer;"
 						onclick="location.href='mypage/userMyPage.jsp'"> </i> <span
 						style="font-size: 11px; cursor: pointer;"
-						onclick="location.href='mypage/userMyPage.jsp'">마이페이지 </span> <i
+						onclick="location.href='index.jsp?main=mypage/userMyPage.jsp'">마이페이지 </span> <i
 						class="fa-solid fa-right-from-bracket"
 						style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
 						onclick="location.href='login/logoutaction.jsp'"> </i> <span
@@ -131,7 +130,7 @@ String nickname = dao.getNickname(myid);
 						style="color: #494949; cursor: pointer;"
 						onclick="location.href='mypage/userMyPage.jsp'"> </i> <span
 						style="font-size: 11px; cursor: pointer;"
-						onclick="location.href='mypage/adminMyPage.jsp'">마이페이지 </span> <i
+						onclick="location.href='mypage/adminMyPage.jsp'">관리자페이지 </span> <i
 						class="fa-solid fa-right-from-bracket"
 						style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
 						onclick="location.href='login/logoutaction.jsp'"> </i> <span
@@ -151,7 +150,7 @@ String nickname = dao.getNickname(myid);
 <script type="text/javascript">
 	$(".profile-bar").hide();
 	$(".fa-caret-down").click(function() {
-		$(".profile-bar").toggle('fast')
+		$(".profile-bar").toggle()
 	});
 </script>
 <script src="https://kit.fontawesome.com/2663817d27.js"

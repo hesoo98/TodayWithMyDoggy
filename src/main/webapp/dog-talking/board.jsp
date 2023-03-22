@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript" src="js/layout.js"></script>
 <link rel="stylesheet" href="css/ut/css.css">
@@ -38,104 +39,7 @@
 	crossorigin="anonymous"></script>
 
 <style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
 
-.container {
-	width: 800px;
-	margin-bottom: 50px;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-.wrapper-top{
-	display: flex;
-	justify-content: center;
-}
-
-#search-bar{
-	width: 500px;
-}
-
-input:focus{
-	outline: none;
-}
-
-.card-content {
-	text-overflow: ellipsis;  /* 말줄임 적용 */
-	display:inline-block;
-	width: 220px;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.card-img {
-	width: 100%;
-	overflow: hidden;
-}
-
-img {
-	max-width: 100%;
-	cursor: pointer;
-	transition: transform .3s; /* Animation */
-}
-img:hover {
-	transform: scale(1.1);
-  -webkit-transform: scale(1.1); /* 크롬, 사파리 */
-  -moz-transform: scale(1.1);  /* 파이어폭스 */
-  -ms-transform: scale(1.1); /* IE */
-  -o-transform: scale(1.1);  /* 오페라 */
-}
-
-.card{
-	cursor: pointer;
-}
-
-
-#list-cnt{
-    margin-left: 10px;
-}
-
-/* 페이지 */
-
-.pagination{
-  padding: 30px 0;
-}
-
-.pagination ul{
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-.pagination a{
-  display: inline-block;
-  padding: 10px 18px;
-  color: #222;
-}
-
-.p1 a{
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  padding: 0;
-  text-align: center;
-}
-
-.p1 li.active{
-	background-color: #fce694;
-	border-radius: 100%;
-	color: #fff;
-}
 
 </style>
 
@@ -189,7 +93,7 @@ img:hover {
 	%>
 	
 	<!-- 인기글보기 -->
-	<jsp:include page="../dog-talking/board-rank.jsp"/>
+	<%-- <jsp:include page="../dog-talking/board-rank.jsp"/> --%>
 	
 
 	<div class="album py-5 bg-light">
@@ -203,9 +107,95 @@ img:hover {
 		 String loginok=(String)session.getAttribute("loginok");
 		 
 		 if (loginok!=null){%>
-		  <button type="button" class="btn btn-warning" onclick="location.href='index-form.jsp?main=dog-talking/write.jsp'">글쓰기</button>
+		  <button type="button" class="btn btn-default border border-secondary" data-toggle="modal" data-target="#exampleModal">글쓰기</button>
 		 <%}
 		 %>
+		 
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal">
+  		<div class="modal-dialog">
+   		 <div class="modal-content">
+   		 
+    		 <div class="modal-header">
+    		    <span class="modal-title" id="exampleModalLabel">사진을 첨부하셔야 입력이 가능합니다.</span>
+     		   <button type="button" class="close" data-dismiss="modal">
+    		      <span aria-hidden="true">&times;</span>
+    		    </button>
+    		 </div>
+    		  
+	   <div class="modal-body">
+	   <form action="dog-talking/writeaction.jsp" method="post" enctype="multipart/form-data">
+		<table class="table">
+		  <tr>
+	    	<td>
+	    	<!-- 이미지 미리보기 -->
+	        <img id="showimg" alt="사진을 넣어주세요" style="max-width: 200px; max-height:200px;">
+	  		<input type="file" name="photo" id="photo" style="visibility: hidden;" onchange="readURL(this)" required> 
+		    </td>
+		    
+		    <td>
+		    <div id="content">
+		      <textarea name="content" placeholder="내용을 입력하세요" required style="width: 200px; height: 200px;"></textarea>
+		    </div>
+	   		</td>
+	  	</tr>
+		<tr>
+		  <td>
+		    <div>
+		    <span class="camera"><i class="fa-solid fa-camera-retro icon"></i> 사진첨부</span>
+		    </div>
+		  </td>
+		  <td align="center">
+		 	<button type="submit" class="btn btn-default border border-secondary" >저장</button>
+		  </td>
+		</tr>
+	  </table>
+	  
+	</form>
+   	  	</div>
+   		 </div>
+  		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+	
+   	  $(function(){
+
+      //trigger 이벤트 강제 호출 
+      $("span.camera").click(function(){
+         $("#photo").trigger("click");
+      });
+      
+      //esc로 모달 닫기
+      $(document).keydown(function(e){
+    		//keyCode 구 브라우저, which 현재 브라우저
+    	    var code = e.keyCode || e.which;
+    	 
+    	    if (code == 27) { // 27은 ESC 키번호
+    	        history.back();
+    	    }
+    	});
+      
+   });
+   	 
+   
+    //이미지 미리보기   
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+            reader.onload = function (e) {
+            //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                $('#showimg').attr('src', e.target.result);
+            }                   
+            reader.readAsDataURL(input.files[0]);
+            //File내용을 읽어 dataURL형식의 문자열로 저장
+        }
+        
+    }
+    
+    </script>
+	
 		 
 		 <!-- 검색 -->
 		 <form action="<%=root %>/board.jsp" method="get" id="search-bar">
@@ -293,10 +283,10 @@ img:hover {
 							</div>
 						</div>
 					</div>
-				</div>
 				<%
 				}
 				%>
+				</div>
 				
 			</div>
 		</div>
