@@ -31,8 +31,12 @@
 		color: black;
 	}
 	
-	.a-tag:hover{
+	.my-qna:hover{
 		color: #5496f2;
+	}
+	
+	a:not(.my-qna):hover{
+		color: black;
 	}
 	
 	.my-qna{
