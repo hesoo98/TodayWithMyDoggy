@@ -271,7 +271,7 @@ td:not(.table-title), tr{
 
 					</td>
 					
-					<td width="100"><%=mdao.getNickname(dto.getId()) %></td>
+					<td width="100" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"><%=mdao.getNickname(dto.getId()) %></td>
 					<td width="200"><%=sdf.format(dto.getWriteday()) %></td>
 					<td width="100"><%=dto.getReadCount() %></td>
 					
