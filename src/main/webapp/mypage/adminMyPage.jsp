@@ -47,7 +47,7 @@
 	
 	//Qna
 	QnaBoardDao qnaDao = new QnaBoardDao();
-	List<QnaBoardDto> qnaList = qnaDao.getAllQnaList();
+	List<QnaBoardDto> qnaList = qnaDao.getAnswerPendingQList();
 			
 			
 %>
