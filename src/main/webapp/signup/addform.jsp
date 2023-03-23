@@ -95,13 +95,13 @@ body {
     	//아이디, 닉네임 중복확인 체크
     	   $("#signup").click(function(){
     		  if($("span.idsuccess").text() === ""){
-    	  	  alert("아이디 중복확인 후 사용해주세요");
+    	  	  alert("아이디 중복확인을 해주세요");
     	  	  return false;
     	 	 }else if($("span.idsuccess").text() === "중복된 닉네임입니다."){
     	 		 alert("아이디가 중복되었습니다.");
     	 		 return false;
     	 	 }else if($("span.nicknamesuccess").text() === ""){
-    	 	   alert("닉네임 중복확인 후 사용해주세요");
+    	 	   alert("닉네임 중복확인을 해주세요");
     	 	   return false;
     	 	 }else if($("span.nicknamesuccess").text() === "중복된 닉네임입니다."){
     	 		 alert("닉네임이 중복되었습니다.");
@@ -136,7 +136,7 @@ body {
   		 	f.password2.value="";
     	  return false;
     	 }else if(num < 0 || eng < 0 || spe < 0 ){
-    	  alert("비밀번호에 영문, 숫자, 특수문자를 혼합하여 입력해주세요");
+    	  alert("비밀번호는 영문, 숫자, 특수문자를 모두 사용하여야 합니다.");
     	  	f.password.value="";
   		  	f.password2.value="";
     	  return false;
@@ -177,19 +177,19 @@ body {
 			id="signuptable">
 
 			<form action="signup/addaction.jsp" method="post"
-				onsubmit="return !!( passCheck(this) & idCheck(this));" name="frm" id="sign-form"
-				style="padding: 50px 100px; font-size: 13px;">
+				onsubmit="return !!( passCheck(this) & idCheck(this));" name="frm"
+				id="sign-form" style="padding: 50px 100px; font-size: 13px;">
 				<div id="signuptext" style="font-size: 20px;">회원가입</div>
-				<br>
-				<span width="100">아이디</span><span style="color: red"> *</span>&nbsp;&nbsp;<span class="idsuccess" style="color: #EB0000;"></span>
+				<br> <span width="100">아이디</span><span style="color: red">
+					*</span>&nbsp;&nbsp;<span class="idsuccess" style="color: #EB0000;"></span>
 				<div>
 					<input type="text" name="id" id="id" required="required"
 						style="width: 320px; float: left" class="writeid form-control"
 						placeholder="6~20자리의 아이디 입력">
 					<button type="button" id="btncheck" class="alert alert-danger"
-						style="width: 100px; margin-left: 10px; height: 40px; line-height:10px;">중복체크</button>
-						<br>
-						
+						style="width: 100px; margin-left: 10px; height: 40px; line-height: 10px;">중복체크</button>
+					<br>
+
 				</div>
 				<span width="100">비밀번호</span><span style="color: red"> *</span>
 				<div>
@@ -197,50 +197,56 @@ body {
 						required="required" style="width: 430px;"
 						placeholder="영문, 숫자, 특수문자를 혼합한 8~20자리" class="form-control">
 				</div>
-				<br>
-
-				<span width="100">비밀번호 확인</span><span style="color: red"> *</span>
+				<br> <span width="100">비밀번호 확인</span><span style="color: red">
+					*</span>
 				<div>
 					<input type="password" name="password2" required="required"
 						style="width: 430px;" placeholder="비밀번호 확인" class="form-control">
 				</div>
-				<br>
+				<br> <span width="100">닉네임</span><span style="color: red">
+					*</span>&nbsp;&nbsp;<span class="nicknamesuccess" style="color: #EB0000;"></span><br>
 
-				<span width="100">닉네임</span><span style="color: red"> *</span>&nbsp;&nbsp;<span class="nicknamesuccess" style="color: #EB0000;"></span><br>
-				
 				<div>
 					<input type="text" name="nickname" id="nickname"
 						required="required" style="width: 320px; float: left;"
 						class="writenickname form-control" placeholder="닉네임을 입력하세요">
 					<button type="button" id="btncheck2" class="alert alert-danger"
-						style="width: 100px; height: 40px; line-height:10px; margin-left: 10px;">중복체크</button>
+						style="width: 100px; height: 40px; line-height: 10px; margin-left: 10px;">중복체크</button>
 				</div>
-				<div width="100">전화번호 <span style="color: red; margin-right: 10px;">*</span><span style="color: grey">
-				('-'를 제외한 숫자만 입력)</span></div>
+				<div width="100">
+					전화번호 <span style="color: red; margin-right: 10px;">*</span><span
+						style="color: grey"> ('-'를 제외한 숫자만 입력)</span>
+				</div>
 				<div class="hp" style="width: 400px;">
-					<select name="hp1" size="1" style=" float: left; width: 80px; height: 30px; background-color: #eee"" class="form-control">
+					<select name="hp1" size="1"
+						style="float: left; width: 80px; height: 30px; background-color: #eee"
+						" class="form-control">
 						<option value="010">010</option>
 						<option value="011">011</option>
 						<option value="016">016</option>
 						<option value="070">070</option>
-					</select> 
-					 
-					 <input type="text" name="hp2" size="3"
-						required="required" onkeyup="goFocus(this)" class="form-control" style="width: 110px; float: left; height: 30px; margin-left: 10px;">
-					 
-					 <input type="text" name="hp3" size="3" required="required"
-						class="form-control" style="width: 110px; float: left; height: 30px; margin-left: 10px;">
+					</select> <input type="text" name="hp2" size="3" required="required"
+						onkeyup="goFocus(this)" class="form-control"
+						style="width: 110px; float: left; height: 30px; margin-left: 10px;">
+
+					<input type="text" name="hp3" size="3" required="required"
+						class="form-control"
+						style="width: 110px; float: left; height: 30px; margin-left: 10px;">
 				</div>
-				<br><br>
+				<br>
+				<br>
 				<div style="margin-top: 10px;">
-				<span width="100">이메일</span><span style="color: red">*</span>
+					<span width="100">이메일</span><span style="color: red">*</span>
 				</div>
 				<div>
 					<input type="text" name="email1" required="required"
-						style="width: 160px; float: left;" class="form-control"> <span style="float: left; padding-top: 10px;">&nbsp;@&nbsp;</span> 
-						<input type="text" name="email2" id="email2" required="required"
-						style="width: 140px; float: left;" class="form-control"> 
-					<select id="selEmail" style="float: left; width:100px; height: 38px; margin-left: 10px; background-color: #eee" class="form-control">
+						style="width: 160px; float: left;" class="form-control"> <span
+						style="float: left; padding-top: 10px;">&nbsp;@&nbsp;</span> <input
+						type="text" name="email2" id="email2" required="required"
+						style="width: 140px; float: left;" class="form-control"> <select
+						id="selEmail"
+						style="float: left; width: 100px; height: 38px; margin-left: 10px; background-color: #eee"
+						class="form-control">
 						<option value="-">직접입력</option>
 						<option value="naver.com">네이버</option>
 						<option value="gmail.com">구글</option>
@@ -248,13 +254,15 @@ body {
 						<option value="nate.com">네이트</option>
 					</select>
 				</div>
-				
-				<br><br>
+
+				<br>
+				<br>
 				<div style="margin-top: 18px;">
 					<span width="100">주소</span><span style="color: red">*</span>
 				</div>
 				<div>
-					<select name="address" size="1" class="nice-select form-control" style="width: 27%">
+					<select name="address" size="1" class="nice-select form-control"
+						style="width: 27%">
 						<option value="강원">강원</option>
 						<option value="경기">경기</option>
 						<option value="경남">경남</option>
@@ -275,9 +283,11 @@ body {
 					</select>
 				</div>
 				<div style="margin-top: 50px; margin-left: 120px;">
-					<button type="submit" class="btn btn-outline-secondary" style="width: 100px; color: black" id="signup">회원가입</button>
+					<button type="submit" class="btn btn-outline-secondary"
+						style="width: 100px; color: black" id="signup">회원가입</button>
 					&nbsp;
-					<button type="reset" class="btn btn-outline-secondary" style="width: 100px; color: black">초기화</button>
+					<button type="reset" class="btn btn-outline-secondary"
+						style="width: 100px; color: black">초기화</button>
 				</div>
 			</form>
 		</div>

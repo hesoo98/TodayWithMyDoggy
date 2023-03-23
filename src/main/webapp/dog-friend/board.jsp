@@ -27,12 +27,12 @@ color:black;
 color:black;
 text-decoration:none;
 }
-
 a#MOVE_TOP_BTN {
     position: fixed;
-    right: 2%;
+    right: 10%;
     bottom: 50px;
     z-index: 999;
+    color: black;
 }
 </style>
     <script type="text/javascript">
@@ -47,7 +47,6 @@ a#MOVE_TOP_BTN {
     		        element.css("visibility", "visible");
     		    }
     	})
-    	
         
         $("#MOVE_TOP_BTN").click(function() {
             $('html, body').animate({
@@ -107,6 +106,12 @@ a#MOVE_TOP_BTN {
 
     			});
     		
+    		$("#checkbox0").click(function(){
+        		//alert("체크");
+        		var chk=$(this).is(":checked");
+        		$("#togglecheck").prop("checked",chk);
+        	})
+    		
     	})
     	const checkboxes = document.querySelectorAll('input[name="category"]');
     	const posts = document.querySelectorAll('.post');
@@ -117,7 +122,7 @@ a#MOVE_TOP_BTN {
     	    .map(checkbox => checkbox.value);
     	  posts.forEach(post => {
     	    if (checkedCategories.length === 0 || checkedCategories.includes(post.classList[1])) {
-    	      post.style.display = 'block';
+    	      post.style.display = '';
     	    } else {
     	      post.style.display = 'none';
     	    }
@@ -187,6 +192,8 @@ a#MOVE_TOP_BTN {
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
      <button id="togglecheckbutton" class="btn btn-default btn-sm">지역 보기</button>
     <form id="togglecheck" style="visibility: hidden">
+      <input type="checkbox" id="checkbox0" value="전체">
+      <label for="checkbox0">전체</label>
       <input type="checkbox" id="checkbox1" name="category" value="강원">
       <label for="checkbox1">강원</label>
       <input type="checkbox" id="checkbox2" name="category" value="경기">
@@ -228,7 +235,7 @@ a#MOVE_TOP_BTN {
    <tr>
    	<td width=100px; align="center">번호</td>
    	<td width=100px;>지역</td>
-   	<td width=200px;>제목</td>
+   	<td width=200px; style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">제목</td>
    	<td width=100px;>작성자</td>
    	<td width=200px;>작성일</td>
    	<td width=100px;>조회수</td>
@@ -262,7 +269,7 @@ a#MOVE_TOP_BTN {
 						<%=memDto.getAddr()%>
 					</td>
 					
-					<td width=200px;>
+					<td width=200px; style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
 						<a class="sublink" href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
 						<%=dto.getSubject() %></a>
 
@@ -296,7 +303,6 @@ a#MOVE_TOP_BTN {
  		<%} else if (loginok!=null){%>
      	<tr>
 			<td colspan="6">
-				<input type="checkbox" class="alldelcheck">전체선택
 					<button type="button" class="btn btn-default btn-sm" style="float:right"
 					onclick="location.href='index.jsp?main=dog-friend/write.jsp'"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
 	
