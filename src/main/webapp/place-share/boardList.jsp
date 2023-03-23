@@ -128,29 +128,31 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	crossorigin="anonymous"></script>
 
 <style type="text/css">
-	.button:hover{
-		color: #555555;
-		font-size: 18px;
-	}
+.button:hover {
+	color: #555555;
+	font-size: 18px;
+}
 </style>
 </head>
 <body>
 	<div class="container2">
-		<div style="float: left; opacity: 0.5;">
+		<div style="float: left; opacity: 0.5;"></div>
+		<div
+			style="text-align: center; font-size: 22px; opacity: 0.8; letter-spacing: 3px; ine-height: 2; padding-bottom: 20px;">
+			당신의 사랑스러운 반려견과 함께 다녀온 <br>특별한 장소를 소개해주세요!
 		</div>
-		<div style="text-align: center; font-size: 22px; opacity: 0.8; letter-spacing:3px; ine-height:2;">
-		당신의 사랑스러운 반려견과 함께 다녀온 
-		<br>특별한 장소를 소개해주세요!</div>
-		
-		<br>
-		<a href="/TodayWithMyDoggy/index.jsp?main=place-share/write.jsp" class="button">
+
+		<br> <a
+			href="/TodayWithMyDoggy/index.jsp?main=place-share/write.jsp"
+			class="button">
 			<div class="button__line"></div>
-			<div class="button__line"></div> <span class="button__text" style="letter-spacing:3px;">글쓰러 가기</span>
+			<div class="button__line"></div> <span class="button__text"
+			style="letter-spacing: 3px;">글쓰러 가기</span>
 			<div class="button__drow1"></div>
 			<div class="button__drow2"></div>
 		</a>
 	</div>
-	<div class="album pb-5 bt-2">
+	<div class="album pb-5 bt-2 m-2">
 		<div class="container">
 			<br> <br>
 			<div
@@ -179,7 +181,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				%>
 				<div class="col">
 					<div class="card border-light mb-10" width="100%"
-						style="border-radius: 10%;">
+						style="border-radius: 10%; background-color: #f5feff">
 						<div class="card-img" id="img" style="border-radius: 12%;">
 							<div class="img-text">
 								<img src="/TodayWithMyDoggy/place-share/place-photo/marker.png"
@@ -201,7 +203,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 								style="font-size: 15px; cursor: pointer;"
 								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getSubject()%></span>
 							<span class="card-content"
-								style="font-size: 10px; cursor: pointer; margin-bottom: 7px;"
+								style="font-size: 12px; cursor: pointer; margin-bottom: 7px;"
 								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getContent()%></span>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="img-box"
@@ -225,6 +227,78 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				}
 				%>
 			</div>
+		</div>
+
+		<%
+		int totalCount;
+		int totalPage;//총페이지수
+		int startPage;//각블럭의 시작페이지
+		int endPage;//각블럭의 끝페이지
+		int start; //각페이지의 시작번호
+		int perPage = 8; //한페이지에 보여질 글의 갯수
+		int perBlock = 5; //한블럭당 보여지는 페이지개수
+		int currentPage; //현재페이지
+
+		//총개수
+		totalCount = dao.getTotalCount();
+		//현재페이지번호 읽기(단 null 일때는 1페이지로 설정)
+		if (request.getParameter("currentPage") == null)
+			currentPage = 1;
+		else
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+		//총 페이지 갯수
+		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+
+		//각블럭의 시작페이지..현재페이지가 3(s:1,e:5) 6(s:6 e:10)
+		startPage = (currentPage - 1) / perBlock * perBlock + 1;
+		endPage = startPage + perBlock - 1;
+
+		//총페이지가 8. (6~10...endpage를 8로 수정해주어야 한다)
+		if (endPage > totalPage)
+			endPage = totalPage;
+
+		//각페이지에서 불러올 시작번호
+		start = (currentPage - 1) * perPage;
+		List<PlaceShareBoardDto> plist = dao.getList(start, perPage);
+		%>
+
+		<!-- 페이징 출력 -->
+		<div style="display: flex; justify-content: center;">
+			<ul class="pagination p1">
+				<%
+				//이전
+				if (startPage > 1) {
+				%>
+				<li><a
+					href="index.jsp?main=place-share/boardList.jsp?currentPage=<%=startPage - 1%>">이전</a>
+				</li>
+				<%
+				}
+				for (int pp = startPage; pp <= endPage; pp++) {
+				if (pp == currentPage) {
+				%>
+				<li class="active"><a
+					href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a>
+				</li>
+				<%
+				} else {
+				%>
+
+				<li><a
+					href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+				<%
+				}
+				}
+				//다음
+				if (endPage < totalPage) {
+				%>
+				<li><a
+					href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+				<%
+				}
+				%>
+			</ul>
 		</div>
 	</div>
 	<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js"
