@@ -53,7 +53,7 @@
 				</div>
 				
 				<div class="row justify-content-end" style="margin-top: 30px;">
-					<i class="fa-solid fa-camera camera" id="camera">&nbsp;&nbsp;<b>사진 수정</b></i>
+					<i class="fa-solid fa-camera camera" id="camera">&nbsp;&nbsp;<b>사진 추가</b></i>
 				 	<input type="file" name="photo" id="photo" style="visibility: hidden;" onchange="readURL(this)" required="required">
 				</div>
 				
