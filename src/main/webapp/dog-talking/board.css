@@ -1,0 +1,74 @@
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+.container {
+	width: 100%;
+	margin-bottom: -100px;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+.card-img {
+	width: 100%;
+	overflow: hidden;
+}
+
+img {
+	max-width: 100%;
+	cursor: pointer;
+	transition: transform .3s; /* Animation */
+}
+
+img:hover {
+	transform: scale(1.1);
+	-webkit-transform: scale(1.1); /* 크롬, 사파리 */
+	-moz-transform: scale(1.1); /* 파이어폭스 */
+	-ms-transform: scale(1.1); /* IE */
+	-o-transform: scale(1.1); /* 오페라 */
+}
+
+#profile-img {
+	width: 20px;
+	border-radius: 20px 20px;
+}
+/*말 줄임표 생성 시작*/
+.card-subject, .card-content {
+	display: block;
+	max-width: calc(100%);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+/*말 줄임표 생성 끝*/
+.img-text {
+	position: absolute;
+	top: 5%;
+	left: 20px;
+	width: 50px;
+	font-size: 13px;
+	z-index: 1;
+}
+
+#img-addr-text {
+	background-color: #00000066;
+	width: 70px;
+	border: none;
+	border-radius: 50px;
+	height: 27px;
+	padding-left: 20px;
+}
+
+.button:hover{
+		color: #555555;
+		font-size: 18px;
+	}
+	

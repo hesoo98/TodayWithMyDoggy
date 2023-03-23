@@ -64,57 +64,17 @@ public class DogTalkingBoardDao {
 			
 			return n;
 		}
-		
-	//read
-	//페이지에서 필요한만큼만 리턴 (for paging)
-	public List<DogTalkingBoardDto> getList(int start,int perpage,String word){
-		List<DogTalkingBoardDto> list=new ArrayList<DogTalkingBoardDto>();
-		
-		Connection conn=db.getConnection();
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String sql="";
-		
-		if(word!=null) { //검색값이 있으면 word 포함값만 출력
-			sql="select * from dog_talking_board where content like ? order by num desc limit ?,?";
+	
+		//페이지
+		public List<DogTalkingBoardDto> getList(int start,int perpage){
+			List<DogTalkingBoardDto> list=new ArrayList<DogTalkingBoardDto>();
 			
-			try {
-				pstmt=conn.prepareStatement(sql);
+			Connection conn=db.getConnection();
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			
+			String sql="select * from dog_talking_board order by num desc limit ?,?";
 				
-				pstmt.setString(1, "%"+word+"%");
-				pstmt.setInt(2, start);
-				pstmt.setInt(3, perpage);
-				
-				rs=pstmt.executeQuery();
-				
-				while(rs.next()) {
-					DogTalkingBoardDto dto=new DogTalkingBoardDto();
-					
-					dto.setNum(rs.getString("num"));
-					dto.setId(rs.getString("id"));
-					dto.setPhoto(rs.getString("photo"));
-					dto.setContent(rs.getString("content"));
-					dto.setWriteday(rs.getTimestamp("writeday"));
-					dto.setReadCount(rs.getInt("readcount"));
-					dto.setLikes(rs.getInt("likes"));
-					
-					list.add(dto);
-				}
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				db.dbClose(rs, pstmt, conn);
-			}
-			
-			return list;
-			
-		}else { //검색값 없으면 전체출력
-			
-			sql="select * from dog_talking_board order by num desc limit ?,?";
-			
 			try {
 				pstmt=conn.prepareStatement(sql);
 				
@@ -145,13 +105,11 @@ public class DogTalkingBoardDao {
 			}
 			
 			return list;
+			
 		}
 		
-		
-	}
-	
 	//rank list
-	public List<DogTalkingBoardDto> getList(){
+	public List<DogTalkingBoardDto> getRankList(){
 		List<DogTalkingBoardDto> list=new ArrayList<DogTalkingBoardDto>();
 		
 		Connection conn=db.getConnection();

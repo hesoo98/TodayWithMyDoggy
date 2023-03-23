@@ -55,7 +55,7 @@
 .main {
 	height: auto;
 	min-height: 100%;
-	width: 1280px;
+	width: 1200px;
 }
 	
 #wrapper{
@@ -70,9 +70,9 @@
 }
 
 #footer {
-	margin: auto;
 	clear: both;
 	height: 200px;
+	width: 1200px;
 }
 
 	/* css */
