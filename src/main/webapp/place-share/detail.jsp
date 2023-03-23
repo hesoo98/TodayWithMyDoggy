@@ -50,7 +50,7 @@ input[type="text"] {
 	box-sizing: border-box;
 	color: black;
 }
-input[type="button"] {
+input[type="submit"] {
 	width: 20%;
 	height: 80%;
 	background-color: lightgray;
@@ -63,7 +63,7 @@ input[type="button"] {
 	margin-left: -80px;
 	box-sizing: border-box;
 }
-input[type="button"]:hover {
+input[type="submit"]:hover {
 	background-color: "";
 }
 #subject {
@@ -258,7 +258,7 @@ dao.addReadCount(boardnum);
 					<input type="text" id="content" class="form-control answer"
 						placeholder="댓글을 입력해주세요"
 						style="float: left; width: 500px; padding: 0 20px;"> <input
-						type="button" id="btnanswer" value="전송" class="btn-answer"
+						type="submit" id="btnanswer" value="전송" class="btn-answer"
 						style="float: left; margin-top: 5px;">
 				</div>
 			</form>
@@ -288,10 +288,41 @@ dao.addReadCount(boardnum);
 
 					<div style="margin-botton: 40px;">
 						<span style='font-size: 15px;'><%=nickname%></span>&nbsp;&nbsp; <span
-							class='mod' style='cursor: pointer;'>수정 | </span> <span
-							class='del' style='cursor: pointer;'>삭제</span><br> <span
+							class='mod' style='cursor: pointer;'>수정 | </span>
+							 <a class='del' id="btn-comment-del" style='cursor: pointer;'
+							  idx="<%=answerdto.getIdx() %>" 
+							  href='place-share/deleteanswer.jsp?idx=<%=answerdto.getIdx()%>'>삭제</a><br> 
+							<span
 							class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
 					</div>
+				</div>	
+					<script type="text/javascript">
+					
+
+					//댓글 삭제
+					  $(document).on("click","#btn-comment-del",function(){
+						  var idx=$(this).attr("idx");
+						  
+						  var a=confirm("댓글을 삭제하시려면 확인을 눌러주세요");
+						  
+						  if(a){
+							  $.ajax({
+								  type:"get",
+								  url:"place-share/deleteanswer.jsp",
+								  dataType:"html",
+								  data:{"idx":idx},
+								  success:function(res){
+									  location.reload();
+								  }
+							   })
+							   
+							} else {
+								return false;
+							}
+					    })
+					    
+					    
+					</script>
 
 					<div id='answerContent' class="answerContents"
 						style='width: 400px; font-size: 15px; margin-top: 20px; padding-left: 60px;'>
@@ -345,6 +376,7 @@ dao.addReadCount(boardnum);
 			marker.setMap(map);
 		</script>
 		<script type="text/javascript">
+		
 			$("#delete").click(function() {
 				var del = confirm("글을 삭제하시겠습니까?");
 				var num = $("num").val();
@@ -354,6 +386,7 @@ dao.addReadCount(boardnum);
 					location.history();
 				}
 			});
+			
 		</script>
 </body>
 </html>

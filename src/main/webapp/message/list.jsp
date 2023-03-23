@@ -28,7 +28,8 @@
 	}
 	
 	.detail{
-	  width: 350px;
+	  width: 300px;
+	  margin-left: 30px;
 	}
 	
 	.content{
@@ -56,6 +57,9 @@
 		background-color: red;
 	} 
 	
+	.blue-color{
+		background-color:#d9e4f4 ;
+	}
 
 </style>
 
@@ -114,7 +118,7 @@
 	  <tr>
 	    <td width="50"><input type="checkbox" class="alldelcheck"></td>
 	    <td width="150">보낸사람</td>
-	    <td width="300">내용</td>
+	    <td width="250">내용</td>
 	    <td width="200">보낸날짜</td>
 	  </tr>
 	  
@@ -126,6 +130,7 @@
 	    <td>
 	    <span class="link-detail">
 	    <input type="hidden" name="num" id="num" value="<%=dto.getNum()%>">
+	    
 	    <% //isread 체크
 	    if(dto.getIsRead()==1){ //읽은 글%>
 	      <span class="content is-read"><%=dto.getContent() %></span>
@@ -156,12 +161,12 @@
 		<input type="hidden" name="num" value="<%=dto.getNum()%>">
 		<input type="hidden" name="receiver" value="<%=dto.getSender()%>">
 		  
-		<textarea rows="10" style="width:400px" name="content" placeholder="답장 내용을 입력하세요"
+		<textarea rows="10" style="width:100%;" name="content" placeholder="답장 내용을 입력하세요"
 		required="required"></textarea>
 	  
 	 	<div class="modal-footer">
-	   	<button type="button" data-dismiss="modal">취소</button>
-	   	<button type="submit" onclick="alert('답장이 전송되었습니다.')">답장하기</button>
+	   	<button type="button" class="btn btn-default border border-secondary" data-dismiss="modal">취소</button>
+	   	<button type="submit" class="btn btn-default border border-secondary" onclick="alert('답장이 전송되었습니다.')">답장하기</button>
 		</div>
     	
 	    </form>
@@ -222,6 +227,7 @@
 	
 	//디테일페이지 나타나게
 	$(".link-detail").click(function(){
+		
 		var num=$(this).find("#num").val();
 		
 		$(".detail").show();
@@ -240,7 +246,6 @@
 				s+="<span class='span-btn' onclick='delMessage("+res.num+")'>삭제</span></div>";
 				s+="<table class='table'>";
 				s+="<tr><td>보낸사람</td><td>"+res.sender+"</td></tr>";
-				s+="<tr><td>보낸날짜</td><td>"+res.writeday+"</td></tr>";
 				s+="<tr><td>내용</td><td>"+res.content+"</td></tr>";
 				s+="</table>";
 				
