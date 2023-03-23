@@ -110,12 +110,6 @@ td:not(.table-title), tr{
 
     			});
     		
-    		$("#checkbox0").click(function(){
-        		//alert("체크");
-        		var chk=$(this).is(":checked");
-        		$("#togglecheck").prop("checked",chk);
-        	})
-    		
     	})
     	const checkboxes = document.querySelectorAll('input[name="category"]');
     	const posts = document.querySelectorAll('.post');
@@ -196,8 +190,6 @@ td:not(.table-title), tr{
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
      <button id="togglecheckbutton" class="btn btn-default btn-sm">지역 보기</button>
     <form id="togglecheck" style="visibility: hidden">
-      <input type="checkbox" id="checkbox0" value="전체">
-      <label for="checkbox0">전체</label>
       <input type="checkbox" id="checkbox1" name="category" value="강원">
       <label for="checkbox1">강원</label>
       <input type="checkbox" id="checkbox2" name="category" value="경기">
