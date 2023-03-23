@@ -71,10 +71,10 @@
 						</div>
 						<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 					</div>
-					<div class="col right_info">
+					<div class="col right_info" style="padding-top: 30px;">
 						<div style="margin-left: 80px;">
-							<span>강아지이름 : <%=dto.getName() %></span><br>
-							<span>강아지성별 : </span>
+							<span>이름 : <%=dto.getName() %></span><br>
+							<span>성별 : </span>
 							<% if(dto.getGender().equals("암")) { %>
 								<i class="fa-solid fa-venus"></i>
 							<%} else if(dto.getGender().equals("수")) {%>
@@ -83,9 +83,9 @@
 								<i class="fa-solid fa-venus-mars"></i>
 							<%}%>
 							<br>
-							<span>강아지크기 : <%=dto.getDogSize() %></span><br>
-							<span>강아지생일 : <%=dto.getBirthday() %></span><br>
-							<span>강아지사진 : <%=dto.getPhoto() %></span><br>
+							<span>크기 : <%=dto.getDogSize() %></span><br>
+							<span>생일 : <%=dto.getBirthday() %></span><br>
+							
 							
 							<%if(dto.getMainDog() == 1) {%>
 							<!-- 대표 강아지 -->

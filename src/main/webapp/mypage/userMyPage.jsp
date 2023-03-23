@@ -101,9 +101,9 @@
 					<div style="margin-left: 30px;">
 						<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 					</div>
-					<div style="margin-left: 50px;">
-						<span>강아지이름 : <%=dto.getName() %></span><br>
-						<span>강아지성별 : </span>
+					<div style="margin-left: 70px; margin-top: 25px;" class="">
+						<span>이름 : <%=dto.getName() %></span><br>
+						<span>성별 : </span>
 						<% if(dto.getGender().equals("암")) { %>
 							<i class="fa-solid fa-venus"></i>
 						<%} else if(dto.getGender().equals("수")) {%>
@@ -112,9 +112,9 @@
 							<i class="fa-solid fa-venus-mars"></i>
 						<%}%>
 						<br>
-						<span>강아지크기 : <%=dto.getDogSize() %></span><br>
-						<span>강아지생일 : <%=dto.getBirthday() %></span><br>
-						<span>강아지사진 : <%=dto.getPhoto() %></span><br>
+						<span>크기 : <%=dto.getDogSize() %></span><br>
+						<span>생일 : <%=dto.getBirthday() %></span><br>
+						
 					</div>
 				</div>
 				<button type="button" 
@@ -124,7 +124,7 @@
 				
 				<%} else {%>
 				<!-- 사용자가 대표 강아지가 없는 경우 -->
-				<p style="margin-left:50px; font-size:1.5rem">대표 강아지 프로필</p>
+				<p style="margin-left:50px; font-size:1.5rem; margin-bottom: 30px;">대표 강아지 프로필</p>
 				<div class="row">
 					<div style="margin-left:30px;">
 						<img class="" src="/TodayWithMyDoggy/mypage/dogImg/dogImgNotFound.png" id="dogprofile">

@@ -14,6 +14,18 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 	<style type="text/css">
+		
+		tr td {
+			cursor: pointer;
+		}
+		
+		.a-tag {
+			color:black;
+		}
+		.a-tag:hover {
+		color: black;
+		}
+		
 		/* 페이지 */
 		.pagination{
 		  padding: 30px 0;
@@ -44,6 +56,8 @@
 		   border-radius: 100%;
 		   color: #fff;
 		}
+		
+		
 	</style>
 </head>
 <body>
@@ -91,7 +105,7 @@
 		<div style="margin-top: 50px;">
 			<p style="font-size: 1.5rem; margin-bottom: 30px;">나의 질문 리스트</p>
 			<div style="width: 800px; display: flex; flex-direction: column;">
-				<table class="table table-hover">
+				<table class="table">
 					<tr>
 						<td width="80">번호</td>
 						<td>제목</td>
@@ -101,9 +115,9 @@
 				<%for(QnaBoardDto d : userList) {%>
 
 					<tr onclick="location.href='index.jsp?main=qna/detail.jsp?num=<%=d.getNum()%>'">
-						<td align="center"><%=d.getNum() %></td>
-						<td><%=d.getTitle() %></td>
-						<td><%=d.getContent() %></td>
+						<td align="center"><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=d.getNum()%>"><%=d.getNum() %></a></td>
+						<td><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=d.getNum()%>"><%=d.getTitle() %></a></td>
+						<td><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=d.getNum()%>"><%=d.getContent() %></a></td>
 						<td><%=sdf.format(d.getWriteday())%></td>
 					</tr>
 
