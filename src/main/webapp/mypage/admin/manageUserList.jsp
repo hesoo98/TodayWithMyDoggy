@@ -120,7 +120,7 @@
 						<td><%=d.getId() %></td>
 						<td><%=d.getHp() %></td>
 						<td><%=d.getAddr() %></td>
-						<td style="word-break: break-all"><%=d.getEmail()%></td>
+						<td style="word-break: break-all"><marquee scrollamount="3"><%=d.getEmail()%></marquee></td>
 						<td><%=sdf.format(d.getCreateDay()) %></td>
 						<%if(d.getAuth() == 1){ %>
 						<td align="center">관리자</td>
@@ -133,8 +133,8 @@
 						</td>
 						<%} else { %>
 						<td align="center">
-							<button class="btn btn-sm btn-primary" onclick="location.href='mypage/admin/updateAuth.jsp?num=<%=d.getNum()%>&currentPage=<%=currentPage%>'">관리자</button>
-							<button class="btn btn-sm btn-danger" onclick="funcdel(<%=d.getNum()%>, <%=currentPage%>)">삭제</button>
+							<button class="btn btn-sm btn-light" onclick="location.href='mypage/admin/updateAuth.jsp?num=<%=d.getNum()%>&currentPage=<%=currentPage%>'">관리자</button>
+							<button class="btn btn-sm btn-light" onclick="funcdel(<%=d.getNum()%>, <%=currentPage%>)">삭제</button>
 						</td>
 						<%} %>
 					</tr>

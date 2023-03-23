@@ -118,7 +118,7 @@
 							<tr>
 								<td><%=q.getNum() %></td>
 								<td><%=nickname %></td>
-								<td style='width:350px;overflow:hidden;text-overflow;ellipsis;'><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
+								<td style='width:350px;overflow:hidden;text-overflow:ellipsis;'><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
 							</tr>
 							<%}%>
 						<%} else {%>
