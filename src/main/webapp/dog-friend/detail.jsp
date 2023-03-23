@@ -19,7 +19,10 @@
     
 
 <style type="text/css">
-
+	.contentphoto>img{
+		width:300px;
+		height: 300px;
+	}
     #a-tag{
       color: black;
     }
@@ -196,7 +199,7 @@
 		<span class="dog-photo"><i class="fa-solid fa-dog fa-lg"></i></span>
 		<span class="nickname"><%=nickname %></span>
 	    <%}else{%>
-		<img class="dog-photo" src="/TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto()%>">
+		<img class="dog-photo" style="width: 20px; height: 20px; border-radius: 20px;" src="/TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto()%>">
 	    <span class="nickname"><%=nickname %></span>
 	    <%}%>
 	    <br>
@@ -208,7 +211,7 @@
    		 <div class="modal-content">
    		 
     		 <div class="modal-header">
-    		    <h5 class="modal-title" id="exampleModalLabel2"><%=nickname %>의 개</h5>
+    		    <h5 class="modal-title" id="exampleModalLabel2"><%=sessionNickname %>의 개</h5>
      		   <button type="button" class="close" data-dismiss="modal">
     		      <span aria-hidden="true">&times;</span>
     		    </button>
@@ -224,7 +227,7 @@
     			    크기 : <%=pdto.getDogSize() %><br>
     			    성별 : <%=pdto.getGender() %><br>
     			    생일 : <%=pdto.getBirthday() %><br>
-    				사진 : <img src="../TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto() %>">    
+    				사진 : <img style="width:300px; height:300px; border-radius: 30px;" src="../TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto() %>">    
     	    	  </div>
     		<%}%>
     		
@@ -254,11 +257,13 @@
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %></span>
 	  <hr>
 	  </div>
+		<div class="contentphoto">
 		<%=dto.getContent() %>
+		</div>
 		</td>
 		</tr>
 		<!-- 로그인되어있을때만 수정삭제 가능 -->
-		<%if(loginok!=null &&  isAdmin.equals("1") || id.equals(nickname)){
+		<%if(loginok!=null &&  isAdmin.equals("1") || loginok!=null &&  nickname.equals(sessionNickname)){
 			%>
 			<div>
 			<tr>

@@ -56,12 +56,8 @@ input[type="text"] {
 	box-sizing: border-box;
 	color: black;
 }
-<<<<<<< HEAD
-input[type="submit"] {
-=======
 
-input[type="button"] {
->>>>>>> 5006609ce6a05f642404cf21d24835f46eb9085c
+input[type="submit"] {
 	width: 20%;
 	height: 80%;
 	background-color: lightgray;
@@ -74,12 +70,8 @@ input[type="button"] {
 	margin-left: -80px;
 	box-sizing: border-box;
 }
-<<<<<<< HEAD
-input[type="submit"]:hover {
-=======
 
-input[type="button"]:hover {
->>>>>>> 5006609ce6a05f642404cf21d24835f46eb9085c
+input[type="submit"]:hover {
 	background-color: "";
 }
 
@@ -314,18 +306,7 @@ dao.addReadCount(boardnum);
 					</div>
 
 					<div style="margin-botton: 40px;">
-<<<<<<< HEAD
-						<span style='font-size: 15px;'><%=nickname%></span>&nbsp;&nbsp; <span
-							class='mod' style='cursor: pointer;'>수정 | </span>
-							 <a class='del' id="btn-comment-del" style='cursor: pointer;'
-							  idx="<%=answerdto.getIdx() %>" 
-							  href='place-share/deleteanswer.jsp?idx=<%=answerdto.getIdx()%>'>삭제</a><br> 
-							<span
-							class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
-					</div>
-				</div>	
-					<script type="text/javascript">
-					
+						<script type="text/javascript">
 
 					//댓글 삭제
 					  $(document).on("click","#btn-comment-del",function(){
@@ -351,16 +332,18 @@ dao.addReadCount(boardnum);
 					    
 					    
 					</script>
-=======
+
 						<span style='font-size: 15px;'><%=answerNickname%></span>&nbsp;&nbsp;
 						<span class='mod' id="<%=modIdx%>" style='cursor: pointer;'
-							onclick="updateAnswer(<%=modIdx%>)">수정 | </span> <span
-							class='del' style='cursor: pointer;'>삭제</span><br> <span
-							class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
+							onclick="updateAnswer(<%=modIdx%>)">수정 | </span> 
+            <a class='del' id="btn-comment-del" style='cursor: pointer;'
+              idx="<%=answerdto.getIdx() %>" 
+              href='place-share/deleteanswer.jsp?idx=<%=answerdto.getIdx()%>'>삭제</a><br> 
+            <span class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
 					</div>
 					<input type="hidden" class="answerIdx" name="answerIdx"
 						value="<%=modIdx%>">
->>>>>>> 5006609ce6a05f642404cf21d24835f46eb9085c
+
 
 					<div id='answer<%=modIdx%>' class="answerContents"
 						style='width: 400px; font-size: 15px; margin-top: 20px; padding-left: 60px;'>
@@ -427,8 +410,6 @@ dao.addReadCount(boardnum);
 					location.history();
 				}
 			});
-<<<<<<< HEAD
-=======
 
 
 			function updateAnswer(modIdx) {
@@ -440,8 +421,7 @@ dao.addReadCount(boardnum);
 				$(contentIdx).toggle();
 				$(btnanswer).toggle();
 			}
->>>>>>> 5006609ce6a05f642404cf21d24835f46eb9085c
-			
+
 		</script>
 	</div>
 </body>

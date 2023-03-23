@@ -25,5 +25,5 @@ dto.setEmail(email);
 
 dao.addMember(dto);
 
-response.sendRedirect("../index.jsp?main=signup/signupsuccess.jsp?id="+id);
+response.sendRedirect("../index.jsp?main=login/loginform.jsp");
 %>
