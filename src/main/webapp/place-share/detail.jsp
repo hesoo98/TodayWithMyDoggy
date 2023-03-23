@@ -58,7 +58,6 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-
 	width: 20%;
 	height: 80%;
 	background-color: lightgray;
@@ -73,7 +72,6 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-
 	background-color: "";
 }
 
@@ -308,8 +306,7 @@ dao.addReadCount(boardnum);
 					</div>
 
 					<div style="margin-botton: 40px;">
-	
-					<script type="text/javascript">
+						<script type="text/javascript">
 
 					//댓글 삭제
 					  $(document).on("click","#btn-comment-del",function(){
@@ -335,6 +332,7 @@ dao.addReadCount(boardnum);
 					    
 					    
 					</script>
+
 						<span style='font-size: 15px;'><%=answerNickname%></span>&nbsp;&nbsp;
 						<span class='mod' id="<%=modIdx%>" style='cursor: pointer;'
 							onclick="updateAnswer(<%=modIdx%>)">수정 | </span> 
@@ -412,6 +410,7 @@ dao.addReadCount(boardnum);
 					location.history();
 				}
 			});
+
 
 			function updateAnswer(modIdx) {
 				contentIdx = "#content" + modIdx;
