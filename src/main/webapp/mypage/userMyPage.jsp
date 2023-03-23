@@ -125,13 +125,16 @@
 					
 					<%} else {%>
 					<!-- 사용자가 대표 강아지가 없는 경우 -->
-					<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">대표 강아지 프로필</p>
+					<p style="font-size:1.5rem">대표 강아지 프로필</p>
 					<div class="row">
-						<div class="col-6 d-flex justify-content-center align-items-center">
+						<div style="margin-left:30px;">
 							<img class="" src="/TodayWithMyDoggy/mypage/dogImg/dogImgNotFound.png" id="dogprofile">
 						</div>
-						<div class="col">
-							<button type="button" class="btn btn-sm btn-light" style="float:right;background-color: #999999;" onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
+						<div style="margin-left:50px;">
+							<button type="button" 
+								class="btn btn-light btn-sm"
+								style="position:absolute; bottom: 0; right: 100px;"
+								onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
 							<b>대표 강아지가 없어요</b>
 						</div>
 					</div>

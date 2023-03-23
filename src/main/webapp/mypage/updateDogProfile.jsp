@@ -56,7 +56,7 @@
 			
 		
 			// 카메라 이미지 눌렀을때 선택창 클릭한 것처럼 하기.
-			$("i").click(function(){
+			$("#camera").click(function(){
 				$("#photo").trigger("click"); //이벤트 강제호출 : trigger
 			});
 	
@@ -81,9 +81,9 @@
 <script>
 	
 </script>
-	<div class="container main" style="border:1px solid red;">
+	<div class="container main">
 		<div class="" style="width:800px;margin:0 auto;">
-			<p style="font-size: 2rem; margin-top: 50px;">강아지 정보 수정</p>
+			<p style="font-size: 2rem;">강아지 정보 수정</p>
 			<form action="mypage/updateDogAction.jsp" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="idx" value="<%=dog_idx%>">
 				<input type="hidden" name="pre_photo" value="<%=photo_name %>">
@@ -92,8 +92,8 @@
 						<img src="/TodayWithMyDoggy/mypage/dogImg/<%=photo_name %>" id="dogprofile">
 					</div>
 				</div>
-				<div class="row justify-content-end">
-					<i class="fa-solid fa-camera camera">&nbsp;&nbsp;<b>사진 수정</b></i>
+				<div class="row justify-content-end" style="margin-top: 30px;">
+					<i class="fa-solid fa-camera camera" id="camera">&nbsp;&nbsp;<b>사진 수정</b></i>
 				 	<input type="file" name="photo" id="photo" style="visibility: hidden;" onchange="readURL(this)" required="required">
 				</div>
 				<table class="table table-borderless align-middle">
@@ -130,8 +130,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: right;">
-							<input type=submit class="btn btn-warning btn-lg" value=저장하기 style="margin-right: 10px;">
-							<button type="button" class="btn btn-danger btn-lg" onclick="location.href='mypage/deleteDog.jsp?idx=<%=dog_idx%>'">삭제하기</button>
+							<input type=submit class="btn btn-light btn-sm" value=저장하기 style="margin-right: 10px;">
+							<button type="button" class="btn btn-light btn-sm" onclick="location.href='mypage/deleteDog.jsp?idx=<%=dog_idx%>'">삭제하기</button>
 						</td>
 					</tr>
 				</table>

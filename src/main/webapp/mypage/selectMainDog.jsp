@@ -25,6 +25,12 @@
 		.selectBox {
 			border:1px solid pink;
 		}
+		#dogprofile {
+			border-radius: 200px;
+			width:150px;
+			height:150px;
+			margin:0 auto;
+		}
 	</style>
 	
 </head>
@@ -48,38 +54,55 @@
 	}
 %>
 
-	<div class="container" style="border:1px solid red;">
-		<h1>대표 강아지 선택 페이지</h1>
-		
-		
-		<div class="row profilebox" style="width:800px;margin:0 auto;">
+	<div class="container" >
+		<p style="font-size: 2rem;">대표 강아지 선택 페이지</p>
+		<div style="width: 950px;">
 		<%for (DogProfileDto dto: myDogList) {%>
-			<div class="col-7 rectangle">
-				<div class="row">
-					<div class="col-4">
-						<img src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" width="100" height="100">
+			<div class="box">
+				<div class="row" style="margin:0 auto; width: 800px;">
+					<div class="col-5 left_info">
+						<div class="col crown_image" style="position: absolute;">
+							<%if(dto.getMainDog() == 1) {%>
+							<!-- 대표 강아지 -->
+							<i class="fa-solid fa-crown fa-2x" style="text-align: center;"></i>
+							<%} else {%>
+							
+							<%}%>
+						</div>
+						<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 					</div>
-					<div class="col">
-						<p>강아지이름 : <%=dto.getName() %></p>
-						<p>강아지성별 : <%=dto.getGender() %></p>
-						<p>강아지크기 : <%=dto.getDogSize() %></p>
-						<p>강아지생일 : <%=dto.getBirthday() %></p>
-						<p>강아지사진 : <%=dto.getPhoto() %></p>
+					<div class="col right_info">
+						<div style="margin-left: 80px;">
+							<span>강아지이름 : <%=dto.getName() %></span><br>
+							<span>강아지성별 : </span>
+							<% if(dto.getGender().equals("암")) { %>
+								<i class="fa-solid fa-venus"></i>
+							<%} else if(dto.getGender().equals("수")) {%>
+								<i class="fa-solid fa-mars"></i>
+							<%} else {%>
+								<i class="fa-solid fa-venus-mars"></i>
+							<%}%>
+							<br>
+							<span>강아지크기 : <%=dto.getDogSize() %></span><br>
+							<span>강아지생일 : <%=dto.getBirthday() %></span><br>
+							<span>강아지사진 : <%=dto.getPhoto() %></span><br>
+							
+							<%if(dto.getMainDog() == 1) {%>
+							<!-- 대표 강아지 -->
+							
+							<%} else {%>
+							<!-- 일반 강아지 -->
+							<button
+								type="button" class="btn btn-light btn-sm"
+								style="position: absolute; right:0;"
+								onclick="location.href='mypage/selectMainDogAction.jsp?idx=<%=dto.getIdx()%>'">대표강아지로 설정</button>
+						<%}%>
+						</div>
+					
 					</div>
 				</div>
 			</div>
-			<div class="col selectBox">
-				<%if(dto.getMainDog() == 1) {%>
-					<!-- 대표 강아지 -->
-					<i class="fa-solid fa-crown fa-3x" style="text-align: center;"></i>
-				<%} else {%>
-					<!-- 일반 강아지 -->
-					<button type="button" class="btn btn-warning btn-lg"
-					onclick="location.href='mypage/selectMainDogAction.jsp?idx=<%=dto.getIdx()%>'">이 강아지를 대표강아지로 설정</button>
-				<%} %>
-			</div>
-			<%
-		}%>
+		<%}%>
 		</div>
 	</div>
 </body>

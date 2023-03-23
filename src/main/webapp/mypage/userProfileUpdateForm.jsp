@@ -120,19 +120,19 @@
 		
 	</script>
 	<div class="container" style="padding-bottom: 100px;">
-		<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">유저 프로필 수정 페이지</p>
+		<!-- <p style="font-family: 'Dovemayo_gothic'; font-size:2rem">유저 프로필 수정 페이지</p> -->
 		<form action="mypage/userProfileUpdateAction.jsp" method="post">
 			<div class="" style="width:800px; margin:0 auto;">
-				<p style="font-family: 'Dovemayo_gothic'; font-size:2.5rem">나의 프로필</p>
+				<span style="font-family: 'Dovemayo_gothic'; font-size:2rem">나의 프로필</span>
 				<div class="row">
 					<div class="col-6">
 						<p>닉네임</p>
-						<p><input type="text" class="form-control form-control-lg" name="nickname" placeholder="이름" value="<%=memberDto.getNickname()%>"></p>
+						<p><input type="text" class="form-control form-control" name="nickname" placeholder="이름" value="<%=memberDto.getNickname()%>"></p>
 						<p>아이디</p>
-						<p><input type="text" class="form-control form-control-lg" name="id" placeholder="아이디" value="<%=memberDto.getId()%>" disabled></p>
+						<p><input type="text" class="form-control form-control" name="id" placeholder="아이디" value="<%=memberDto.getId()%>" disabled></p>
 						<p>핸드폰</p>
 						<p>
-							<select class="form-control" name="hp1" size="1" style="width:100px;display:inline-block;">
+							<select class="form-control" name="hp1" size="1" style="width:100px; display:inline-block;">
 								<option value="010" class="hp1">010</option>
 								<option value="011" class="hp2">011</option>
 								<option value="016" class="hp3">016</option>
@@ -147,9 +147,9 @@
 						</p>
 						<p>이메일</p>
 						<p>
-							<input type="text" class="form-control input-lg" name="email1" required="required" style="width:100px;display:inline-block;" value="<%=emailArray[0]%>">
+							<input type="text" class="form-control" name="email1" required="required" style="width:100px;display:inline-block;" value="<%=emailArray[0]%>">
 							<span>@</span>
-							<input type="text" class="form-control input-lg" name="email2" id="email2" required="required" style="width:100px;display:inline-block;" value="<%=emailArray[1]%>">
+							<input type="text" class="form-control" name="email2" id="email2" required="required" style="width:100px;display:inline-block;" value="<%=emailArray[1]%>">
 							
 							<select id="selEmail" class="form-control" style="width: 100px; display: inline-block;">
 								<option value="-">직접입력</option>
@@ -163,7 +163,7 @@
 					<div class="col">
 						<p>주소</p>
 						<p>변경 전 주소</p>
-						<p><input type="text" class="form-control form-control-lg" name="oldaddr" placeholder="아이디" value="<%=memberDto.getAddr() %>" disabled></p><br>
+						<p><input type="text" class="form-control form-control" name="oldaddr" placeholder="아이디" value="<%=memberDto.getAddr() %>" disabled></p><br>
 						<p>변경 할 주소</p>
 						<select id="addr" class="form-control" name="addr" style="width: 100px; display: inline-block;">
 							<option value="강원">강원</option>
@@ -188,7 +188,7 @@
 				</div>
 				
 			</div>
-			<input type="submit" class="btn btn-warning btn-lg mx-auto d-block" style="margin-top:50px;" value="저장">
+			<input type="submit" class="btn btn-light btn-sm mx-auto d-block" style="margin-top:50px;" value="저장">
 		</form>
 	</div>
 </body>
