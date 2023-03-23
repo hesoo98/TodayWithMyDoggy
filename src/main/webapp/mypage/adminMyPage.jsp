@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+	<script src="https://code.jquery.com/jquery-13.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 	<style>
@@ -58,9 +58,11 @@
 			
 			<div style="flex-direction: row; display: flex;">
 				<div class="rectangle">
-					<div style="flex-direction: row; display: flex;">
-						<p>유저 관리</p>
-						<button class="moreBtn btn btn-xs btn-warning" onclick="location.href='index.jsp?main=mypage/admin/manageUserList.jsp'">더 보기</button>
+					<div style="">
+						<span>유저 관리</span>
+						<button class="moreBtn btn btn-sm btn-light"
+								style="float:right;"
+								onclick="location.href='index.jsp?main=mypage/admin/manageUserList.jsp'">더 보기</button>
 					</div>
 					
 					<div>
@@ -96,9 +98,11 @@
 				</div>
 				
 				<div class="rectangle">
-					<div style="flex-direction: row; display: flex;">
-						<p>답변을 기다리는 질문</p>
-						<button class="moreBtn btn btn-xs btn-warning" onclick="location.href='index.jsp?main=mypage/admin/showWaitingQuestion.jsp'">더 보기</button>
+					<div style="margin-bottom: 10px;">
+						<span>답변을 기다리는 질문</span>
+						<button class="moreBtn btn btn-sm btn-light" 
+								style="float:right;"
+								onclick="location.href='index.jsp?main=mypage/admin/showWaitingQuestion.jsp'">더 보기</button>
 					</div>
 					<div>
 						<table class="table table-bordered">
@@ -134,7 +138,7 @@
 				</div>
 			</div>
 			
-			<div style="flex-direction: row; display: flex;">
+			<!-- <div style="flex-direction: row; display: flex;">
 				<div class="rectangle">
 					<div style="flex-direction: row; display: flex;">
 						<p>??????</p>
@@ -151,6 +155,7 @@
 					<div></div>
 				</div>
 			</div>
+			 -->
 		</div>
 	</div>
 </body>

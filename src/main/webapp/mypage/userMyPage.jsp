@@ -73,9 +73,9 @@
 	<div class="container" style="width: 950px;">
 
 			<div class="row" style="padding-top:50px; height: 350px;" id="myprofile_maindog">
-				<div class="col-5">
+				<div class="col-5" style="border : 1px solid black;">
 					<p style="margin-bottom: 30px;font-size: 1.5rem;"><%=memberDto.getNickname() %>님의 프로필</p>
-					<div style="margin-left:50px; margin-bottom: 20px;">
+					<div style="margin-left:50px; margin-bottom: 20px; border:1px solid black;">
 						<i class="fa-solid fa-id-card"></i>
 						<span>아이디 : <%=memberDto.getId() %></span><br>
 						<i class="fa-solid fa-phone"></i>
@@ -83,7 +83,7 @@
 						<i class="fa-solid fa-map-location-dot"></i>
 						<span><%=memberDto.getAddr() %></span><br>
 						<i class="fa-solid fa-envelope"></i>
-						<span><%=memberDto.getEmail() %></span><br>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=memberDto.getEmail() %></span><br>
 						<i class="fa-solid fa-calendar-days"></i>
 						<span><%=sdf.format(memberDto.getCreateDay()) %>에 생성함.</span><br><br>
 					</div>
