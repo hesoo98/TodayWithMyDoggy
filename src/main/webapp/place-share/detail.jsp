@@ -77,6 +77,26 @@ input[type="submit"]:hover {
 	background-color: "";
 }
 
+input[type="button"] {
+
+	width: 20%;
+	height: 80%;
+	background-color: lightgray;
+	border: none;
+	background-color: white;
+	font-size: 1em;
+	color: #042AaC;
+	outline: none;
+	display: inline;
+	margin-left: -80px;
+	box-sizing: border-box;
+}
+
+input[type="button"]:hover {
+
+	background-color: "";
+}
+
 #subject {
 	font-size: 20px;
 	font-weight: bold;
@@ -105,6 +125,7 @@ div {
 		var content = $("#answerContent").val();
 		$("#modContent").val(content);
 		//댓글 입력
+		
 		$("#btnanswer").click(function() {
 			$.ajax({
 				type : "get",
@@ -113,11 +134,12 @@ div {
 				data : {
 					"boardnum" : boardnum,
 					"myid" : $("#myid").val(),
-					"content" : $("#content").val()
+					"content" : $("#content").val(),
+					"currentPage" : $("#curr").val()
 				},
 				success : function(res) {
 					$("#content").val(" ");
-					location.reload();
+					location.href="index.jsp?main=place-share/detail.jsp?num="+boardnum+"&currentPage"+$("#curr").val();
 				}
 			});
 		});
@@ -148,11 +170,13 @@ DogProfileDao proDao = new DogProfileDao();
 DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
 // 프로필 사진 가져오기
 String proPhoto = proDto.getPhoto();
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH:mm");
 
 PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
 int totalAnswerCnt = answerDao.getTotalAnswerCount(boardnum);
 dao.addReadCount(boardnum);
+
+String currentPage = request.getParameter("currentPage");
 %>
 <body>
 	<div class="container" role="main">
@@ -166,7 +190,7 @@ dao.addReadCount(boardnum);
 			</div>
 			<div class="nickname"
 				style="float: left; padding-left: 10px; font-size: 15px;">
-				<%=memberdto.getNickname()%>님<br>
+				<%=memberdto.getNickname()%><br>
 				<div class="date" style="color: gray">
 					<%=sdf.format(dto.getWriteday())%><br>
 				</div>
@@ -272,6 +296,7 @@ dao.addReadCount(boardnum);
 					type="hidden" id="nickname" value="<%=nickname%>"> <input
 					type="hidden" id="photo" value="<%=proPhoto%>">
 				<div class="answer-input" style="float: left; text-align: left">
+					<input type="hidden" id="curr" name="curr" value="<%=currentPage%>">
 					<input type="text" id="content" class="form-control answer"
 						placeholder="댓글을 입력해주세요"
 						style="float: left; width: 500px; padding: 0 20px;"> <input
@@ -296,7 +321,6 @@ dao.addReadCount(boardnum);
 				String answerId = answerdto.getId();
 				String answerNickname = memberdao.getNickname(answerId);
 				String modIdx = answerdto.getIdx();
-				System.out.println(modIdx);
 			%>
 			<div style="margin-top: 20px;">
 				<div id="answerView">
@@ -356,7 +380,7 @@ dao.addReadCount(boardnum);
 						class="form-control contentMod"
 						style="margin-left: 55px; width: 400px; height: 40px; font-size: 15px; margin-top: 10px;">
 					<input type="button" id="btnanswer<%=modIdx%>" value="전송"
-						class="btn-answer btnanswer" style="margin-right: 80px; text-align: right; width: 70px;" onclick="location.href='place-share/answerUpdateAction.jsp?content='">
+						class="btn-answer btnanswer" style="margin-right: 80px; text-align: right; width: 70px;" onclick="submitMod(<%=modIdx%>)">
 				</div>
 				<hr style="width: 50%">
 				<br> <br>
@@ -412,7 +436,6 @@ dao.addReadCount(boardnum);
 					location.history();
 				}
 			});
-
 			function updateAnswer(modIdx) {
 				contentIdx = "#content" + modIdx;
 				answerIdx = "#answer" + modIdx;
@@ -422,7 +445,14 @@ dao.addReadCount(boardnum);
 				$(contentIdx).toggle();
 				$(btnanswer).toggle();
 			}
-
+			function submitMod(modIdx) {
+				var boardnum = $("#boardnum").val();
+				var currentPage = $("#curr").val();				
+				
+				contentIdx = "#content" + modIdx;
+				var modcontent = $(contentIdx).val();
+				location.href="place-share/answerUpdateAction.jsp?content="+modcontent+"&idx="+modIdx;
+			}
 		</script>
 	</div>
 </body>

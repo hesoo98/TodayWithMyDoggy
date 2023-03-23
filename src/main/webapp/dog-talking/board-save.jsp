@@ -86,7 +86,7 @@
 	start=(currentPage-1)*perPage;
 	//각페이지에서 필요한 게시글 가져오기
 	String word=request.getParameter("word");
-	List<DogTalkingBoardDto> list=dao.getList(start, perPage, word);
+	List<DogTalkingBoardDto> list=dao.getList(start, perPage);
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	

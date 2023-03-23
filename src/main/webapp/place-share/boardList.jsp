@@ -14,6 +14,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/page.css">
+
 <link rel="canonical"
 	href="https://getbootstrap.kr/docs/5.1/examples/album/">
 
@@ -59,7 +61,6 @@
 }
 
 .container {
-	width: 1200px;
 }
 
 @media ( min-width : 768px) {
@@ -120,8 +121,6 @@ img:hover {
 </style>
 <%
 PlaceShareBoardDao dao = new PlaceShareBoardDao();
-List<PlaceShareBoardDto> list = dao.getBoardList();
-
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 <script src="https://kit.fontawesome.com/2663817d27.js"
@@ -133,6 +132,34 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	font-size: 18px;
 }
 </style>
+<%
+int totalCount;
+int totalPage;//총페이지수
+int startPage;//각블럭의 시작페이지
+int endPage;//각블럭의 끝페이지
+int start; //각페이지의 시작번호
+int perPage = 8; //한페이지에 보여질 글의 갯수
+int perBlock = 5; //한블럭당 보여지는 페이지개수
+int currentPage; //현재페이지
+//총개수
+totalCount = dao.getTotalCount();
+//현재페이지번호 읽기(단 null 일때는 1페이지로 설정)
+if (request.getParameter("currentPage") == null)
+	currentPage = 1;
+else
+	currentPage = Integer.parseInt(request.getParameter("currentPage"));
+//총 페이지 갯수
+totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+//각블럭의 시작페이지..현재페이지가 3(s:1,e:5) 6(s:6 e:10)
+startPage = (currentPage - 1) / perBlock * perBlock + 1;
+endPage = startPage + perBlock - 1;
+//총페이지가 8. (6~10...endpage를 8로 수정해주어야 한다)
+if (endPage > totalPage)
+	endPage = totalPage;
+//각페이지에서 불러올 시작번호
+start = (currentPage - 1) * perPage;
+List<PlaceShareBoardDto> list = dao.getList(start, perPage);
+%>
 </head>
 <body>
 	<div class="container2">
@@ -157,31 +184,24 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			<br> <br>
 			<div
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
-
 				<%
 				for (PlaceShareBoardDto dto : list) {
 					String boardNum = dto.getNum();
-
 					String boardId = dto.getId();
-
 					MemberDao memberdao = new MemberDao();
 					MemberDto memberdto = memberdao.getMemeber(boardId);
-
 					String memberId = memberdto.getId();
 					String memberNum = memberdao.getNum(memberId);
-
 					DogProfileDao proDao = new DogProfileDao();
 					DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
 					String proPhoto = proDto.getPhoto();
-
 					String place = dto.getMapAddr().substring(0, 2);
-
 					PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
 					int totalAnswerCnt = answerDao.getTotalAnswerCount(boardNum);
 				%>
 				<div class="col">
 					<div class="card border-light mb-10" width="100%"
-						style="border-radius: 10%; background-color: #f5feff">
+						style="border-radius: 10%;">
 						<div class="card-img" id="img" style="border-radius: 12%;">
 							<div class="img-text">
 								<img src="/TodayWithMyDoggy/place-share/place-photo/marker.png"
@@ -196,15 +216,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 								height="200px;" xmlns="http://www.w3.org/2000/svg" role="img"
 								aria-label="Placeholder: Thumbnail"
 								preserveAspectRatio="xMidYMid slice" focusable="false"
-								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'">
+								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'">
 						</div>
 						<div class="card-body">
 							<span class="card-subject"
 								style="font-size: 15px; cursor: pointer;"
-								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getSubject()%></span>
+								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'"><%=dto.getSubject()%></span>
 							<span class="card-content"
 								style="font-size: 12px; cursor: pointer; margin-bottom: 7px;"
-								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getContent()%></span>
+								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'"><%=dto.getContent()%></span>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="img-box"
 									style="width: 25px; height: 25px; border-radius: 70%; overflow: hidden; float: left; margin-right: 2px;">
@@ -226,79 +246,46 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				<%
 				}
 				%>
+
 			</div>
-		</div>
 
-		<%
-		int totalCount;
-		int totalPage;//총페이지수
-		int startPage;//각블럭의 시작페이지
-		int endPage;//각블럭의 끝페이지
-		int start; //각페이지의 시작번호
-		int perPage = 8; //한페이지에 보여질 글의 갯수
-		int perBlock = 5; //한블럭당 보여지는 페이지개수
-		int currentPage; //현재페이지
+			<!-- 페이징 출력 -->
+			<div style="display: flex; justify-content: center;">
+				<ul class="pagination p1">
+					<%
+					//이전
+					if (startPage > 1) {
+					%>
+					<li><a
+						href="index.jsp?main=place-share/boardList.jsp?currentPage=<%=startPage - 1%>">이전</a>
+					</li>
+					<%
+					}
+					for (int pp = startPage; pp <= endPage; pp++) {
+					if (pp == currentPage) {
+					%>
+					<li class="active"><a
+						href="index.jsp?main=place-share/boardList.jsp?currentPage=<%=pp%>"><%=pp%></a>
+					</li>
+					<%
+					} else {
+					%>
 
-		//총개수
-		totalCount = dao.getTotalCount();
-		//현재페이지번호 읽기(단 null 일때는 1페이지로 설정)
-		if (request.getParameter("currentPage") == null)
-			currentPage = 1;
-		else
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-
-		//총 페이지 갯수
-		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-
-		//각블럭의 시작페이지..현재페이지가 3(s:1,e:5) 6(s:6 e:10)
-		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-		endPage = startPage + perBlock - 1;
-
-		//총페이지가 8. (6~10...endpage를 8로 수정해주어야 한다)
-		if (endPage > totalPage)
-			endPage = totalPage;
-
-		//각페이지에서 불러올 시작번호
-		start = (currentPage - 1) * perPage;
-		List<PlaceShareBoardDto> plist = dao.getList(start, perPage);
-		%>
-
-		<!-- 페이징 출력 -->
-		<div style="display: flex; justify-content: center;">
-			<ul class="pagination p1">
-				<%
-				//이전
-				if (startPage > 1) {
-				%>
-				<li><a
-					href="index.jsp?main=place-share/boardList.jsp?currentPage=<%=startPage - 1%>">이전</a>
-				</li>
-				<%
-				}
-				for (int pp = startPage; pp <= endPage; pp++) {
-				if (pp == currentPage) {
-				%>
-				<li class="active"><a
-					href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a>
-				</li>
-				<%
-				} else {
-				%>
-
-				<li><a
-					href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
-				<%
-				}
-				}
-				//다음
-				if (endPage < totalPage) {
-				%>
-				<li><a
-					href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
-				<%
-				}
-				%>
-			</ul>
+					<li><a
+						href="index.jsp?main=place-share/boardList.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+					<%
+					}
+					}
+					//다음
+					if (endPage < totalPage) {
+					%>
+					<li><a
+						href="index.jsp?main=place-share/boardList.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+					<%
+					}
+					%>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js"
