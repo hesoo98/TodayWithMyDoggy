@@ -24,7 +24,7 @@
 	<script type="text/javascript">
 		$(function(){
 			// 카메라 이미지 눌렀을때 선택창 클릭한 것처럼 하기.
-			$("i").click(function(){
+			$("#camera").click(function(){
 				$("#photo").trigger("click"); //이벤트 강제호출 : trigger
 			});
 		});
@@ -41,24 +41,22 @@
 	</script>
 </head>
 <body>
-	<div class="container main" style="border:1px solid red;">
-		<h1>강아지 추가 폼</h1>
+	<div class="container main">
+		<p style="font-size: 2rem;">강아지 추가 폼</p>
 	
 		<div style="width:800px; margin:0 auto;">
 			<form action="mypage/addDogAction.jsp" method="post" enctype="multipart/form-data">
 				<div class="row" style="float:none;">
 					<div class="row" style="float:none;margin:0 auto;">
-						<img src="" id="dogprofile">
+						<img src="/TodayWithMyDoggy/mypage/dogImg/dogImgNotFound.png" id="dogprofile">
 					</div>
 				</div>
-				<%-- <div class="row">
-				 	<input type="file" name="photo" id="photo" onchange="readURL(this)" required="required">
-				</div>--%>
 				
-				<div class="row justify-content-end">
-					<i class="fa-solid fa-camera camera">&nbsp;&nbsp;<b>사진 수정</b></i>
+				<div class="row justify-content-end" style="margin-top: 30px;">
+					<i class="fa-solid fa-camera camera" id="camera">&nbsp;&nbsp;<b>사진 수정</b></i>
 				 	<input type="file" name="photo" id="photo" style="visibility: hidden;" onchange="readURL(this)" required="required">
 				</div>
+				
 				<table class="table table-borderless align-middle">
 					<tr>
 						<td style="text-align:right;">
@@ -93,7 +91,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type=submit class="btn btn-warning btn-lg" value=저장하기 style="float:right;">
+							<input type=submit class="btn btn-light btn-sm" value=저장하기 style="float:right;">
 						</td>
 					</tr>
 				</table>
