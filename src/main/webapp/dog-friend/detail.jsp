@@ -141,14 +141,14 @@
 	
 %>
 
-	<div style="margin:30px 30px;">
+	<div class="wrapper">
 	<input type="hidden" id="num" name="num" value="<%=dto.getNum()%>">
-	<table class="table table-bordered" style="width: 500px;">
+	<table class="table table-borderless" style="width: 100%;">
 	<tr>
 	<td>
-	<h3><b><%=dto.getSubject() %></b></h3>
+	<h3><%=dto.getSubject() %></h3>
 	
-	<!-- Modal -->
+	<!-- 쪽지 Modal -->
 	<div class="modal fade" id="exampleModal">
   		<div class="modal-dialog">
    		 <div class="modal-content">
@@ -165,7 +165,6 @@
 	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
 	   <input type="hidden" name="receiver" value="<%=dto.getId()%>">
 	   
-      <span>[보내는 사람] <%=sessionNickname %></span><br>
 	   	<span>[받는 사람] <%=nickname %></span>
 	   	
 	   	<br><br>
@@ -183,6 +182,7 @@
    		 </div>
   		</div>
 	</div>
+	<!-- 쪽지 Modal 끝 -->
 			
 	 <div class="wrapper-subject">
 	  
@@ -191,58 +191,94 @@
 	    <b>
 	    <%
 	    if(pdto.getIdx()==null){%>
-		<span class="dog-photo"><i class="fa-solid fa-dog fa-lg"></i></span>
-		<span class="nickname"><%=nickname %></span>
+		<span class="dog-photo" style="cursor: pointer;"><i class="fa-solid fa-dog fa-lg"></i></span>
+		<span class="nickname" style="cursor: pointer;"><%=nickname %></span>
 	    <%}else{%>
-		<img class="dog-photo" style="width: 20px; height: 20px; border-radius: 20px;" src="/TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto()%>">
-	    <span class="nickname"><%=nickname %></span>
+		<img class="dog-photo" style="cursor: pointer;width: 20px; height: 20px; border-radius: 20px;" src="/TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto()%>">
+	    <span class="nickname" style="cursor: pointer;"><%=nickname %></span>
 	    <%}%>
 	    <br>
 	    </b>
 	  </a>
+	  
 	  <!-- 프로필 모달 -->
 	  <div class="modal fade" id="exampleModal2">
   		<div class="modal-dialog">
    		 <div class="modal-content">
    		 
     		 <div class="modal-header">
-    		    <h5 class="modal-title" id="exampleModalLabel2"><%=sessionNickname %>의 개</h5>
+    		    <h5 class="modal-title" id="exampleModalLabel2"><%=nickname %>의 멍멍이</h5>
      		   <button type="button" class="close" data-dismiss="modal">
     		      <span aria-hidden="true">&times;</span>
     		    </button>
     		 </div>
     		<%if(pdto.getName()==null){%>
-    			<div class="modal-body">
-    				개없음
-    			</div>
+    		<div class="modal-body">
+    			<span >
+    				강아지 프로필을 추가하지 않은 회원입니다.
+    				쪽지로 인사해보세요!
+    			</span>
+			</div>
     		<%}else{
     			%> 
     	   		   <div class="modal-body">
-    	   		   	이름 : <%=pdto.getName() %><br>
-    			    크기 : <%=pdto.getDogSize() %><br>
-    			    성별 : <%=pdto.getGender() %><br>
-    			    생일 : <%=pdto.getBirthday() %><br>
-    				사진 : <img style="width:300px; height:300px; border-radius: 30px;" src="../TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto() %>">    
+   	   		   
+	   	   		   <table class="table table-borderless">
+	   	   		   	 <tr>
+	   	   		   	 	<td rowspan="5"><img style="width:200px; height:200px; border-radius: 30px;" src="../TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto() %>"></td>
+	   	   		   	 </tr>
+	   	   		   	 <tr>
+	   	   		   	 	<td> 이름 | <%=pdto.getName() %></td>
+	   	   		   	 </tr>
+	   	   		   	 <tr>
+	   	   		   	 	<td> 성별 | <%=pdto.getGender() %></td>
+	   	   		   	 </tr>
+	   	   		   	 <tr>
+	   	   		   	 	<td> 크기 | <%=pdto.getDogSize() %></td>
+	   	   		   	 </tr>
+	   	   		   	 <tr>
+	   	   		   	 	<td> 생일 | <%=pdto.getBirthday() %> (<span id="age"></span>세)</td>
+	   	   		   	 </tr>
+	   	   		   </table>  
+	   	   		   
     	    	  </div>
     		<%}%>
     		
-    	  
       	<div class="modal-footer">
-        	<button type="button" data-dismiss="modal">확인</button>
-    	</div>
+        	<button type="button" class="btn btn-light" data-dismiss="modal">확인</button>
+        	
+			<!-- 쪽지함 만들기 -->
+			<button type="button" class="btn btn-light"  data-dismiss="modal" style="float: right" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn" >
+			쪽지
+			</button>
+	   	</div>
     	
    		 </div>
   		</div>
 	</div>
-	  
-	  
+	<!-- 프로필모달 끝 -->
+	
+		<script type="text/javascript">
+    		
+    		//멍멍이 나이 계산
+    				
+			let today=new Date();
+			let year=today.getYear()+1900;
+			
+			let birthyear=$("#birthday").val().substr(0,4);
+			
+			let age=year-parseInt(birthyear);
+			
+			$("#age").text(age);
+			
+    		</script>
+    	  
 	  <!-- 펫정보 -->
 	  <%
 
 
 	    String loginok=(String)session.getAttribute("loginok");
 	    if(pdto.getIdx()==null){%>
-	    (멍멍)
 	    <%}else{%>
 	    <span style="font-size: 12px;"><%=pdto.getName() %> ( <%=pdto.getGender() %>|<%=pdto.getDogSize() %> )</span>
 	    <%} %>
@@ -275,14 +311,10 @@
 					onclick="funcdel(<%=num%>,<%=currentPage%>)">
 					<span class="glyphicon glyphicon-remove"></span>삭제</button>
 					
-					<button type="button" class="btn btn-default"
+					<button type="button" class="btn btn-default" style="float: right;"
 					onclick="location.href='index.jsp?main=dog-friend/board.jsp?currentPage=<%=currentPage%>'">
 					<span></span>목록</button>
 					
-						<!-- 쪽지함 만들기 -->
-					<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn" >
-					<b>쪽지</b>
-					</button>
 				</td>
 			</tr>
 			</div>
@@ -295,11 +327,6 @@
 					<button type="button" class="btn btn-default"
 					onclick="location.href='index.jsp?main=dog-friend/board.jsp?currentPage=<%=currentPage%>'">
 					<span></span>목록</button>
-					
-						<!-- 쪽지함 만들기 -->
-					<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal" class="btn btn-default" >
-					<b>쪽지</b>
-					</button>
 				</td>
 			</tr>
 			</div>

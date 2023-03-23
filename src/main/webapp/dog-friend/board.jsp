@@ -34,6 +34,10 @@ a#MOVE_TOP_BTN {
     z-index: 999;
     color: black;
 }
+
+td:not(.table-title), tr{
+	text-align: center;
+}
 </style>
     <script type="text/javascript">
    
@@ -233,12 +237,12 @@ a#MOVE_TOP_BTN {
     
    <table style="width: 800px; table-layout: fixed;" class="table" id="sort" >
    <tr>
-   	<td width=100px; align="center">번호</td>
-   	<td width=100px;>지역</td>
-   	<td width=200px; style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">제목</td>
-   	<td width=100px;>작성자</td>
-   	<td width=200px;>작성일</td>
-   	<td width=100px;>조회수</td>
+   	<td width="100" align="center">번호</td>
+   	<td width="100">지역</td>
+   	<td width="200">제목</td>
+   	<td width="100">작성자</td>
+   	<td width="200">작성일</td>
+   	<td width="100">조회수</td>
    </tr>
 
 		<%
@@ -259,25 +263,25 @@ a#MOVE_TOP_BTN {
 				
 				
 				<tr id="posts" class="post <%=memDto.getAddr()%>" style="width:800px;">
-					<td align="center" width=100px;>
+					<td align="center" width="100">
 						<input type="checkbox" class="alldel" value="<%=dto.getNum()%>">
 						&nbsp;&nbsp;
 						<%=no-- %>
 					</td>
-					<td width=100px;>
+					<td width="100">
 						<%-- 테이블에서 가져온 id로 dto넣기 --%>
 						<%=memDto.getAddr()%>
 					</td>
 					
-					<td width=200px; style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+					<td class="table-title" width="100" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
 						<a class="sublink" href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
 						<%=dto.getSubject() %></a>
 
 					</td>
 					
-					<td width=100px;><%=mdao.getNickname(dto.getId()) %></td>
-					<td width=200px;><%=sdf.format(dto.getWriteday()) %></td>
-					<td width=100px;><%=dto.getReadCount() %></td>
+					<td width="100"><%=mdao.getNickname(dto.getId()) %></td>
+					<td width="200"><%=sdf.format(dto.getWriteday()) %></td>
+					<td width="100"><%=dto.getReadCount() %></td>
 					
 				</tr>
 				<%
