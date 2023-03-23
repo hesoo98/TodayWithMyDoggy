@@ -39,7 +39,7 @@
 <body>
    <article>
       <div class="container">
-         <h2>공지사항 글쓰기 폼</h2>
+         <h2>공지사항 수정</h2>
          <br>
          <form method="post" action="notification/updateaction.jsp">
          	<!-- num을 hidden으로 updateaction.jsp로 넘겨준다 -->
@@ -53,7 +53,7 @@
             <div class="content">
                <div>내용</div>
                <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요"><%=dto.getContent()%></textarea>
-            <button type="submit" class="btn btn-sm btn-default border border-secondary" id="btn-save">저장</button>
+            <button type="submit" class="btn btn-sm btn-default border border-secondary" id="btn-save">수정</button>
             </div>
          </form>
       </div>

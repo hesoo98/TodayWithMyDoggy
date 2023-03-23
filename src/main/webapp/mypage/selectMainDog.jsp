@@ -59,7 +59,7 @@
 		<div style="width: 950px;">
 		<%for (DogProfileDto dto: myDogList) {%>
 			<div class="box">
-				<div class="row" style="margin:0 auto; width: 800px;">
+				<div class="row" style="margin:0px auto; margin-bottom: 50px;  width: 800px;">
 					<div class="col-5 left_info">
 						<div class="col crown_image" style="position: absolute;">
 							<%if(dto.getMainDog() == 1) {%>

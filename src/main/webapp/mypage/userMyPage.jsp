@@ -70,12 +70,12 @@
 	List<QnaBoardDto> myQList = qnaDao.getMyBoardList(id);
 %>
 <div style="background: #F8F9FA;" class="">
-	<div class="container" style="width: 950px;">
+	<div class="container" style="width: 880px;">
 
 			<div class="row" style="padding-top:50px; height: 350px;" id="myprofile_maindog">
-				<div class="col-5" style="border : 1px solid black;">
+				<div class="col-5" style="">
 					<p style="margin-bottom: 30px;font-size: 1.5rem;"><%=memberDto.getNickname() %>님의 프로필</p>
-					<div style="margin-left:50px; margin-bottom: 20px; border:1px solid black;">
+					<div style="margin-left:50px; margin-bottom: 20px;">
 						<i class="fa-solid fa-id-card"></i>
 						<span>아이디 : <%=memberDto.getId() %></span><br>
 						<i class="fa-solid fa-phone"></i>
