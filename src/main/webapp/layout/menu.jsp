@@ -160,7 +160,7 @@ int msgCnt=mdao.getUnreadCount(myid);
 						style="color: #494949; cursor: pointer;"
 						onclick="location.href='mypage/userMyPage.jsp'"> </i> <span
 						style="font-size: 11px; cursor: pointer;"
-						onclick="location.href='mypage/adminMyPage.jsp'">관리자페이지 </span> <i
+						onclick="location.href='index.jsp?main=mypage/adminMyPage.jsp'">관리자페이지 </span> <i
 						class="fa-solid fa-right-from-bracket"
 						style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
 						onclick="location.href='login/logoutaction.jsp'"> </i> <span

@@ -11,10 +11,12 @@
 <%@page import="board.placeShare.PlaceShareBoardDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0168677f39871625290af327bd783770&libraries=services"></script>
@@ -23,21 +25,25 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 .container {
-	padding-bottom: 130px;
-	padding-top: 70px;
+	padding-bottom: 200px;
+	margin: 0;
 }
+
 #title-img {
 	width: 40%;
 	height: 30%;
 	border-radius: 5%;
 }
+
 .answer-input {
 	width: 350px;
 	height: 40px;
 }
+
 input {
 	margin: 0;
 }
+
 input[type="text"] {
 	width: 140%;
 	height: 100%;
@@ -50,7 +56,12 @@ input[type="text"] {
 	box-sizing: border-box;
 	color: black;
 }
+<<<<<<< HEAD
 input[type="submit"] {
+=======
+
+input[type="button"] {
+>>>>>>> 5006609ce6a05f642404cf21d24835f46eb9085c
 	width: 20%;
 	height: 80%;
 	background-color: lightgray;
@@ -63,25 +74,36 @@ input[type="submit"] {
 	margin-left: -80px;
 	box-sizing: border-box;
 }
+<<<<<<< HEAD
 input[type="submit"]:hover {
+=======
+
+input[type="button"]:hover {
+>>>>>>> 5006609ce6a05f642404cf21d24835f46eb9085c
 	background-color: "";
 }
+
 #subject {
 	font-size: 20px;
 	font-weight: bold;
 }
+
 div {
 	font-size: 10pt
 }
+
 #dogimg {
 	width: 100%
 }
+
 #map-addr:hover {
 	color: #e3d82b
 }
 </style>
 <script type="text/javascript">
 	$(function() {
+		$(".contentMod").hide()
+		$(".btnanswer").hide();
 		var boardnum = $("#boardnum").val();
 		//모든 댓글 수정 입력폼 숨기기
 		$(".modContents").hide();
@@ -107,8 +129,7 @@ div {
 		});
 	});
 </script>
-<script src="https://kit.fontawesome.com/2663817d27.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 </head>
 <%
 //로그인한 사람 아이디
@@ -134,6 +155,7 @@ DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
 // 프로필 사진 가져오기
 String proPhoto = proDto.getPhoto();
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH시:mm분");
+
 PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
 int totalAnswerCnt = answerDao.getTotalAnswerCount(boardnum);
 dao.addReadCount(boardnum);
@@ -150,7 +172,7 @@ dao.addReadCount(boardnum);
 			</div>
 			<div class="nickname"
 				style="float: left; padding-left: 10px; font-size: 15px;">
-				<%=nickname%>님<br>
+				<%=memberdto.getNickname()%>님<br>
 				<div class="date" style="color: gray">
 					<%=sdf.format(dto.getWriteday())%><br>
 				</div>
@@ -160,11 +182,11 @@ dao.addReadCount(boardnum);
 			if (loginok != null) {
 			%>
 			<div style="margin-left: 50%">
-				<button type="button" class="btn btn-warning"
-					style="width: 60px; height: 30px; border-radius: 10px;"
+				<button type="button" class="btn btn-light"
+					style="width: 60px; border-radius: 10px;"
 					onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정</button>
-				<button type="button" class="btn btn-danger"
-					style="width: 60px; height: 30px; border-radius: 10px;" id="delete"
+				<button type="button" class="btn btn-light"
+					style="width: 60px; border-radius: 10px;" id="delete"
 					onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제</button>
 			</div>
 			<%
@@ -183,13 +205,14 @@ dao.addReadCount(boardnum);
 		<div class="content-img" style="margin: 50px 0; padding-bottom: 30px;">
 			<img
 				src="/TodayWithMyDoggy/place-share/place-photo/<%=dto.getPhotoName()%>"
-				id="title-img" style="width: 40%">
+				id="title-img" style="width: 60%">
 		</div>
 
 		<!-- 지도 -->
 		<i style="color: #aaaaaa">하단 주소 클릭시 길찾기 페이지로 이동</i><br>
 		<div class="map-box" style="margin-bottom: 100px;">
-			<div id="map" style="width: 50%; height: 350px; margin-bottom: 20px;"></div>
+			<div id="map"
+				style="width: 100%; height: 350px; margin-bottom: 20px;"></div>
 			<input type="hidden" id="la" value="<%=dto.getPlaceLa()%>"> <input
 				type="hidden" id="ma" value="<%=dto.getPlaceMa()%>"> <input
 				type="hidden" id="mapAddr" value="<%=dto.getMapAddr()%>">
@@ -200,8 +223,8 @@ dao.addReadCount(boardnum);
 		</div>
 		<i class="fa-solid fa-heart"
 			style="margin-left: 10px; margin-top: 2px; font-size: 16px; cursor: pointer; float: left;"
-			id="heart"></i>&nbsp;
-		<span class="likeview" style="font-size: 15px; float: left;"><%=dto.getLikes() %></span>
+			id="heart"></i>&nbsp; <span class="likeview"
+			style="font-size: 15px; float: left;"><%=dto.getLikes()%></span>
 		<hr style="width: 550px; margin-top: 20px">
 		<input type="hidden" id="heart-boardnum" value="<%=boardnum%>">
 		<script type="text/javascript">
@@ -276,6 +299,10 @@ dao.addReadCount(boardnum);
 			PlaceShareAnswerDao answerdao = new PlaceShareAnswerDao();
 			List<PlaceShareAnswerDto> answerlist = answerdao.getAllAnswers(boardnum);
 			for (PlaceShareAnswerDto answerdto : answerlist) {
+				String answerId = answerdto.getId();
+				String answerNickname = memberdao.getNickname(answerId);
+				String modIdx = answerdto.getIdx();
+				System.out.println(modIdx);
 			%>
 			<div style="margin-top: 20px;">
 				<div id="answerView">
@@ -287,6 +314,7 @@ dao.addReadCount(boardnum);
 					</div>
 
 					<div style="margin-botton: 40px;">
+<<<<<<< HEAD
 						<span style='font-size: 15px;'><%=nickname%></span>&nbsp;&nbsp; <span
 							class='mod' style='cursor: pointer;'>수정 | </span>
 							 <a class='del' id="btn-comment-del" style='cursor: pointer;'
@@ -323,25 +351,38 @@ dao.addReadCount(boardnum);
 					    
 					    
 					</script>
+=======
+						<span style='font-size: 15px;'><%=answerNickname%></span>&nbsp;&nbsp;
+						<span class='mod' id="<%=modIdx%>" style='cursor: pointer;'
+							onclick="updateAnswer(<%=modIdx%>)">수정 | </span> <span
+							class='del' style='cursor: pointer;'>삭제</span><br> <span
+							class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
+					</div>
+					<input type="hidden" class="answerIdx" name="answerIdx"
+						value="<%=modIdx%>">
+>>>>>>> 5006609ce6a05f642404cf21d24835f46eb9085c
 
-					<div id='answerContent' class="answerContents"
+					<div id='answer<%=modIdx%>' class="answerContents"
 						style='width: 400px; font-size: 15px; margin-top: 20px; padding-left: 60px;'>
 						<%=answerdto.getContent()%>
 					</div>
-					<input type="hidden" id="<%=answerdto.getIdx()%>" name="idx"
-						value="<%=answerdto.getContent()%>">
+					<input type="text" id="content<%=modIdx%>" name="modContent"
+						value="<%=answerdto.getContent()%>"
+						class="form-control contentMod"
+						style="margin-left: 55px; width: 400px; height: 40px; font-size: 15px; margin-top: 10px;">
+					<input type="button" id="btnanswer<%=modIdx%>" value="전송"
+						class="btn-answer btnanswer" style="margin-right: 80px; text-align: right; width: 70px;" onclick="location.href='place-share/answerUpdateAction.jsp?content='">
 				</div>
 				<hr style="width: 50%">
-				<br>
-				<br>
+				<br> <br>
 			</div>
 			<%
 			}
 			%>
 
 		</div>
-		<br>
-		<br> <input type="hidden" id="num" value="<%=boardnum%>">
+		<br> <br> <input type="hidden" id="num"
+			value="<%=boardnum%>">
 
 		<script
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
@@ -386,7 +427,22 @@ dao.addReadCount(boardnum);
 					location.history();
 				}
 			});
+<<<<<<< HEAD
+=======
+
+
+			function updateAnswer(modIdx) {
+				contentIdx = "#content" + modIdx;
+				answerIdx = "#answer" + modIdx;
+				btnanswer = "#btnanswer" + modIdx;
+				
+				$(answerIdx).toggle();
+				$(contentIdx).toggle();
+				$(btnanswer).toggle();
+			}
+>>>>>>> 5006609ce6a05f642404cf21d24835f46eb9085c
 			
 		</script>
+	</div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="icon" type="image/png" href="files/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="files/doglogg.png" sizes="100%">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <title>Today With My Doggy</title>
 

@@ -298,7 +298,7 @@ p {
 					</div>
 
 					<div class="card" id="cardImg"
-						style="margin-right: 70%; margin-bottom: 50px; border-radius: 10%">
+						style="margin-right: 30%; margin-bottom: 50px; border-radius: 10%">
 						<img src="" class="card-img-top" id="card1"
 							style="border-radius: 10%; filter: drop-shadow(2px 2px 2px #dcdcdc);">
 					</div>
@@ -385,9 +385,9 @@ p {
 				</script>
 				<div style="margin-bottom: 100px;">
 					<br>
-					<button type="submit" class="btn btn-sm btn-warning" id="btnSave"
+					<button type="submit" class="btn btn-sm btn-light" id="btnSave"
 						style="width: 45%; height: 30px;">저장</button>
-					<button type="button" class="btn btn-sm btn-warning" id="btnList"
+					<button type="button" class="btn btn-sm btn-light" id="btnList"
 						style="width: 45%; height: 30px;">목록</button>
 				</div>
 			</form>

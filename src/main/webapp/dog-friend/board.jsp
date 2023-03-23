@@ -27,6 +27,13 @@ color:black;
 color:black;
 text-decoration:none;
 }
+
+a#MOVE_TOP_BTN {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+    z-index: 999;
+}
 </style>
     <script type="text/javascript">
    
@@ -41,6 +48,13 @@ text-decoration:none;
     		    }
     	})
     	
+        
+        $("#MOVE_TOP_BTN").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
     	
     	//전체체크클릭시 체크값 얻어서 모든 체크값에 전달
     	$(".alldelcheck").click(function(){
@@ -73,6 +87,25 @@ text-decoration:none;
     			//삭제파일로 전송
     			location.href="dog-friend/alldelete.jsp?nums="+n;
     		}
+    		
+    		$(document).ready(function () {
+    			 
+    			   // 1. 특정 위치에서 부터 버튼 나타고, 사라지게..효과는 fade로
+    			    $(window).scroll(function () {
+    					if ($(this).scrollTop() > 200) {
+    						$('.go-top').fadeIn(200);
+    					} else {
+    						$('.go-top').fadeOut(200);
+    					}
+    				});
+
+    				// 2. 버튼 클릭하면 원하는 위치로 이동
+    				$('.go-top').click(function (event) {
+    					event.preventDefault();
+    					$('html, body').animate({ scrollTop: 0 }, 300);
+    				});
+
+    			});
     		
     	})
     	const checkboxes = document.querySelectorAll('input[name="category"]');
@@ -149,7 +182,6 @@ text-decoration:none;
    %>
 	
 	
-	
    <div style=" margin: 20px 200px 20px 200px; width: 800px;" id="abc" >
    
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
@@ -192,7 +224,7 @@ text-decoration:none;
       
     </form>
     
-   <table style="width: 800px; table-layout: fixed;" class="table table-hover" id="sort" >
+   <table style="width: 800px; table-layout: fixed;" class="table" id="sort" >
    <tr>
    	<td width=100px; align="center">번호</td>
    	<td width=100px;>지역</td>
@@ -282,6 +314,9 @@ text-decoration:none;
      <%}%>
      
    </table>
+   </div>
+   <div>
+   <a id="MOVE_TOP_BTN"  href="#">TOP</a>
    </div>
 </body>
 </html>
