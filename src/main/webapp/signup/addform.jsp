@@ -44,7 +44,7 @@ body {
     				} else if(res.count==0 && $(".writeid").val()===""){
         				$("span.idsuccess").text("아이디를 입력해 주세요.");
         				
-    				} else if(res.count==0 && $(".writeid").val().length<8 ||  $(".writeid").val().length>20){
+    				} else if(res.count==0 && $(".writeid").val().length<6 ||  $(".writeid").val().length>20){
         				$("span.idsuccess").text("아이디는 6자 이상 20자 이내로 입력하여야 합니다.");
         				
     				} else if(res.count==0 && $(".writeid").val().search(/\s/) != -1){
