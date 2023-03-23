@@ -33,13 +33,11 @@
 	 <!-- 수정폼 반드시 num, currentPage 같이 히든으로 넘긴다. 폼안 아무데나 가능-->
       <input type="hidden" name="num" value="<%=num %>">
       <input type="hidden" name="currentPage" value="<%=currentPage%>">
-	<table class="table table-bordered" style="width: 800px;margin-left: 100px;">
-		<caption><h3>스마트 포토 게시판</h3></caption>
+	<table class="table table-bordered" style="width: 800px;margin: 20px 100px 20px 100px;">
 		<tr>
-			<th bgcolor="lightgray" width="100">제  목</th>
-			<td>
-				<input type="text" name="subject" class="form-control"
-					required="required" style="width: 500px;" value=<%=dto.getSubject() %>>
+			<th style= "text-align:center; line-height:40px" width="100px" height="40px" required="required">제  목</th>
+			<td style= "line-height:40px">
+				<%=dto.getSubject() %>
 			</td>
 		</tr>
 		<tr>
@@ -52,11 +50,11 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="submitContents(this)">DB수정</button>
+					onclick="submitContents(this)">수정</button>
 				
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-default"
 					style="width: 120px;"
 					onclick="location.href='index.jsp?main=dog-friend/board.jsp'">목록</button>
 			</td>

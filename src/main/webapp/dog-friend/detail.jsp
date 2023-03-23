@@ -148,11 +148,6 @@
 	<td>
 	<h3><b><%=dto.getSubject() %></b></h3>
 	
-	<!-- 쪽지함 만들기 -->
-	<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm " >
-		<b>쪽지</b>
-	</button>
-	
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal">
   		<div class="modal-dialog">
@@ -283,6 +278,11 @@
 					<button type="button" class="btn btn-default"
 					onclick="location.href='index.jsp?main=dog-friend/board.jsp?currentPage=<%=currentPage%>'">
 					<span></span>목록</button>
+					
+						<!-- 쪽지함 만들기 -->
+					<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn" >
+					<b>쪽지</b>
+					</button>
 				</td>
 			</tr>
 			</div>
@@ -295,6 +295,11 @@
 					<button type="button" class="btn btn-default"
 					onclick="location.href='index.jsp?main=dog-friend/board.jsp?currentPage=<%=currentPage%>'">
 					<span></span>목록</button>
+					
+						<!-- 쪽지함 만들기 -->
+					<button type="button" style="float: right" data-toggle="modal" data-target="#exampleModal" class="btn btn-default" >
+					<b>쪽지</b>
+					</button>
 				</td>
 			</tr>
 			</div>

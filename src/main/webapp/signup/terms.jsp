@@ -53,8 +53,9 @@
 			<tr>
 				<td width="800px" height="50%" align="center">
 					<p align="left">
-						<span> 멍멍이와 함께하는 하루 약관동의</span>
-					</p> <br> <textarea style="width: 800px;" rows="20" cols="150"
+						<span> 멍멍이와 함께하는 하루 약관동의</span><br>
+						<b style="color:red; font-size: 0.6em">※이용약관을 모두 읽어주셔야 동의가 완료됩니다.</b>
+					</p> <textarea style="width: 800px;" rows="20" cols="150"
 						class="tbox" readonly>
      
 제1조 목적
