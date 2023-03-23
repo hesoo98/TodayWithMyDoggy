@@ -1,3 +1,4 @@
+<%@page import="message.MessageDao"%>
 <%@page import="member.MemberDto"%>
 <%@page import="profile.dogProfile.DogProfileDto"%>
 <%@page import="profile.dogProfile.DogProfileDao"%>
@@ -18,6 +19,29 @@
 <script type="text/javascript" src="js/layout.js"></script>
 <link rel="stylesheet" href="css/layout.css">
 
+<style type="text/css">
+
+.fa-envelope{
+	position: absolute;
+}
+
+.msgCnt{
+	background-color: #5496f2 ;
+	color: white;
+	font-weight: 600;
+	font-size:10px;
+	border-radius: 15px;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	text-align: center;
+	position: relative;
+	left: -10px;
+	top: 10px;
+}
+
+</style>
+
 <%
 //프로젝트 경로구하기
 String root = request.getContextPath();
@@ -29,13 +53,18 @@ String isAdmin = (String) session.getAttribute("isAdmin");
 String myid = (String) session.getAttribute("myid");
 MemberDao dao = new MemberDao();
 String nickname = dao.getNickname(myid);
+
+//msg 개수
+MessageDao mdao=new MessageDao();
+int msgCnt=mdao.getUnreadCount(myid);
 %>
+
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-custom navbar-mainbg m-0 p-0">
 		<img src="/TodayWithMyDoggy/css/doglogg.png" width="50px;"
-			style="margin-left: 80px; margin-right: 10px;"> <a
+			style="margin-left: 20px; margin-right: 10px;"> <a
 			class="navbar-brand navbar-logo pb-2 pt-2" href="index.jsp?main.jsp">
 			<div style="font-size: 16px;">
 				<b>TodayWithMyDoggy</b>
@@ -82,10 +111,11 @@ String nickname = dao.getNickname(myid);
 				%>
 
 				<a href="index.jsp?main=message/list.jsp"
-					style="width: 25px; padding-top: 15px; margin-left: 100px; margin-right: 15px;">
+					style="width: 25px; padding-top: 15px; margin-left: 100px;">
 					<i class="fa-solid fa-envelope"
 					style="color: #5b5b5b; font-size: 25px"></i>
 				</a>
+					<span class="msgCnt"><%=msgCnt %></span>
 				<%
 				String memberNum = dao.getNum(myid);
 

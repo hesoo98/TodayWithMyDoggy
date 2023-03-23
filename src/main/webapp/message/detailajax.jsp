@@ -12,7 +12,7 @@
 	MessageDto dto=dao.showMessageDetail(num);
 	dao.updateRead(num);
 	
-	SimpleDateFormat sdf=new SimpleDateFormat("전송일: yyyy-MM-dd HH:mm");
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	JSONObject ob=new JSONObject();
 	ob.put("cnt", dao.getUnreadCount(id));

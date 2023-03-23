@@ -1,73 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script type="text/javascript">
-    
-    //스크롤 안내리면 동의 비활성화
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+	//스크롤 안내리면 동의 비활성화
+	function chk() {
+		var req = document.form.req.checked;
+		var num = 0;
+		if (req == true) {
+			num = 1;
+		}
+		if (num == 1) {
 
-
-    
-	function chk(){
- 	var req = document.form.req.checked;
- 	var num = 0;
- 	if(req == true){
- 	 num = 1;
- 	}
- 	if(num==1){
- 		
-  	location.href="index.jsp?main=signup/addform.jsp";
- 	}else{
- 	 alert("개인정보 약관에 동의하셔야 합니다.");
- 	}
+			location.href = "index.jsp?main=signup/addform.jsp";
+		} else {
+			alert("개인정보 약관에 동의하셔야 합니다.");
+		}
 	}
-	function nochk(){
-	 alert("동의하지 않으면 가입하실 수 없습니다");
-	return false;}
-	
-	
-	$(function(){
-		$(".tbox").scroll(function(){
-        var scrollTop = $(this).scrollTop();
-        var innerHeight = $(this).innerHeight();
-        var scrollHeight = $(this).prop('scrollHeight');
+	function nochk() {
+		alert("동의하지 않으면 가입하실 수 없습니다");
+		return false;
+	}
 
-        
-        	if (scrollTop + innerHeight >= scrollHeight-10) {
-        	$("#agree").attr('disabled', false);
-      	    } else {
-       	    $("#agree").attr('disabled', true);
-       	    }
-		})
-		
-		
-		
-	})
-	</script>
-    
+	//스크롤바 - 끝까지 내리지 않으면 동의버튼 비활성화
+	$(function() {
+		$(".tbox").scroll(function() {
+			var scrollTop = $(this).scrollTop();
+			var innerHeight = $(this).innerHeight();
+			var scrollHeight = $(this).prop('scrollHeight');
+
+			if (scrollTop + innerHeight >= scrollHeight - 10) { //-10 없으면 너무 빡빡해짐
+				$("#agree").attr('disabled', false);
+			} else {
+				$("#agree").attr('disabled', true);
+			}
+		});
+	});
+</script>
+
 </head>
 <body>
-<form name="form" method="post">
- <table width="800px" height="650">
-  <tr>
-   <td width="100%" height="10%"><b>회원가입</b>
-    <br>
-    <hr>
-   </td>
-  </tr>
-  <tr>
-   <td width="800px" height="50%" align="center">
-   <p align="left">
-   <span>
-   멍멍이와 함께하는 하루 약관동의</span>
-   </p>
-   <br>
-   <textarea style="width:800px;"
-     rows="20" cols="150" class="tbox">
+	<form name="form" method="post">
+		<table width="800px" height="650">
+			<tr>
+				<td width="100%" height="10%"><b>회원가입</b> <br>
+					<hr></td>
+			</tr>
+			<tr>
+				<td width="800px" height="50%" align="center">
+					<p align="left">
+						<span> 멍멍이와 함께하는 하루 약관동의</span>
+					</p> <br> <textarea style="width: 800px;" rows="20" cols="150"
+						class="tbox" readonly>
      
 제1조 목적
 
@@ -192,18 +180,17 @@
 부칙
 
 이 약관은 2023년 3월 14일부터 시행합니다.
-   </textarea>
-   <br>
-   <input type="checkbox" name="req"> 개인정보 수집 및 이용에 동의합니다.
-   </td>
-  </tr>
-  <tr>
-   <td align="center" valign="top">
-    <input type="button" class="btn btn-default" id="agree" disabled value="동의" onclick="chk()"/>&nbsp;&nbsp;&nbsp;
-    <input type="button" class="btn btn-default" value="동의하지 않습니다" onclick="nochk()"/>
-   </td>
-  </tr>
- </table>
-</form>
+   </textarea> <br> <input type="checkbox" name="req"> 개인정보 수집 및 이용에
+					동의합니다.
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top"><input type="button"
+					class="btn btn-default" id="agree" disabled value="동의"
+					onclick="chk()" />&nbsp;&nbsp;&nbsp; <input type="button"
+					class="btn btn-default" value="동의하지 않습니다" onclick="nochk()" /></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

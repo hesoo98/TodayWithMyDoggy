@@ -61,6 +61,25 @@ public class PlaceShareAnswerDao {
 		}
 	}
 	
+	//댓글 수정
+	public void updateAnswer(PlaceShareAnswerDto dto) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update place_share_answer set content=? where idx=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getContent());
+			pstmt.setString(2, dto.getIdx());
+			pstmt.execute();
+		} catch (SQLException e) {
+			System.out.println("UPDATE ERROR: " + e.getMessage());
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
 	//댓글 목록 불러오기
 	public List<PlaceShareAnswerDto> getAllAnswers(String boardnum) {
 		List<PlaceShareAnswerDto> list = new Vector<>();
@@ -68,7 +87,7 @@ public class PlaceShareAnswerDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from place_share_answer where board_num=? order by idx";
+		String sql = "select * from place_share_answer where board_num=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -93,5 +112,26 @@ public class PlaceShareAnswerDao {
 		return list;
 	}
 	
-	
+	//delete
+	public void deleteAnswer(String idx) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="delete from place_share_answer where idx=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, idx);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+				
+	}
+
 }
