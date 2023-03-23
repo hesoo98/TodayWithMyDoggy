@@ -69,7 +69,7 @@
 	QnaBoardDao qnaDao = new QnaBoardDao();
 	List<QnaBoardDto> myQList = qnaDao.getMyBoardList(id);
 %>
-<div style="background: #F8F9FA;" class="">
+<div style="" class="">
 	<div class="container" style="width: 880px;">
 		<div class="row" style="padding-top:50px; height: 350px;" id="myprofile_maindog">
 			<div class="col-5" style="">
@@ -148,7 +148,7 @@
 				<p style="margin-left:50px; font-size: 1.5rem; display: inline;">나의 질문</p>
 				
 			</div>
-			<table class="table table-hover" style="width: 800px; margin: 0 auto;">
+			<table class="table" style="width: 800px; margin: 0 auto;">
 				<tr>
 					<td width="60">번호</td>
 					<td width="500">제목</td>
