@@ -58,7 +58,6 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-
 	width: 20%;
 	height: 80%;
 	background-color: lightgray;
@@ -73,7 +72,6 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-
 	background-color: "";
 }
 
@@ -332,15 +330,12 @@ String currentPage = request.getParameter("currentPage");
 					</div>
 
 					<div style="margin-botton: 40px;">
-	
-					<script type="text/javascript">
+						<script type="text/javascript">
 
 					//댓글 삭제
 					  $(document).on("click","#btn-comment-del",function(){
 						  var idx=$(this).attr("idx");
-						  
 						  var a=confirm("댓글을 삭제하시려면 확인을 눌러주세요");
-						  
 						  if(a){
 							  $.ajax({
 								  type:"get",
@@ -348,10 +343,10 @@ String currentPage = request.getParameter("currentPage");
 								  dataType:"html",
 								  data:{"idx":idx},
 								  success:function(res){
+									  alert(idx);
 									  location.reload();
 								  }
 							   })
-							   
 							} else {
 								return false;
 							}
@@ -359,6 +354,7 @@ String currentPage = request.getParameter("currentPage");
 					    
 					    
 					</script>
+
 						<span style='font-size: 15px;'><%=answerNickname%></span>&nbsp;&nbsp;
 						<span class='mod' id="<%=modIdx%>" style='cursor: pointer;'
 							onclick="updateAnswer(<%=modIdx%>)">수정 | </span> 
@@ -436,6 +432,7 @@ String currentPage = request.getParameter("currentPage");
 					location.history();
 				}
 			});
+
 			function updateAnswer(modIdx) {
 				contentIdx = "#content" + modIdx;
 				answerIdx = "#answer" + modIdx;
@@ -445,6 +442,7 @@ String currentPage = request.getParameter("currentPage");
 				$(contentIdx).toggle();
 				$(btnanswer).toggle();
 			}
+			
 			function submitMod(modIdx) {
 				var boardnum = $("#boardnum").val();
 				var currentPage = $("#curr").val();				

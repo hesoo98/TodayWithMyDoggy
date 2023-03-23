@@ -87,7 +87,7 @@
 
 	<div class="container" style="display: flex; justify-content: center;">
 		<div style="flex-direction: column; margin-top: 50px;">
-			<p style="font-size: 2rem;">회원 리스트</p>
+			<p style="font-size: 2rem;">나의 질문 리스트</p>
 			<div class="" style="width: 1100px; display: flex; flex-direction: column;">
 				<table class="table table-hover">
 					<tr>

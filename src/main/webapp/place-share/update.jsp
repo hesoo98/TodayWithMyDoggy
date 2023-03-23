@@ -385,8 +385,8 @@ p {
 				</script>
 				<div style="margin-bottom: 100px;">
 					<br>
-					<button type="submit" class="btn btn-sm btn-warning" id="btnSave" style="width: 45%; height: 30px;">수정</button>
-					<button type="button" class="btn btn-sm btn-warning" id="btnList" style="width: 45%;  height: 30px;">목록</button>
+					<button type="submit" class="btn btn-sm btn-light" id="btnSave" style="width: 45%; height: 30px;">수정</button>
+					<button type="button" class="btn btn-sm btn-light" id="btnList" style="width: 45%;  height: 30px;">목록</button>
 				</div>
 			</form>
 		</div>

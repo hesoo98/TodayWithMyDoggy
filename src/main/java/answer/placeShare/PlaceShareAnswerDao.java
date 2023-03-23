@@ -133,7 +133,6 @@ public class PlaceShareAnswerDao {
 		}
 				
 	}
-	
 	public PlaceShareAnswerDto getData(String idx) {
 
 		PlaceShareAnswerDto dto = new PlaceShareAnswerDto();
@@ -165,5 +164,4 @@ public class PlaceShareAnswerDao {
 		}
 		return dto;
 	}
-
 }

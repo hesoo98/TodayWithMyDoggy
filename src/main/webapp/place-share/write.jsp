@@ -275,7 +275,6 @@ p {
 }
 </style>
 </head>
-
 <body>
 	<article>
 		<div class="container" role="main">
@@ -292,7 +291,7 @@ p {
 				<div class="card-deck mr-5">
 					<div class="input-group mb-5 mr-5 ml-4" style="width: 500px;">
 						<input type="file" class="form-control" id="inputGroupFile02"
-							name="photo1" onchange="readURL1(this)" style="height: 30px;">
+							name="photo1" onchange="readURL1(this)" style="height: 30px;" required="required">
 						<button type="button" class="input-group-text btn btn-warning"
 							for="inputGroupFile02" id="albtn">미리보기</button>
 					</div>
@@ -319,8 +318,8 @@ p {
 						<i>- 주소가 입력되면 하단에 지도가 표시됩니다</i>
 					</p>
 
-					<input type="text" id="sample5_address" placeholder="주소"
-						style="width: 300px;"> <input type="button"
+					<input type="text" id="sample5_address" placeholder="주소 검색 버튼을 눌러주세요"
+						style="width: 300px;" required="required" > <input type="button"
 						onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 					<div id="map"
 						style="width: 100%; height: 350px; margin-top: 10px; display: none"></div>

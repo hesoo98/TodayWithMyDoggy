@@ -11,6 +11,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 	<style type="text/css">
+	
+		td {
+			word-break:breack-all;
+		}
+	
+	
 		/* 페이지 */
 		.pagination{
 		  padding: 30px 0;
@@ -85,20 +91,20 @@
 	
 %>
 
-	<div class="container" style="border:1px solid black; display: flex; justify-content: center;">
-		<div style="flex-direction: column; margin-top: 50px;">
+	<div class="container" style="display: flex; justify-content: center;">
+		<div style=" margin-top: 50px; width: 1100px;">
 			<p style="font-size: 2rem;">회원 리스트</p>
-			<div class="" style="width: 1100px; border:1px solid red; display: flex; flex-direction: column;">
+			<div>
 				<table class="table table-hover">
 					<tr>
-						<td width="">번호</td>
-						<td width="">닉네임</td>
-						<td width="">아이디</td>
+						<td width="80">번호</td>
+						<td>닉네임</td>
+						<td>아이디</td>
 						<td>전화번호</td>
-						<td width="">주소</td>
+						<td width="80">주소</td>
 						<td>이메일</td>
 						<td>생성일</td>
-						<td width="">계정등급</td>
+						<td>계정등급</td>
 						<td align="center">기능버튼</td>
 	
 					</tr>
@@ -109,7 +115,7 @@
 						<td><%=d.getId() %></td>
 						<td><%=d.getHp() %></td>
 						<td><%=d.getAddr() %></td>
-						<td><%=d.getEmail()%></td>
+						<td style="word-break: break-all"><%=d.getEmail()%></td>
 						<td><%=d.getCreateDay() %></td>
 						<%if(d.getAuth() == 1){ %>
 						<td align="center">관리자</td>
