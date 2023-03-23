@@ -91,10 +91,10 @@
 	
 %>
 
-	<div class="container" style="border:1px solid black; display: flex; justify-content: center;">
+	<div class="container" style="display: flex; justify-content: center;">
 		<div style=" margin-top: 50px; width: 1100px;">
 			<p style="font-size: 2rem;">회원 리스트</p>
-			<div class="" style="border:1px solid red;">
+			<div>
 				<table class="table table-hover">
 					<tr>
 						<td width="80">번호</td>

@@ -14,7 +14,7 @@
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 	<style>
 		.rectangle {
-			border:1px solid brown;
+			
 			width:500px;
 			height: 500px;
 		}
@@ -51,14 +51,14 @@
 			
 			
 %>
-	<div class="container" style="border:1px solid black;display: flex; justify-content: center;">
-		<div class="" style="width: 1000px; border:1px solid red; display: flex; flex-direction: column;">	
+	<div class="container" style="display: flex; justify-content: center;">
+		<div class="" style="width: 1000px; display: flex; flex-direction: column;">	
 			<p style="font-size: 2rem;">관리자 페이지</p>
 			<hr>
 			
 			<div style="flex-direction: row; display: flex;">
-				<div class="rectangle">
-					<div style="">
+				<div class="rectangle" style="padding:10px 20px;">
+					<div style="margin-bottom: 20px;">
 						<span>유저 관리</span>
 						<button class="moreBtn btn btn-sm btn-light"
 								style="float:right;"
@@ -66,13 +66,12 @@
 					</div>
 					
 					<div>
-						<table class="table table-bordered">
+						<table class="table table-striped">
 							<tr>
 								<td width="20">번호</td>
 								<td width="50">닉네임</td>
 								<td width="50">아이디</td>
 								<td width="30">주소</td>
-
 							</tr>
 							
 					<%if(userList.size() < 8) {%>
@@ -97,15 +96,15 @@
 					</div>
 				</div>
 				
-				<div class="rectangle">
-					<div style="margin-bottom: 10px;">
+				<div class="rectangle" style="padding:10px 20px;">
+					<div style="margin-bottom: 20px;">
 						<span>답변을 기다리는 질문</span>
 						<button class="moreBtn btn btn-sm btn-light" 
 								style="float:right;"
 								onclick="location.href='index.jsp?main=mypage/admin/showWaitingQuestion.jsp'">더 보기</button>
 					</div>
 					<div>
-						<table class="table table-bordered">
+						<table class="table table-striped">
 							<tr>
 								<td width="50">번호</td>
 								<td width="100">작성자</td>
