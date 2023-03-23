@@ -157,9 +157,10 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    //writer_num
 	    String writerNum=mdao.getNum(dto.getId());
 	    DogProfileDao pdao=new DogProfileDao();
-	    DogProfileDto pdto=pdao.getMainDogInfo(writerNum);
+	    DogProfileDto pdto=pdao.getMainDogInfo(writerNum);%>
 	    
-	    // 프로필사진
+	    <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal2">
+	    <%// 프로필사진
 	    if(pdto.getIdx()==null){%>
 		<span class="dog-photo"><i class="fa-solid fa-dog fa-lg"></i></span>
 		<span class="nickname"><%=nickname %></span>
@@ -169,6 +170,117 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    <br>
 	    <span style="font-size: 12px;"><%=pdto.getName() %></span>
 	    <%} %>
+	    </div>
+	    
+   	  <!-- 프로필 모달 -->
+	  <div class="modal fade" id="exampleModal2">
+  		<div class="modal-dialog">
+   		 <div class="modal-content">
+   		 
+    		 <div class="modal-header">
+    		    <h5 class="modal-title" id="exampleModalLabel2"><%=nickname %>의 멍멍이</h5>
+     		   <button type="button" class="close" data-dismiss="modal">
+    		      <span aria-hidden="true">&times;</span>
+    		    </button>
+    		 </div>
+    		<%if(pdto.getName()==null){%>
+    		<div class="modal-body">
+    			<span >
+    				강아지 프로필을 추가하지 않은 회원입니다.
+    				쪽지로 인사해보세요!
+    			</span>
+			</div>
+    		<%}else{
+    			%> 
+    	   		   <div class="modal-body">
+   	   		   
+	   	   		   <table class="table table-borderless">
+	   	   		   	 <tr>
+	   	   		   	 	<td rowspan="5"><img style="width:200px; height:200px; border-radius: 30px;" src="../TodayWithMyDoggy/mypage/dogImg/<%=pdto.getPhoto() %>"></td>
+	   	   		   	 </tr>
+	   	   		   	 <tr>
+	   	   		   	 	<td> 이름 | <%=pdto.getName() %></td>
+	   	   		   	 </tr>
+	   	   		   	 <tr>
+	   	   		   	 	<td> 성별 | <%=pdto.getGender() %></td>
+	   	   		   	 </tr>
+	   	   		   	 <tr>
+	   	   		   	 	<td> 크기 | <%=pdto.getDogSize() %></td>
+	   	   		   	 </tr>
+	   	   		   	 <tr>
+	   	   		   	 	<td> 생일 | <%=pdto.getBirthday() %> (<span id="age"></span>세)</td>
+	   	   		   	 </tr>
+	   	   		   </table>  
+	   	   		   
+    	    	  </div>
+    		<%}%>
+    		
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-light" data-dismiss="modal">확인</button>
+	        	
+				<!-- 쪽지함 만들기 -->
+				<button type="button" class="btn btn-light"  data-dismiss="modal"
+				 style="float: right" data-toggle="modal" data-target="#exampleModalMessage" class="btn btn-default btn" >
+				쪽지
+				</button>
+		   	</div>
+		    	
+	   		 </div>
+	  		</div>
+		</div>
+		<!-- 프로필모달 끝 -->
+		
+		<!-- 쪽지 Modal -->
+		<div class="modal fade" id="exampleModalMessage">
+  		<div class="modal-dialog">
+   		 <div class="modal-content">
+   		 
+    		 <div class="modal-header">
+    		    <h5 class="modal-title" id="exampleModalLabel">쪽지 보내기</h5>
+     		   <button type="button" class="close" data-dismiss="modal">
+    		      <span aria-hidden="true">&times;</span>
+    		    </button>
+    		 </div>
+    		  
+	   <div class="modal-body">
+	   <form action="message/writeaction.jsp" method="post">
+	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
+	   <input type="hidden" name="receiver" value="<%=dto.getId()%>">
+	   
+	   	<span>[받는 사람] <%=nickname %></span>
+	   	
+	   	<br><br>
+	    <textarea rows="10" style="width:100%;" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
+
+	    required="required"></textarea>
+    	  
+      	<div class="modal-footer">
+        	<button type="button" class="btn btn-default border border-secondary" data-dismiss="modal">취소</button>
+        	<button type="submit" class="btn btn-default border border-secondary" >보내기</button>
+    	</div>
+    	
+	   </form>
+   	  	</div>
+   		 </div>
+  		</div>
+	</div>
+	<!-- 쪽지 Modal 끝 -->
+		
+		<script type="text/javascript">
+   		
+   		//멍멍이 나이 계산
+   				
+		let today=new Date();
+		let year=today.getYear()+1900;
+		
+		let birthyear=$("#birthday").val().substr(0,4);
+		
+		let age=year-parseInt(birthyear);
+		
+		$("#age").text(age);
+		
+   		</script>
+	    
 	  <br>
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
@@ -372,7 +484,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    	<!-- 이미지 미리보기 -->
 	        <img id="showimg" style="max-width: 200px; max-height:200px;"
 	         src="<%=dto.getPhoto()==null?"":"dog-talking-photo/"+dto.getPhoto()%>">
-	  		<input type="file" name="photo" id="input-photo" style="visibility: hidden;" onchange="readURL(this)" required> 
+	  		<input type="file" name="photo" value="<%=dto.getPhoto() %>" id="input-photo" style="visibility: hidden;" onchange="readURL(this)" required> 
 		    </td>
 		    
 		    <td>

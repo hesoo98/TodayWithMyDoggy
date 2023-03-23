@@ -26,6 +26,7 @@
   		String num=multi.getParameter("num");
   		String content=multi.getParameter("content");
   		String photoname=multi.getFilesystemName("photo");
+  		String currentPage=multi.getParameter("currentPage");
   		
   		//사진 수정 안하면 이전의 값 유지하기
   		DogTalkingBoardDao dao=new DogTalkingBoardDao();
@@ -38,12 +39,10 @@
   		dto.setNum(num);
   		dto.setContent(content);
   		dto.setPhoto(photoname==null?gu_photoname:photoname); //현재 사진 없으면 이전 사진 넣기
-  		System.out.println(num);
   		//update
   		dao.updateBoard(dto);
   		
-  		//방명록 목록으로 이동
-  		response.sendRedirect("../index-form.jsp?main=dog-talking/detail.jsp?num="+num);
+  		response.sendRedirect("../index-form.jsp?main=dog-talking/detail.jsp?num="+num+"&currentPage="+currentPage);
   	} catch (Exception e){
   		System.out.print("업로드 오류:"+e.getMessage());
   	}
