@@ -73,7 +73,7 @@
 	//각페이지에서 불러올 시작번호
 	start = (currentPage - 1) * perPage;
 	//각페이지에서 필요한 게시글 가져오기
-	List<QnaBoardDto> userList = dao.showAllQna(start, perPage, null);
+	List<QnaBoardDto> userList = dao.getAnswerPendingQList(start, perPage);
 	// 총개수
 	totalCount = userList.size();
 	//총 페이지 갯수

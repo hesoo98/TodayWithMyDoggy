@@ -47,7 +47,7 @@
 	
 	//Qna
 	QnaBoardDao qnaDao = new QnaBoardDao();
-	List<QnaBoardDto> qnaList = qnaDao.getAllQnaList();
+	List<QnaBoardDto> qnaList = qnaDao.getAnswerPendingQList();
 			
 			
 %>
@@ -66,7 +66,7 @@
 					</div>
 					
 					<div>
-						<table class="table table-striped">
+						<table class="table">
 							<tr>
 								<td width="20">번호</td>
 								<td width="50">닉네임</td>
@@ -104,7 +104,7 @@
 								onclick="location.href='index.jsp?main=mypage/admin/showWaitingQuestion.jsp'">더 보기</button>
 					</div>
 					<div>
-						<table class="table table-striped">
+						<table class="table">
 							<tr>
 								<td width="50">번호</td>
 								<td width="100">작성자</td>

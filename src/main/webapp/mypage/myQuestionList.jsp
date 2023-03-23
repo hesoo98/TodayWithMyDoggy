@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.qna.QnaBoardDto"%>
 <%@page import="board.qna.QnaBoardDao"%>
 <%@page import="member.MemberDto"%>
@@ -47,6 +48,7 @@
 </head>
 <body>
 <%
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	//로그인한 사용자 아이디 가져옴
 	String id = (String)session.getAttribute("myid");
 	QnaBoardDao dao = new QnaBoardDao();
@@ -85,14 +87,13 @@
 	}
 %>
 
-	<div class="container" style="display: flex; justify-content: center;">
-		<div style="flex-direction: column; margin-top: 50px;">
-			<p style="font-size: 2rem;">나의 질문 리스트</p>
-			<div class="" style="width: 1100px; display: flex; flex-direction: column;">
+	<div class="container">
+		<div style="margin-top: 50px;">
+			<p style="font-size: 1.5rem; margin-bottom: 30px;">나의 질문 리스트</p>
+			<div style="width: 800px; display: flex; flex-direction: column;">
 				<table class="table table-hover">
 					<tr>
 						<td width="80">번호</td>
-						<td>아이디</td>
 						<td>제목</td>
 						<td>내용</td>
 						<td>작성일</td>
@@ -101,10 +102,9 @@
 
 					<tr onclick="location.href='index.jsp?main=qna/detail.jsp?num=<%=d.getNum()%>'">
 						<td align="center"><%=d.getNum() %></td>
-						<td><%=d.getId() %></td>
 						<td><%=d.getTitle() %></td>
 						<td><%=d.getContent() %></td>
-						<td><%=d.getWriteday() %></td>
+						<td><%=sdf.format(d.getWriteday())%></td>
 					</tr>
 
 				<%}%>
