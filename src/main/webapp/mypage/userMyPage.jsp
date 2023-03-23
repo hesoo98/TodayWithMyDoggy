@@ -69,151 +69,149 @@
 	QnaBoardDao qnaDao = new QnaBoardDao();
 	List<QnaBoardDto> myQList = qnaDao.getMyBoardList(id);
 %>
-<div style="background: #F8F9FA;" class="">
-	<div class="container" style="width: 950px;">
-
-			<div class="row" style="padding-top:50px; height: 350px;" id="myprofile_maindog">
-				<div class="col-5" style="border : 1px solid black;">
-					<p style="margin-bottom: 30px;font-size: 1.5rem;"><%=memberDto.getNickname() %>님의 프로필</p>
-					<div style="margin-left:50px; margin-bottom: 20px; border:1px solid black;">
-						<i class="fa-solid fa-id-card"></i>
-						<span>아이디 : <%=memberDto.getId() %></span><br>
-						<i class="fa-solid fa-phone"></i>
-						<span><%=memberDto.getHp() %></span><br>
-						<i class="fa-solid fa-map-location-dot"></i>
-						<span><%=memberDto.getAddr() %></span><br>
-						<i class="fa-solid fa-envelope"></i>
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=memberDto.getEmail() %></span><br>
-						<i class="fa-solid fa-calendar-days"></i>
-						<span><%=sdf.format(memberDto.getCreateDay()) %>에 생성함.</span><br><br>
-					</div>
-					<button type="button"
-								class="btn btn-light btn-sm"
-								style="position:absolute; bottom: 0; right: 0;"
-								onclick="location.href='index.jsp?main=mypage/userProfileUpdateForm.jsp'">나의 프로필 수정</button>
+<div style="" class="">
+	<div class="container" style="width: 880px;">
+		<div class="row" style="padding-top:50px; height: 350px;" id="myprofile_maindog">
+			<div class="col-5" style="">
+				<p style="margin-left:50px; margin-bottom: 30px;font-size: 1.5rem;"><%=memberDto.getNickname() %>님의 프로필</p>
+				<div style="margin-left:50px; margin-bottom: 20px;">
+					<i class="fa-solid fa-id-card"></i>
+					<span>아이디 : <%=memberDto.getId() %></span><br>
+					<i class="fa-solid fa-phone"></i>
+					<span><%=memberDto.getHp() %></span><br>
+					<i class="fa-solid fa-map-location-dot"></i>
+					<span><%=memberDto.getAddr() %></span><br>
+					<i class="fa-solid fa-envelope"></i>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=memberDto.getEmail() %></span><br>
+					<i class="fa-solid fa-calendar-days"></i>
+					<span><%=sdf.format(memberDto.getCreateDay()) %>에 생성함.</span><br><br>
 				</div>
-				<div class="col-7">
-					<!-- 대표강아지 프로필 칸 -->
-					<%if (isMainDog == 1) {
-						// 사용자가 대표 강아지가 있을 경우
-						DogProfileDto dto = dogDao.getMyMainDog(member_num);%>
-					<p style="margin-bottom: 30px; font-size: 1.5rem;">대표 강아지 프로필</p>
-					<div style="margin: 0 auto;" class="row">
-						<div style="margin-left: 30px;">
-							<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
-						</div>
-						<div style="margin-left: 50px;">
-							<span>강아지이름 : <%=dto.getName() %></span><br>
-							<span>강아지성별 : </span>
-							<% if(dto.getGender().equals("암")) { %>
-								<i class="fa-solid fa-venus"></i>
-							<%} else if(dto.getGender().equals("수")) {%>
-								<i class="fa-solid fa-mars"></i>
-							<%} else {%>
-								<i class="fa-solid fa-venus-mars"></i>
-							<%}%>
-							<br>
-							<span>강아지크기 : <%=dto.getDogSize() %></span><br>
-							<span>강아지생일 : <%=dto.getBirthday() %></span><br>
-							<span>강아지사진 : <%=dto.getPhoto() %></span><br>
-						</div>
+				<button type="button"
+							class="btn btn-light btn-sm"
+							style="position:absolute; bottom: 0; right: 0;"
+							onclick="location.href='index.jsp?main=mypage/userProfileUpdateForm.jsp'">나의 프로필 수정</button>
+			</div>
+			<div class="col-7" style="">
+				<!-- 대표강아지 프로필 칸 -->
+				<%if (isMainDog == 1) {
+					// 사용자가 대표 강아지가 있을 경우
+					DogProfileDto dto = dogDao.getMyMainDog(member_num);%>
+				<p style="margin-left:50px; margin-bottom: 30px; font-size: 1.5rem;">대표 강아지 프로필</p>
+				<div style="margin: 0 auto;" class="row">
+					<div style="margin-left: 30px;">
+						<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 					</div>
-					<button type="button" 
+					<div style="margin-left: 50px;">
+						<span>강아지이름 : <%=dto.getName() %></span><br>
+						<span>강아지성별 : </span>
+						<% if(dto.getGender().equals("암")) { %>
+							<i class="fa-solid fa-venus"></i>
+						<%} else if(dto.getGender().equals("수")) {%>
+							<i class="fa-solid fa-mars"></i>
+						<%} else {%>
+							<i class="fa-solid fa-venus-mars"></i>
+						<%}%>
+						<br>
+						<span>강아지크기 : <%=dto.getDogSize() %></span><br>
+						<span>강아지생일 : <%=dto.getBirthday() %></span><br>
+						<span>강아지사진 : <%=dto.getPhoto() %></span><br>
+					</div>
+				</div>
+				<button type="button" 
+						class="btn btn-light btn-sm"
+						style="position:absolute; bottom: 0; right: 100px;"
+						onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
+				
+				<%} else {%>
+				<!-- 사용자가 대표 강아지가 없는 경우 -->
+				<p style="margin-left:50px; font-size:1.5rem">대표 강아지 프로필</p>
+				<div class="row">
+					<div style="margin-left:30px;">
+						<img class="" src="/TodayWithMyDoggy/mypage/dogImg/dogImgNotFound.png" id="dogprofile">
+					</div>
+					<div style="margin-left:50px;">
+						<button type="button" 
 							class="btn btn-light btn-sm"
 							style="position:absolute; bottom: 0; right: 100px;"
 							onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
-					
-					<%} else {%>
-					<!-- 사용자가 대표 강아지가 없는 경우 -->
-					<p style="font-size:1.5rem">대표 강아지 프로필</p>
-					<div class="row">
-						<div style="margin-left:30px;">
-							<img class="" src="/TodayWithMyDoggy/mypage/dogImg/dogImgNotFound.png" id="dogprofile">
-						</div>
-						<div style="margin-left:50px;">
-							<button type="button" 
-								class="btn btn-light btn-sm"
-								style="position:absolute; bottom: 0; right: 100px;"
-								onclick="location.href='index.jsp?main=mypage/dogMorePage.jsp'">강아지 더보기</button>
-							<b>대표 강아지가 없어요</b>
-						</div>
+						<b>대표 강아지가 없어요</b>
 					</div>
-					<%}%>
 				</div>
-			</div>
-			
-		
-
-			<div style="height: 400px; margin-top: 50px;">
-				<div style="margin-bottom: 20px;">
-					<p style="font-size: 1.5rem; display: inline;">나의 질문</p>
-					
-				</div>
-				<table class="table table-hover" style="width: 800px; margin: 0 auto;">
-					<tr>
-						<td width="60">번호</td>
-						<td width="500">제목</td>
-						<td>날짜</td>
-						<td>답변 유무</td>
-					</tr>
-					
-					
-				<%if( myQList.size() < 5) { 
-					for(QnaBoardDto q : myQList){
-						//답변여부 확인
-					    QnaAnswerDao adao=new QnaAnswerDao();
-					    QnaAnswerDto adto=adao.getAnswer(q.getNum());
-						%>
-					<tr>
-						<td><%=q.getNum() %></td>
-						<td><a style="color:black;"href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
-						<td><%=sdf.format(q.getWriteday())%></td>
-				
-					<% if(adto.getIdx()==null){%>
-					    <td>대기중</td>
-				    <%}else{%>
-				    	<td>답변완료</td>
-				    <%}%>
-					</tr>
-					
-						
-					<%}%>
-				<%} else { %>
-					
-					<%for(int i = 0 ; i < 5; i ++) { 
-						//답변여부 확인
-					    QnaAnswerDao adao=new QnaAnswerDao();
-					    QnaAnswerDto adto=adao.getAnswer(myQList.get(i).getNum());
-					%>
-					<tr>
-						<td><%=myQList.get(i).getNum() %></td>
-						<td><a href="index.jsp?main=qna/detail.jsp?num=<%=myQList.get(i).getNum()%>"><%=myQList.get(i).getTitle() %></a></td>
-						<td><%=myQList.get(i).getWriteday() %></td>
-				
-					<% if(adto.getIdx()==null){%>
-					    <td>대기중</td>
-				    <%}else{%>
-				    	<td>답변완료</td>
-				    <%}%>
-					</tr>
-					
-					<%}
-					}%>
-					
-					<tr>
-						<td colspan="4" align="right">
-							<button type="button"
-							class="btn btn-light btn-sm"
-							onclick="location.href='index.jsp?main=mypage/myQuestionList.jsp'">더보기</button>
-						</td>
-					
-					</tr>
-					
-				</table>
-				
+				<%}%>
 			</div>
 		</div>
-	
+		
+		
+
+		<div style="height: 400px; margin-top: 50px;">
+			<div style="margin-bottom: 20px;">
+				<p style="margin-left:50px; font-size: 1.5rem; display: inline;">나의 질문</p>
+				
+			</div>
+			<table class="table" style="width: 800px; margin: 0 auto;">
+				<tr>
+					<td width="60">번호</td>
+					<td width="500">제목</td>
+					<td>날짜</td>
+					<td>답변 유무</td>
+				</tr>
+				
+				
+			<%if( myQList.size() < 5) { 
+				for(QnaBoardDto q : myQList){
+					//답변여부 확인
+				    QnaAnswerDao adao=new QnaAnswerDao();
+				    QnaAnswerDto adto=adao.getAnswer(q.getNum());
+					%>
+				<tr>
+					<td><%=q.getNum() %></td>
+					<td><a style="color:black;"href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
+					<td><%=sdf.format(q.getWriteday())%></td>
+			
+				<% if(adto.getIdx()==null){%>
+				    <td>대기중</td>
+			    <%}else{%>
+			    	<td>답변완료</td>
+			    <%}%>
+				</tr>
+				
+					
+				<%}%>
+			<%} else { %>
+				
+				<%for(int i = 0 ; i < 5; i ++) { 
+					//답변여부 확인
+				    QnaAnswerDao adao=new QnaAnswerDao();
+				    QnaAnswerDto adto=adao.getAnswer(myQList.get(i).getNum());
+				%>
+				<tr>
+					<td><%=myQList.get(i).getNum() %></td>
+					<td><a href="index.jsp?main=qna/detail.jsp?num=<%=myQList.get(i).getNum()%>"><%=myQList.get(i).getTitle() %></a></td>
+					<td><%=myQList.get(i).getWriteday() %></td>
+			
+				<% if(adto.getIdx()==null){%>
+				    <td>대기중</td>
+			    <%}else{%>
+			    	<td>답변완료</td>
+			    <%}%>
+				</tr>
+				
+				<%}
+				}%>
+				
+				<tr>
+					<td colspan="4" align="right">
+						<button type="button"
+						class="btn btn-light btn-sm"
+						onclick="location.href='index.jsp?main=mypage/myQuestionList.jsp'">더보기</button>
+					</td>
+				
+				</tr>
+				
+			</table>
+			
+		</div>
+	</div>
 </div>
 </body>
 </html>

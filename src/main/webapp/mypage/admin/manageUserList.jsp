@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="member.MemberDto"%>
 <%@page import="java.util.List"%>
 <%@page import="member.MemberDao"%>
@@ -47,10 +48,14 @@
 		   border-radius: 100%;
 		   color: #fff;
 		}
+		.line {
+			text-align: center;
+		}
 	</style>
 </head>
 <body>
 <%
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	MemberDao dao = new MemberDao();
 	List<MemberDto> userList = dao.getAllUserList();//사용하지않고 리스트들 갯수 구하는 용도임.
 
@@ -96,15 +101,15 @@
 			<p style="font-size: 2rem;">회원 리스트</p>
 			<div>
 				<table class="table table-hover">
-					<tr>
-						<td width="80">번호</td>
+					<tr class="line">
+						<td width="60">번호</td>
 						<td>닉네임</td>
 						<td>아이디</td>
-						<td>전화번호</td>
-						<td width="80">주소</td>
+						<td width="150">전화번호</td>
+						<td width="60">주소</td>
 						<td>이메일</td>
 						<td>생성일</td>
-						<td>계정등급</td>
+						<td width="80">계정등급</td>
 						<td align="center">기능버튼</td>
 	
 					</tr>
@@ -115,8 +120,8 @@
 						<td><%=d.getId() %></td>
 						<td><%=d.getHp() %></td>
 						<td><%=d.getAddr() %></td>
-						<td style="word-break: break-all"><%=d.getEmail()%></td>
-						<td><%=d.getCreateDay() %></td>
+						<td style="word-break: break-all"><marquee scrollamount="3"><%=d.getEmail()%></marquee></td>
+						<td><%=sdf.format(d.getCreateDay()) %></td>
 						<%if(d.getAuth() == 1){ %>
 						<td align="center">관리자</td>
 						<%} else {%>
@@ -124,12 +129,12 @@
 						<%} %>
 						<%if(d.getAuth() == 1){ %>
 						<td align="center">
-							<button class="btn btn-sm btn-danger" onclick="location.href='mypage/admin/deleteUser.jsp?num=<%=d.getNum()%>&currentPage=<%=currentPage%>'">삭제</button>
+							<button class="btn btn-sm btn-danger" onclick="funcdel(<%=d.getNum()%>, <%=currentPage%>)">삭제</button>
 						</td>
 						<%} else { %>
 						<td align="center">
-							<button class="btn btn-sm btn-primary" onclick="location.href='mypage/admin/updateAuth.jsp?num=<%=d.getNum()%>&currentPage=<%=currentPage%>'">관리자</button>
-							<button class="btn btn-sm btn-danger" onclick="location.href='mypage/admin/deleteUser.jsp?num=<%=d.getNum()%>&currentPage=<%=currentPage%>'">삭제</button>
+							<button class="btn btn-sm btn-light" onclick="location.href='mypage/admin/updateAuth.jsp?num=<%=d.getNum()%>&currentPage=<%=currentPage%>'">관리자</button>
+							<button class="btn btn-sm btn-light" onclick="funcdel(<%=d.getNum()%>, <%=currentPage%>)">삭제</button>
 						</td>
 						<%} %>
 					</tr>
@@ -165,5 +170,14 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	function funcdel(num, currentPage){
+		var a = confirm("삭제하려면 확인버튼을 눌러주세요.");
+		if(a) {
+			location.href = "mypage/admin/deleteUser.jsp?num=" + num + "&currentPage=" + currentPage;
+		}
+	}
+</script>
 </body>
 </html>

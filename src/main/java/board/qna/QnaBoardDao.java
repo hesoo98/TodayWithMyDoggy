@@ -366,4 +366,70 @@ public class QnaBoardDao {
 		
 		return list;
 	}
+	
+	//관리자 페이지에서 답변하지 않은 Q&A 질문만 가져옴
+	public List<QnaBoardDto> getAnswerPendingQList(){
+		List<QnaBoardDto> list=new ArrayList<QnaBoardDto>();
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+	
+		String sql = "select * from qna_board where num not in (select board_num from qna_answer)";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				QnaBoardDto dto=new QnaBoardDto();
+				dto.setNum(rs.getString("num"));
+				dto.setId(rs.getString("id"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setReadcount(rs.getInt("readcount"));
+				dto.setSecret(rs.getString("secret"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
+	}
+	
+	//관리자 페이지에서 답변하지 않은 Q&A 질문만 가져옴 페이징 처리한 메서드
+		public List<QnaBoardDto> getAnswerPendingQList(int start,int perpage){
+			List<QnaBoardDto> list=new ArrayList<QnaBoardDto>();
+			
+			Connection conn=db.getConnection();
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+		
+			String sql = "select * from qna_board where num not in (select board_num from qna_answer) order by num desc limit ?,?";
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, perpage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					QnaBoardDto dto=new QnaBoardDto();
+					dto.setNum(rs.getString("num"));
+					dto.setId(rs.getString("id"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContent(rs.getString("content"));
+					dto.setWriteday(rs.getTimestamp("writeday"));
+					dto.setReadcount(rs.getInt("readcount"));
+					dto.setSecret(rs.getString("secret"));
+					list.add(dto);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+			}
+			return list;
+		}
 }

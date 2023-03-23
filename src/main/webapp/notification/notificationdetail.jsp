@@ -20,6 +20,9 @@
 	// 클릭한 제목의 데이터 가져오기
 	NotificationDto dto = dao.getData(num);
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+	// 관리자 계정인지?
+	String isAdmin = (String)session.getAttribute("isAdmin");
 
 %>
 <div class="container">
@@ -45,9 +48,14 @@
 			<tr>
 				<td align="right">
 				<!-- 이 부분은 관리자 계정일때만 보여야 함 -->
+				
+				<%if(isAdmin.equals("1")) { %>
 					<button type="button" class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=notification/updateform.jsp?num=<%=dto.getNum()%>'"><span class="glyphicon glyphicon-edit"></span>수정</button>
 					<button type="button" class="btn btn-default border border-secondary" onclick="funcdel()"><span class="glyphicon glyphicon-remove"></span>삭제</button>
 					<button type="button" class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=notification/notificationlist.jsp'"><span class="glyphicon glyphicon-list"></span>목록</button>
+				<%} else if(isAdmin.equals("0")) {%>
+				
+				<%}%>
 				</td>
 			</tr>
 		</table>
@@ -57,7 +65,7 @@
 	
 <script type="text/javascript">
 	function funcdel(){
-		var a = confirm("삭제하려면 확인 누르시오");
+		var a = confirm("삭제하려면 확인버튼을 눌러주세요.");
 		if(a) {
 			location.href = "notification/delete.jsp?num=" + <%=dto.getNum()%>;
 		}
