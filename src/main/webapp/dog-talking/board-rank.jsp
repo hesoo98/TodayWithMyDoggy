@@ -164,14 +164,27 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="img-box"
 									style="width: 25px; height: 25px; border-radius: 70%; overflow: hidden; float: left; margin-right: 2px;">
-									<img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>"
-										id="profile-img" style="width: 100%; height: 100%">
+									
+									<%if(proDto.getIdx()==null){%>
+					
+									<div style="background-color:#d9e4f4;
+									text-align: center;line-height: 25px;">
+										<%=memberdao.getNickname(memberId) %>
+									</div>
+								
+									<%}else{%>
+										
+											<img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>"
+												id="profile-img" style="width: 100%; height: 100%">
+									<%}
+									%>
+									
 								</div>
 								<div
 									style="float: left; padding-top: 5px; font-size: 10px; color: gray">
-									<%=memberdto.getNickname()%>님 &emsp;&emsp; 
-									<i class="fa-regular fa-eye"></i><%=dto.getReadCount()%>
-									&nbsp;<i class="fa-regular fa-comment-dots"></i><%=totalAnswerCnt%>
+									<%=memberdto.getNickname()%> &emsp;&emsp; 
+									<i class="fa-solid fa-paw"></i><%=dto.getReadCount()%>
+									&nbsp;<i class="fa-regular fa-heart"></i><%=totalAnswerCnt%>
 								</div>
 								<br>
 

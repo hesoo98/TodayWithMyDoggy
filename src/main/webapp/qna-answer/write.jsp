@@ -29,16 +29,16 @@ QnaBoardDto dto=dao.getData(num);
    <div class="container wrapper">
    <form action="qna-answer/writeaction.jsp" method="post">
    <span>문의 내용</span>
-   <table class="table table-bordered" style="width: 800px;">
+   <table class="table" style="width: 100%;">
        <input type="hidden" name="num" value="<%=dto.getNum()%>">
        <tr>
        	<td width="100">제목</td>
-       	<td><%=dto.getTitle() %></td>
+       	<td colspan="2"><%=dto.getTitle() %></td>
        </tr>
        
        <tr>
        	<td width="100">내용</td>
-       	<td><%=dto.getContent() %></td>
+       	<td colspan="2"><%=dto.getContent() %></td>
        </tr>
        
        <tr>
@@ -49,8 +49,8 @@ QnaBoardDto dto=dao.getData(num);
        </tr>
        
        <tr>
-         <td colspan="2" align="center">
-           <button type="submit">제출하기</button>
+         <td colspan="3" align="center">
+           <button type="submit" class="btn btn-light">제출하기</button>
          </td>
        </tr>
        
