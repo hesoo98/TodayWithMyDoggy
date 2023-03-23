@@ -123,13 +123,26 @@ int msgCnt=mdao.getUnreadCount(myid);
 				DogProfileDto proDto = proDao.getMyMainDog(memberNum);
 
 				String proPhoto = proDto.getPhoto();
+				
+				if(proDto.getIdx()==null){%>
+					
+					<div class="img-box" 
+					style="width: 35px; height: 35px; background-color:#d9e4f4; border-radius: 70%; 
+					overflow: hidden; float: left; margin-right: 2px; margin-top: 10px;
+					text-align: center;line-height: 35px;">
+						<%=dao.getNickname(myid) %>
+					</div>
+				
+				<%}else{%>
+					
+					<div class="img-box"
+						style="width: 35px; height: 35px; border-radius: 70%; overflow: hidden; float: left; margin-right: 2px; margin-top: 10px;">
+						<img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>"
+							id="profile-img" style="width: 100%; height: 100%">
+					</div>
+				<%}
 				%>
-
-				<div class="img-box"
-					style="width: 35px; height: 35px; border-radius: 70%; overflow: hidden; float: left; margin-right: 2px; margin-top: 10px;">
-					<img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>"
-						id="profile-img" style="width: 100%; height: 100%">
-				</div>
+				
 				<i class="fa-solid fa-caret-down fa-rotate-270"
 					style="margin-left: 30px; cursor: pointer;"></i>
 

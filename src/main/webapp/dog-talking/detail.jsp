@@ -239,7 +239,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					  <span id="my-comment" style="float: left;">&nbsp;내댓글</span>
 					  
 		          <div class="btn-box">
-				      <a class="a-tag" id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>" href="">수정버튼</a>
+				      <a class="a-tag" id="btn-comment-mod" idx="<%=dogAnswer.getIdx() %>" href="">수정</a>
 				      <a class="a-tag" id="btn-comment-del" idx="<%=dogAnswer.getIdx() %>" href="dog-talking/deleteanswer.jsp?idx=<%=adto.getIdx()%>">삭제</a>
 		          </div>
 				  <%}
