@@ -17,14 +17,14 @@ p {
 }
 
 a, a:link, a:visited, a:active {
-	color: #3ca9e2;
+	color:black;
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 }
 
 a:focus, a:hover, a:link:focus, a:link:hover, a:visited:focus, a:visited:hover,
 	a:active:focus, a:active:hover {
-	color: #329dd5;
+	color: rgb(0, 0, 0);
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 }
@@ -70,7 +70,7 @@ input[type="text"], input[type="password"] {
 }
 
 input[type="text"]:focus, input[type="password"]:focus {
-	border-color: #3ca9e2;
+	border-color: rgb(0, 0, 0);
 }
 
 input[type="text"]:focus:invalid, input[type="password"]:focus:invalid {
@@ -126,7 +126,7 @@ input[type="submit"] {
 	height: 50px;
 	border: none;
 	display: block;
-	background-color: #3ca9e2;
+	background-color: rgb(0, 0, 0);
 	color: #fff;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -142,7 +142,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-	background-color: #329dd5;
+	background-color: rgb(0, 0, 0);
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 }
