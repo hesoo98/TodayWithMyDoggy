@@ -8,22 +8,27 @@
 <head>
 	<meta charset="utf-8">
 	<title>Insert title here</title>
+	<link rel="stylesheet" href="css/page.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="css/page.css">
 	<style type="text/css">
 		td {
 			word-break:breack-all;
 		}
-
 	</style>
 </head>
 <body>
 <%
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String searchField = request.getParameter("searchField");
+	String searchText = request.getParameter("searchText");
+	if(searchText != null) {
+		searchText = new String(searchText.getBytes("8859_1"), "UTF-8");
+	}
+
 	MemberDao dao = new MemberDao();
-	List<MemberDto> userList = dao.getAllUserList();//사용하지않고 리스트들 갯수 구하는 용도임.
+	List<MemberDto> userList = dao.getUserSearch(searchField, searchText);
 
 	int totalCount;		// 총개수
 	int totalPage;		// 총페이지수
@@ -58,7 +63,7 @@
 	//각페이지에서 불러올 시작번호
 	start = (currentPage - 1) * perPage;
 	//각페이지에서 필요한 게시글 가져오기
-	List<MemberDto> list = dao.selectPageingUserList(start, perPage);
+	List<MemberDto> list = dao.getUserSearch(start, perPage, searchField, searchText);
 	
 %>
 
@@ -67,10 +72,10 @@
 			<p style="font-size: 2rem;"><a style="color: black;"href="index.jsp?main=mypage/admin/manageUserList.jsp">회원 리스트</a></p>
 			
 			<!-- 검색 폼 -->
-			<form method="post" name="search" action="index.jsp?main=mypage/admin/userSearch.jsp">
+			<form method="post" name="search" action=''>
 				<table class="float-right" style="margin-bottom: 30px;">
 					<tr>
-						<td style="padding-right: 10px;">
+						<td  style="padding-right: 10px;">
 							<select class="form-control" name="searchField">
 								<option value="0">선택</option>
 								<option value="id">아이디</option>

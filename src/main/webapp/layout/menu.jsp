@@ -40,6 +40,28 @@
 	top: 10px;
 }
 
+@keyframes notificationAnimation {
+  0% {
+    transform: none;
+  }
+  50% {
+    transform: translateY(-5px) rotateY(360deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.msgCnt:hover {
+  animation: notificationAnimation 2s ease-in-out infinite;
+}
+
+.id-bar{
+	 padding-top: 20px; 
+	 font-size: 11px;
+	 margin-left: -5px;
+}
+
 </style>
 
 <%
@@ -98,7 +120,7 @@ int msgCnt=mdao.getUnreadCount(myid);
 					href="<%=root%>/index.jsp?main=notification/notificationlist.jsp"><i
 						class="notificationBoard"></i>공지사항</a></li>
 
-				<%
+				<% //로그인 안한 경우
 				if (loginok == null) {
 				%>
 				<li class="nav-item"><a class="nav-link"
@@ -107,82 +129,93 @@ int msgCnt=mdao.getUnreadCount(myid);
 					href="<%=root%>/index.jsp?main=signup/terms.jsp"><i class=""></i>회원가입</a>
 				</li>
 				<%
-				} else {
+				} else { //로그인 한 경우
 				%>
-
-				<a href="index.jsp?main=message/list.jsp"
-					style="width: 25px; padding-top: 15px; margin-left: 100px;">
-					<i class="fa-solid fa-envelope"
-					style="color: #5b5b5b; font-size: 25px"></i>
-				</a>
-					<span class="msgCnt"><%=msgCnt %></span>
-				<%
-				String memberNum = dao.getNum(myid);
-
-				DogProfileDao proDao = new DogProfileDao();
-				DogProfileDto proDto = proDao.getMyMainDog(memberNum);
-
-				String proPhoto = proDto.getPhoto();
-				
-				if(proDto.getIdx()==null){%>
 					
-					<div class="img-box" 
-					style="width: 35px; height: 35px; background-color:#d9e4f4; border-radius: 70%; 
-					overflow: hidden; float: left; margin-right: 2px; margin-top: 10px;
-					text-align: center;line-height: 35px;">
-						<%=dao.getNickname(myid) %>
-					</div>
-				
-				<%}else{%>
+					<!-- 쪽지함 표시 -->
+					<a href="index.jsp?main=message/list.jsp"
+						style="width: 25px; padding-top: 15px; margin-left: 100px;">
+						<i class="fa-solid fa-envelope"
+						style="color: #5b5b5b; font-size: 25px"></i>
+					</a>
+						<span class="msgCnt"><%=msgCnt %></span>
+					<%
+					String memberNum = dao.getNum(myid);
+	
+					DogProfileDao proDao = new DogProfileDao();
+					DogProfileDto proDto = proDao.getMyMainDog(memberNum);
+	
+					String proPhoto = proDto.getPhoto();
 					
-					<div class="img-box"
-						style="width: 35px; height: 35px; border-radius: 70%; overflow: hidden; float: left; margin-right: 2px; margin-top: 10px;">
-						<img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>"
-							id="profile-img" style="width: 100%; height: 100%">
-					</div>
-				<%}
-				%>
+					if(proDto.getIdx()==null){ //로그인 + 강아지 정보 없음%>
+						
+						<div class="img-box" 
+						style="width: 35px; height: 35px; background-color:#d9e4f4; border-radius: 70%; 
+						overflow: hidden; float: left; margin-right: 2px; margin-top: 10px;
+						text-align: center;line-height: 35px;">
+							<%=dao.getNickname(myid) %>
+						</div>
+					
+					<%}else{ //로그인 + 강아지 정보 있음%>
+						
+						<div class="img-box"
+							style="width: 35px; height: 35px; border-radius: 70%; overflow: hidden; float: left; margin-right: 2px; margin-top: 10px;">
+							<img src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>"
+								id="profile-img" style="width: 100%; height: 100%">
+						</div>
+					<%}
+					%>
+					
+					<i class="fa-solid fa-caret-down fa-rotate-270"
+						style="margin-left: 30px; cursor: pointer;"></i>
+	
+						<%
+						if (loginok == null) { //로그아웃 상태
+							
+						%>
+						<!-- 로그인 하지 않았을경우 관리자,마이페이지 안보이게 -->
+						<%
+						} else if (loginok != null && isAdmin.equals("0")) { //로그인 + 일반회원
+						%>
+						<div class="id-bar">
+						<%=myid %>님 안녕하세요
+						</div>
+						
+						<div class="profile-bar">
+						<i class="fa-solid fa-user"
+							style="color: #494949; cursor: pointer;"
+							onclick="location.href='mypage/userMyPage.jsp'"> </i> <span
+							style="font-size: 11px; cursor: pointer;"
+							onclick="location.href='index.jsp?main=mypage/userMyPage.jsp'">마이페이지 </span> <i
+							class="fa-solid fa-right-from-bracket"
+							style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
+							onclick="location.href='login/logoutaction.jsp'"> </i> <span
+							style="font-size: 11px; padding-bottom: 5px; cursor: pointer;"
+							onclick="location.href='login/logoutaction.jsp'">로그아웃 </span>
+						</div>
+						<%
+						} else { //로그인 + 관리자
+						%>
+						<div class="id-bar">
+						관리자님 안녕하세요
+						</div>
+						
+						<div class="profile-bar">
+						<i class="fa-solid fa-user"
+							style="color: #494949; cursor: pointer;"
+							onclick="location.href='mypage/userMyPage.jsp'"> </i> <span
+							style="font-size: 11px; cursor: pointer;"
+							onclick="location.href='index.jsp?main=mypage/adminMyPage.jsp'">관리자페이지 </span> <i
+							class="fa-solid fa-right-from-bracket"
+							style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
+							onclick="location.href='login/logoutaction.jsp'"> </i> <span
+							style="font-size: 11px; padding-bottom: 5px; cursor: pointer;"
+							onclick="location.href='login/logoutaction.jsp'">로그아웃 </span>
+							</div>
+						<%
+						}
+						%>
 				
-				<i class="fa-solid fa-caret-down fa-rotate-270"
-					style="margin-left: 30px; cursor: pointer;"></i>
-
-				<div class="profile-bar">
-
-					<%
-					if (loginok == null) {
-					%>
-					<!-- 로그인 하지 않았을경우 관리자,마이페이지 안보이게 -->
-					<%
-					} else if (loginok != null && isAdmin.equals("0")) {
-					%>
-					<i class="fa-solid fa-user"
-						style="color: #494949; cursor: pointer;"
-						onclick="location.href='mypage/userMyPage.jsp'"> </i> <span
-						style="font-size: 11px; cursor: pointer;"
-						onclick="location.href='index.jsp?main=mypage/userMyPage.jsp'">마이페이지 </span> <i
-						class="fa-solid fa-right-from-bracket"
-						style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
-						onclick="location.href='login/logoutaction.jsp'"> </i> <span
-						style="font-size: 11px; padding-bottom: 5px; cursor: pointer;"
-						onclick="location.href='login/logoutaction.jsp'">로그아웃 </span>
-					<%
-					} else {
-					%>
-
-					<i class="fa-solid fa-user"
-						style="color: #494949; cursor: pointer;"
-						onclick="location.href='mypage/userMyPage.jsp'"> </i> <span
-						style="font-size: 11px; cursor: pointer;"
-						onclick="location.href='index.jsp?main=mypage/adminMyPage.jsp'">관리자페이지 </span> <i
-						class="fa-solid fa-right-from-bracket"
-						style="color: #cc0000; padding-top: 20px; margin-left: 15px; cursor: pointer;"
-						onclick="location.href='login/logoutaction.jsp'"> </i> <span
-						style="font-size: 11px; padding-bottom: 5px; cursor: pointer;"
-						onclick="location.href='login/logoutaction.jsp'">로그아웃 </span>
-					<%
-					}
-					%>
-				</div>
 				<%
 				}
 				%>
@@ -194,6 +227,8 @@ int msgCnt=mdao.getUnreadCount(myid);
 	$(".profile-bar").hide();
 	$(".fa-caret-down").click(function() {
 		$(".profile-bar").toggle()
+		$(".id-bar").toggle()
+		
 	});
 </script>
 <script src="https://kit.fontawesome.com/2663817d27.js"
