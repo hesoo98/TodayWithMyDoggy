@@ -92,15 +92,6 @@ td:not(.table-title), tr{
     		}
     		
     		$(document).ready(function () {
-    			 
-    			   // 1. 특정 위치에서 부터 버튼 나타고, 사라지게..효과는 fade로
-    			    $(window).scroll(function () {
-    					if ($(this).scrollTop() > 200) {
-    						$('.go-top').fadeIn(200);
-    					} else {
-    						$('.go-top').fadeOut(200);
-    					}
-    				});
 
     				// 2. 버튼 클릭하면 원하는 위치로 이동
     				$('.go-top').click(function (event) {
@@ -186,7 +177,7 @@ td:not(.table-title), tr{
 	
 	
    <div style=" margin: 20px 200px 20px 200px; width: 800px;" id="abc" >
-   
+     <span> | 같이 걸어요 | </span><br>
      <b>총 <%=totalCount %>개의 글이 있습니다</b>
      <button id="togglecheckbutton" class="btn btn-default btn-sm">지역 보기</button>
     <form id="togglecheck" style="visibility: hidden">
@@ -229,7 +220,7 @@ td:not(.table-title), tr{
     
    <table style="width: 800px; table-layout: fixed;" class="table" id="sort" >
    <tr>
-   	<td width="100" align="center">번호</td>
+   	<td width="100" style="text-align: left">번호</td>
    	<td width="100">지역</td>
    	<td width="200">제목</td>
    	<td width="100">작성자</td>
@@ -255,7 +246,7 @@ td:not(.table-title), tr{
 				
 				
 				<tr id="posts" class="post <%=memDto.getAddr()%>" style="width:800px;">
-					<td align="center" width="100">
+					<td align="center" width="100" style="text-align: left">
 						<input type="checkbox" class="alldel" value="<%=dto.getNum()%>">
 						&nbsp;&nbsp;
 						<%=no-- %>
@@ -265,7 +256,7 @@ td:not(.table-title), tr{
 						<%=memDto.getAddr()%>
 					</td>
 					
-					<td class="table-title" width="100" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+					<td class="table-title" width="100" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; text-align: left">
 						<a class="sublink" href="index.jsp?main=dog-friend/detail.jsp?num=<%=dto.getNum() %>&currentPage=<%=currentPage%>">
 						<%=dto.getSubject() %></a>
 
@@ -308,7 +299,7 @@ td:not(.table-title), tr{
      <%}else if(loginok==null){%>
   			<tr>
   				<td colspan="6">
-    	 		<input type="checkbox" class="alldelcheck">전체선택
+    	 		<div style="float:left"><input type="checkbox" class="alldelcheck"> 전체선택</div>
 					<button type="button" class="btn btn-default btn-sm" style="float:right"
 					onclick="alert('로그인 후 이용해주세요')"><span class="glyphicon glyphicon-pencil" ></span>글쓰기</button>
 				</td>
