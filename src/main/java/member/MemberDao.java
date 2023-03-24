@@ -467,9 +467,11 @@ public class MemberDao {
 			ResultSet rs = null;
 			
 			String sql = "select * from member WHERE "+searchField.trim();
-			
 			if(searchText != null && !searchText.equals("") ){
                 sql +=" LIKE '%"+searchText.trim()+"%' order by num desc limit ?,?";
+            } else {
+            	sql = "";
+            	return new ArrayList<>();
             }
 			try {
 				pstmt = conn.prepareStatement(sql);

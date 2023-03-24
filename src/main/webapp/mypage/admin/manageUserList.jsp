@@ -11,46 +11,12 @@
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/page.css">
 	<style type="text/css">
-	
 		td {
 			word-break:breack-all;
 		}
-	
-	
-		/* 페이지 */
-		.pagination{
-		  padding: 30px 0;
-		}
-		
-		.pagination ul{
-		  margin: 0;
-		  padding: 0;
-		  list-style-type: none;
-		}
-		
-		.pagination a{
-		  display: inline-block;
-		  padding: 10px 18px;
-		  color: #222;
-		}
-		
-		.p1 a{
-		  width: 40px;
-		  height: 40px;
-		  line-height: 40px;
-		  padding: 0;
-		  text-align: center;
-		}
-		
-		.p1 li.active{
-		   background-color: #fce694;
-		   border-radius: 100%;
-		   color: #fff;
-		}
-		.line {
-			text-align: center;
-		}
+
 	</style>
 </head>
 <body>
@@ -98,13 +64,13 @@
 
 	<div class="container" style="display: flex; justify-content: center;">
 		<div style=" margin-top: 50px; width: 1100px;">
-			<p style="font-size: 2rem;">회원 리스트</p>
+			<p style="font-size: 2rem;"><a style="color: black;"href="index.jsp?main=mypage/admin/manageUserList.jsp">회원 리스트</a></p>
 			
 			<!-- 검색 폼 -->
 			<form method="post" name="search" action="index.jsp?main=mypage/admin/userSearch.jsp">
-				<table class="float-right">
+				<table class="float-right" style="margin-bottom: 30px;">
 					<tr>
-						<td>
+						<td style="padding-right: 10px;">
 							<select class="form-control" name="searchField">
 								<option value="0">선택</option>
 								<option value="id">아이디</option>
@@ -113,10 +79,10 @@
 								<option value="addr">주소</option>
 							</select>
 						</td>
-						<td>
+						<td style="padding-right: 10px;">
 							<input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100">
 						</td>
-						<td><button type="submit" class="btn btn-light">검색</button></td>
+						<td><button type="submit" class="btn btn-light btn-sm">검색</button></td>
 					</tr>
 
 				</table>

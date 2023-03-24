@@ -9,40 +9,11 @@
 <head>
 	<meta charset="utf-8">
 	<title>Insert title here</title>
+	<link rel="stylesheet" href="css/page.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
 	<style type="text/css">
-		/* 페이지 */
-		.pagination{
-		  padding: 30px 0;
-		}
-		
-		.pagination ul{
-		  margin: 0;
-		  padding: 0;
-		  list-style-type: none;
-		}
-		
-		.pagination a{
-		  display: inline-block;
-		  padding: 10px 18px;
-		  color: #222;
-		}
-		
-		.p1 a{
-		  width: 40px;
-		  height: 40px;
-		  line-height: 40px;
-		  padding: 0;
-		  text-align: center;
-		}
-		
-		.p1 li.active{
-		   background-color: #fce694;
-		   border-radius: 100%;
-		   color: #fff;
-		}
 	</style>
 </head>
 <body>
@@ -88,7 +59,7 @@
 		<div style="flex-direction: column; margin-top: 50px;">
 			<p style="font-size: 2rem;">질문 리스트</p>
 			<div class="" style="width: 1100px; display: flex; flex-direction: column;">
-				<table class="table table-hover">
+				<table class="table">
 					<tr>
 						<td width="80">번호</td>
 						<td>아이디</td>
