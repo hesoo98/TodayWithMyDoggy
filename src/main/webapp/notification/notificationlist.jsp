@@ -95,7 +95,7 @@
 	      	<div class="tableWrapper">
 				<table class="table">
 					<%
-					SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
 					NotificationDao dao = new NotificationDao();
 					%>
 					

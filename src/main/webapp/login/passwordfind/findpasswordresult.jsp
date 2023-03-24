@@ -54,11 +54,11 @@ MemberDto dto= dao.getMemeber(id);
  %>
         <div class = "container">
       	<div class = "found-fail">
-	      등록된 정보가 없습니다
+	      등록된 정보가 없습니다.
 	     </div>
 	     <div class = "found-login">
- 		    <input type="button" id="btnback" value="다시 찾기" onclick="history.back()"/>
- 		    <input type="button" id="btnjoin" value="회원가입" onclick="location.href='index.jsp?main=signup/terms.jsp'"/>
+ 		    <input type="button" id="btnback" class="btn btn-default" value="다시 찾기" onclick="history.back()"/>
+ 		    <input type="button" id="btnjoin" class="btn btn-default" value="회원가입" onclick="location.href='index.jsp?main=signup/terms.jsp'"/>
        	</div>
        </div>
        

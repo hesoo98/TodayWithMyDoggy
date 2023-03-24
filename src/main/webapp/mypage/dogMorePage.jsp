@@ -70,17 +70,17 @@
 				<%} else { 
 					DogProfileDto dto = dogDao.getMyMainDog(member_num);
 				%>
-				<div class="row">
+				<div class="row" style="">
 					<div class="col-5" style="margin:0 auto;">
 						<div class="col" style="position: absolute;">
 							<i class="fa-solid fa-crown fa-2x" style="text-align: center;"></i>
 						</div>
 						<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 					</div>
-					<div class="col">
+					<div class="col" style="padding-top: 20px;">
 						<button style="float: right;" class="btn btn-sm btn-light" onclick="location.href='index.jsp?main=mypage/updateDogProfile.jsp?idx=<%=dto.getIdx()%>'">강아지 프로필 수정</button>
-						<span>강아지이름 : <%=dto.getName() %></span><br>
-						<span>강아지성별 : </span>
+						<span>이름 : <%=dto.getName() %></span><br>
+						<span>성별 : </span>
 						<% if(dto.getGender().equals("암")) { %>
 							<i class="fa-solid fa-venus"></i>
 						<%} else if(dto.getGender().equals("수")) {%>
@@ -89,9 +89,9 @@
 							<i class="fa-solid fa-venus-mars"></i>
 						<%}%>
 						<br>
-						<span>강아지크기 : <%=dto.getDogSize() %></span><br>
-						<span>강아지생일 : <%=dto.getBirthday() %></span><br>
-						<span>강아지사진 : <%=dto.getPhoto() %></span><br>
+						<span>크기 : <%=dto.getDogSize() %></span><br>
+						<span>생일 : <%=dto.getBirthday() %></span><br>
+						<span>사진 : <%=dto.getPhoto() %></span><br>
 					</div>
 					
 				</div>
@@ -104,14 +104,14 @@
 			<%for (DogProfileDto dto: myNotMainDogList){
 				if (dto.getMainDog() == 0) {%>
 					
-				<div class="row" style="margin-top:50px;margin-bottom: 50px;">
+				<div class="row" style="margin-top:75px;margin-bottom: 75px; ">
 					<div class="col-5" style="margin:0 auto;">
 						<img class="mx-auto d-block"src="/TodayWithMyDoggy/mypage/dogImg/<%=dto.getPhoto()%>" id="dogprofile">
 					</div>
-					<div class="col">
+					<div class="col" style="padding-top: 20px;">
 						<button style="float: right;" class="btn btn-sm btn-light" onclick="location.href='index.jsp?main=mypage/updateDogProfile.jsp?idx=<%=dto.getIdx()%>'">강아지 프로필 수정</button>
-						<span>강아지이름 : <%=dto.getName() %></span><br>
-						<span>강아지성별 : </span>
+						<span>이름 : <%=dto.getName() %></span><br>
+						<span>성별 : </span>
 						<% if(dto.getGender().equals("암")) { %>
 							<i class="fa-solid fa-venus"></i>
 						<%} else if(dto.getGender().equals("수")) {%>
@@ -120,9 +120,9 @@
 							<i class="fa-solid fa-venus-mars"></i>
 						<%}%>
 						<br>
-						<span>강아지크기 : <%=dto.getDogSize() %></span><br>
-						<span>강아지생일 : <%=dto.getBirthday() %></span><br>
-						<span>강아지사진 : <%=dto.getPhoto() %></span><br>
+						<span>크기 : <%=dto.getDogSize() %></span><br>
+						<span>생일 : <%=dto.getBirthday() %></span><br>
+						<span>사진 : <%=dto.getPhoto() %></span><br>
 					</div>
 				</div>
 				

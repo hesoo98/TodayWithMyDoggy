@@ -73,8 +73,14 @@
 								<td width="50">아이디</td>
 								<td width="30">주소</td>
 							</tr>
-							
-					<%if(userList.size() < 8) {%>
+					<%if(userList.size() == 0) { %>
+						<tr>
+							<td colspan="4" align="center">
+								<h3>등록된 유저가 없습니다.</h3>
+							</td>
+						</tr>
+						
+					<%} else if(userList.size() < 8) {%>
 						<%for(MemberDto m : userList) {%>
 							<tr><%=m.getNum() %></tr>
 							<tr><%=m.getNickname() %></tr>
@@ -110,8 +116,14 @@
 								<td width="100">작성자</td>
 								<td>제목</td>
 							</tr>
-							
-						<%if(qnaList.size() < 8) { %>
+						<%if(qnaList.size() == 0) { %>
+							<tr>
+								<td colspan="3" align="center">
+									<h3>등록된 질문글이 없습니다.</h3>
+								</td>
+							</tr>
+						
+						<%} else if(qnaList.size() < 8) { %>
 							<%for(QnaBoardDto q : qnaList) {
 							//닉네임설정
 							String nickname = mdao.getNickname(q.getId());%>

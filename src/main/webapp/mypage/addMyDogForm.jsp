@@ -15,7 +15,7 @@
 			border:1px solid black;
 		}
 		#dogprofile {
-			border:1px solid gray;
+			border:1px solid #EDEDED;
 			border-radius: 200px;
 			width:200px;
 			height:200px;

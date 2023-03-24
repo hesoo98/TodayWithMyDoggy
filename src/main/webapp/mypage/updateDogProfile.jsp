@@ -99,7 +99,7 @@
 				<table class="table table-borderless align-middle">
 					<tr>
 						<td style="text-align:right;">
-							강아지 이름 &nbsp;&nbsp;&nbsp;
+							이름 &nbsp;&nbsp;&nbsp;
 						</td>
 						<td>
 							<input type="text" name="name" class="form-control" style="width:200px;" placeholder="강아지 이름 입력" required="required" value="<%=dogDto.getName()%>">
