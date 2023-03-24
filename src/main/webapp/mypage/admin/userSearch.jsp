@@ -56,8 +56,14 @@
 <body>
 <%
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String searchField = request.getParameter("searchField");
+	String searchText = request.getParameter("searchText");
+	if(searchText != null) {
+		searchText = new String(searchText.getBytes("8859_1"), "UTF-8");
+	}
+
 	MemberDao dao = new MemberDao();
-	List<MemberDto> userList = dao.getAllUserList();//사용하지않고 리스트들 갯수 구하는 용도임.
+	List<MemberDto> userList = dao.getUserSearch(searchField, searchText);
 
 	int totalCount;		// 총개수
 	int totalPage;		// 총페이지수
@@ -92,16 +98,16 @@
 	//각페이지에서 불러올 시작번호
 	start = (currentPage - 1) * perPage;
 	//각페이지에서 필요한 게시글 가져오기
-	List<MemberDto> list = dao.selectPageingUserList(start, perPage);
+	List<MemberDto> list = dao.getUserSearch(start, perPage, searchField, searchText);
 	
 %>
 
 	<div class="container" style="display: flex; justify-content: center;">
 		<div style=" margin-top: 50px; width: 1100px;">
-			<p style="font-size: 2rem;">회원 리스트</p>
+			<p style="font-size: 2rem;"><a href="index.jsp?main=mypage/admin/manageUserList.jsp">회원 리스트</a></p>
 			
 			<!-- 검색 폼 -->
-			<form method="post" name="search" action="index.jsp?main=mypage/admin/userSearch.jsp">
+			<form method="post" name="search" action=''>
 				<table class="float-right">
 					<tr>
 						<td>
