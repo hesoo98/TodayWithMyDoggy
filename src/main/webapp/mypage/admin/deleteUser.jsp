@@ -6,6 +6,6 @@
 
 	MemberDao dao = new MemberDao();
 	dao.deleteUser(num);
-	System.out.println("삭제들어옴");
+	//System.out.println("삭제들어옴");
 	response.sendRedirect("../../index.jsp?main=mypage/admin/manageUserList.jsp?currentPage=" + currentPage);
 %>

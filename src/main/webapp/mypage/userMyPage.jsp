@@ -150,10 +150,10 @@
 			</div>
 			<table class="table" style="width: 800px; margin: 0 auto;">
 				<tr>
-					<td width="60">번호</td>
+					<td align="center" width="60">번호</td>
 					<td width="500">제목</td>
-					<td>날짜</td>
-					<td>답변 유무</td>
+					<td align="center">날짜</td>
+					<td align="center">답변 유무</td>
 				</tr>
 				
 				
@@ -164,14 +164,14 @@
 				    QnaAnswerDto adto=adao.getAnswer(q.getNum());
 					%>
 				<tr>
-					<td><%=q.getNum() %></td>
+					<td align="center"><%=q.getNum() %></td>
 					<td><a style="color:black;"href="index.jsp?main=qna/detail.jsp?num=<%=q.getNum()%>"><%=q.getTitle() %></a></td>
 					<td><%=sdf.format(q.getWriteday())%></td>
 			
 				<% if(adto.getIdx()==null){%>
-				    <td>대기중</td>
+				    <td align="center">대기중</td>
 			    <%}else{%>
-			    	<td>답변완료</td>
+			    	<td align="center">답변완료</td>
 			    <%}%>
 				</tr>
 				
@@ -185,14 +185,14 @@
 				    QnaAnswerDto adto=adao.getAnswer(myQList.get(i).getNum());
 				%>
 				<tr>
-					<td><%=myQList.get(i).getNum() %></td>
-					<td><a href="index.jsp?main=qna/detail.jsp?num=<%=myQList.get(i).getNum()%>"><%=myQList.get(i).getTitle() %></a></td>
-					<td><%=myQList.get(i).getWriteday() %></td>
+					<td align="center"><%=myQList.get(i).getNum() %></td>
+					<td><a style="color: black;" href="index.jsp?main=qna/detail.jsp?num=<%=myQList.get(i).getNum()%>"><%=myQList.get(i).getTitle() %></a></td>
+					<td><%=sdf.format(myQList.get(i).getWriteday()) %></td>
 			
 				<% if(adto.getIdx()==null){%>
-				    <td>대기중</td>
+				    <td align="center">대기중</td>
 			    <%}else{%>
-			    	<td>답변완료</td>
+			    	<td align="center">답변완료</td>
 			    <%}%>
 				</tr>
 				

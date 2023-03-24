@@ -133,11 +133,13 @@
 							</tr>
 							<%}%>
 						<%} else {%>
-							<%for(int i = 0 ; i < 8 ; i ++) { %>
+							<%for(int i = 0 ; i < 8 ; i ++) { 
+							//닉네임설정
+							String nickname = mdao.getNickname(qnaList.get(i).getId());%>
 							<tr>
 								<td><%=qnaList.get(i).getNum() %></td>
-								<td><%=qnaList.get(i).getNum() %></td>
-								<td style='width:350px;overflow:hidden;text-overflow:ellipsis;'><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=qnaList.get(i).getNum()%>"><%=qnaList.get(i).getNum() %></a></td>
+								<td><%=nickname %></td>
+								<td style='width:350px;overflow:hidden;text-overflow:ellipsis;'><a class="a-tag" href="index.jsp?main=qna/detail.jsp?num=<%=qnaList.get(i).getNum()%>"><%=qnaList.get(i).getTitle() %></a></td>
 							</tr>
 							<%}%>
 						<%}%>
