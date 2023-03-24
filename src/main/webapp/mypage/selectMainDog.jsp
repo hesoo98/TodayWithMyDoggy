@@ -55,7 +55,7 @@
 %>
 
 	<div class="container" >
-		<p style="font-size: 2rem;">대표 강아지 선택 페이지</p>
+		<p> | 대표 강아지 선택 | </p>
 		<div style="width: 950px;">
 		<%for (DogProfileDto dto: myDogList) {%>
 			<div class="box">

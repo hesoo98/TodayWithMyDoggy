@@ -42,7 +42,7 @@
 </head>
 <body>
 	<div class="container main">
-		<p style="font-size: 2rem;">강아지 추가 폼</p>
+		<p>| 강아지 추가 | </p>
 	
 		<div style="width:800px; margin:0 auto;">
 			<form action="mypage/addDogAction.jsp" method="post" enctype="multipart/form-data">

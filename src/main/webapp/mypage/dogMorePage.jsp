@@ -31,9 +31,6 @@
 			height:150px;
 			margin:0 auto;
 		}
-		div > p {
-			font-size: 2rem;
-		}
 	</style>
 </head>
 <body>
@@ -57,7 +54,7 @@
 	}
 %>
 	<div class="container main">
-		<p>강아지 정보 더보기</p>
+		<p> | 강아지 정보 더보기 | </p>
 		<div style="width:800px;margin:0 auto;">
 			<div class="firstLine">
 				<div style="margin-bottom: 50px;">

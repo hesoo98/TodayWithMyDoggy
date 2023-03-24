@@ -53,8 +53,7 @@
 %>
 	<div class="container" style="display: flex; justify-content: center;">
 		<div class="" style="width: 1000px; display: flex; flex-direction: column;">	
-			<p style="font-size: 2rem;">관리자 페이지</p>
-			<hr>
+			<span> | 관리자 페이지 | </span><br>
 			
 			<div style="flex-direction: row; display: flex;">
 				<div class="rectangle" style="padding:10px 20px;">
