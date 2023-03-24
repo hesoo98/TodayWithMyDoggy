@@ -76,7 +76,6 @@ input[type="submit"]:hover {
 }
 
 input[type="button"] {
-
 	width: 20%;
 	height: 80%;
 	background-color: lightgray;
@@ -91,7 +90,6 @@ input[type="button"] {
 }
 
 input[type="button"]:hover {
-
 	background-color: "";
 }
 
@@ -141,9 +139,19 @@ div {
 				}
 			});
 		});
+		
+		$("#content").click(function () {
+			var loginok = $("#loginok").val();
+			var text = $("#content").text();
+			if(loginok==null) {
+				alert("로그인 후 이용해주세요");
+				$("#content").attr("readonly" , true);
+			}
+		});	
 	});
 </script>
-<script src="https://kit.fontawesome.com/2663817d27.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/2663817d27.js"
+	crossorigin="anonymous"></script>
 </head>
 <%
 //로그인한 사람 아이디
@@ -209,6 +217,7 @@ String currentPage = request.getParameter("currentPage");
 			}
 			%>
 		</div>
+		<input type="hidden" id="loginok" value="<%=loginok%>">
 		<hr style="width: 700px;">
 		<br>
 		<div id="subject">
@@ -299,7 +308,7 @@ String currentPage = request.getParameter("currentPage");
 						placeholder="댓글을 입력해주세요"
 						style="float: left; width: 500px; padding: 0 20px;"> <input
 						type="submit" id="btnanswer" value="전송" class="btn-answer"
-						style="float: left; margin-top: 5px;">
+						style="float: left; margin-top: 3px; border-radius: 50px;">
 				</div>
 			</form>
 			<br>
@@ -357,11 +366,11 @@ String currentPage = request.getParameter("currentPage");
 
 						<span style='font-size: 15px;'><%=answerNickname%></span>&nbsp;&nbsp;
 						<span class='mod' id="<%=modIdx%>" style='cursor: pointer;'
-							onclick="updateAnswer(<%=modIdx%>)">수정 | </span> 
-            <a class='del' id="btn-comment-del" style='cursor: pointer;'
-              idx="<%=answerdto.getIdx() %>" 
-              href='place-share/deleteanswer.jsp?idx=<%=answerdto.getIdx()%>'>삭제</a><br> 
-            <span class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
+							onclick="updateAnswer(<%=modIdx%>)">수정 | </span> <a class='del'
+							id="btn-comment-del" style='cursor: pointer;'
+							idx="<%=answerdto.getIdx()%>"
+							href='place-share/deleteanswer.jsp?idx=<%=answerdto.getIdx()%>'>삭제</a><br>
+						<span class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
 					</div>
 					<input type="hidden" class="answerIdx" name="answerIdx"
 						value="<%=modIdx%>">
@@ -376,7 +385,9 @@ String currentPage = request.getParameter("currentPage");
 						class="form-control contentMod"
 						style="margin-left: 55px; width: 400px; height: 40px; font-size: 15px; margin-top: 10px;">
 					<input type="button" id="btnanswer<%=modIdx%>" value="전송"
-						class="btn-answer btnanswer" style="margin-right: 80px; text-align: right; width: 70px;" onclick="submitMod(<%=modIdx%>)">
+						class="btn-answer btnanswer"
+						style="margin-right: 80px; text-align: right; width: 70px;"
+						onclick="submitMod(<%=modIdx%>)">
 				</div>
 				<hr style="width: 50%">
 				<br> <br>
@@ -429,7 +440,7 @@ String currentPage = request.getParameter("currentPage");
 				if (del) {
 					location.href = "place-share/deleteAction.jsp?num=" + num;
 				} else {
-					location.history();
+					return;
 				}
 			});
 
