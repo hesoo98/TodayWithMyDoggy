@@ -114,7 +114,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	<div class="container2">
 
 		<div style="text-align: center; font-size: 22px; opacity: 0.8; letter-spacing:3px; line-height:2;">
-		사랑스러운 반려견과 함께한 일상을 공유하고 인기강아지에 도전하세요</div>
+		사랑스러운 반려견과의 일상을 공유하고 인기강아지에 도전하세요</div>
 		<span>인기강아지는 매주 좋아요 순으로 갱신됩니다</span>
 		<br>
 		
@@ -296,8 +296,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 								</div>
 								<div
 									style="float: left; padding-top: 5px; font-size: 10px; color: gray">
-									<%=memberdto.getNickname()%> &emsp;&emsp; <i
-										class="fa-regular fa-eye"></i><%=dto.getReadCount()%>
+									<%=memberdto.getNickname()%> &emsp;&emsp;
+									<i class="fa-solid fa-paw"></i><%=dto.getReadCount()%>
 									&nbsp;<i class="fa-regular fa-comment-dots"></i><%=totalAnswerCnt%>
 								</div>
 								<br>

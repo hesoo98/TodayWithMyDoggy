@@ -125,7 +125,10 @@
 	  <%for(MessageDto dto:list){%>
 	  <tr>
 	    <td><input type="checkbox" class="chk-del" value="<%=dto.getNum()%>"></td>
-	    <td><%=dto.getSender() %>(<%=memdao.getNickname(dto.getSender()) %>)</td>
+	    <td>
+	    <span>
+	    <%=dto.getSender() %>(<%=memdao.getNickname(dto.getSender()) %>)</span>
+	    </td>
 	    
 	    <td>
 	    <span class="link-detail">
@@ -144,7 +147,7 @@
 	    <td><%=sdf.format(dto.getWriteday()) %></td>
 	    </tr>
 	    
-	    <!-- Modal -->
+	    <!-- 답장 Modal -->
 		<div class="modal fade" id="exampleModal">
   		<div class="modal-dialog">
    		 <div class="modal-content">

@@ -152,6 +152,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  %>
 	  
 	  <div class="wrapper-subject">
+	  
 	  <!-- pet info -->
 	  <%
 	    //writer_num
@@ -160,6 +161,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    DogProfileDto pdto=pdao.getMainDogInfo(writerNum);%>
 	    
 	    <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal2">
+	    <input type="hidden" id="birthday" value="<%=pdto.getBirthday()%>">
 	    <%// 프로필사진
 	    if(pdto.getIdx()==null){%>
 		<span class="dog-photo"><i class="fa-solid fa-dog fa-lg"></i></span>
@@ -230,6 +232,19 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		</div>
 		<!-- 프로필모달 끝 -->
 		
+		<script type="text/javascript">
+    		
+    		//멍멍이 나이 계산
+    				
+			let today=new Date();
+			let year=today.getYear()+1900;
+			
+			let birthyear=$("#birthday").val().substr(0,4);
+			
+			$("#age").text(year-parseInt(birthyear));
+			
+   		</script>
+		
 		<!-- 쪽지 Modal -->
 		<div class="modal fade" id="exampleModalMessage">
   		<div class="modal-dialog">
@@ -243,14 +258,14 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
     		 </div>
     		  
 	   <div class="modal-body">
-	   <form action="message/writeaction.jsp" method="post">
+	   <form action="dog-talking/writemessageaction.jsp" method="post">
 	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
 	   <input type="hidden" name="receiver" value="<%=dto.getId()%>">
 	   
 	   	<span>[받는 사람] <%=nickname %></span>
 	   	
 	   	<br><br>
-	    <textarea rows="10" style="width:100%;" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
+	    <textarea rows="10" style="width:100%;" name="content" placeholder="쪽지 내용을 입력해주세요."
 
 	    required="required"></textarea>
     	  
@@ -266,21 +281,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	</div>
 	<!-- 쪽지 Modal 끝 -->
 		
-		<script type="text/javascript">
-   		
-   		//멍멍이 나이 계산
-   				
-		let today=new Date();
-		let year=today.getYear()+1900;
-		
-		let birthyear=$("#birthday").val().substr(0,4);
-		
-		let age=year-parseInt(birthyear);
-		
-		$("#age").text(age);
-		
-   		</script>
-	    
 	  <br>
 	  <span class="gray-font"><%=sdf.format(dto.getWriteday()) %></span>
 	  <span class="gray-font" style="float: right;"> 조회수 <%=dto.getReadCount() %> 좋아요 <%=dto.getLikes() %></span>
@@ -297,8 +297,12 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  <hr class="line">
 	  
 	  <div class="wrapper-comment">
-	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>likes</span>
-	    <span> <%=dto.getLikes() %></span>
+	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>
+	    	<i class="fa-solid fa-heart"
+			style="margin-left: 10px; margin-top: 5px; font-size: 16px; cursor: pointer; float: left;"
+			id="heart"></i>
+	    </span>
+	    <span> <%=dto.getLikes() %> | </span>
 	    
 	    <!-- 댓글 -->
 	    <%

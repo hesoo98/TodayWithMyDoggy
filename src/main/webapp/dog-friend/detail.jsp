@@ -185,6 +185,7 @@
 	<!-- 쪽지 Modal 끝 -->
 			
 	 <div class="wrapper-subject">
+	 <input type="hidden" id="birthday" value="<%=pdto.getBirthday()%>">
 	  
 	  <!-- 프사 누르면 이동 -->
 	  <a id="a-tag" data-toggle="modal" data-target="#exampleModal2">
@@ -237,7 +238,7 @@
 	   	   		   	 	<td> 크기 | <%=pdto.getDogSize() %></td>
 	   	   		   	 </tr>
 	   	   		   	 <tr>
-	   	   		   	 	<td> 생일 | <%=pdto.getBirthday() %> (<span id="age"></span>세)</td>
+	   	   		   	 	<td> 생일 | <%=pdto.getBirthday() %> (<span id="age">0</span>세)</td>
 	   	   		   	 </tr>
 	   	   		   </table>  
 	   	   		   
@@ -267,9 +268,7 @@
 			
 			let birthyear=$("#birthday").val().substr(0,4);
 			
-			let age=year-parseInt(birthyear);
-			
-			$("#age").text(age);
+			$("#age").text(year-parseInt(birthyear));
 			
     		</script>
     	  
