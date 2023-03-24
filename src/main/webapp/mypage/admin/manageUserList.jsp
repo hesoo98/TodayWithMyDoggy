@@ -117,12 +117,12 @@
 							<%} %>
 							<%if(d.getAuth() == 1){ %>
 							<td align="center">
-								<button class="btn btn-sm btn-light" onclick="funcdel(<%=d.getNum()%>, <%=currentPage%>)">삭제</button>
+								<button type="button" class="btn btn-sm btn-light" onclick="funcdel(<%=d.getNum()%>, <%=currentPage%>)">삭제</button>
 							</td>
 							<%} else { %>
 							<td align="center">
-								<button class="btn btn-sm btn-light" onclick="location.href='mypage/admin/updateAuth.jsp?num=<%=d.getNum()%>&currentPage=<%=currentPage%>'">관리자</button>
-								<button class="btn btn-sm btn-light" onclick="funcdel(<%=d.getNum()%>, <%=currentPage%>)">삭제</button>
+								<button type="button" class="btn btn-sm btn-light" onclick="location.href='mypage/admin/updateAuth.jsp?num=<%=d.getNum()%>&currentPage=<%=currentPage%>'">관리자</button>
+								<button type="button" class="btn btn-sm btn-light" onclick="funcdel(<%=d.getNum()%>, <%=currentPage%>)">삭제</button>
 							</td>
 							<%} %>
 						</tr>
