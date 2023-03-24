@@ -69,7 +69,7 @@
 
 	<div class="container" style="display: flex; justify-content: center;">
 		<div style=" margin-top: 50px; width: 1100px;">
-			<p style="font-size: 2rem;"><a style="color: black;"href="index.jsp?main=mypage/admin/manageUserList.jsp">회원 리스트</a></p>
+			<span><a style="color: black;"href="index.jsp?main=mypage/admin/manageUserList.jsp"> | 회원 리스트 | </a></span><br>
 			
 			<!-- 검색 폼 -->
 			<form method="post" name="search" action=''>

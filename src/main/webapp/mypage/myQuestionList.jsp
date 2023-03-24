@@ -103,7 +103,7 @@
 
 	<div class="container">
 		<div style="margin-top: 50px;">
-			<p style="font-size: 1.5rem; margin-bottom: 30px;">나의 질문 리스트</p>
+			<p style="margin-bottom: 30px;"> | 나의 질문 리스트 | </p>
 			<div style="width: 800px; display: flex; flex-direction: column;">
 				<table class="table">
 					<tr>
