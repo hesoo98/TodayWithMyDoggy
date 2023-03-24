@@ -50,9 +50,9 @@
 				<!-- 이 부분은 관리자 계정일때만 보여야 함 -->
 				
 				<%if(isAdmin.equals("1")) { %>
-					<button type="button" class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=notification/updateform.jsp?num=<%=dto.getNum()%>'"><span class="glyphicon glyphicon-edit"></span>수정</button>
-					<button type="button" class="btn btn-default border border-secondary" onclick="funcdel()"><span class="glyphicon glyphicon-remove"></span>삭제</button>
-					<button type="button" class="btn btn-default border border-secondary" onclick="location.href='index.jsp?main=notification/notificationlist.jsp'"><span class="glyphicon glyphicon-list"></span>목록</button>
+					<button type="button" class="btn btn-light btn-sm" onclick="location.href='index.jsp?main=notification/updateform.jsp?num=<%=dto.getNum()%>'"><span class="glyphicon glyphicon-edit"></span>수정</button>
+					<button type="button" class="btn btn-light btn-sm" onclick="funcdel()"><span class="glyphicon glyphicon-remove"></span>삭제</button>
+					<button type="button" class="btn btn-light btn-sm" onclick="location.href='index.jsp?main=notification/notificationlist.jsp'"><span class="glyphicon glyphicon-list"></span>목록</button>
 				<%} else if(isAdmin.equals("0")) {%>
 				
 				<%}%>
