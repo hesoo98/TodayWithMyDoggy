@@ -31,7 +31,7 @@
 </head>
 <body>
 	<div class="container">
-	   <p style="font-size:2rem; margin-top: 50px;">공지사항 글쓰기 폼</p>
+	   <p> | 공지사항 글쓰기 | </p>
 	   <br>
 	   <form method="post" action="notification/notificationaddaction.jsp" style="margin-bottom: 50px;">
 	      <div class="subject">
@@ -44,7 +44,7 @@
 	      <div class="content">
 	         <div>내용</div>
 	         <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea><br>
-	         <button type="submit" class="btn btn-default border border-secondary" id="btnSave">저장</button>
+	         <button type="submit" class="btn btn-light btn-sm" id="btnSave">저장</button>
 	      </div>
 	      
 	   </form>
