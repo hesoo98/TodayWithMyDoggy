@@ -78,8 +78,6 @@ if (saveok != null) {
 					placeholder="비밀번호를 입력해주세요" required><i class="validation"><span></span><span></span></i>
 			</p>
 			</div>
-			<br>
-			<br>
 
 			<div class="form-inline form-group">
 				<div>
