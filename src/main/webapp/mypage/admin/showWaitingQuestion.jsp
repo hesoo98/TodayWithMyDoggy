@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.qna.QnaBoardDto"%>
 <%@page import="board.qna.QnaBoardDao"%>
 <%@page import="member.MemberDto"%>
@@ -18,6 +19,7 @@
 </head>
 <body>
 <%
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	//로그인한 사용자 아이디 가져옴
 	QnaBoardDao dao = new QnaBoardDao();
 	int totalCount;		// 총개수
@@ -61,11 +63,11 @@
 			<div class="" style="width: 1100px; display: flex; flex-direction: column;">
 				<table class="table">
 					<tr>
-						<td width="80">번호</td>
+						<td align="center" width="80">번호</td>
 						<td>아이디</td>
 						<td>제목</td>
 						<td>내용</td>
-						<td>작성일</td>
+						<td align="center">작성일</td>
 					</tr>
 				<%for(QnaBoardDto d : userList) {%>
 
@@ -74,7 +76,7 @@
 						<td><%=d.getId() %></td>
 						<td><%=d.getTitle() %></td>
 						<td><%=d.getContent() %></td>
-						<td><%=d.getWriteday() %></td>
+						<td align="center"><%=sdf.format(d.getWriteday())%></td>
 					</tr>
 
 				<%}%>

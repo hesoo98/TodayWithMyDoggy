@@ -83,7 +83,7 @@
 </script>
 	<div class="container main">
 		<div class="" style="width:800px;margin:0 auto;">
-			<p style="font-size: 2rem;">강아지 정보 수정</p>
+			<p> | 강아지 정보 수정 | </p>
 			<form action="mypage/updateDogAction.jsp" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="idx" value="<%=dog_idx%>">
 				<input type="hidden" name="pre_photo" value="<%=photo_name %>">

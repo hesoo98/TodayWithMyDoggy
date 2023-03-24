@@ -88,7 +88,7 @@
 						<br>
 						<span>크기 : <%=dto.getDogSize() %></span><br>
 						<span>생일 : <%=dto.getBirthday() %></span><br>
-						<span>사진 : <%=dto.getPhoto() %></span><br>
+						
 					</div>
 					
 				</div>
@@ -119,7 +119,7 @@
 						<br>
 						<span>크기 : <%=dto.getDogSize() %></span><br>
 						<span>생일 : <%=dto.getBirthday() %></span><br>
-						<span>사진 : <%=dto.getPhoto() %></span><br>
+						
 					</div>
 				</div>
 				
