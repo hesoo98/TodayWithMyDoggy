@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Vector;
 
 import board.dogTalking.DogTalkingBoardDto;
+import board.placeShare.PlaceShareBoardDto;
 import member.MemberDto;
 import mysql.db.DbConnect;
 
@@ -90,6 +91,39 @@ public class DogFriendBoardDao {
 		}
 		
 		return n;
+	}
+	
+	public List<DogFriendBoardDto> getBoardList() {
+		List<DogFriendBoardDto> list = new Vector<>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from dog_friend_board order by num desc";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				DogFriendBoardDto dto=new DogFriendBoardDto();
+				
+				dto.setNum(rs.getString("num"));
+				dto.setId(rs.getString("id"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setReadCount(rs.getInt("read_count"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			System.out.println("getList ERROR: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
 	}
 	
 	//read

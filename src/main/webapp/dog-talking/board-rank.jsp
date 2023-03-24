@@ -117,9 +117,11 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		<br>
 		<span style="display: flex; justify-content: center;"><span id="month"></span>월&nbsp;<span id="week"></span>째주의 인기강아지</span>
 		<br>
+					<div style="font-size: 13px; text-align:right; margin-left: 180px; color: gray;
+					cursor: pointer;">더보기</div>
+		
 			<div
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
-
 				<%
 				for (DogTalkingBoardDto dto : list) {
 					String boardNum = dto.getNum();

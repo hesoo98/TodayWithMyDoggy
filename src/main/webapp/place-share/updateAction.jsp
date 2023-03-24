@@ -36,11 +36,14 @@
 		dto.setNum(num);
 		dto.setSubject(subject);
 		dto.setContent(content);
+		if(photoName == null) {
+			photoName = multi.getParameter("photo");
+		}
 		dto.setPhotoName(photoName);
 		dto.setPlaceLa(placeLa);
 		dto.setPlaceMa(placeMa);
 		dto.setMapAddr(mapAddr);
-		
+
 		PlaceShareBoardDao dao = new PlaceShareBoardDao();
 		dao.updateBoard(dto);
 		
@@ -50,3 +53,6 @@
        response.sendRedirect("UploadFail.jsp");
 	}
 %>
+<input type="hidden" name="la" value="" id="la">
+				<input type="hidden" name="ma" value="" id="ma">
+				<input type="hidden" name="mapAddr" value="" id="mapAddr">

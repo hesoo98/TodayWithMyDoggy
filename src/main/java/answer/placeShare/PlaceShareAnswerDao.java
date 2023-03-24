@@ -133,5 +133,35 @@ public class PlaceShareAnswerDao {
 		}
 				
 	}
-	
+	public PlaceShareAnswerDto getData(String idx) {
+
+		PlaceShareAnswerDto dto = new PlaceShareAnswerDto();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from place_share_answer where idx=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				dto.setIdx(rs.getString("idx"));
+				dto.setBoardNum(rs.getString("board_num"));
+				dto.setId(rs.getString("id"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
 }

@@ -25,11 +25,6 @@
 			$("#cardImg").toggle();
 		});
 		
-		if ($('input[name="photo1"]').is(":checked") == true) {
-			var fileValue = $("#photo1").val().split("\\");
-			var fileName = fileValue[fileValue.length - 1];
-			$("#titlePhoto").val(fileName);
-		}
 		$("#keyword").on("keydown", () => {
 		    if (event.keyCode === 13) {
 		        event.preventDefault();
@@ -40,8 +35,12 @@
 			var y = confirm("저장하지 않으면 데이터가 삭제될수도 있습니다.\n그래도 목록으로 가시겠습니까?")
 			if(y) {
 				location.history();
+			} else {
+				return false;
 			}
 		});
+		
+		$('input[name=photo1]').attr('value',"21rqdwaqdq.jpg");
 	});
 	function readURL1(input) {
 		if (input.files && input.files[0]) {
@@ -275,9 +274,11 @@ p {
 }
 </style>
 <%
-	String num = request.getParameter("num");
+	String boardnum = request.getParameter("num");
 	PlaceShareBoardDao dao = new PlaceShareBoardDao();
-	PlaceShareBoardDto dto = dao.getData(num);
+	PlaceShareBoardDto dto = dao.getData(boardnum);
+	
+	
 %>
 </head>
 <body>
@@ -286,8 +287,7 @@ p {
 			<br>
 			<form method="post" action="place-share/updateAction.jsp"
 				enctype="multipart/form-data">
-			<input type="hidden" name="num" value=<%=num %>>
-				<input type="hidden" name="titlePhoto" id="titlePhoto" value="">
+			<input type="hidden" name="num" value=<%=boardnum %>>
 				<div class="subject">
 					<input type="text" class="form-control mr-5" name="subject"
 						id="subject" placeholder="제목을 입력해 주세요" required="required" value="<%=dto.getSubject() %>"
@@ -295,7 +295,8 @@ p {
 				</div>
 				<br>
 				<div class="card-deck mr-5">
-					<div class="input-group mb-5 mr-5 ml-4" style="width: 500px;">
+					<span style="font-size: 10px; color: red; margin-left: 17px;">* 사진 수정을 원할 경우에만 사진을 등록해주세요</span>
+					<div class="input-group mb-5 mr-5 ml-4" style="width: 500px; margin-top: 5px;">
 						<input type="file" class="form-control" id="inputGroupFile02"
 							name="photo1" onchange="readURL1(this)" style="height: 30px;">
 						<button type="button" class="input-group-text btn btn-warning"
@@ -303,7 +304,7 @@ p {
 					</div>
 
 					<div class="card" id="cardImg"
-						style="margin-right: 70%; margin-bottom: 50px; border-radius: 10%">
+						style="margin-right: 30%; margin-bottom: 50px; border-radius: 10%">
 						<img src="" class="card-img-top" id="card1"
 							style="border-radius: 10%; filter: drop-shadow(2px 2px 2px #dcdcdc);">
 					</div>					
@@ -314,14 +315,15 @@ p {
 						id="content" placeholder="내용을 입력해주세요" required="required"
 						style="font-size: 13px;"><%=dto.getContent() %></textarea>
 				</div>
-				
-				<input type="hidden" name="la" value="" id="la">
-				<input type="hidden" name="ma" value="" id="ma">
-				<input type="hidden" name="mapAddr" value="" id="mapAddr">
+				<input type="hidden" name="photo" value="<%=dto.getPhotoName()%>">
+				<input type="hidden" name="la" value="<%=dto.getPlaceLa() %>" id="la">
+				<input type="hidden" name="ma" value="<%=dto.getPlaceMa() %>" id="ma">
+				<input type="hidden" name="mapAddr" value="<%=dto.getMapAddr()%>" id="mapAddr">
 				<div class="map-search" style="margin-top: 270px; margin-bottom: 100px;">
 				<p><i>- 상호명이 검색되지 않는다면 정확한 주소(도로명)를 입력해주세요!</i></p>
 				<p><i>- 주소가 입력되면 하단에 지도가 표시됩니다</i></p>
-
+				<span style="font-size: 10px; color: red;">* 지도 수정을 원할 경우에만 지도를 등록해주세요</span>
+				<br>
 				<input type="text" id="sample5_address" placeholder="주소" style="width: 300px;"> <input
 					type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 				<div id="map"
@@ -345,7 +347,6 @@ p {
 				        position: new daum.maps.LatLng(37.537187, 127.005476),
 				        map: map
 				    });
-				
 				
 				    function sample5_execDaumPostcode() {
 				        new daum.Postcode({
@@ -385,8 +386,8 @@ p {
 				</script>
 				<div style="margin-bottom: 100px;">
 					<br>
-					<button type="submit" class="btn btn-sm btn-warning" id="btnSave" style="width: 45%; height: 30px;">수정</button>
-					<button type="button" class="btn btn-sm btn-warning" id="btnList" style="width: 45%;  height: 30px;">목록</button>
+					<button type="submit" class="btn btn-sm btn-light" id="btnSave" style="width: 45%; height: 30px;">수정</button>
+					<button type="button" class="btn btn-sm btn-light" id="btnList" style="width: 45%;  height: 30px;">목록</button>
 				</div>
 			</form>
 		</div>

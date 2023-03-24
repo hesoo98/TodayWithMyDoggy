@@ -8,6 +8,7 @@ request.setCharacterEncoding("utf-8");
 String boardnum = request.getParameter("boardnum");
 String myid = (String)session.getAttribute("myid");
 String content = request.getParameter("content");
+String currentPage = request.getParameter("currentPage");
 
 PlaceShareAnswerDto dto = new PlaceShareAnswerDto();
 dto.setBoardNum(boardnum);

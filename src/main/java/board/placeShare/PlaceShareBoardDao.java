@@ -40,8 +40,29 @@ public class PlaceShareBoardDao {
 	}
 
 	public int getTotalCount() {
-		int cnt = 0;
-		return cnt;
+		int n=0;
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select count(*) from place_share_board";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				n=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return n;
 	}
 
 	public List<PlaceShareBoardDto> getBoardList() {
@@ -240,11 +261,13 @@ public class PlaceShareBoardDao {
 				PlaceShareBoardDto dto = new PlaceShareBoardDto();
 				dto.setNum(rs.getString("num"));
 				dto.setId(rs.getString("id"));
-				dto.setPhotoName(rs.getString("photo_name"));
+				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
+				dto.setPhotoName(rs.getString("photo_name"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
-				dto.setReadCount(rs.getInt("readcount"));
+				dto.setReadCount(rs.getInt("read_count"));
 				dto.setLikes(rs.getInt("likes"));
+				dto.setMapAddr(rs.getString("map_addr"));
 				list.add(dto);
 
 			}
