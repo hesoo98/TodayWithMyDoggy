@@ -265,7 +265,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	   	<span>[받는 사람] <%=nickname %></span>
 	   	
 	   	<br><br>
-	    <textarea rows="10" style="width:100%;" name="content" placeholder="같이 산책하고 싶은 상대에게 쪽지를 보내보세요!"
+	    <textarea rows="10" style="width:100%;" name="content" placeholder="쪽지 내용을 입력해주세요."
 
 	    required="required"></textarea>
     	  
@@ -297,8 +297,12 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  <hr class="line">
 	  
 	  <div class="wrapper-comment">
-	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>likes</span>
-	    <span> <%=dto.getLikes() %></span>
+	    <span id="likes" style="cursor: pointer;" onclick="updateLikes()" num=<%=dto.getNum() %>>
+	    	<i class="fa-solid fa-heart"
+			style="margin-left: 10px; margin-top: 5px; font-size: 16px; cursor: pointer; float: left;"
+			id="heart"></i>
+	    </span>
+	    <span> <%=dto.getLikes() %> | </span>
 	    
 	    <!-- 댓글 -->
 	    <%

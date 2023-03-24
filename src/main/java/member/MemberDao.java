@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import com.mysql.cj.protocol.Resultset;
+
 import board.notification.NotificationDto;
 import board.placeShare.PlaceShareBoardDto;
 import mysql.db.DbConnect;
@@ -418,5 +420,83 @@ public class MemberDao {
 			} finally {
 				db.dbClose(pstmt, conn);
 			}
+		}
+		
+		//관리자 페이지에서 유저 검색 기능 메서드, 사실 개수 새는 용도로 쓰인다
+		public List<MemberDto> getUserSearch(String searchField, String searchText) {
+			List<MemberDto> list = new ArrayList<>();
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "select * from member WHERE "+searchField.trim();
+			
+			if(searchText != null && !searchText.equals("") ){
+                sql +=" LIKE '%"+searchText.trim()+"%' order by num desc limit 10";
+            }
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					MemberDto dto = new MemberDto();
+					dto.setNum(rs.getString("num"));
+					dto.setNickname(rs.getString("nickname"));
+					dto.setId(rs.getString("id"));
+					dto.setPassword(rs.getString("password"));
+					dto.setHp(rs.getString("hp"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setEmail(rs.getString("email"));
+					dto.setCreateDay(rs.getTimestamp("create_day"));
+					dto.setAuth(rs.getInt("auth"));
+					list.add(dto);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+			}
+			return list;
+		}
+		
+		// 관리자 페이지에서 쓰는 페이징 처리가 되어있는 유저검색 메서드
+		public List<MemberDto> getUserSearch(int start, int perpage, String searchField, String searchText) {
+			List<MemberDto> list = new ArrayList<>();
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "select * from member WHERE "+searchField.trim();
+			if(searchText != null && !searchText.equals("") ){
+                sql +=" LIKE '%"+searchText.trim()+"%' order by num desc limit ?,?";
+            } else {
+            	sql = "";
+            	return new ArrayList<>();
+            }
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, perpage);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					MemberDto dto = new MemberDto();
+					dto.setNum(rs.getString("num"));
+					dto.setNickname(rs.getString("nickname"));
+					dto.setId(rs.getString("id"));
+					dto.setPassword(rs.getString("password"));
+					dto.setHp(rs.getString("hp"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setEmail(rs.getString("email"));
+					dto.setCreateDay(rs.getTimestamp("create_day"));
+					dto.setAuth(rs.getInt("auth"));
+					list.add(dto);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+			}
+			return list;
 		}
 }
