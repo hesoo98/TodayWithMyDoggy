@@ -279,7 +279,7 @@ td:not(.table-title), tr{
      if(loginok!=null && isAdmin.equals("1")){%>
 	 <tr>
 		<td colspan="6">
- 		<input type="checkbox" class="alldelcheck">전체선택
+ 		<div style="float:left"><input type="checkbox" class="alldelcheck">전체선택</div>
 			<button type="button" class="btn btn-default btn-sm" style="float:right"
 			id="btndel"><span class="glyphicon glyphicon-trash"></span>삭제</button>
 		<button type="button" class="btn btn-default btn-sm" style="float:right"

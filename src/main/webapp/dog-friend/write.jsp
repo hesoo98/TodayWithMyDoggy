@@ -44,7 +44,7 @@
 				
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="location.href='boardlist.jsp'">목록</button>
+					onclick="location.href='index.jsp?main=dog-friend/board.jsp'">목록</button>
 			</td>
 		</tr>
 		
