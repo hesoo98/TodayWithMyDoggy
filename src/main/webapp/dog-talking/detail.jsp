@@ -128,6 +128,7 @@
 <%
 //num에 해당하는 data 받기
 String num=request.getParameter("num");
+String currentPage=request.getParameter("currentPage");
 
 DogTalkingBoardDao dao=new DogTalkingBoardDao();
 DogTalkingBoardDto dto=dao.getData(num);
@@ -261,6 +262,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	   <form action="dog-talking/writemessageaction.jsp" method="post">
 	   <input type="hidden" name="num" value="<%=dto.getNum()%>">
 	   <input type="hidden" name="receiver" value="<%=dto.getId()%>">
+	   <input type="hidden" name="currentPage" value="<%=currentPage%>">
 	   
 	   	<span>[받는 사람] <%=nickname %></span>
 	   	
@@ -455,9 +457,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	  <div class="btn-box">
 	  <%
 
-	    //currentpage
-	    String currentPage=request.getParameter("currentPage");
-	  
 	    if(nickname.equals(sessionNickname)){%>
 	  		<button class="btn btn-default btn-sm border border-secondary" type="button"
 	  		  data-toggle="modal" data-target="#exampleModal">수정</button>

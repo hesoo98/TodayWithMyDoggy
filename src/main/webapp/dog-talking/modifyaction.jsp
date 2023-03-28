@@ -42,7 +42,7 @@
   		//update
   		dao.updateBoard(dto);
   		
-  		response.sendRedirect("../index-form.jsp?main=dog-talking/detail.jsp?num="+num+"&currentPage="+currentPage);
+  		response.sendRedirect("../index.jsp?main=dog-talking/detail.jsp?num="+num+"&currentPage="+currentPage);
   	} catch (Exception e){
   		System.out.print("업로드 오류:"+e.getMessage());
   	}

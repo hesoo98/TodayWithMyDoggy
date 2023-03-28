@@ -93,15 +93,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			  result= parseInt(((weekDay - 1) + currentDate) / 7) + 1;
 			  
 			  if(result==1){
-				  return "첫";
+				  return "첫째 ";
 			  }else if(result==2){
-				  return "둘";
+				  return "둘째 ";
 			  }else if(result==3){
-				  return "셋";
+				  return "셋째 ";
 			  }else if(result==4){
-				  return "넷";
+				  return "넷째 ";
 			  }else{
-				  return "마지막";
+				  return "마지막 ";
 			  }
 			}
 
@@ -115,10 +115,10 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	<div class="album pb-5 bt-2">
 		<div class="container">
 		<br>
-		<span style="display: flex; justify-content: center;"><span id="month"></span>월&nbsp;<span id="week"></span>째주의 인기강아지</span>
+		<span style="display: flex; justify-content: center;"><span id="month"></span>월&nbsp;<span id="week"></span>주의 인기강아지</span>
 		<br>
 					<div style="font-size: 13px; text-align:right; margin-left: 180px; color: gray;
-					cursor: pointer;">더보기</div>
+					cursor: pointer;"></div>
 		
 			<div
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
@@ -157,12 +157,12 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 							height="200px;" xmlns="http://www.w3.org/2000/svg" role="img"
 							aria-label="Placeholder: Thumbnail"
 							preserveAspectRatio="xMidYMid slice" focusable="false"
-							onclick="location.href='<%=root%>/index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum() %>'">
+							onclick="location.href='<%=root%>/index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum() %>&currentPage=1'">
 						</div>
 						<div class="card-body">
 							<span class="card-subject"
 								style="font-size: 12px; cursor: pointer;"
-								onclick="location.href='index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getContent()%></span>
+								onclick="location.href='index.jsp?main=dog-talking/detail.jsp?num=<%=dto.getNum()%>&currentPage=1'"><%=dto.getContent()%></span>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="img-box"
 									style="width: 25px; height: 25px; border-radius: 70%; overflow: hidden; float: left; margin-right: 2px;">
@@ -186,7 +186,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 									style="float: left; padding-top: 5px; font-size: 10px; color: gray">
 									<%=memberdto.getNickname()%> &emsp;&emsp; 
 									<i class="fa-solid fa-paw"></i><%=dto.getReadCount()%>
-									&nbsp;<i class="fa-regular fa-heart"></i><%=totalAnswerCnt%>
+									&nbsp;<i class="fa-regular fa-heart"></i><%=dto.getLikes()%>
 								</div>
 								<br>
 
