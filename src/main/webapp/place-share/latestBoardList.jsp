@@ -120,7 +120,8 @@ img:hover {
 <body>
 	<div class="album pb-5 bt-2">
 		<div class="container">
-			<br> <br>
+			<div></div>
+					<div style="text-align: center">반려견과 함께한 추억 장소</div><br>
 					<div style="font-size: 13px; text-align:right; margin-left: 180px; color: gray;
 					cursor: pointer;">더보기</div><br>
 			
@@ -172,7 +173,7 @@ img:hover {
 								style="font-size: 15px; cursor: pointer;"
 								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getSubject()%></span>
 							<span class="card-content"
-								style="font-size: 12px; cursor: pointer; margin-bottom: 7px;"
+								style="font-size: 12px; cursor: pointer; margin-bottom: 7px; height: 15px;"
 								onclick="location.href='index.jsp?main=place-share/detail.jsp?num=<%=dto.getNum()%>'"><%=dto.getContent()%></span>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="img-box"

@@ -104,6 +104,13 @@ String proPhoto = dto.getPhoto();
 
 	<!-- 커뮤니티 정보(산책) -->
 	<div style="margin: 100px 0;"></div>
+	<i class="fa-solid fa-quote-left" style="color: #dbe8ff; margin-left: 500px; font-size: 60px; margin-top: 50px; margin-bottom: 10px; "></i>
+	<div style="font-size: 17px; text-align: center; color: gray; margin-bottom: 50px;">
+	 <b>이곳에서는 반려견과 관련된 정보와 경험을 공유하며,
+	 같은 취미와 관심사를 가진 사람들끼리 소통할 수 있습니다.<br>
+	  또한, 다양한 이벤트와 모임을 통해 반려견과 함께 즐길 수 있는 기회도 제공합니다.<br>
+	   함께하는 반려견 커뮤니티에서 소중한 반려견과의 삶을 더욱 풍요롭게 만들어보세요.
+	</b></div><br><br><br>
 
 	<!-- 커뮤니티 정보(자랑) -->
 	<jsp:include page="/dog-talking/board-rank.jsp" />
