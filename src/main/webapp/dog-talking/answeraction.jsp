@@ -10,6 +10,8 @@
     
     String num=request.getParameter("num");
     String answer=request.getParameter("answer");
+    String currentPage=request.getParameter("currentPage");
+    
     
     //nickname
     MemberDao mdao=new MemberDao();
@@ -24,6 +26,6 @@
     DogTalkingAnswerDao dao=new DogTalkingAnswerDao();
     dao.insertAnswer(dto);
     
-    response.sendRedirect("../index.jsp?main=dog-talking/detail.jsp?num="+num);
+    response.sendRedirect("../index.jsp?main=dog-talking/detail.jsp?num="+num+"&currentPage="+currentPage);
     
     %>

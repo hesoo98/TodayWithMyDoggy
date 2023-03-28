@@ -60,6 +60,14 @@
 	.blue-color{
 		background-color:#d9e4f4 ;
 	}
+	
+	.subject{
+	text-align: left;
+	text-overflow: ellipsis;  /* 말줄임 적용 */
+	width: 240px;
+	white-space: nowrap;
+	overflow: hidden;
+}
 
 </style>
 
@@ -130,7 +138,7 @@
 	    <%=dto.getSender() %>(<%=memdao.getNickname(dto.getSender()) %>)</span>
 	    </td>
 	    
-	    <td>
+	    <td class="subject">
 	    <span class="link-detail">
 	    <input type="hidden" name="num" id="num" value="<%=dto.getNum()%>">
 	    
