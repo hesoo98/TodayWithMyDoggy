@@ -28,13 +28,40 @@
 <br><br>
 
 ## 팀 소개🐶 
-
-|이름|역할|
-|--------|-----------|
-|최보현|초기 레이아웃, footer, 우리강아지 게시판, 쪽지함, Q&A 게시판, 메인페이지 날씨 정보 제공|
-|김영돈|전반적인 프론트엔드 디자인 설계 및 구현(main, nav bar, 앨범형 게시판 공통 css), 같이가요 게시판|
-|박재승|회원가입, 로그인(카카오로그인 등), 아이디 비밀번호 찾기, 같이걸어요 게시판|
-|김희수|마이페이지, 관리자페이지 및 프로필과 관리자 권한 사용을 위한 공통 기능 개발, 공지사항 게시판|
+<table>
+    <tr>
+      <td align="center"> <a href="https://github.com/lambdaramge"><img src="https://avatars.githubusercontent.com/u/126458406?v=4" width="140px" /><br/>👩 최보현</a><a href="https://solved.ac/chlqhgus3278">
+      <br>
+        </a></td>
+      <td>
+        - 우리강아지 게시판<br>
+        - Q&A 게시판<br>
+        - 쪽지 기능<br>
+        - 메인페이지 날씨 정보<br>
+        - css: 초기 레이아웃, footer
+        </td>
+        <td align="center"> <a href="https://github.com/028902"><img src="https://avatars.githubusercontent.com/u/123163275?v=4" width="140px" /><br/>👦🏻 박재승</a><a href="https://solved.ac/conscience98">
+      <br>
+        </a></td>
+      <td>
+ - 회원가입, 로그인<br> - 카카오로그인 <br> - 아이디, 비밀번호 찾기<br> - 같이걸어요 게시판
+        </td>
+    </tr>
+    <tr>
+      <td align="center"> <a href="https://github.com/tenta3802"><img src="https://avatars.githubusercontent.com/u/84509774?v=4" width="140px" /><br/>👦🏻 김영돈</a><a href="https://solved.ac/tenta3802">
+      <br>
+        </a></td>
+      <td>
+        - 전반적인 프론트엔드 디자인 설계 및 구현 <br> - main, nav bar, 앨범형 게시판 공통 css 디자인 <br> - 같이가요 게시판
+        </td>
+        <td align="center"> <a href="https://github.com/hesoo98"><img src="https://avatars.githubusercontent.com/u/8851063?v=4" width="140px" /><br/>👦🏻 김희수</a><a href="https://solved.ac/hesoo98">
+      <br>
+        </a></td>
+      <td>
+        - 마이페이지<br> - 관리자페이지 <br> - 프로필과 관리자 권한 사용을 위한 공통 기능 개발 <br> - 공지사항 게시판
+        </td>
+    </tr>
+</table>
 
 <br><br>
 
