@@ -56,7 +56,6 @@ public class PlaceShareBoardDao {
 				n=rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			db.dbClose(rs, pstmt, conn);
@@ -156,7 +155,6 @@ public class PlaceShareBoardDao {
 
 			pstmt.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			db.dbClose(pstmt, conn);
@@ -175,7 +173,6 @@ public class PlaceShareBoardDao {
 
 			pstmt.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			db.dbClose(pstmt, conn);
@@ -190,12 +187,9 @@ public class PlaceShareBoardDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-
 			pstmt.setString(1, num);
-
 			pstmt.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			db.dbClose(pstmt, conn);
@@ -213,7 +207,6 @@ public class PlaceShareBoardDao {
 			pstmt.setString(1, boardnum);
 			pstmt.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			db.dbClose(pstmt, conn);
@@ -231,7 +224,6 @@ public class PlaceShareBoardDao {
 			pstmt.setString(1, boardnum);
 			pstmt.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			db.dbClose(pstmt, conn);
@@ -254,7 +246,6 @@ public class PlaceShareBoardDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, perpage);
-
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -272,7 +263,6 @@ public class PlaceShareBoardDao {
 
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			db.dbClose(rs, pstmt, conn);
